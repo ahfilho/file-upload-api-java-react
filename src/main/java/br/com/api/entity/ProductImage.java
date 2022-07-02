@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "al_imagem")
-public class ImgProdutoModel implements Serializable {
+@Table(name = "imagem")
+public class ProductImage implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,8 +34,5 @@ public class ImgProdutoModel implements Serializable {
 	@Lob
 	private byte[] data;
 
-	@OneToOne
-	@JoinColumn(name = "imagem_name")
-	private Product produtoImg;
 
 }

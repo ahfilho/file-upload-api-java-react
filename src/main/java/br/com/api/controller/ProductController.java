@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.api.entity.CategoryProduct;
+import br.com.api.entity.Category;
 import br.com.api.entity.OfferImageResponse;
-import br.com.api.entity.ImgProdutoModel;
+import br.com.api.entity.ProductImage;
 import br.com.api.entity.Product;
 import br.com.api.service.ProductService;
 
@@ -30,7 +30,7 @@ public class ProductController {
 
 	@PostMapping
 	public ResponseEntity<String> productSave_uploadImg_category(@RequestParam("file") MultipartFile file,
-																 Product productModel, CategoryProduct catpm) {
+																 Product productModel, Category catpm) {
 		try {
 			productService.saveProduct_file_category(productModel, file, catpm);
 
@@ -48,7 +48,7 @@ public class ProductController {
 		return productService.listProduct();
 	}
 
-	private OfferImageResponse testaMap(ImgProdutoModel imgModel) {
+	private OfferImageResponse testaMap(ProductImage imgModel) {
 		long l1 = imgModel.getId();
 		String download = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files").path(Long.toString(l1))
 				.toUriString();

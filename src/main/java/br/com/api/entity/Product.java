@@ -24,10 +24,12 @@ public class Product {
 	@Column(name = "product_type")
 	private String productType;
 
-	@OneToOne(mappedBy = "produtoImg", cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
-	private ImgProdutoModel imgProduto;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "image_product_id")
+	private ProductImage imgProduct;
 
-	@OneToOne(mappedBy = "produtosCategoria")
-	private CategoryProduct categoriaProduto;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "category_product_id")
+	private Category categoryProduct;
 
 }

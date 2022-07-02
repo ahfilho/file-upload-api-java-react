@@ -15,7 +15,7 @@ import com.sun.istack.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name = "al_whatsappRegistration")
+@Table(name = "whatsappRegistration")
 public class WhatsappRegistrationModel {
 
 	@Id

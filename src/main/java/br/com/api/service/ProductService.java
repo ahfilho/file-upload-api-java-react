@@ -8,13 +8,13 @@ import java.util.Optional;
 import java.util.List;
 import javax.transaction.Transactional;
 
+import br.com.api.entity.ProductImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import br.com.api.entity.CategoryProduct;
-import br.com.api.entity.ImgProdutoModel;
+import br.com.api.entity.Category;
 import br.com.api.entity.Product;
 import br.com.api.repository.CategoryRepository;
 import br.com.api.repository.ProductRepository;
@@ -42,10 +42,10 @@ public class ProductService {
 		}
 	}
 
-	public void saveProduct_file_category(Product productModel, MultipartFile file, CategoryProduct catPm)
+	public void saveProduct_file_category(Product productModel, MultipartFile file, Category catPm)
 			throws IOException {
 		Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
-		ImgProdutoModel img = new ImgProdutoModel();
+		ProductImage img = new ProductImage();
 		
 		img.setName(StringUtils.cleanPath(file.getOriginalFilename()));
 		img.setContentType(file.getContentType());
@@ -66,9 +66,9 @@ public class ProductService {
 		Optional<Product> opt = this.productRespository.findById(productModel.getId());
 		if (opt.isPresent()) {
 			Product pm = opt.get();
-			pm.setProduct_name(productModel.getProduct_name());
-			pm.setCategoriaProduto(productModel.getCategoriaProduto());
-			pm.setImgProduto(productModel.getImgProduto());
+			pm.setProductName(productModel.getProductName());
+			pm.setCategoryProduct(productModel.getCategoryProduct());
+			pm.setImgProduct(productModel.getImgProduct());
 			return pm;
 		} else {
 			throw new Exception("Erro ao atualizar o produto, categoria e a imagem." + productModel.getId());
