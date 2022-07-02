@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "al_categoria")
-public class CategoryProduct {
+@Table(name = "categoria")
+public class Category {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,9 +19,5 @@ public class CategoryProduct {
 
 	@Column(name = "product_category")
 	private String productCategory;
-
-	@OneToOne
-	@JoinColumn(name = "product_category")
-	private Product produtosCategoria;
 
 }

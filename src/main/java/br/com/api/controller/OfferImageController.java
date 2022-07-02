@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.api.entity.CategoryProduct;
-import br.com.api.entity.ImgProdutoModel;
+import br.com.api.entity.Category;
+import br.com.api.entity.ProductImage;
 import br.com.api.entity.Product;
 import br.com.api.entity.OfferImageResponse;
 import br.com.api.service.OfferImageService;
@@ -55,7 +55,7 @@ public class OfferImageController {
 	// SALVA UMA IMAGEM, UM PRODUTO E UMA CATEGORIA
 	@PostMapping
 	public ResponseEntity<String> uploadImgOferta(@RequestParam("file") MultipartFile file, Product productModel,
-			CategoryProduct categoryProductModel) {
+			Category categoryProductModel) {
 
 		try {
 			ofertasService.saveFile(file, productModel, categoryProductModel);
@@ -75,7 +75,7 @@ public class OfferImageController {
 		return ofertasService.terca().stream().map(this::mapToQuery).collect(Collectors.toList());
 	}
 
-	private OfferImageResponse mapTo_Terca_Feira(ImgProdutoModel img) {
+	private OfferImageResponse mapTo_Terca_Feira(ProductImage img) {
 		long l1 = img.getId();
 		String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/")
 				.path(Long.toString(l1)).toUriString();
@@ -98,7 +98,7 @@ public class OfferImageController {
 	}
 
 	// FUNCIONANDO: traz as imagens de acordo com o select do repository
-	private OfferImageResponse mapToQuery(ImgProdutoModel img) {
+	private OfferImageResponse mapToQuery(ProductImage img) {
 
 		long l1 = img.getId();
 		String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/")
@@ -117,7 +117,7 @@ public class OfferImageController {
 		return ofertasService.getAllFiles().stream().map(this::mapToFileResponse).collect(Collectors.toList());
 	}
 
-	private OfferImageResponse mapToFileResponse(ImgProdutoModel ofertasModel) {
+	private OfferImageResponse mapToFileResponse(ProductImage ofertasModel) {
 
 		long l2 = ofertasModel.getId();
 		String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/")
@@ -135,11 +135,11 @@ public class OfferImageController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<byte[]> getFile(@PathVariable Long id) {
-		Optional<ImgProdutoModel> file = ofertasService.getFile(id);
+		Optional<ProductImage> file = ofertasService.getFile(id);
 		if (!file.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
-		ImgProdutoModel ofertasmodel = file.get();
+		ProductImage ofertasmodel = file.get();
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_DISPOSITION, "teste de upload/ filename=" + ofertasmodel.getName() + "\"")
 				.contentType(MediaType.valueOf(ofertasmodel.getContentType())).body(ofertasmodel.getData());

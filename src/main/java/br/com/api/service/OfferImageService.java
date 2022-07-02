@@ -14,8 +14,8 @@ import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import br.com.api.entity.CategoryProduct;
-import br.com.api.entity.ImgProdutoModel;
+import br.com.api.entity.Category;
+import br.com.api.entity.ProductImage;
 import br.com.api.entity.Product;
 import br.com.api.repository.OfferImageRepository;
 
@@ -36,10 +36,10 @@ public class OfferImageService {
 		}
 	}
 
-	public void saveFile(MultipartFile file, Product productModel, CategoryProduct categoryModel)
+	public void saveFile(MultipartFile file, Product productModel, Category categoryModel)
 			throws IOException {
 		Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
-		ImgProdutoModel img = new ImgProdutoModel();
+		ProductImage img = new ProductImage();
 
 		img.setName(StringUtils.cleanPath(file.getOriginalFilename()));
 		img.setContentType(file.getContentType());
@@ -71,31 +71,31 @@ public class OfferImageService {
 	 * this.ofertasRepository.save(product_name);
 	 * this.ofertasRepository.save(product_category); } }
 	 */
-	public void saveCategoria(CategoryProduct cpm) {
+	public void saveCategoria(Category cpm) {
 	}
 
 	public void saveProduto(Product pm) {
 
 	}
 
-	public Optional<ImgProdutoModel> getFile(Long id) {
+	public Optional<ProductImage> getFile(Long id) {
 		return ofertasRepository.findById(id);
 	}
 	// LISTA COMPLETA
-	public List<ImgProdutoModel> getAllFiles() {
+	public List<ProductImage> getAllFiles() {
 		return ofertasRepository.findAll();
 	}
 
-	public List<ImgProdutoModel> getSql() {
+	public List<ProductImage> getSql() {
 		return ofertasRepository.consulta_personalizada();
 	}
 
-	public List<ImgProdutoModel> terca() {
+	public List<ProductImage> terca() {
 		return ofertasRepository.terca();
 	}
 
 	public void imgDelete(Long id) throws Exception {
-		Optional<ImgProdutoModel> im = this.ofertasRepository.findById(id);
+		Optional<ProductImage> im = this.ofertasRepository.findById(id);
 		if (im.isPresent()) {
 			this.ofertasRepository.delete(im.get());
 		} else {
@@ -105,8 +105,8 @@ public class OfferImageService {
 	}
 
 	public void imgDeleteDiretory(Long id) {
-		ImgProdutoModel img = new ImgProdutoModel();
-		Optional<ImgProdutoModel> opt = this.ofertasRepository.findById(id);
+		ProductImage img = new ProductImage();
+		Optional<ProductImage> opt = this.ofertasRepository.findById(id);
 		if (opt.isPresent()) {
 
 			try {
@@ -121,9 +121,9 @@ public class OfferImageService {
 	}
 
 	// VERIFICAR AQUI DEPOIS
-	public ImgProdutoModel updateImg(MultipartFile file, Product produtoModel) throws IOException {
+	public ProductImage updateImg(MultipartFile file, Product produtoModel) throws IOException {
 		Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
-		ImgProdutoModel ofertas = new ImgProdutoModel();
+		ProductImage ofertas = new ProductImage();
 
 		ofertas.setName(StringUtils.cleanPath(file.getOriginalFilename()));
 		ofertas.setContentType(file.getContentType());
