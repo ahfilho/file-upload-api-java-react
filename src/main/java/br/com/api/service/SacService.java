@@ -35,8 +35,8 @@ public class SacService {
 			Sac sac = smu.get();
 			sac.setName(sacModel.getName());
 			sac.setEmail(sacModel.getEmail());
-			sac.setFone(sacModel.getMessage());
-			sac.setFone(sacModel.getFone());
+			sac.setMessage(sacModel.getMessage());
+			sac.setTelephone(sacModel.getTelephone());
 			return sac;
 		} else {
 			throw new Exception("ERRO AO ATUALIZAR O SAC" + sacModel.getId());

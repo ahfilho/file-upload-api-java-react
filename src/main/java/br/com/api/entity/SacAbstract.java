@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "al_sac")
+@Table(name = "sac")
 public abstract class SacAbstract {
 	
 	@Id

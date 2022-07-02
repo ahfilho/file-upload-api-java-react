@@ -33,7 +33,7 @@ public class ContactService {
 			cm.setName(contactModel.getName());
 			cm.setEmail(contactModel.getEmail());
 			cm.setSubject(contactModel.getSubject());
-			cm.setTelefone(contactModel.getTelefone());
+			cm.setTelephone(contactModel.getTelephone());
 			return cm;
 		} else {
 			throw new Exception("ERRO AO ATUALIZAR" + contactModel.getId());
