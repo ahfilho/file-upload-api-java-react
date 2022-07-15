@@ -16,9 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.api.entity.Category;
-import br.com.api.entity.ImageResponse;
-import br.com.api.entity.Image;
-import br.com.api.entity.Ssd;
+import br.com.api.entity.OfferImageResponse;
+import br.com.api.entity.ProductImage;
+import br.com.api.entity.Product;
 import br.com.api.service.ProductService;
 
 @RestController
@@ -30,7 +30,7 @@ public class ProductController {
 
 	@PostMapping
 	public ResponseEntity<String> productSave_uploadImg_category(@RequestParam("file") MultipartFile file,
-                                                                 Ssd productModel, Category catpm) {
+																 Product productModel, Category catpm) {
 		try {
 			productService.saveProduct_file_category(productModel, file, catpm);
 
@@ -43,16 +43,16 @@ public class ProductController {
 	}
 
 	@GetMapping
-	public List<Ssd> list() {
+	public List<Product> list() {
 
 		return productService.listProduct();
 	}
 
-	private ImageResponse testaMap(Image imgModel) {
+	private OfferImageResponse testaMap(ProductImage imgModel) {
 		long l1 = imgModel.getId();
 		String download = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files").path(Long.toString(l1))
 				.toUriString();
-		ImageResponse imgOferta = new ImageResponse();
+		OfferImageResponse imgOferta = new OfferImageResponse();
 		imgOferta.setId(imgModel.getId());
 		imgOferta.setName(imgModel.getName());
 		imgOferta.setContentType(imgModel.getContentType());

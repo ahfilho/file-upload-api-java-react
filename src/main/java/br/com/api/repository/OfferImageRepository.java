@@ -6,18 +6,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import br.com.api.entity.Category;
-import br.com.api.entity.Image;
-import br.com.api.entity.Ssd;
+import br.com.api.entity.ProductImage;
+import br.com.api.entity.Product;
 
-public interface OfferImageRepository extends JpaRepository<Image, Long> {
+public interface OfferImageRepository extends JpaRepository<ProductImage, Long> {
 
 	@Query(value = "SELECT * FROM imagem", nativeQuery = true)
-	public List<Image> consulta_personalizada();
+	public List<ProductImage> consulta_personalizada();
 
 	@Query(value = "SELECT * FROM product", nativeQuery = true)
-	public List<Image> terca();
+	public List<ProductImage> terca();
 
-	void save(Ssd pm);
+	void save(Product pm);
 
 	void save(Category cpm);
 

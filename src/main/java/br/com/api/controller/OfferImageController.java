@@ -21,9 +21,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.api.entity.Category;
-import br.com.api.entity.Image;
-import br.com.api.entity.Ssd;
-import br.com.api.entity.ImageResponse;
+import br.com.api.entity.ProductImage;
+import br.com.api.entity.Product;
+import br.com.api.entity.OfferImageResponse;
 import br.com.api.service.OfferImageService;
 
 @RestController
@@ -54,7 +54,7 @@ public class OfferImageController {
 
 	// SALVA UMA IMAGEM, UM PRODUTO E UMA CATEGORIA
 	@PostMapping
-	public ResponseEntity<String> uploadImgOferta(@RequestParam("file") MultipartFile file, Ssd productModel,
+	public ResponseEntity<String> uploadImgOferta(@RequestParam("file") MultipartFile file, Product productModel,
 			Category categoryProductModel) {
 
 		try {
@@ -71,15 +71,15 @@ public class OfferImageController {
 
 	@GetMapping("terca")
 	// @Scheduled(fixedRate = 2000)
-	public List<ImageResponse> teste3() {
+	public List<OfferImageResponse> teste3() {
 		return ofertasService.terca().stream().map(this::mapToQuery).collect(Collectors.toList());
 	}
 
-	private ImageResponse mapTo_Terca_Feira(Image img) {
+	private OfferImageResponse mapTo_Terca_Feira(ProductImage img) {
 		long l1 = img.getId();
 		String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/")
 				.path(Long.toString(l1)).toUriString();
-		ImageResponse iqr = new ImageResponse();
+		OfferImageResponse iqr = new OfferImageResponse();
 		iqr.setId(img.getId());
 		iqr.setName(img.getName());
 		iqr.setContentType(img.getContentType());
@@ -93,17 +93,17 @@ public class OfferImageController {
 	@GetMapping("teste")
 	// @Scheduled(fixedRate = 2000) // Vou usar isso para exibir as determinadas
 	// consultas de acordo com o dia da semana.
-	public List<ImageResponse> teste2() {
+	public List<OfferImageResponse> teste2() {
 		return ofertasService.getSql().stream().map(this::mapToQuery).collect(Collectors.toList());
 	}
 
 	// FUNCIONANDO: traz as imagens de acordo com o select do repository
-	private ImageResponse mapToQuery(Image img) {
+	private OfferImageResponse mapToQuery(ProductImage img) {
 
 		long l1 = img.getId();
 		String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/")
 				.path(Long.toString(l1)).toUriString();
-		ImageResponse iqr = new ImageResponse();
+		OfferImageResponse iqr = new OfferImageResponse();
 		iqr.setId(img.getId());
 		iqr.setName(img.getName());
 		iqr.setContentType(img.getContentType());
@@ -113,17 +113,17 @@ public class OfferImageController {
 	}
 
 	@GetMapping
-	public List<ImageResponse> list() {
+	public List<OfferImageResponse> list() {
 		return ofertasService.getAllFiles().stream().map(this::mapToFileResponse).collect(Collectors.toList());
 	}
 
-	private ImageResponse mapToFileResponse(Image ofertasModel) {
+	private OfferImageResponse mapToFileResponse(ProductImage ofertasModel) {
 
 		long l2 = ofertasModel.getId();
 		String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/")
 				.path(Long.toString(l2)).toUriString();
 
-		ImageResponse ofertas = new ImageResponse();
+		OfferImageResponse ofertas = new OfferImageResponse();
 		ofertas.setId(ofertasModel.getId());
 		ofertas.setName(ofertasModel.getName());
 		ofertas.setContentType(ofertasModel.getContentType());
@@ -135,11 +135,11 @@ public class OfferImageController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<byte[]> getFile(@PathVariable Long id) {
-		Optional<Image> file = ofertasService.getFile(id);
+		Optional<ProductImage> file = ofertasService.getFile(id);
 		if (!file.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
-		Image ofertasmodel = file.get();
+		ProductImage ofertasmodel = file.get();
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_DISPOSITION, "teste de upload/ filename=" + ofertasmodel.getName() + "\"")
 				.contentType(MediaType.valueOf(ofertasmodel.getContentType())).body(ofertasmodel.getData());
