@@ -16,7 +16,7 @@ import com.sun.istack.NotNull;
 @AllArgsConstructor
 @Data
 @Table(name = "whatsappRegistration")
-public class WhatsappRegistrationModel {
+public class Ram {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
