@@ -8,14 +8,14 @@ import java.util.Optional;
 import java.util.List;
 import javax.transaction.Transactional;
 
-import br.com.api.entity.ProductImage;
+import br.com.api.entity.Image;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.api.entity.Category;
-import br.com.api.entity.Product;
+import br.com.api.entity.Ssd;
 import br.com.api.repository.CategoryRepository;
 import br.com.api.repository.ProductRepository;
 import br.com.api.repository.OfferImageRepository;
@@ -42,10 +42,10 @@ public class ProductService {
 		}
 	}
 
-	public void saveProduct_file_category(Product productModel, MultipartFile file, Category catPm)
+	public void saveProduct_file_category(Ssd productModel, MultipartFile file, Category catPm)
 			throws IOException {
 		Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
-		ProductImage img = new ProductImage();
+		Image img = new Image();
 		
 		img.setName(StringUtils.cleanPath(file.getOriginalFilename()));
 		img.setContentType(file.getContentType());
@@ -58,15 +58,15 @@ public class ProductService {
 
 	}
 
-	public List<Product> listProduct() {
+	public List<Ssd> listProduct() {
 		return this.productRespository.findAll();
 	}
 
-	public Product updateProduct(Product productModel) throws Exception {
-		Optional<Product> opt = this.productRespository.findById(productModel.getId());
+	public Ssd updateProduct(Ssd productModel) throws Exception {
+		Optional<Ssd> opt = this.productRespository.findById(productModel.getId());
 		if (opt.isPresent()) {
-			Product pm = opt.get();
-			pm.setProductName(productModel.getProductName());
+			Ssd pm = opt.get();
+			pm.setModel(productModel.getModel());
 			pm.setCategoryProduct(productModel.getCategoryProduct());
 			pm.setImgProduct(productModel.getImgProduct());
 			return pm;
@@ -75,7 +75,7 @@ public class ProductService {
 		}
 	}
 	public void deleteProduct(Long id) throws Exception {
-		Optional<Product> product = this.productRespository.findById(id);
+		Optional<Ssd> product = this.productRespository.findById(id);
 		if(product.isPresent()) {
 			this.productRespository.delete(product.get());
 		} else {

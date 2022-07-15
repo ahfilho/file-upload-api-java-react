@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.api.entity.WhatsappRegistrationModel;
+import br.com.api.entity.Ram;
 import br.com.api.service.WhatsappService;
 
 @RestController
@@ -25,18 +25,18 @@ public class WhatsappRegistrationController {
 	private WhatsappService service;
 
 	@PostMapping
-	public ResponseEntity<WhatsappRegistrationModel> whatsappSave(@RequestBody WhatsappRegistrationModel whatsModel) {
+	public ResponseEntity<Ram> whatsappSave(@RequestBody Ram whatsModel) {
 		return ResponseEntity.ok().body(this.service.whatsappSave(whatsModel));
 	}
 
 	@GetMapping
-	public ResponseEntity<List<WhatsappRegistrationModel>> whatsappList() {
+	public ResponseEntity<List<Ram>> whatsappList() {
 		return ResponseEntity.ok().body(this.service.whatsappList());
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<WhatsappRegistrationModel> whatsappUpdate(@PathVariable Long id,
-			@RequestBody WhatsappRegistrationModel whats) throws Exception {
+	public ResponseEntity<Ram> whatsappUpdate(@PathVariable Long id,
+											  @RequestBody Ram whats) throws Exception {
 		whats.setId(id);
 		return ResponseEntity.ok().body(this.service.whaytsappUpdate(whats));
 	}
