@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/curriculo")
 public class CurriculoController {
 
-	//Para uma implementação futura 
-	
-	//@PostMapping("/cadastrarCv")
-	//public ResponseEntity<Curriculo>(){}
-	
-	
+    //Para uma implementação futura
+
+    //@PostMapping("/cadastrarCv")
+    //public ResponseEntity<Curriculo>(){}
+
+
 }

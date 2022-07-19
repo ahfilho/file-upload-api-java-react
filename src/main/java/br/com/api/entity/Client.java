@@ -11,9 +11,9 @@ import com.sun.istack.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name = "al_contact")
+@Table(name = "contact")
 @Entity
-public class Contact {
+public class Client {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,5 +38,6 @@ public class Contact {
 	@NotNull
 	@Column(name = "message")
 	private String message;
+
 
 }
