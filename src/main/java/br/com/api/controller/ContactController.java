@@ -14,38 +14,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.api.entity.Contact;
+import br.com.api.entity.Client;
 import br.com.api.service.ContactService;
 
 @RestController
-@RequestMapping("cadcontato")
+@RequestMapping("/contact")
 public class ContactController {
 
-	@Autowired
-	private ContactService servico;
+    @Autowired
+    private ContactService servico;
 
-	@PostMapping
-	public ResponseEntity<Contact> contactSave(@RequestBody Contact contactModel) {
-		return ResponseEntity.ok().body(this.servico.contactSave(contactModel));
+    @PostMapping
+    public ResponseEntity<Client> contactSave(@RequestBody Client contactModel) {
+        return ResponseEntity.ok().body(this.servico.contactSave(contactModel));
 
-	}
+    }
 
-	@GetMapping
-	public ResponseEntity<List<Contact>> contactList() {
-		return ResponseEntity.ok().body(this.servico.contactList());
+    @GetMapping
+    public ResponseEntity<List<Client>> contactList() {
+        return ResponseEntity.ok().body(this.servico.contactList());
 
-	}
+    }
 
-	@PutMapping("/{id}")
-	public ResponseEntity<Contact> contactUpdate(@PathVariable Long id, @RequestBody Contact contactModel)
-			throws Exception {
-		contactModel.setId(id);
-		return ResponseEntity.ok().body(this.servico.updateContact(contactModel));
-	}
+    @PutMapping("/{id}")
+    public ResponseEntity<Client> contactUpdate(@PathVariable Long id, @RequestBody Client contactModel)
+            throws Exception {
+        contactModel.setId(id);
+        return ResponseEntity.ok().body(this.servico.updateContact(contactModel));
+    }
 
-	@DeleteMapping("/{id}")
-	public HttpStatus contactDelete(@PathVariable long id) throws Exception {
-		this.servico.contactDelete(id);
-		return HttpStatus.OK;
-	}
+    @DeleteMapping("/{id}")
+    public HttpStatus contactDelete(@PathVariable Long id) throws Exception {
+        this.servico.contactDelete(id);
+        return HttpStatus.OK;
+    }
 }

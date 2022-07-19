@@ -10,15 +10,15 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import br.com.api.controller.ContactController;
-import br.com.api.controller.OfferImageController;
+import br.com.api.controller.ImageController;
 import br.com.api.controller.SacController;
-import br.com.api.controller.WhatsappRegistrationController;
-import br.com.api.entity.Contact;
+import br.com.api.controller.RamController;
+import br.com.api.entity.Client;
 import br.com.api.repository.ContactRepository;
 import br.com.api.service.ContactService;
 import br.com.api.service.OfferImageService;
 import br.com.api.service.SacService;
-import br.com.api.service.WhatsappService;
+import br.com.api.service.RamService;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 
 @EnableJpaRepositories("web.repositories")
@@ -31,7 +31,7 @@ class Supervia2ApplicationTests {
 	private ContactController contactController;
 
 	@Qualifier("contact")
-	private Contact contactModel;
+	private Client contactModel;
 
 	@Autowired 
 	private ContactRepository contactRepository;
@@ -40,7 +40,7 @@ class Supervia2ApplicationTests {
 	private ContactService contactService;
 
 	@Autowired
-	private OfferImageController ioc;
+	private ImageController ioc;
 
 	@MockBean
 	private OfferImageService ios;
@@ -52,10 +52,10 @@ class Supervia2ApplicationTests {
 	private SacService sacService;
 
 	@Autowired
-	private WhatsappRegistrationController whatsController;
+	private RamController whatsController;
 
 	@MockBean
-	private WhatsappService whatsService;
+	private RamService whatsService;
 
 	// private ContactRepository contactRepository;
 

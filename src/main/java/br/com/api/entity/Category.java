@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "categoria")
+@Table(name = "category")
 public class Category {
 
 	@Id
@@ -19,5 +19,7 @@ public class Category {
 
 	@Column(name = "product_category")
 	private String productCategory;
+
+
 
 }

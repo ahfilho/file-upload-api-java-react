@@ -14,36 +14,37 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.api.entity.Sac;
-import br.com.api.service.SacService;
+import br.com.api.entity.Ram;
+import br.com.api.service.RamService;
 
 @RestController
-@RequestMapping("/sac")
-public class SacController {
+@RequestMapping("/ram")
+public class RamController {
 
     @Autowired
-    private SacService service;
+    private RamService service;
 
     @PostMapping
-    public ResponseEntity<Sac> sacSave(@RequestBody Sac sacModel) {
-        return ResponseEntity.ok().body(this.service.saveSac(sacModel));
+    public ResponseEntity<Ram> whatsappSave(@RequestBody Ram whatsModel) {
+        return ResponseEntity.ok().body(this.service.whatsappSave(whatsModel));
     }
 
     @GetMapping
-    public ResponseEntity<List<Sac>> sacList() {
-        return ResponseEntity.ok().body(this.service.sacList());
+    public ResponseEntity<List<Ram>> whatsappList() {
+        return ResponseEntity.ok().body(this.service.whatsappList());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Sac> sacUpdate(@PathVariable Long id, @RequestBody Sac sacmodel) throws Exception {
-        sacmodel.setId(id);
-        return ResponseEntity.ok().body(this.service.sacUpdate(sacmodel));
-
+    public ResponseEntity<Ram> whatsappUpdate(@PathVariable Long id,
+                                              @RequestBody Ram whats) throws Exception {
+        whats.setId(id);
+        return ResponseEntity.ok().body(this.service.whaytsappUpdate(whats));
     }
 
     @DeleteMapping("/{id}")
-    public HttpStatus sacDelete(@PathVariable Long id) throws Exception {
+    public HttpStatus whatsappDelete(@PathVariable Long id) throws Exception {
         this.service.delete(id);
         return HttpStatus.OK;
     }
+
 }

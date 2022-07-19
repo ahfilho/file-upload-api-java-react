@@ -1,15 +1,17 @@
 package br.com.api.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
 
-//@AllArgsConstructor
-//@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Entity
-@Table(name = "al_cpu")
+@Table(name = "cpu")
+@NoArgsConstructor
 public class Cpu {
 
     @Id
@@ -44,17 +46,17 @@ public class Cpu {
     private int threads;
 
     @Column(name = "clock")
-    private int clock;
+    private float clock;
 
     @Column(name = "overclock")
     private boolean overclock;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "name")
+    private Image image;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "image_product_id")
-    private Image imgProduct;
+    @JoinColumn(name = "product_category")
+    private Category category;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_product_id")
-    private Category categoryProduct;
 }
