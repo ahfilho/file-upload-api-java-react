@@ -20,6 +20,7 @@ public class Category {
 	@Column(name = "product_category")
 	private String productCategory;
 
-
-
+	@OneToOne
+	@JoinColumn(name = "ssd_id")
+	private Ssd ssd;
 }

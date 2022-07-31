@@ -26,13 +26,13 @@ import br.com.api.service.SsdService;
 public class SsdController {
 
     @Autowired
-    private SsdService productService;
+    private SsdService ssdService;
 
     @PostMapping
     public ResponseEntity<String> productSaveUploadImgCategory(@RequestParam("file") MultipartFile file,
                                                                Ssd ssd, Category category) {
         try {
-            productService.saveProductFileCategory(ssd, file, category);
+            ssdService.saveProductFileCategory(ssd, file, category);
 
             return ResponseEntity.status(HttpStatus.OK)
                     .body(String.format("sucesso no upload %s", file.getOriginalFilename()));
@@ -44,7 +44,7 @@ public class SsdController {
 
     @GetMapping
     public List<Ssd> list() {
-        return productService.listAllSsd();
+        return ssdService.listAllSsd();
     }
 
     private ImageResponse testaMap(Image imgModel) {
@@ -63,7 +63,7 @@ public class SsdController {
 
     @DeleteMapping("/{id}")
     public HttpStatus deleteProduct(@PathVariable Long id) throws Exception {
-        productService.deleteProduct(id);
+        ssdService.deleteProduct(id);
         return HttpStatus.OK;
     }
 }

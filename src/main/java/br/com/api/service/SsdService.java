@@ -13,7 +13,6 @@ import javax.transaction.Transactional;
 
 import br.com.api.controller.ImageController;
 import br.com.api.entity.Image;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -32,7 +31,7 @@ public class SsdService {
     private final Path root = Paths.get("uploadss");
 
     @Autowired
-    private SsdRepository SsdRespository;
+    private SsdRepository ssdRespository;
     @Autowired
     private CategoryRepository catRepository;
     @Autowired
@@ -70,18 +69,23 @@ public class SsdService {
         img.setData(file.getBytes());
         img.setSize(file.getSize());
 
-        this.SsdRespository.save(ssd);
+        this.ssdRespository.save(ssd);
         this.catRepository.save(catPm);
         this.imageRepository.save(img);
 
     }
 
     public List<Ssd> listAllSsd() {
-        return this.SsdRespository.teste();
+        List<Ssd> a = ssdRespository.findAll();
+        for (Ssd s:a
+             ) {
+
+        }
+        return a;
     }
 
     public Ssd updateProduct(Ssd productModel) throws Exception {
-        Optional<Ssd> opt = this.SsdRespository.findById(productModel.getId());
+        Optional<Ssd> opt = this.ssdRespository.findById(productModel.getId());
         if (opt.isPresent()) {
             Ssd pm = opt.get();
             pm.setModel(productModel.getModel());
@@ -94,9 +98,9 @@ public class SsdService {
     }
 
     public void deleteProduct(Long id) throws Exception {
-        Optional<Ssd> product = this.SsdRespository.findById(id);
+        Optional<Ssd> product = this.ssdRespository.findById(id);
         if (product.isPresent()) {
-            this.SsdRespository.delete(product.get());
+            this.ssdRespository.delete(product.get());
         } else {
             throw new Exception("Erro ao deletar");
         }

@@ -19,6 +19,7 @@ public class Ssd {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ssd_id")
 	private Long id;
 
 	@Column(name = "brand")
@@ -53,11 +54,13 @@ public class Ssd {
 	private String model;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "name")
+//	@JoinTable(name="image")
+	@JoinColumn(name = "ssd_id")
 	private Image image;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "product_category")
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	@JoinTable(name="category")
+	@JoinColumn(name = "ssd_id")
 	private Category category;
 
 }

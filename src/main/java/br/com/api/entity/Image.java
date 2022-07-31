@@ -34,5 +34,7 @@ public class Image implements Serializable {
 	@Lob
 	private byte[] data;
 
-
+	@OneToOne
+	@JoinColumn(name = "ssd_id")
+	private Ssd ssd;
 }
