@@ -24,7 +24,7 @@ import io.restassured.module.mockmvc.RestAssuredMockMvc;
 @EnableJpaRepositories("web.repositories")
 //@SpringBootTest
 @WebMvcTest
-class Supervia2ApplicationTests {
+class ApiApplicationTests {
 	// Teste de unidade
 
 	@Autowired
