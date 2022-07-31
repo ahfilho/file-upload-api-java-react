@@ -14,7 +14,7 @@ public interface OfferImageRepository extends JpaRepository<Image, Long> {
 	@Query(value = "SELECT * FROM imagem", nativeQuery = true)
 	public List<Image> consulta_personalizada();
 
-	@Query(value = "SELECT * FROM product", nativeQuery = true)
+	@Query(value = "SELECT * FROM image", nativeQuery = true)
 	public List<Image> terca();
 
 	void save(Ssd pm);
