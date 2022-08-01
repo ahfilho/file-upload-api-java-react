@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 
 import br.com.api.controller.ImageController;
 import br.com.api.entity.Image;
+import br.com.api.entity.ImageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -79,6 +80,8 @@ public class SsdService {
         List<Ssd> a = ssdRespository.findAll();
         for (Ssd s:a
              ) {
+            System.out.println(s.getCategory());
+            System.out.println(s.getImage().getName());
 
         }
         return a;
