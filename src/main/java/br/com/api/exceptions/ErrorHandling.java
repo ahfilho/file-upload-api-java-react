@@ -16,7 +16,7 @@ import br.com.api.response.ErrorMessage;
 public class ErrorHandling extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(value = { Exception.class }) 
-	public ResponseEntity<Object> ErorHandleException(Exception e, WebRequest request) {
+	public ResponseEntity<Object> ErrorHandleException(Exception e, WebRequest request) {
 		String errorDescription = e.getLocalizedMessage();
 		if (errorDescription == null)
 			errorDescription = e.toString();
