@@ -49,6 +49,9 @@ public class Ssd {
 	@Column(name = "arrival_date")
 	private Date arrivalDate;
 
+	@Column(name = "url")
+	private String url;
+
 	@NotNull
 	@Column(name = "model")
 	private String model;
