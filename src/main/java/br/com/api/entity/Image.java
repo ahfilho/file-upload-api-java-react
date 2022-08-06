@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,7 @@ public class Image implements Serializable {
 	private String url;
 
 	@Lob
+	@JsonIgnore
 	private byte[] data;
 
 	@OneToOne
