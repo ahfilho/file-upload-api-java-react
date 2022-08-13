@@ -77,14 +77,14 @@ public class SsdService {
     }
 
     public List<Ssd> listAllSsd() {
-        List<Ssd> a = ssdRespository.findAll();
-        for (Ssd s:a
+        List<Ssd> ssdALl = ssdRespository.findAll();
+        for (Ssd s:ssdALl
              ) {
             System.out.println(s.getCategory());
             System.out.println(s.getImage().getName());
 
         }
-        return a;
+        return ssdALl;
     }
 
     public Ssd updateProduct(Ssd productModel) throws Exception {
