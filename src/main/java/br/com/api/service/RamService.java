@@ -12,14 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.api.entity.Ram;
-import br.com.api.repository.WhatsappRegistrationRepository;
+import br.com.api.repository.RamRepository;
 
 @Service
 @Transactional
 public class RamService {
 
     @Autowired
-    private WhatsappRegistrationRepository whatsRepository;
+    private RamRepository whatsRepository;
 
     public Ram whatsappSave(Ram ram) {
 

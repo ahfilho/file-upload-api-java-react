@@ -11,13 +11,14 @@ import com.sun.istack.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name = "contact")
+@Table(name = "client")
 @Entity
 public class Client {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	@Column(name = "client_id")
+	private Long id;
 
 	@NotNull
 	@Column(name = "name")
@@ -28,16 +29,16 @@ public class Client {
 	private String email;
 
 	@NotNull
-	@Column(name = "subject")
-	private String subject;
+	@Column(name = "cpf")
+	private String cpf;
 
 	@NotNull
-	@Column(name = "telephone")
-	private String telephone;
+	@Column(name = "contact")
+	private int contact;
 
-	@NotNull
-	@Column(name = "message")
-	private String message;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "client_id")
+	private Address address;
 
 
 }

@@ -9,13 +9,13 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import br.com.api.controller.ContactController;
+import br.com.api.controller.ClientController;
 import br.com.api.controller.ImageController;
 import br.com.api.controller.SacController;
 import br.com.api.controller.RamController;
 import br.com.api.entity.Client;
-import br.com.api.repository.ContactRepository;
-import br.com.api.service.ContactService;
+import br.com.api.repository.ClientRepository;
+import br.com.api.service.ClientService;
 import br.com.api.service.OfferImageService;
 import br.com.api.service.SacService;
 import br.com.api.service.RamService;
@@ -28,16 +28,16 @@ class ApiApplicationTests {
 	// Teste de unidade
 
 	@Autowired
-	private ContactController contactController;
+	private ClientController contactController;
 
 	@Qualifier("contact")
 	private Client contactModel;
 
 	@Autowired 
-	private ContactRepository contactRepository;
+	private ClientRepository contactRepository;
 	
 	@MockBean
-	private ContactService contactService;
+	private ClientService contactService;
 
 	@Autowired
 	private ImageController ioc;
