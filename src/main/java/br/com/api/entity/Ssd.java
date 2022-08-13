@@ -1,6 +1,7 @@
 package br.com.api.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -22,10 +23,12 @@ public class Ssd {
 	@Column(name = "ssd_id")
 	private Long id;
 
+	@NotBlank(message = "Brand is mandatory")
 	@Column(name = "brand")
 	@NotNull
 	private String brand;
 
+	@NotBlank(message = "Serial number is mandatory")
 	@Column(name = "serial_number", length = 17)
 	@NotNull
 	private int serialNumber;
@@ -57,12 +60,10 @@ public class Ssd {
 	private String model;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//	@JoinTable(name="image")
 	@JoinColumn(name = "ssd_id")
 	private Image image;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//	@JoinTable(name="category")
 	@JoinColumn(name = "ssd_id")
 	private Category category;
 

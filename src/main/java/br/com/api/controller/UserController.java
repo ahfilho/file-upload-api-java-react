@@ -4,8 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/curriculo")
-public class CurriculoController {
+@RequestMapping("/user")
+public class UserController {
 
     //Para uma implementação futura
 
