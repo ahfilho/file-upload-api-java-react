@@ -13,8 +13,8 @@ Tecnologias utilizadas
 
 IDE e programas utilizados
 
-Intellij
-Postman
-Dbeaver
+###Intellij
+###Postman
+###Dbeaver
 
-Teste automatizado com o Postman
+##Teste automatizado com o Postman
