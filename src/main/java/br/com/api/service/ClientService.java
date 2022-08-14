@@ -1,5 +1,6 @@
 package br.com.api.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,9 +25,9 @@ public class ClientService {
     @Autowired
     private AddressRepository addressRepository;
 
-    public void clientSave(Client client, @NotNull Address address) {
-        this.clientRepository.save(client);
-        this.addressRepository.save(address);
+    public void clientSave(Client client) {
+            this.clientRepository.save(client);
+
     }
 
     public List<Client> clientList() {

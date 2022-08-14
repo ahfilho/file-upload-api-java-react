@@ -5,14 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 import com.sun.istack.NotNull;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name = "client")
 @Entity
+@Table(name = "client")
 public class Client {
 
 	@Id
@@ -25,6 +26,7 @@ public class Client {
 	private String name;
 
 	@NotNull
+	@Email
 	@Column(name = "email")
 	private String email;
 
