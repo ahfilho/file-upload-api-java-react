@@ -1,4 +1,5 @@
 # backend_api Rest
+ Documentação aqui: https://documenter.getpostman.com/view/14374394/Uyxkkkyr
  
 Tecnologias utilizadas 
 
@@ -9,3 +10,11 @@ Tecnologias utilizadas
 ### Maven
 ### PostgreSql
 ### Docker
+
+IDE e programas utilizados
+
+Intellij
+Postman
+Dbeaver
+
+Teste automatizado com o Postman
