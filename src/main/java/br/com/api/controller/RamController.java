@@ -22,28 +22,28 @@ import br.com.api.service.RamService;
 public class RamController {
 
     @Autowired
-    private RamService service;
+    private RamService ramService;
 
     @PostMapping
-    public ResponseEntity<Ram> whatsappSave(@RequestBody Ram whatsModel) {
-        return ResponseEntity.ok().body(this.service.whatsappSave(whatsModel));
+    public ResponseEntity<Ram> whatsappSave(@RequestBody Ram ram) {
+        return ResponseEntity.ok().body(this.ramService.whatsappSave(ram));
     }
 
     @GetMapping
     public ResponseEntity<List<Ram>> whatsappList() {
-        return ResponseEntity.ok().body(this.service.whatsappList());
+        return ResponseEntity.ok().body(this.ramService.whatsappList());
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Ram> whatsappUpdate(@PathVariable Long id,
                                               @RequestBody Ram whats) throws Exception {
         whats.setId(id);
-        return ResponseEntity.ok().body(this.service.whaytsappUpdate(whats));
+        return ResponseEntity.ok().body(this.ramService.whaytsappUpdate(whats));
     }
 
     @DeleteMapping("/{id}")
     public HttpStatus whatsappDelete(@PathVariable Long id) throws Exception {
-        this.service.delete(id);
+        this.ramService.delete(id);
         return HttpStatus.OK;
     }
 
