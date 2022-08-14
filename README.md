@@ -10,11 +10,13 @@
 ### Maven
 ### PostgreSql
 ### Docker
-<br>
+
+
 ## IDE e programas utilizados
-<br>
-### Intellij 
+
+### Intellij
 ### Postman 
-### Dbeaver 
+### Dbeaver
+
 
 ## Teste automatizado com o Postman
