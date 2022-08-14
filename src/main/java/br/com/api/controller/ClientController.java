@@ -19,9 +19,9 @@ public class ClientController {
     private ClientService clientService;
 
     @PostMapping
-    public ResponseEntity<String> clientSave(@RequestBody Client client,  Address address) {
+    public ResponseEntity<String> clientSave(@RequestBody Client client) {
         try {
-            this.clientService.clientSave(client,address);
+            this.clientService.clientSave(client);
             return ResponseEntity.status(HttpStatus.OK).body(String.format("Cliente: " + client.getName()+ " salvo com sucesso!"));
         }
         catch (Exception e) {

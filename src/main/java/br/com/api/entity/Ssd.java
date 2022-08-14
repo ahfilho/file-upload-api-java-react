@@ -1,7 +1,6 @@
 package br.com.api.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -23,12 +22,10 @@ public class Ssd {
 	@Column(name = "ssd_id")
 	private Long id;
 
-	@NotBlank(message = "Brand is mandatory")
 	@Column(name = "brand")
 	@NotNull
 	private String brand;
 
-	@NotBlank(message = "Serial number is mandatory")
 	@Column(name = "serial_number", length = 17)
 	@NotNull
 	private int serialNumber;
