@@ -10,11 +10,11 @@ Tecnologias utilizadas
 ### Maven
 ### PostgreSql
 ### Docker
-
+<br>
 IDE e programas utilizados
-
+<br>
 ###Intellij
 ###Postman
 ###Dbeaver
 
-##Teste automatizado com o Postman
+Teste automatizado com o Postman
