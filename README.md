@@ -12,6 +12,8 @@
 ### Docker
 
 
+<br>
+<hr>
 ## IDE e programas utilizados
 
 ### Intellij
