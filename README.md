@@ -1,22 +1,20 @@
 # backend_api Rest
  Documentação aqui: https://documenter.getpostman.com/view/14374394/Uyxkkkyr
  
-## Tecnologias utilizadas 
+### Tecnologias utilizadas 
 
-### Java 11
-### Spring data
-### Spring validation
-### Lombok
-### Maven
-### PostgreSql
-### Docker
-
-
-## IDE e programas utilizados
-
-### Intellij
-### Postman 
-### Dbeaver
+## Java 11
+## Spring data
+## Spring validation
+## Lombok
+## Maven
+## PostgreSql
+## Docker
 
 
-## Teste automatizado com o Postman
+### IDE e programas utilizados
+
+## Intellij
+## Postman - teste automatizado
+## Dbeaver
+
