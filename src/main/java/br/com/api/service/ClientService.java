@@ -26,7 +26,7 @@ public class ClientService {
     private AddressRepository addressRepository;
 
     public void clientSave(Client client) {
-            this.clientRepository.save(client);
+        this.clientRepository.save(client);
 
     }
 

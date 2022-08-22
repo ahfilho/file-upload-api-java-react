@@ -1,21 +1,19 @@
 package br.com.api.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import br.com.api.entity.Category;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import br.com.api.entity.Ram;
 import br.com.api.service.RamService;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("/ram")
@@ -25,26 +23,45 @@ public class RamController {
     private RamService ramService;
 
     @PostMapping
-    public ResponseEntity<Ram> whatsappSave(@RequestBody Ram ram) {
-        return ResponseEntity.ok().body(this.ramService.whatsappSave(ram));
+    public ResponseEntity<String> ramSave(@RequestParam("file") MultipartFile file, Ram ram, Category category) {
+
+        try {
+            ramService.ramSave(ram, file, category);
+
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(String.format("sucesso no cadastro: %s", file.getOriginalFilename()));
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(String.format("Falha no cadastro: %s", file.getOriginalFilename()));
+        }
     }
 
     @GetMapping
-    public ResponseEntity<List<Ram>> whatsappList() {
-        return ResponseEntity.ok().body(this.ramService.whatsappList());
+    public List<Ram> ramList() {
+        return this.ramService.whatsappList().stream().map(this::linkImgRam).collect(Collectors.toList());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Ram> whatsappUpdate(@PathVariable Long id,
-                                              @RequestBody Ram whats) throws Exception {
-        whats.setId(id);
-        return ResponseEntity.ok().body(this.ramService.whaytsappUpdate(whats));
+    public ResponseEntity<Ram> ramUpdate(@PathVariable Long id,
+                                         @NotNull @RequestBody Ram ram) throws Exception {
+        ram.setId(id);
+        return ResponseEntity.ok().body(this.ramService.whaytsappUpdate(ram));
     }
 
     @DeleteMapping("/{id}")
-    public HttpStatus whatsappDelete(@PathVariable Long id) throws Exception {
+    public HttpStatus ramDelete(@PathVariable Long id) throws Exception {
         this.ramService.delete(id);
         return HttpStatus.OK;
+    }
+
+    private Ram linkImgRam(Ram ram) {
+        long r1 = ram.getId();
+        String linkRam = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/").path(Long.toString(r1)).toUriString();
+        Ram r = new Ram();
+        r.setId(ram.getId());
+        r.setUrl(ram.getUrl());
+        return ram;
     }
 
 }

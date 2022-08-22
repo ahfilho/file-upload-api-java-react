@@ -22,10 +22,9 @@ public class ClientController {
     public ResponseEntity<String> clientSave(@RequestBody Client client) {
         try {
             this.clientService.clientSave(client);
-            return ResponseEntity.status(HttpStatus.OK).body(String.format("Cliente: " + client.getName()+ " salvo com sucesso!"));
-        }
-        catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.OK).body(String.format("Não foi possível salvar o cliente: " + client.getName() ));
+            return ResponseEntity.status(HttpStatus.OK).body(String.format("Cliente: " + client.getName() + " cadastrado com sucesso!"));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.OK).body(String.format("Não foi possível cadastrar o cliente: " + client.getName()));
         }
     }
 
