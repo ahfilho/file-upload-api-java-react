@@ -44,14 +44,12 @@ public class SacService {
     }
 
     public void delete(Long sacId) throws Exception {
-        {
-            Optional<Sac> smd = this.repositorySac.findById(sacId);
-            if (smd.isPresent()) {
-                this.repositorySac.delete(smd.get());
-            } else {
-                throw new Exception("ERRO AO DELETAR O ID" + sacId);
-            }
 
+        Optional<Sac> smd = this.repositorySac.findById(sacId);
+        if (smd.isPresent()) {
+            this.repositorySac.delete(smd.get());
+        } else {
+            throw new Exception("ERRO AO DELETAR O ID" + sacId);
         }
     }
 

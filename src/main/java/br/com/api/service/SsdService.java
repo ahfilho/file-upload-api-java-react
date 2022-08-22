@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.List;
 import javax.transaction.Transactional;
 
+import br.com.api.ImagePath;
 import br.com.api.controller.ImageController;
 import br.com.api.entity.Image;
 import br.com.api.entity.ImageResponse;
@@ -27,9 +28,9 @@ import br.com.api.repository.OfferImageRepository;
 
 @Transactional
 @Service
-public class SsdService {
+public class SsdService implements ImagePath {
 
-    private final Path root = Paths.get("uploadss");
+//    private final Path root = Paths.get("uploadss");
 
     @Autowired
     private SsdRepository ssdRespository;
@@ -78,8 +79,8 @@ public class SsdService {
 
     public List<Ssd> listAllSsd() {
         List<Ssd> ssdALl = ssdRespository.findAll();
-        for (Ssd s:ssdALl
-             ) {
+        for (Ssd s : ssdALl
+        ) {
             System.out.println(s.getCategory());
             System.out.println(s.getImage().getName());
 
@@ -87,6 +88,8 @@ public class SsdService {
         return ssdALl;
     }
 
+
+    //TODO - fazer ou corrigir o update
     public Ssd updateProduct(Ssd productModel) throws Exception {
         Optional<Ssd> opt = this.ssdRespository.findById(productModel.getId());
         if (opt.isPresent()) {

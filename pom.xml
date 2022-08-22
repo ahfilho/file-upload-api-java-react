@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 		
 	</parent>
-	<groupId>com.ws</groupId>
+	<groupId>com.api</groupId>
 	<artifactId>backend_api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>backend_api</name>

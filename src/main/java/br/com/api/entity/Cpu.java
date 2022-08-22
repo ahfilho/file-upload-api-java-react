@@ -22,7 +22,7 @@ public class Cpu {
     private String brand;
 
     @Column(name = "serial_number")
-    private int serial_number ;
+    private int serial_number;
 
     @Column(name = "model")
     private String model;
@@ -37,7 +37,7 @@ public class Cpu {
     private float sale_value;
 
     @Column(name = "arrival_date")
-    private Date arrival_date ;
+    private Date arrival_date;
 
     @Column(name = "cores")
     private int cores;
@@ -50,6 +50,9 @@ public class Cpu {
 
     @Column(name = "overclock")
     private boolean overclock;
+
+    @Column(name = "url")
+    private String url;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "name")
