@@ -22,34 +22,32 @@ public class SsdController {
     private SsdService ssdService;
 
     @PostMapping
-    public ResponseEntity<String> productSaveUploadImgCategory(@RequestParam("file") MultipartFile file,
-                                                               Ssd ssd, Category category) {
+    public ResponseEntity<String> ssdSave(@RequestParam("file") MultipartFile file,
+                                          Ssd ssd, Category category) {
         try {
             ssdService.saveProductFileCategory(ssd, file, category);
 
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(String.format("sucesso no upload %s", file.getOriginalFilename()));
+                    .body(String.format("sucesso no cadastro: %s", file.getOriginalFilename()));
 
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(String.format("Falha no upload %s", file.getOriginalFilename()));
+                    .body(String.format("Falha no cadastro: %s", file.getOriginalFilename()));
         }
     }
 
     @GetMapping
     public List<Ssd> list() {
-        return ssdService.listAllSsd().stream().map(this::linkImg).collect(Collectors.toList());
+        return ssdService.listAllSsd().stream().map(this::linkImgSsd).collect(Collectors.toList());
     }
 
-    private Ssd linkImg(Ssd ssd) {
+    private Ssd linkImgSsd(Ssd ssd) {
         long l1 = ssd.getId();
         String download = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/").path(Long.toString(l1))
                 .toUriString();
-
         Ssd s = new Ssd();
         ssd.setId(ssd.getId());
         ssd.setUrl(download);
-
         return ssd;
     }
 

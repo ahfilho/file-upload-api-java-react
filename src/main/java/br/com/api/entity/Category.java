@@ -23,4 +23,9 @@ public class Category {
 	@OneToOne
 	@JoinColumn(name = "ssd_id")
 	private Ssd ssd;
+
+	@OneToOne
+	@JoinColumn(name = "ram_id")
+	private Ram ram;
+
 }

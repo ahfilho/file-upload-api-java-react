@@ -16,27 +16,31 @@ import lombok.NoArgsConstructor;
 @Table(name = "image")
 public class Image implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "name")
-	private String name;
+    @Column(name = "name")
+    private String name;
 
-	@Column(name = "content_type")
-	private String contentType;
+    @Column(name = "content_type")
+    private String contentType;
 
-	@Column(name = "size")
-	private Long size;
+    @Column(name = "size")
+    private Long size;
 
-	@Column(name = "url")
-	private String url;
+    @Column(name = "url")
+    private String url;
 
-	@Lob
-	@JsonIgnore
-	private byte[] data;
+    @Lob
+    @JsonIgnore
+    private byte[] data;
 
-	@OneToOne
-	@JoinColumn(name = "ssd_id")
-	private Ssd ssd;
+    @OneToOne
+    @JoinColumn(name = "ssd_id")
+    private Ssd ssd;
+
+    @OneToOne
+    @JoinColumn(name = "ram_id")
+    private Ram ram;
 }

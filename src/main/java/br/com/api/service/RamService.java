@@ -1,5 +1,7 @@
 package br.com.api.service;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -8,20 +10,34 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import br.com.api.ImagePath;
+import br.com.api.entity.Category;
+import br.com.api.entity.Image;
+import br.com.api.repository.CategoryRepository;
+import br.com.api.repository.OfferImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.api.entity.Ram;
 import br.com.api.repository.RamRepository;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @Transactional
-public class RamService {
+public class RamService implements ImagePath {
 
     @Autowired
-    private RamRepository whatsRepository;
+    private RamRepository ramRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
+    @Autowired
+    private OfferImageRepository offerImageRepository;
 
-    public Ram whatsappSave(Ram ram) {
+
+    public void ramSave(Ram ram, MultipartFile file, Category category) throws IOException {
+
+        Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
 
         Date dateAtual = new Date();
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -29,30 +45,44 @@ public class RamService {
         ram.setArrivalDate(dateAtual);
         ram.setPurchaseDate(dateAtual);
 
-        return this.whatsRepository.save(ram);
+        Image img = new Image();
 
+        img.setName(StringUtils.cleanPath(file.getOriginalFilename()));
+        img.setContentType(file.getContentType());
+        img.setData(file.getBytes());
+        img.setSize(file.getSize());
+        this.ramRepository.save(ram);
+        this.offerImageRepository.save(img);
+        this.categoryRepository.save(category);
     }
 
     public List<Ram> whatsappList() {
-        return this.whatsRepository.findAll();
+        return this.ramRepository.findAll();
     }
 
-    public Ram whaytsappUpdate(Ram whats) throws Exception {
-        Optional<Ram> whatsOptional = this.whatsRepository.findById(whats.getId());
+    public Ram whaytsappUpdate(Ram ram) throws Exception {
+        Optional<Ram> whatsOptional = this.ramRepository.findById(ram.getId());
         if (whatsOptional.isPresent()) {
-            Ram wrm = whatsOptional.get();
-            wrm.setBrand(whats.getBrand());
-            wrm.setModel(whats.getModel());
-            return wrm;
+            Ram ramAux = whatsOptional.get();
+            ramAux.setBrand(ram.getBrand());
+            ramAux.setModel(ram.getModel());
+            ramAux.setMhz(ram.getMhz());
+            ramAux.setSize(ram.getSize());
+            ramAux.setPurchasePrice(ram.getPurchasePrice());
+            ramAux.setSaleValue(ram.getSaleValue());
+            ramAux.setArrivalDate(ram.getArrivalDate());
+            ramAux.setPurchaseDate(ram.getPurchaseDate());
+
+            return ramAux;
         } else {
-            throw new Exception("ERRO AO ATUALIZAR O NUMERO DO WHATSAPP" + whats.getId());
+            throw new Exception("ERRO AO ATUALIZAR A RAM" + ram.getId());
         }
     }
 
     public void delete(Long whatsId) throws Exception {
-        Optional<Ram> whats = this.whatsRepository.findById(whatsId);
+        Optional<Ram> whats = this.ramRepository.findById(whatsId);
         if (whats.isPresent()) {
-            this.whatsRepository.delete(whats.get());
+            this.ramRepository.delete(whats.get());
         } else {
             throw new Exception("ERRO AO DELETAR O ID" + whatsId);
         }

@@ -29,143 +29,140 @@ import br.com.api.service.OfferImageService;
 @RestController
 @RequestMapping("/files")
 public class ImageController {
-
-    @Autowired
-    private OfferImageService ofertasService;
-
-    /*
-     * Envia mais de um arquivo por requisição; vai ficar aqui caso precise.
-     *
-     * @PostMapping public ResponseEntity<String>
-     * uploadImgOferta(@RequestParam("file") MultipartFile[] file, ProdutoModel pm,
-     * CategoriaProdutoModel cpm) {
-     *
-     * try { ofertasService.saveFile(file, pm, cpm);
-     *
-     * return ResponseEntity.status(HttpStatus.OK)
-     * .body(String.format("sucesso no upload")); } catch (Exception e) { return
-     * ResponseEntity.status(HttpStatus.OK)
-     * .body(String.format("falha no upload %s"));
-     *
-     * } }
-     */
-
-    // Envia apenas um arquivo por requisição
-
-    // SALVA UMA IMAGEM, UM PRODUTO E UMA CATEGORIA
-    @PostMapping
-    public ResponseEntity<String> uploadImgOferta(@RequestParam("file") MultipartFile file, Ssd ssd,
-                                                  Category category) {
-
-        try {
-            ofertasService.saveFile(file, ssd, category);
-
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(String.format("sucesso no upload", file.getOriginalFilename()));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(String.format("falha no upload %s", file.getOriginalFilename()));
-
-        }
-    }
-
-    @GetMapping("terca")
-    // @Scheduled(fixedRate = 2000)
-    public List<ImageResponse> teste3() {
-        return ofertasService.terca().stream().map(this::mapToQuery).collect(Collectors.toList());
-    }
-
-    private ImageResponse mapTo_Terca_Feira(Image img) {
-        long l1 = img.getId();
-        String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/")
-                .path(Long.toString(l1)).toUriString();
-        ImageResponse iqr = new ImageResponse();
-        iqr.setId(img.getId());
-        iqr.setName(img.getName());
-        iqr.setContentType(img.getContentType());
-        // iqr.setSize(img.getSize());
-        iqr.setUrl(downloadURL);
-        return iqr;
-    }
-
-    // Ainda para terminar, só falta fazer o select do repository. Mas já funciona
-    // certinho.
-    @GetMapping("teste")
-    // @Scheduled(fixedRate = 2000) // Vou usar isso para exibir as determinadas
-    // consultas de acordo com o dia da semana.
-    public List<ImageResponse> teste2() {
-        return ofertasService.getSql().stream().map(this::mapToQuery).collect(Collectors.toList());
-    }
-
-    // FUNCIONANDO: traz as imagens de acordo com o select do repository
-    private ImageResponse mapToQuery(Image img) {
-
-        long l1 = img.getId();
-        String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/")
-                .path(Long.toString(l1)).toUriString();
-        ImageResponse iqr = new ImageResponse();
-        iqr.setId(img.getId());
-        iqr.setName(img.getName());
-        iqr.setContentType(img.getContentType());
-        // iqr.setSize(img.getSize());
-        iqr.setUrl(downloadURL);
-        return iqr;
-    }
-
-    @GetMapping
-    public List<ImageResponse> list() {
-        return ofertasService.getAllFiles().stream().map(this::mapToFileResponse).collect(Collectors.toList());
-    }
-
-    private ImageResponse mapToFileResponse(Image ofertasModel) {
-
-        long l2 = ofertasModel.getId();
-        String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/")
-                .path(Long.toString(l2)).toUriString();
-
-        ImageResponse ofertas = new ImageResponse();
-        ofertas.setId(ofertasModel.getId());
-        ofertas.setName(ofertasModel.getName());
-        ofertas.setContentType(ofertasModel.getContentType());
-        ofertas.setSize(ofertasModel.getSize());
-        ofertas.setUrl(downloadURL);
-
-        return ofertas;
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<byte[]> getFile(@PathVariable Long id) {
-        Optional<Image> file = ofertasService.getFile(id);
-        if (!file.isPresent()) {
-            return ResponseEntity.notFound().build();
-        }
-        Image ofertasmodel = file.get();
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "teste de upload/ filename=" + ofertasmodel.getName() + "\"")
-                .contentType(MediaType.valueOf(ofertasmodel.getContentType())).body(ofertasmodel.getData());
-
-    }
-
-    @DeleteMapping("/{id}")
-    public HttpStatus deleta(@PathVariable Long id) throws Exception {
-        ofertasService.imgDeleteDiretory(id);
-        this.ofertasService.imgDelete(id);
-        return HttpStatus.OK;
-    }
-
-    // VERIFICAR AQUI DEPOIS
-    @PutMapping("/{id}")
-    public ResponseEntity<String> uploadImgOferta(@RequestParam("file") MultipartFile file) {
-
-        try {
-            ofertasService.updateImg(file, null);
-
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(String.format("sucesso no upload", file.getOriginalFilename()));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(String.format("falha no upload %s", file.getOriginalFilename()));
-
-        }
-    }
+//
+//    @Autowired
+//    private OfferImageService ofertasService;
+//
+//    /*
+//     * Envia mais de um arquivo por requisição; vai ficar aqui caso precise.
+//     *
+//     * @PostMapping public ResponseEntity<String>
+//     * uploadImgOferta(@RequestParam("file") MultipartFile[] file, ProdutoModel pm,
+//     * CategoriaProdutoModel cpm) {
+//     *
+//     * try { ofertasService.saveFile(file, pm, cpm);
+//     *
+//     * return ResponseEntity.status(HttpStatus.OK)
+//     * .body(String.format("sucesso no upload")); } catch (Exception e) { return
+//     * ResponseEntity.status(HttpStatus.OK)
+//     * .body(String.format("falha no upload %s"));
+//     *
+//     * } }
+//     */
+//
+//    // Envia apenas um arquivo por requisição
+//
+//    // SALVA UMA IMAGEM, UM PRODUTO E UMA CATEGORIA
+//    @PostMapping
+//    public ResponseEntity<String> uploadImgOferta(@RequestParam("file") MultipartFile file, Ssd ssd,
+//                                                  Category category) {
+//
+//        try {
+//            ofertasService.saveFile(file, ssd, category);
+//
+//            return ResponseEntity.status(HttpStatus.OK)
+//                    .body(String.format("sucesso no upload", file.getOriginalFilename()));
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.OK)
+//                    .body(String.format("falha no upload %s", file.getOriginalFilename()));
+//
+//        }
+//    }
+//
+//    @GetMapping("terca")
+//    // @Scheduled(fixedRate = 2000)
+//    public List<ImageResponse> teste3() {
+//        return ofertasService.terca().stream().map(this::mapToQuery).collect(Collectors.toList());
+//    }
+//
+//    private ImageResponse mapTo_Terca_Feira(Image img) {
+//        long l1 = img.getId();
+//        String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/")
+//                .path(Long.toString(l1)).toUriString();
+//        ImageResponse iqr = new ImageResponse();
+//        iqr.setId(img.getId());
+//        iqr.setName(img.getName());
+//        iqr.setContentType(img.getContentType());
+//        // iqr.setSize(img.getSize());
+//        iqr.setUrl(downloadURL);
+//        return iqr;
+//    }
+//
+//
+//    @GetMapping("teste")
+//    // @Scheduled(fixedRate = 2000) // Vou usar isso para exibir as determinadas
+//    // consultas de acordo com o dia da semana.
+//    public List<ImageResponse> teste2() {
+//        return ofertasService.getSql().stream().map(this::mapToQuery).collect(Collectors.toList());
+//    }
+//
+//    private ImageResponse mapToQuery(Image img) {
+//
+//        long l1 = img.getId();
+//        String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/")
+//                .path(Long.toString(l1)).toUriString();
+//        ImageResponse iqr = new ImageResponse();
+//        iqr.setId(img.getId());
+//        iqr.setName(img.getName());
+//        iqr.setContentType(img.getContentType());
+//        iqr.setUrl(downloadURL);
+//        return iqr;
+//    }
+//
+//    @GetMapping
+//    public List<ImageResponse> list() {
+//        return ofertasService.getAllFiles().stream().map(this::mapToFileResponse).collect(Collectors.toList());
+//    }
+//
+//    private ImageResponse mapToFileResponse(Image ofertasModel) {
+//
+//        long l2 = ofertasModel.getId();
+//        String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/")
+//                .path(Long.toString(l2)).toUriString();
+//        ImageResponse offer = new ImageResponse();
+//        offer.setId(ofertasModel.getId());
+//        offer.setName(ofertasModel.getName());
+//        offer.setContentType(ofertasModel.getContentType());
+//        offer.setSize(ofertasModel.getSize());
+//        offer.setUrl(downloadURL);
+//
+//        return offer;
+//    }
+//
+//    @GetMapping("/{id}")
+//    public ResponseEntity<byte[]> getFile(@PathVariable Long id) {
+//        Optional<Image> file = ofertasService.getFile(id);
+//        if (!file.isPresent()) {
+//            return ResponseEntity.notFound().build();
+//        }
+//        Image imageOffer = file.get();
+//        return ResponseEntity.ok()
+//                .header(HttpHeaders.CONTENT_DISPOSITION, "teste de upload/ filename=" + imageOffer.getName() + "\"")
+//                .contentType(MediaType.valueOf(imageOffer.getContentType())).body(imageOffer.getData());
+//
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public HttpStatus deleta(@PathVariable Long id) throws Exception {
+//        ofertasService.imgDeleteDiretory(id);
+//        this.ofertasService.imgDelete(id);
+//        return HttpStatus.OK;
+//    }
+//
+//    //TODO
+//    // VERIFICAR AQUI DEPOIS
+//    @PutMapping("/{id}")
+//    public ResponseEntity<String> uploadImgOferta(@RequestParam("file") MultipartFile file) {
+//
+//        try {
+//            ofertasService.updateImg(file, null);
+//
+//            return ResponseEntity.status(HttpStatus.OK)
+//                    .body(String.format("sucesso no upload", file.getOriginalFilename()));
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.OK)
+//                    .body(String.format("falha no upload %s", file.getOriginalFilename()));
+//
+//        }
+//    }
 }

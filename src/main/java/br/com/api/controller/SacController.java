@@ -35,9 +35,9 @@ public class SacController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Sac> sacUpdate(@PathVariable Long id, @RequestBody Sac sacmodel) throws Exception {
-        sacmodel.setId(id);
-        return ResponseEntity.ok().body(this.service.sacUpdate(sacmodel));
+    public ResponseEntity<Sac> sacUpdate(@PathVariable Long id, @RequestBody Sac sac) throws Exception {
+        sac.setId(id);
+        return ResponseEntity.ok().body(this.service.sacUpdate(sac));
 
     }
 
