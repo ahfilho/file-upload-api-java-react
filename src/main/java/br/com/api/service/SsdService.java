@@ -11,10 +11,8 @@ import java.util.Optional;
 import java.util.List;
 import javax.transaction.Transactional;
 
-import br.com.api.ImagePath;
 import br.com.api.controller.ImageController;
 import br.com.api.entity.Image;
-import br.com.api.entity.ImageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -28,9 +26,9 @@ import br.com.api.repository.OfferImageRepository;
 
 @Transactional
 @Service
-public class SsdService implements ImagePath {
+public class SsdService {
 
-//    private final Path root = Paths.get("uploadss");
+    private final Path root = Paths.get("uploadss");
 
     @Autowired
     private SsdRepository ssdRespository;
@@ -90,16 +88,16 @@ public class SsdService implements ImagePath {
 
 
     //TODO - fazer ou corrigir o update
-    public Ssd updateProduct(Ssd productModel) throws Exception {
-        Optional<Ssd> opt = this.ssdRespository.findById(productModel.getId());
+    public Ssd updateProduct(Ssd ssd) throws Exception {
+        Optional<Ssd> opt = this.ssdRespository.findById(ssd.getId());
         if (opt.isPresent()) {
             Ssd pm = opt.get();
-            pm.setModel(productModel.getModel());
-            pm.setCategory(productModel.getCategory());
-            pm.setModel(productModel.getModel());
+            pm.setModel(ssd.getModel());
+            pm.setCategory(ssd.getCategory());
+            pm.setModel(ssd.getModel());
             return pm;
         } else {
-            throw new Exception("Erro ao atualizar o produto, categoria e a imagem." + productModel.getId());
+            throw new Exception("Erro ao atualizar o produto, categoria e a imagem." + ssd.getId());
         }
     }
 

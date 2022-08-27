@@ -13,55 +13,54 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "ssd")
+@Table(name = "T_SSD")
 public class Ssd {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "SSD_ID")
+    private Long id;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ssd_id")
-	private Long id;
+    @Column(name = "brand")
+    @NotNull
+    private String brand;
 
-	@Column(name = "brand")
-	@NotNull
-	private String brand;
+    @Column(name = "serial_number", length = 17)
+    @NotNull
+    private int serialNumber;
 
-	@Column(name = "serial_number", length = 17)
-	@NotNull
-	private int serialNumber;
+    @NotNull
+    @Column(name = "size_storage", length = 4)
+    private int size;
 
-	@NotNull
-	@Column(name = "size_storage", length = 4)
-	private int size;
+    @NotNull
+    @Column(name = "purchase_price")
+    private float purchasePrice;
 
-	@NotNull
-	@Column(name = "purchase_price")
-	private float purchasePrice;
+    @NotNull
+    @Column(name = "purchase_date")
+    private Date purchaseDate;
 
-	@NotNull
-	@Column(name = "purchase_date")
-	private Date purchaseDate;
+    @NotNull
+    @Column(name = "sale_value")
+    private float saleValue;
 
-	@NotNull
-	@Column(name = "sale_value")
-	private float saleValue;
+    @Column(name = "arrival_date")
+    private Date arrivalDate;
 
-	@Column(name = "arrival_date")
-	private Date arrivalDate;
+    @Column(name = "url")
+    private String url;
 
-	@Column(name = "url")
-	private String url;
+    @NotNull
+    @Column(name = "model")
+    private String model;
 
-	@NotNull
-	@Column(name = "model")
-	private String model;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    //@JoinColumn(name = "SSD_ID")
+    private Image image;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "ssd_id")
-	private Image image;
-
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "ssd_id")
-	private Category category;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    //@JoinColumn(name = "SSD_ID")
+    private Category category;
 
 }

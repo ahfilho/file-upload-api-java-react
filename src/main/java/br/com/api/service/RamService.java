@@ -2,6 +2,8 @@ package br.com.api.service;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,7 +12,6 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import br.com.api.ImagePath;
 import br.com.api.entity.Category;
 import br.com.api.entity.Image;
 import br.com.api.repository.CategoryRepository;
@@ -25,7 +26,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @Transactional
-public class RamService implements ImagePath {
+public class RamService {
+
+    public final Path root = Paths.get("uploadss");
 
     @Autowired
     private RamRepository ramRepository;
@@ -56,11 +59,11 @@ public class RamService implements ImagePath {
         this.categoryRepository.save(category);
     }
 
-    public List<Ram> whatsappList() {
+    public List<Ram> ramList() {
         return this.ramRepository.findAll();
     }
 
-    public Ram whaytsappUpdate(Ram ram) throws Exception {
+    public Ram ramUpdate(Ram ram) throws Exception {
         Optional<Ram> whatsOptional = this.ramRepository.findById(ram.getId());
         if (whatsOptional.isPresent()) {
             Ram ramAux = whatsOptional.get();
@@ -87,5 +90,5 @@ public class RamService implements ImagePath {
             throw new Exception("ERRO AO DELETAR O ID" + whatsId);
         }
     }
+    }
 
-}
