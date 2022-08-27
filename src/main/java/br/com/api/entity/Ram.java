@@ -13,11 +13,12 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name = "ram")
+@Table(name = "T_RAM")
 public class Ram {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "RAM_ID")
     private Long id;
 
     @Column(name = "brand")
@@ -55,13 +56,13 @@ public class Ram {
     @Column(name = "url")
     private String url;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "ram_id")
+    @OneToOne(mappedBy = "ram",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "PK_RAM")
     private Image image;
 
     //TODO DEPOIS VER O NAME DESSA JOINCOLUMN
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "ra_id")
+    @OneToOne(mappedBy = "ram", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "PK_RAM")
     private Category category;
 
 }

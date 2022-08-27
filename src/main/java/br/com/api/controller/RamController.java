@@ -39,14 +39,14 @@ public class RamController {
 
     @GetMapping
     public List<Ram> ramList() {
-        return this.ramService.whatsappList().stream().map(this::linkImgRam).collect(Collectors.toList());
+        return this.ramService.ramList().stream().map(this::linkImgRam).collect(Collectors.toList());
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Ram> ramUpdate(@PathVariable Long id,
                                          @NotNull @RequestBody Ram ram) throws Exception {
         ram.setId(id);
-        return ResponseEntity.ok().body(this.ramService.whaytsappUpdate(ram));
+        return ResponseEntity.ok().body(this.ramService.ramUpdate(ram));
     }
 
     @DeleteMapping("/{id}")

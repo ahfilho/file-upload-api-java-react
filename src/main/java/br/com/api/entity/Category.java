@@ -13,19 +13,22 @@ import lombok.NoArgsConstructor;
 @Table(name = "category")
 public class Category {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "product_category")
-	private String productCategory;
+    @Column(name = "product_category")
+    private String productCategory;
+
 
 	@OneToOne
-	@JoinColumn(name = "ssd_id")
+	//@JoinColumn(name = "SSD_ID")
 	private Ssd ssd;
 
 	@OneToOne
-	@JoinColumn(name = "ram_id")
+	//@JoinColumn(name = "RAM_ID")
 	private Ram ram;
+
+
 
 }
