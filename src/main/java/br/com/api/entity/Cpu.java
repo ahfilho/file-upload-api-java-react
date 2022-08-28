@@ -10,12 +10,13 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "cpu")
+@Table(name = "T_CPU")
 @NoArgsConstructor
 public class Cpu {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "CPU_ID")
     private Long id;
 
     @Column(name = "brand")
@@ -55,11 +56,12 @@ public class Cpu {
     private String url;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "name")
+    @JoinColumn(name = "CPU_ID")
     private Image image;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_category")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "CPU_ID")
     private Category category;
+
 
 }

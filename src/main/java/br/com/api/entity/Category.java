@@ -21,16 +21,17 @@ public class Category {
     @Column(name = "product_category")
     private String productCategory;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SSD_ID")
+    private Ssd ssd;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "SSD_ID")
-	private Ssd ssd;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "RAM_ID")
+    private Ram ram;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "RAM_ID")
-	private Ram ram;
-
-
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CPU_ID")
+    private Cpu cpu;
 
 
 }
