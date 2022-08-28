@@ -9,11 +9,12 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-@Entity
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name = "T_RAM")
+@Table(name = "ram")
+@Entity
 public class Ram {
 
     @Id
@@ -56,13 +57,13 @@ public class Ram {
     @Column(name = "url")
     private String url;
 
-    @OneToOne(mappedBy = "ram",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "PK_RAM")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "RAM_ID")
     private Image image;
 
     //TODO DEPOIS VER O NAME DESSA JOINCOLUMN
-    @OneToOne(mappedBy = "ram", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "PK_RAM")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "RAM_ID")
     private Category category;
 
 }
