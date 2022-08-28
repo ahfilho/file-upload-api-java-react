@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "C_IMAGE")
-public class Image implements Serializable {
+public class Image {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,4 +43,9 @@ public class Image implements Serializable {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "RAM_ID")
     private Ram ram;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CPU_ID")
+    private Cpu cpu;
+
 }
