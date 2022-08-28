@@ -12,8 +12,8 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity
 @Table(name = "T_SSD")
+@Entity
 public class Ssd {
 
     @Id
@@ -56,11 +56,11 @@ public class Ssd {
     private String model;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    //@JoinColumn(name = "SSD_ID")
+    @JoinColumn(name = "SSD_ID")
     private Image image;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    //@JoinColumn(name = "SSD_ID")
+    @JoinColumn(name = "SSD_ID")
     private Category category;
 
 }

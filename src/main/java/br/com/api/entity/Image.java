@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "image")
+@Table(name = "C_IMAGE")
 public class Image implements Serializable {
 
     @Id
@@ -36,11 +36,11 @@ public class Image implements Serializable {
     @JsonIgnore
     private byte[] data;
 
-    @OneToOne
-    @JoinColumn(name = "ssd_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SSD_ID")
     private Ssd ssd;
 
-    @OneToOne
-    @JoinColumn(name = "ram_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "RAM_ID")
     private Ram ram;
 }
