@@ -5,12 +5,13 @@ import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "category")
+@Table(name = "C_CATEGORY")
 public class Category {
 
     @Id
@@ -21,13 +22,14 @@ public class Category {
     private String productCategory;
 
 
-	@OneToOne
-	//@JoinColumn(name = "SSD_ID")
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "SSD_ID")
 	private Ssd ssd;
 
-	@OneToOne
-	//@JoinColumn(name = "RAM_ID")
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "RAM_ID")
 	private Ram ram;
+
 
 
 
