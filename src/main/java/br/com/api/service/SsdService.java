@@ -35,7 +35,7 @@ public class SsdService {
     @Autowired
     private CategoryRepository catRepository;
     @Autowired
-    private OfferImageRepository imageRepository;
+    private OfferImageRepository offerImageRepository;
 
     @Autowired
     private ImageController imageController;
@@ -50,7 +50,7 @@ public class SsdService {
         }
     }
 
-    public void saveProductFileCategory(Ssd ssd, MultipartFile file, Category catPm)
+    public void saveProductFileCategory(Ssd ssd, MultipartFile file, Category category)
             throws IOException {
         Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
         Image img = new Image();
@@ -70,8 +70,8 @@ public class SsdService {
         img.setSize(file.getSize());
 
         this.ssdRespository.save(ssd);
-        this.catRepository.save(catPm);
-        this.imageRepository.save(img);
+        this.catRepository.save(category);
+        this.offerImageRepository.save(img);
 
     }
 
