@@ -1,34 +1,68 @@
 package br.com.api.service;
 
+import br.com.api.entity.Category;
 import br.com.api.entity.Cpu;
+import br.com.api.entity.Image;
+import br.com.api.repository.CategoryRepository;
 import br.com.api.repository.CpuRepository;
+import br.com.api.repository.OfferImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+import static br.com.api.ImagePath.root;
 
 @Service
 @Transactional
 public class CpuService {
 
+    private final Path root = Paths.get("uploadss");
+
     @Autowired
     private CpuRepository cpuRepository;
 
-    public Cpu save (Cpu cpu) {
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+    @Autowired
+    private OfferImageRepository offerImageRepository;
+
+    public void init() {
+        try {
+            Files.createDirectory(root);
+        } catch (IOException e) {
+            throw new RuntimeException("ERRO AO INICIALIZAR O DIRETÓRIO");
+        }
+    }
+
+    public void save(Cpu cpu, MultipartFile file, Category category) throws IOException {
+
+        Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
+        Image img = new Image();
         Date dateNow = new Date();
-        cpu.setPurchase_date(cpu.getPurchase_date());
-        cpu.setArrival_date(dateNow);
-        if(cpu.isOverclock()){
+        cpu.setPurchaseDate(cpu.getPurchaseDate());
+        cpu.setArrivalDate(dateNow);
+
+        if (cpu.isOverclock()) {
             System.out.println("This processor has been overclocked");
-        } else{
+        } else {
             System.out.println("This processor has not been overclocked");
 
         }
 
-        return this.cpuRepository.save(cpu);
+        this.cpuRepository.save(cpu);
+        this.categoryRepository.save(category);
+        this.offerImageRepository.save(img);
+
     }
 
     public List<Cpu> listAll() {
@@ -43,27 +77,26 @@ public class CpuService {
             throw new Exception(("ERRO AO DELETAR CPU" + cpuId));
         }
     }
-    public Cpu update(Cpu cpu) throws Exception{
-    Optional<Cpu> editCpu = this.cpuRepository.findById(cpu.getId());
-            if(editCpu.isPresent()){
-                Cpu c = editCpu.get();
+
+    public Cpu update(Cpu cpu) throws Exception {
+        Optional<Cpu> editCpu = this.cpuRepository.findById(cpu.getId());
+        if (editCpu.isPresent()) {
+            Cpu c = editCpu.get();
             c.setBrand(cpu.getBrand());
-            c.setArrival_date(cpu.getArrival_date());
+            c.setArrivalDate(cpu.getArrivalDate());
             c.setClock(cpu.getClock());
             c.setCores(cpu.getCores());
             c.setModel(cpu.getModel());
-            c.setPurchase_date(cpu.getPurchase_date());
-            c.setPurchase_price(cpu.getPurchase_price());
-            c.setSale_value(cpu.getSale_value());
+            c.setPurchaseDate(cpu.getPurchaseDate());
+            c.setPurchasePrice(cpu.getPurchasePrice());
+            c.setSaleValue(cpu.getSaleValue());
             c.setThreads(cpu.getThreads());
             return c;
-            } else {
-                throw new Exception("ERRO AO ATUALIZAR"+cpu.getId());
-            }
+        } else {
+            throw new Exception("ERRO AO ATUALIZAR" + cpu.getId());
+        }
 
     }
-
-
 
 
 }

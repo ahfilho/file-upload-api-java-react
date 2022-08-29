@@ -23,22 +23,22 @@ public class Cpu {
     private String brand;
 
     @Column(name = "serial_number")
-    private int serial_number;
+    private String serialNumber;
 
     @Column(name = "model")
     private String model;
 
     @Column(name = "purchase_price")
-    private float purchase_price;
+    private float purchasePrice;
 
     @Column(name = "purchase_date")
-    private Date purchase_date;
+    private Date purchaseDate;
 
     @Column(name = "sale_value")
-    private float sale_value;
+    private float saleValue;
 
     @Column(name = "arrival_date")
-    private Date arrival_date;
+    private Date arrivalDate;
 
     @Column(name = "cores")
     private int cores;
