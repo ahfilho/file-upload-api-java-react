@@ -24,7 +24,7 @@ public class ClientController {
             this.clientService.clientSave(client);
             return ResponseEntity.status(HttpStatus.OK).body(String.format("Cliente: " + client.getName() + " cadastrado com sucesso!"));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.OK).body(String.format("Não foi possível cadastrar o cliente: " + client.getName()));
+            return ResponseEntity.status(HttpStatus.OK).body(String.format("Não foi possível cadastrar o cliente: " + client.getName() + "."));
         }
     }
 

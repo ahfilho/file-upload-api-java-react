@@ -121,7 +121,7 @@ public class OfferImageService {
 	}
 
 	// VERIFICAR AQUI DEPOIS
-	public Image updateImg(MultipartFile file, Ssd produtoModel) throws IOException {
+	public Image updateImg(MultipartFile file, Ssd ssd) throws IOException {
 		Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
 		Image ofertas = new Image();
 
