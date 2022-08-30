@@ -57,7 +57,7 @@ public class SsdService {
 
         Date dateAtual = new Date();
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String dataFormatada = df.format(dateAtual);
+        //String dataFormatada = df.format(dateAtual);
 
         //DEPOIS VERIFICAR AS DATAS
         ssd.setPurchaseDate(dateAtual);

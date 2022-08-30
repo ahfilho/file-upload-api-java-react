@@ -29,7 +29,7 @@ public class RamController {
             ramService.ramSave(ram, file, category);
 
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(String.format("sucesso no cadastro: %s", file.getOriginalFilename()));
+                    .body(String.format("Produto %s", file.getOriginalFilename() + "cadastrado com sucesso!"));
 
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.OK)
@@ -58,7 +58,6 @@ public class RamController {
     private Ram linkImgRam(Ram ram) {
         long r1 = ram.getId();
         String linkRam = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/").path(Long.toString(r1)).toUriString();
-//        Ram r = new Ram();
         ram.setId(ram.getId());
         ram.setUrl(linkRam);
         return ram;

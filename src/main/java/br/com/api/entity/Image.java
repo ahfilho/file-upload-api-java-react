@@ -29,6 +29,7 @@ public class Image {
     @Column(name = "size")
     private Long size;
 
+    @JsonIgnore
     @Column(name = "url")
     private String url;
 
@@ -36,14 +37,17 @@ public class Image {
     @JsonIgnore
     private byte[] data;
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SSD_ID")
     private Ssd ssd;
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "RAM_ID")
     private Ram ram;
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CPU_ID")
     private Cpu cpu;

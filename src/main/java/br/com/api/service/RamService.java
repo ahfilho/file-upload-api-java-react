@@ -82,12 +82,12 @@ public class RamService {
         }
     }
 
-    public void delete(Long whatsId) throws Exception {
-        Optional<Ram> whats = this.ramRepository.findById(whatsId);
+    public void delete(Long id) throws Exception {
+        Optional<Ram> whats = this.ramRepository.findById(id);
         if (whats.isPresent()) {
             this.ramRepository.delete(whats.get());
         } else {
-            throw new Exception("ERRO AO DELETAR O ID" + whatsId);
+            throw new Exception("ERRO AO DELETAR O ID" + id);
         }
     }
 }

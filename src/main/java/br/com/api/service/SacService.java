@@ -18,8 +18,8 @@ public class SacService {
     @Autowired
     private SacRepository repositorySac;
 
-    public Sac saveSac(Sac sacModel) {
-        return this.repositorySac.save(sacModel);
+    public Sac saveSac(Sac sac) {
+        return this.repositorySac.save(sac);
 
     }
 
@@ -27,29 +27,29 @@ public class SacService {
         return this.repositorySac.findAll();
     }
 
-    public Sac sacUpdate(Sac sacModel) throws Exception {
+    public Sac sacUpdate(Sac sac) throws Exception {
 
-        Optional<Sac> smu = this.repositorySac.findById(sacModel.getId());
+        Optional<Sac> smu = this.repositorySac.findById(sac.getId());
 
         if (smu.isPresent()) {
-            Sac sac = smu.get();
-            sac.setName(sacModel.getName());
-            sac.setEmail(sacModel.getEmail());
-            sac.setMessage(sacModel.getMessage());
-            sac.setTelephone(sacModel.getTelephone());
-            return sac;
+            Sac s = smu.get();
+            s.setName(s.getName());
+            s.setEmail(s.getEmail());
+            s.setMessage(s.getMessage());
+            s.setTelephone(s.getTelephone());
+            return s;
         } else {
-            throw new Exception("ERRO AO ATUALIZAR O SAC" + sacModel.getId());
+            throw new Exception("ERRO AO ATUALIZAR O SAC" + sac.getId());
         }
     }
 
-    public void delete(Long sacId) throws Exception {
+    public void delete(Long id) throws Exception {
 
-        Optional<Sac> smd = this.repositorySac.findById(sacId);
+        Optional<Sac> smd = this.repositorySac.findById(id);
         if (smd.isPresent()) {
             this.repositorySac.delete(smd.get());
         } else {
-            throw new Exception("ERRO AO DELETAR O ID" + sacId);
+            throw new Exception("ERRO AO DELETAR O ID" + id);
         }
     }
 
