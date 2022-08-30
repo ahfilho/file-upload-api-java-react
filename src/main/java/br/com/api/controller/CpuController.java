@@ -9,10 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RestController
@@ -24,17 +26,26 @@ public class CpuController {
 
     @GetMapping
     public List<Cpu> list() {
-        return cpuService.listAll();
+        return cpuService.listAll().stream().map(this::link).collect(Collectors.toList());
+
+    }
+
+    public Cpu link(Cpu cpu) {
+        long c1 = cpu.getId();
+        String download = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/").path(Long.toString(c1)).toUriString();
+        cpu.setId(cpu.getId());
+        cpu.setUrl(download);
+        return cpu;
 
     }
 
     @PostMapping
     public ResponseEntity<String> save(@RequestParam("file") MultipartFile file, Cpu cpu, Category category) {
         try {
-            cpuService.save(cpu,file,category);
-            return ResponseEntity.status(HttpStatus.OK).body(String.format("SUCESS") + file.getOriginalFilename());
+            cpuService.save(cpu, file, category);
+            return ResponseEntity.status(HttpStatus.OK).body(String.format("Cpu " + cpu.getModel() + "cadastrado com sucesso!") + file.getOriginalFilename());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.OK).body(String.format("ERROR") + file.getOriginalFilename());
+            return ResponseEntity.status(HttpStatus.OK).body(String.format("Erro no cadastro.") + file.getOriginalFilename());
         }
     }
 

@@ -8,6 +8,7 @@ import br.com.api.repository.CpuRepository;
 import br.com.api.repository.OfferImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
@@ -15,11 +16,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
-import static br.com.api.ImagePath.root;
 
 @Service
 @Transactional
@@ -49,8 +50,15 @@ public class CpuService {
         Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
         Image img = new Image();
         Date dateNow = new Date();
-        cpu.setPurchaseDate(cpu.getPurchaseDate());
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+        cpu.setPurchaseDate(dateNow);
         cpu.setArrivalDate(dateNow);
+
+        img.setName(StringUtils.cleanPath(file.getOriginalFilename()));
+        img.setContentType(file.getContentType());
+        img.setData(file.getBytes());
+        img.setSize(file.getSize());
 
         if (cpu.isOverclock()) {
             System.out.println("This processor has been overclocked");
@@ -69,12 +77,12 @@ public class CpuService {
         return this.cpuRepository.findAll();
     }
 
-    public void delete(Long cpuId) throws Exception {
-        Optional<Cpu> c = this.cpuRepository.findById(cpuId);
+    public void delete(Long cpu) throws Exception {
+        Optional<Cpu> c = this.cpuRepository.findById(cpu);
         if (c.isPresent()) {
             this.cpuRepository.delete(c.get());
         } else {
-            throw new Exception(("ERRO AO DELETAR CPU" + cpuId));
+            throw new Exception(("ERRO AO DELETAR CPU" + cpu));
         }
     }
 
