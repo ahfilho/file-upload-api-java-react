@@ -58,9 +58,9 @@ public class RamController {
     private Ram linkImgRam(Ram ram) {
         long r1 = ram.getId();
         String linkRam = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/").path(Long.toString(r1)).toUriString();
-        Ram r = new Ram();
-        r.setId(ram.getId());
-        r.setUrl(ram.getUrl());
+//        Ram r = new Ram();
+        ram.setId(ram.getId());
+        ram.setUrl(linkRam);
         return ram;
     }
 
