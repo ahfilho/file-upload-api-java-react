@@ -45,7 +45,7 @@ public class SsdController {
         long l1 = ssd.getId();
         String download = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/").path(Long.toString(l1))
                 .toUriString();
-        Ssd s = new Ssd();
+//        Ssd s = new Ssd();
         ssd.setId(ssd.getId());
         ssd.setUrl(download);
         return ssd;

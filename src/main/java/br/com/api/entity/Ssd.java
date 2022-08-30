@@ -55,11 +55,12 @@ public class Ssd {
     @Column(name = "model")
     private String model;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SSD_ID")
     private Image image;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SSD_ID")
     private Category category;
 

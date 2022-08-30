@@ -13,12 +13,12 @@ import com.sun.istack.NotNull;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "client")
+@Table(name = "T_CLIENT")
 public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "client_id")
+    @Column(name = "CLIENT_ID")
     private Long id;
 
     @NotNull
@@ -38,8 +38,8 @@ public class Client {
     @Column(name = "contact")
     private int contact;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CLIENT_ID")
     private Address address;
 
 

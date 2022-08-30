@@ -29,8 +29,8 @@ public class Address {
     @Column(name = "city")
     private String city;
 
-    @OneToOne
-    @JoinColumn(name = "client_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CLIENT_ID")
     private Client client;
 
 }

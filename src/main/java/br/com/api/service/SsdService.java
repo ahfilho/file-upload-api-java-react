@@ -80,7 +80,7 @@ public class SsdService {
         for (Ssd s : ssdALl
         ) {
             System.out.println(s.getCategory());
-            System.out.println(s.getImage().getName());
+            //System.out.println(s.getImage().getName());
 
         }
         return ssdALl;
