@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "C_IMAGE")
+@Table(name = "IMAGE")
 public class Image {
 
     @Id

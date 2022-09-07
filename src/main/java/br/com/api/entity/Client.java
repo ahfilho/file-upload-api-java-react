@@ -13,7 +13,7 @@ import com.sun.istack.NotNull;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "T_CLIENT")
+@Table(name = "CLIENT")
 public class Client {
 
     @Id
@@ -21,24 +21,24 @@ public class Client {
     @Column(name = "CLIENT_ID")
     private Long id;
 
-    @NotNull
+//    @NotNull
     @Column(name = "name")
     private String name;
 
-    @NotNull
+//    @NotNull
     @Email
     @Column(name = "email")
     private String email;
 
-    @NotNull
+//    @NotNull
     @Column(name = "cpf")
     private String cpf;
 
-    @NotNull
+//    @NotNull
     @Column(name = "contact")
     private int contact;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "CLIENT_ID")
     private Address address;
 

@@ -12,7 +12,7 @@ import org.hibernate.annotations.Fetch;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "C_CATEGORY")
+@Table(name = "CATEGORY")
 public class Category {
 
     @Id

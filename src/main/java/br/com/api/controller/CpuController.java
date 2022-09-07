@@ -24,6 +24,7 @@ public class CpuController {
     @Autowired
     private CpuService cpuService;
 
+    @ExceptionHandler
     @GetMapping
     public List<Cpu> list() {
         return cpuService.listAll().stream().map(this::link).collect(Collectors.toList());
@@ -39,6 +40,7 @@ public class CpuController {
 
     }
 
+    @ExceptionHandler
     @PostMapping
     public ResponseEntity<String> save(@RequestParam("file") MultipartFile file, Cpu cpu, Category category) {
         try {
@@ -49,12 +51,14 @@ public class CpuController {
         }
     }
 
+
+    @ExceptionHandler
     @DeleteMapping("/{id}")
     public HttpStatus delete(@PathVariable Long id) throws Exception {
         cpuService.delete(id);
         return HttpStatus.OK;
     }
-
+    @ExceptionHandler
     @PutMapping("/{id}")
     public ResponseEntity<Cpu> cpuUpdate(@PathVariable Long id, @RequestBody Cpu cpu) throws Exception {
         cpu.setId(id);
