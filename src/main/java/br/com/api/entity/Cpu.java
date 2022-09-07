@@ -10,7 +10,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "T_CPU")
+@Table(name = "CPU")
 @NoArgsConstructor
 public class Cpu {
 
