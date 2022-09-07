@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name = "T_RAM")
+@Table(name = "RAM")
 @Entity
 public class Ram {
 

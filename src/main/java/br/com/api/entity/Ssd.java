@@ -12,7 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "T_SSD")
+@Table(name = "SSD")
 @Entity
 public class Ssd {
 
