@@ -40,4 +40,8 @@ public class Address {
     @JoinColumn(name = "CLIENT_ID")
     private Client client;
 
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CUSTOMER_ID")
+    private CustomerSale customerSale;
 }
