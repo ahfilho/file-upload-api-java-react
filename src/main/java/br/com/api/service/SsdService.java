@@ -28,7 +28,7 @@ import br.com.api.repository.OfferImageRepository;
 @Service
 public class SsdService {
 
-    private final Path root = Paths.get("uploadss");
+    private final Path root = Paths.get("uploads");
 
     @Autowired
     private SsdRepository ssdRespository;

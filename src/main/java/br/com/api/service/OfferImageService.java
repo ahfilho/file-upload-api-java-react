@@ -23,7 +23,7 @@ import br.com.api.repository.OfferImageRepository;
 @Service
 public class OfferImageService {
 
-	private final Path root = Paths.get("uploadss");
+	private final Path root = Paths.get("uploads");
 
 	@Autowired
 	private OfferImageRepository ofertasRepository;
