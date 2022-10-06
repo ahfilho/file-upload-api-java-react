@@ -26,7 +26,7 @@ import java.util.Optional;
 @Transactional
 public class CpuService {
 
-    private final Path root = Paths.get("uploadss");
+    private final Path root = Paths.get("uploads");
 
     @Autowired
     private CpuRepository cpuRepository;

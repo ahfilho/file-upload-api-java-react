@@ -28,7 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Transactional
 public class RamService {
 
-    public final Path root = Paths.get("uploadss");
+    public final Path root = Paths.get("uploads");
 
     @Autowired
     private RamRepository ramRepository;
