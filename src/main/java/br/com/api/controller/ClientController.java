@@ -24,18 +24,22 @@ public class ClientController {
 
     @ExceptionHandler
     @PostMapping
-    public ResponseEntity<String> clientSave(@RequestBody Client client, Address address) {
+    public ResponseEntity<String> clientSave(@RequestBody Client client, String cpf, Address address) {
+        int a = clientService.searchCpf(cpf);
+        if (a == 1) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(String.format("Cpf já cadastrado na base de dados: " + client.getCpf() + "."));
+        }
         try {
-            clientService.clientSave(client,address);
+            clientService.clientSave(client, address);
             return ResponseEntity.status(HttpStatus.OK).body(String.format("Cliente: " + client.getName() + " cadastrado com sucesso!"));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.OK).body(String.format("Não foi possível cadastrar o cliente: " + client.getName() + "."));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(String.format("Não foi possível cadastrar o cliente: " + client.getName() + "."));
         }
     }
 
     @ExceptionHandler
     @GetMapping
-    public ResponseEntity<List<Client>> clientList() {
+    public ResponseEntity<List<Client>> clientList() throws Exception {
         return ResponseEntity.ok().body(this.clientService.clientList());
 
     }
