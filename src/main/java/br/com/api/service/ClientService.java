@@ -33,7 +33,11 @@ public class ClientService {
         this.addressRepository.save(address);
     }
 
-    public List<Client> clientList() {
+    public List<Client> clientList() throws Exception {
+        List<Client> cli = clientRepository.findAll();
+        if (cli.isEmpty()) {
+            System.out.println("Não existe cliente cadastrado.");
+        }
         return this.clientRepository.findAll();
     }
 
@@ -58,5 +62,11 @@ public class ClientService {
         } else {
             throw new Exception("ERRO AO DELETAR O ID" + clientId);
         }
+    }
+
+    public int searchCpf(String cpf) {
+        List<Client> cli = null;
+        cli = clientRepository.searchCpf(cpf);
+        return cli.size();
     }
 }
