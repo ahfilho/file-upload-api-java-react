@@ -3,6 +3,7 @@ package br.com.api.controller;
 import java.util.List;
 
 import br.com.api.entity.Address;
+import br.com.api.entity.Ssd;
 import br.com.api.exceptions.ErrorHandling;
 import io.restassured.mapper.ObjectMapper;
 import io.restassured.mapper.ObjectMapperDeserializationContext;
@@ -24,7 +25,7 @@ public class ClientController {
 
     @ExceptionHandler
     @PostMapping
-    public ResponseEntity<String> clientSave(@RequestBody Client client, String cpf, Address address) {
+    public ResponseEntity<String> clientSave(@RequestBody Client client, Address address, String cpf) {
         int a = clientService.searchCpf(cpf);
         if (a == 1) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(String.format("Cpf já cadastrado na base de dados: " + client.getCpf() + "."));
