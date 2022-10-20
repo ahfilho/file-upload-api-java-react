@@ -1,0 +1,19 @@
+.Formulario {
+    text-align: center;
+  
+}
+.meuForm{
+background-color: gold;
+display: flex;
+flex-direction: column;
+
+}
+.a{
+color:darkblue;
+text-align: center;
+font-size: small;
+}
+.botoes{
+    margin: 20px;
+}
+

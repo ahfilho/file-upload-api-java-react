@@ -1,18 +1,15 @@
 package br.com.api.service;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import br.com.api.entity.Address;
+import br.com.api.entity.Ssd;
 import br.com.api.repository.AddressRepository;
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.jetbrains.annotations.NotNull;
+import br.com.api.repository.SsdRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.json.JsonbHttpMessageConverter;
 import org.springframework.stereotype.Service;
 
 import br.com.api.entity.Client;
@@ -28,9 +25,13 @@ public class ClientService {
     @Autowired
     private AddressRepository addressRepository;
 
-    public void clientSave(Client client, Address address) {
+    @Autowired
+    private SsdRepository ssdRepository;
+
+    public void clientSave(Client client, Address address ) {
         this.clientRepository.save(client);
         this.addressRepository.save(address);
+
     }
 
     public List<Client> clientList() throws Exception {
