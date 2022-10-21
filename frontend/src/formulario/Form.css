@@ -3,17 +3,19 @@
   
 }
 .meuForm{
-background-color: gold;
 display: flex;
 flex-direction: column;
+width: 500px;
+margin: 30px auto;
 
 }
-.a{
-color:darkblue;
-text-align: center;
-font-size: small;
+.form-row{
+    margin-top: 10px;
+margin-bottom: 5px;
 }
-.botoes{
-    margin: 20px;
+.botao1{
+margin-top: 8px;
 }
-
+.col-md-6{
+    margin-bottom: 5px;
+}
