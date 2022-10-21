@@ -4,19 +4,23 @@
 ## Tecnologias utilizadas 
 
 ### Java 11
-### Spring data
+### Spring Data JPA
 ### Spring validation
 ### Lombok
 ### Maven
 ### PostgreSql
 ### Docker
+### React
 
 
 <hr>
 
-## IDE e programas utilizados
+IDE utilizada
 
 ### Intellij
-### Postman - teste automatizado
+### VsCode
+<hr>
+
+### Postman
 ### Dbeaver
 
