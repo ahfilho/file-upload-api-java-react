@@ -16,7 +16,9 @@ import br.com.api.entity.Category;
 import br.com.api.entity.Ssd;
 import br.com.api.service.SsdService;
 
+
 @RestController
+@CrossOrigin(origins="http://localhost:3000")
 @RequestMapping("/ssd")
 public class SsdController {
 
@@ -39,7 +41,7 @@ public class SsdController {
         }
     }
 
-    @GetMapping("/ssds")
+    @GetMapping("/list")
     public List<Ssd> list() {
         return ssdService.listAllSsd().stream().map(this::linkImgSsd).collect(Collectors.toList());
     }
