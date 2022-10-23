@@ -1,8 +1,8 @@
 function Listar({ vetor }) {
   return (
     <table className="table">
+      
       <thead>
-        <h4>Todos os produtos cadastrados</h4>
         <tr>
           <th>id</th>
           <th>Brand</th>
@@ -27,9 +27,7 @@ function Listar({ vetor }) {
             <td>{obj.purchasePrice}</td>
             <td>{obj.purchaseDate}</td>
             <td>{obj.arrivalDate}</td>
-            <td a href="{obj.url}">
-              {obj.url}
-            </td>
+            <td>"{obj.url}"</td>
 
             <td>
               <button className="btn btn-success">Update</button>

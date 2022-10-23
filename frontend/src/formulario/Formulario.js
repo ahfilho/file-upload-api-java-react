@@ -1,62 +1,113 @@
 import "./Form.css";
 
-function Form() {
+function Form({botao, eventoTeste}) {
   //uma funçao que retorna o form
   return (
-    <div class="meuForm">
-      <form>
-        <input type="button" class="btn btn-secondary" value="Início" />
-        <input type="button" class="btn btn-dark" value="Pesquisar" />
-
-        <div class="form-row">
-          <div class=" col-md-6 offset-md-3">
-            <input type="text" class="form-control" placeholder="Brand" />
-          </div>
-          <div class=" col-md-6 offset-md-3">
-            <input type="text" class="form-control" placeholder="Model" />
-          </div>
-          <div class=" col-md-6 offset-md-3">
+    <form>
+      <div className='meuForm'>
+        <div className='form-row'>
+          <div className='col-md-6 offset-md-3'>
             <input
-              type="text"
-              class="form-control"
-              placeholder="Serial number"
+              type='text'
+              onChange={eventoTeste}
+              name='brand'
+              className='form-control'
+              placeholder='Brand'
             />
           </div>
-          <div class=" col-md-6 offset-md-3">
-            <input type="text" class="form-control" placeholder="Size" />
-          </div>
-          <div class=" col-md-6 offset-md-3">
+          <div className='col-md-6 offset-md-3'>
             <input
-              type="text"
-              class="form-control"
-              placeholder="Purchase price"
+              type='text'
+              onChange={eventoTeste}
+              name='model'
+              className='form-control'
+              placeholder='Model'
             />
           </div>
-          <div class=" col-md-6 offset-md-3">
-            <input type="text" class="form-control" placeholder="Sale value" />
-          </div>
-          <div class=" col-md-6 offset-md-3">
+          <div className='col-md-6 offset-md-3'>
             <input
-              type="text"
-              class="form-control"
-              placeholder="Purchate date"
+              type='text'
+              onChange={eventoTeste}
+              name='serialNumber'
+              className='form-control'
+              placeholder='Serial number'
             />
           </div>
-          <div class=" col-md-6 offset-md-3">
+          <div className='col-md-6 offset-md-3'>
             <input
-              type="text"
-              class="form-control"
-              placeholder="Arrival date"
+              type='text'
+              onChange={eventoTeste}
+              name='size'
+              className='form-control'
+              placeholder='Size'
             />
           </div>
-          <div class="botao1">
-            {" "}
-            <input type="submit" class="btn btn-success" value="Cadastrar" />
-            <input type="button" class="btn btn-primary" value="Listar" />
+          <div className='col-md-6 offset-md-3'>
+            <input
+              type='text'
+              onChange={eventoTeste}
+              name='purchasePrice'
+              className='form-control'
+              placeholder='Purchase price'
+            />
+          </div>
+          <div className=" col-md-6 offset-md-3">
+            <input
+              type='text'
+              onChange={eventoTeste}
+              name='saleValue'
+              className='form-control'
+              placeholder='Sale value'
+            />
+          </div>
+          <div className='col-md-6 offset-md-3'>
+            <input
+              type='text'
+              onChange={eventoTeste}
+              name='purchaseDate'
+              className='form-control'
+              placeholder='Purchate date'
+            />
+          </div>
+          <div className='col-md-6 offset-md-3'>
+            <input
+              type='text'
+              onChange={eventoTeste}
+              name='arrivalDate'
+              className='form-control'
+              placeholder='Arrival date'
+            />
+          </div>
+          <div className='botao'>
+            {botao ? (
+              <input
+                type='button'
+                className='btn btn-success'
+                value='Cadastrar'
+              />
+            ) : (
+              <div>
+                <input
+                  type='button'
+                  className='btn btn-secondary'
+                  value='Início'
+                />
+                <input
+                  type='button'
+                  className='btn btn-dark'
+                  value='Pesquisar'
+                />
+                <input
+                  type='button'
+                  className='btn btn-primary'
+                  value='Listar'
+                />
+              </div>
+            )}
           </div>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 }
 
