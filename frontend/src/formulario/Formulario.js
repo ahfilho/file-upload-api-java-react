@@ -1,6 +1,6 @@
 import "./Form.css";
 
-function Form({botao, eventoTeste}) {
+function Form({botao, eventoTeste, cadastrar}){
   //uma funçao que retorna o form
   return (
     <form>
@@ -9,6 +9,7 @@ function Form({botao, eventoTeste}) {
           <div className='col-md-6 offset-md-3'>
             <input
               type='text'
+              // value={brand}
               onChange={eventoTeste}
               name='brand'
               className='form-control'
@@ -78,10 +79,12 @@ function Form({botao, eventoTeste}) {
               placeholder='Arrival date'
             />
           </div>
+          
           <div className='botao'>
             {botao ? (
               <input
                 type='button'
+                onClick={cadastrar}
                 className='btn btn-success'
                 value='Cadastrar'
               />

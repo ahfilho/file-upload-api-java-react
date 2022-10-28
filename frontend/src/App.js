@@ -7,8 +7,8 @@ function App() {
 
 //objeto SSD
 const ssd = {
-  brand : '',
-  model :'',
+  brand: '',
+  model : '',
   serialNumber : '',
   size : '',
   purchasePrice :'',
@@ -19,6 +19,7 @@ const ssd = {
 }
   // UseState = cria  um objeto de maneira dinâmica
   const [btnCadastrar, setBtnCadastrar] = useState(true);
+  
   const [ssds, setSsds] = useState([]);
   const [objetoSsd, setObjetoSsd] = useState(ssd);  
 
@@ -31,11 +32,36 @@ const ssd = {
 
 //pegando os dados do formulário
 
+//setState
+const aoDiditar = (e) => {
+    setObjetoSsd({...ssds,[e.target.brand]:e.target.value});
+    console.log(e.target.value);
+  }
+  //para editar o objeto
 
-const teste = (e) => {
-  console.log(e.target);
-  setObjetoSsd({...objetoSsd, [e.target.brand]:e.target.model}); //para editar o objeto
-}
+
+const cadastrar = () => {
+  console.log("testee");
+  fetch("http://localhost:9090/ssd/new", {
+    method: "post",
+    body: JSON.stringify(objetoSsd),
+    headers: {
+      "Content-type": "application/json",
+      Accept: "application/json",
+    },
+  })
+    .then((retorno) => retorno.json())
+    .then((retorno_convertido) => {
+      if (retorno_convertido.mensagem !== undefined) {
+        alert(retorno_convertido.mensagem);
+      } else {
+        setSsds([...ssds, retorno_convertido]);
+        alert("Produto cadastrado com sucesso!");
+        // limparFormulario();
+      }
+    });
+};
+
 
 
   // Retorno
@@ -45,7 +71,7 @@ const teste = (e) => {
       {/* <p>{JSON.stringify(ssds)}</p> */}
       <p>{JSON.stringify(objetoSsd)}</p>
 
-      <Formulario botao={btnCadastrar} eventoTeste={teste} />
+      <Formulario botao={btnCadastrar} eventoTeste={aoDiditar} obj={objetoSsd}  cadastrar={cadastrar} />
 
       <List vetor={ssds} />
       {/* <h3>Produtos cadastrados</h3> */}
