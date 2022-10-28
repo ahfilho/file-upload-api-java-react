@@ -26,7 +26,7 @@ public class SsdController {
     private SsdService ssdService;
 
     @ExceptionHandler
-    @PostMapping
+    @PostMapping("/new")
     public ResponseEntity<String> ssdSave(@RequestParam("file") MultipartFile file,
                                           Ssd ssd, Category category) {
         try {
