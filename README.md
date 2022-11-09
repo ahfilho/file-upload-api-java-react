@@ -1,4 +1,4 @@
-# backend_api Rest
+# backend_api Rest + React
  Documentação aqui: https://documenter.getpostman.com/view/14374394/Uyxkkkyr
  
 ## Tecnologias utilizadas no back-end
