@@ -4,10 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import List from './listagem/List';
+import AddSsd from './formulario/AddSsd';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    {/* <App /> */}
+    {/* <Upload></Upload> */}
+    {/* <List></List> */}
+    <AddSsd/>
   </React.StrictMode>
 );
 

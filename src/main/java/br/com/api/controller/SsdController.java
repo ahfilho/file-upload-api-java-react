@@ -16,14 +16,17 @@ import br.com.api.entity.Category;
 import br.com.api.entity.Ssd;
 import br.com.api.service.SsdService;
 
+import static org.springframework.http.ResponseEntity.*;
+
 
 @RestController
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/ssd")
 public class SsdController {
 
     @Autowired
     private SsdService ssdService;
+
 
     @ExceptionHandler
     @PostMapping("/new")
@@ -32,11 +35,11 @@ public class SsdController {
         try {
             ssdService.saveProductFileCategory(ssd, file, category);
 
-            return ResponseEntity.status(HttpStatus.OK)
+            return status(HttpStatus.OK)
                     .body(String.format("sucesso no cadastro: %s", file.getOriginalFilename()));
 
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.OK)
+            return status(HttpStatus.OK)
                     .body(String.format("Falha no cadastro: %s", file.getOriginalFilename()));
         }
     }
@@ -53,11 +56,17 @@ public class SsdController {
         ssd.setId(ssd.getId());
         ssd.setUrl(download);
         return ssd;
+
     }
 
     @DeleteMapping("/{id}")
     public HttpStatus deleteProduct(@PathVariable Long id) throws Exception {
-        ssdService.deleteProduct(id);
-        return HttpStatus.OK;
+        try {
+            ssdService.deleteProduct(id);
+            return HttpStatus.OK;
+        } catch (Exception e) {
+            return HttpStatus.BAD_REQUEST;
+        }
     }
+
 }

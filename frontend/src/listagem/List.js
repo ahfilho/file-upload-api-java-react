@@ -1,44 +1,53 @@
-function Listar({ vetor }) {
+import React from "react";
+import axios from "axios";
+
+export default class List extends React.Component {
+
+state = {
+  ssds: []
+ }
+// state = {
+//   categories: []
+// }
+
+componentDidMount(){
+  axios.get('http://localhost:9090/ssd/list').then(res => {
+    const ssds = res.data;
+    this.setState({ ssds });
+
+    // const categories = res.data;
+    // this.setCategories ({ categories});
+  })
+}
+render(){
   return (
-    <table className="table">
-      
-      <thead>
-        <tr>
-          <th>id</th>
-          <th>Brand</th>
-          <th>Model</th>
-          <th>Serial Number</th>
-          <th>Size</th>
-          <th>Purchase price</th>
-          <th>Purchase Date</th>
-          <th>Arrival Date</th>
-          <th>URL</th>
-        </tr>
-      </thead>
+    <ul>
+      {this.state.ssds.map((ssd) => (
+        <li>
+          <label></label>
+          <li key={ssd.id}>{ssd.id}+
+         {ssd.brand}+
+    {ssd.model}+
+          {ssd.size}+
+          {ssd.purchasePrice}+
+        {ssd.purchaseDate}+
+          {ssd.arrivalDate}+
+          {ssd.saleValue}+
+          {ssd.url}</li>
+          ------------- CATEGORIA AQUI -------------------
+          <li key={ssd.id}>{ssd.productCategory}</li>
+        </li>
+      ))}
+      {/* {this.state.categories.map((category) => (
+        <li>
+          <label></label>
+          <li key={category.id}>{category.id}</li>
 
-      <tbody>
-        {vetor.map((obj, indice) => (
-          <tr key={indice}>
-            <td>{indice + 1}</td>
-            <td>{obj.brand}</td>
-            <td>{obj.model}</td>
-            <td>{obj.serialNumber}</td>
-            <td>{obj.size}</td>
-            <td>{obj.purchasePrice}</td>
-            <td>{obj.purchaseDate}</td>
-            <td>{obj.arrivalDate}</td>
-            <td>"{obj.url}"</td>
-
-            <td>
-              <button className="btn btn-success">Update</button>
-            </td>
-            <td>
-              <button className="btn btn-danger">Delete</button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+          <li key={category.id}>{category.productCategory}</li>
+        </li>
+      ))} */}
+    </ul>
   );
 }
-export default Listar;
+
+}
