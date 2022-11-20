@@ -61,7 +61,6 @@ public class Ram {
     @JoinColumn(name = "RAM_ID")
     private Image image;
 
-    //TODO DEPOIS VER O NAME DESSA JOINCOLUMN
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "RAM_ID")
     private Category category;

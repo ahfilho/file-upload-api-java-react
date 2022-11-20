@@ -22,6 +22,7 @@ public class ApiApplication implements CommandLineRunner {
 	}
 	// 123456
 
+
 	@Override
 	public void run(String... args) throws Exception {
 

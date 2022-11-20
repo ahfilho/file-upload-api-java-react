@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "sac")
-public abstract class SacAbstract {
+@Table(name = "contact")
+public abstract class ContactAbstract {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
