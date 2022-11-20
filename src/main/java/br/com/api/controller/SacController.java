@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.api.entity.Sac;
+import br.com.api.entity.Contact;
 import br.com.api.service.SacService;
 
 @RestController
@@ -25,17 +25,17 @@ public class SacController {
     private SacService service;
 
     @PostMapping
-    public ResponseEntity<Sac> sacSave(@RequestBody Sac sac) {
+    public ResponseEntity<Contact> sacSave(@RequestBody Contact sac) {
         return ResponseEntity.ok().body(this.service.saveSac(sac));
     }
 
     @GetMapping
-    public ResponseEntity<List<Sac>> sacList() {
+    public ResponseEntity<List<Contact>> sacList() {
         return ResponseEntity.ok().body(this.service.sacList());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Sac> sacUpdate(@PathVariable Long id, @RequestBody Sac sac) throws Exception {
+    public ResponseEntity<Contact> sacUpdate(@PathVariable Long id, @RequestBody Contact sac) throws Exception {
         sac.setId(id);
         return ResponseEntity.ok().body(this.service.sacUpdate(sac));
 

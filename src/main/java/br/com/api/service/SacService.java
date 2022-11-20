@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.api.entity.Sac;
+import br.com.api.entity.Contact;
 import br.com.api.repository.SacRepository;
 
 @Service
@@ -18,21 +18,21 @@ public class SacService {
     @Autowired
     private SacRepository repositorySac;
 
-    public Sac saveSac(Sac sac) {
+    public Contact saveSac(Contact sac) {
         return this.repositorySac.save(sac);
 
     }
 
-    public List<Sac> sacList() {
+    public List<Contact> sacList() {
         return this.repositorySac.findAll();
     }
 
-    public Sac sacUpdate(Sac sac) throws Exception {
+    public Contact sacUpdate(Contact sac) throws Exception {
 
-        Optional<Sac> smu = this.repositorySac.findById(sac.getId());
+        Optional<Contact> smu = this.repositorySac.findById(sac.getId());
 
         if (smu.isPresent()) {
-            Sac s = smu.get();
+            Contact s = smu.get();
             s.setName(s.getName());
             s.setEmail(s.getEmail());
             s.setMessage(s.getMessage());
@@ -45,7 +45,7 @@ public class SacService {
 
     public void delete(Long id) throws Exception {
 
-        Optional<Sac> smd = this.repositorySac.findById(id);
+        Optional<Contact> smd = this.repositorySac.findById(id);
         if (smd.isPresent()) {
             this.repositorySac.delete(smd.get());
         } else {

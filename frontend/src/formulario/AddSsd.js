@@ -1,11 +1,12 @@
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
-
+import Upload from './Upload'
         const url = 'http://localhost:9090/ssd/new';
 
 const AddSsd = () => {
     const [name, setName] = useState("");
+    const [result, setResult] = useState("");
 
     const [brand, setBrand] = useState('');
     const [model, setModel] = useState('');
@@ -15,6 +16,8 @@ const AddSsd = () => {
     const [purchasePrice, setPurchasePrice] = useState("");
     const [arrivalDate, setArrivalDate] = useState("");
     
+
+
 
 const handleSubmit = async(e) =>{
     
@@ -39,6 +42,7 @@ const handleSubmit = async(e) =>{
         console.log(error.response);
     }
 }
+
 return (
   <div className="meuForm">
     <div className="form-row">
@@ -47,10 +51,9 @@ return (
           <label className="form-label">Imagem JPEG ou JPG</label>
 
           <input
-            type="file"
-            name="name"
-            className="form-control"
-            accept="application/jpg"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
 
