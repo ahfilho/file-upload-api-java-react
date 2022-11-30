@@ -28,15 +28,15 @@ public class Ssd {
 
     @Column(name = "serial_number", length = 17)
     @NotNull
-    private int serialNumber;
+    private String serialNumber;
 
     @NotNull
     @Column(name = "size_storage", length = 4)
-    private int size;
+    private String size;
 
     @NotNull
     @Column(name = "purchase_price")
-    private float purchasePrice;
+    private String purchasePrice;
 
     @NotNull
     @Column(name = "purchase_date")

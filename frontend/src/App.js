@@ -4,8 +4,9 @@ import List from "./listagem/List";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Upload from "./formulario/Upload";
-
-  const url = 'http://localhost:9090/ssd/new';
+import Navbar from "./components/Navbar";
+  
+const url = 'http://localhost:9090/ssd/new';
 
 const App = () => {
     const [brand, setBrand] = useState('');
@@ -67,7 +68,7 @@ return (
           <input type="file" className="form-control" onChange={handleChange} 
           />
         </div>
-
+    
         <div className="col-md-6 offset-md-3">
           <input
             type={"text"}

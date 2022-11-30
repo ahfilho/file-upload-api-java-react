@@ -12,15 +12,26 @@ const Client = () => {
 
   const [street, setStret] = useState("");
   const [number, setNumber] = useState("");
-    const [bairro, setBairro] = useState("");
+  const [bairro, setBairro] = useState("");
   const [district, setDistrict] = useState("");
   const [city, setCity] = useState("");
 
+  const [image, setImage] = useState("");
+
+  const handleImage = (e) => {
+    console.log(e.target.files);
+    setImage(e.target.files[0]);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("bate e fica aqui");
+
+    const formData = new FormData();
+    formData.append("image", image);
+    formData.append("name", name);
     try {
-      const response = await axios.post(url, {
-        
+      const response = await axios.post(url, formData, {
         name: name,
         email: email,
         cpf: cpf,
@@ -31,6 +42,7 @@ const Client = () => {
         district: district,
         city: city,
       });
+
       console.log(response.data);
     } catch (error) {
       console.log(error.response);
@@ -44,6 +56,11 @@ const Client = () => {
           <div className="col-md-6 offset-md-3"></div>
           <div className="menu">Alguns botões aqui</div>
           <div className="clientTitle">Novo Cliente</div>
+
+          <div className="col-md-6 offset-md-3">
+            <input type="file" name="file" onChange={handleImage} />
+          </div>
+
           <div className="col-md-6 offset-md-3">
             <input
               type={"text"}
@@ -130,17 +147,6 @@ const Client = () => {
               className="form-control"
               placeholder="Cidade"
               onChange={(e) => setCity(e.target.value)}
-            />
-          </div>
-          <div className="col-md-6 offset-md-3">
-            <input
-              type={"text"}
-              name="district"
-              id="district"
-              value={district}
-              className="form-control"
-              placeholder="Estado"
-              onChange={(e) => setDistrict(e.target.value)}
             />
           </div>
 
