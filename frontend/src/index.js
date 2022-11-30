@@ -5,20 +5,26 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import List from './listagem/List';
-import AddSsd from './formulario/AddSsd';
+import Ssd from './formulario/Ssd';
 import Upload from './formulario/Upload';
 import Client from './client/Client';
 import ListClient from './client/ListClient';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import SsdList from './formulario/SsdList';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     {/* <App /> */}
     {/* <List></List> */}
-    {/* <AddSsd/> */}
+    {/* <Ssd/> */}
     {/* <Upload></Upload> */}
     {/* <Client></Client> */}
-    <ListClient/>
+    {/* <ListClient/> */}
+    {/* <Navbar></Navbar> */}
+    {/* <Home></Home> */}
+    <SsdList></SsdList>
   </React.StrictMode>
 );
 

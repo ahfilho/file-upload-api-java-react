@@ -1,18 +1,18 @@
 import React from "react";
 import axios from "axios";
 
-export default class List extends React.Component {
+export default class SsdList extends React.Component {
   state = {
-    clients: [],
+    ssds: [],
   };
   // state = {
   //   categories: []
   // }
 
   componentDidMount() {
-    axios.get("http://localhost:9090/client/list/client").then((res) => {
-      const clients = res.data;
-      this.setState({ clients });
+    axios.get("http://localhost:9090/ssd/list").then((res) => {
+      const ssds = res.data;
+      this.setState({ ssds });
 
       // const categories = res.data;
       // this.setCategories ({ categories});
@@ -21,16 +21,19 @@ export default class List extends React.Component {
   render() {
     return (
       <ul>
-        {this.state.clients.map((client) => (
+        {this.state.ssds.map((ssd) => (
           <li>
             <div className="Todos"></div>
             <label></label>
             <li>
-              key{client.id}
-              {client.name}
-              {client.contact}
-              {client.email}
-              {client.cpf}
+              key{ssd.id}
+              {ssd.brand}
+              {ssd.model}
+              {ssd.serialNumber}
+              {ssd.purchaseDate}
+              {ssd.purchasePrice}
+              {ssd.arrivalDate}
+              {ssd.saleValue}
             </li>
             ------------- TESTE AQUI -------------------
           </li>

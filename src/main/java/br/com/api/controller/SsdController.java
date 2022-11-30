@@ -37,7 +37,6 @@ public class SsdController {
 
             return status(HttpStatus.OK)
                     .body(String.format("sucesso no cadastro: %s", file.getOriginalFilename()));
-
         } catch (Exception e) {
             return status(HttpStatus.OK)
                     .body(String.format("Falha no cadastro: %s", file.getOriginalFilename()));

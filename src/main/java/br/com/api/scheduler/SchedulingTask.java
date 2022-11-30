@@ -1,8 +1,7 @@
-package br.com.api.agendador;
+package br.com.api.scheduler;
 
 import java.util.Date;
 
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
