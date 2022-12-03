@@ -9,8 +9,6 @@ import Ssd from './formulario/Ssd';
 import Upload from './formulario/Upload';
 import Client from './client/Client';
 import ListClient from './client/ListClient';
-import Navbar from './components/Navbar';
-import Home from './components/Home';
 import SsdList from './formulario/SsdList';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -18,13 +16,11 @@ root.render(
   <React.StrictMode>
     {/* <App /> */}
     {/* <List></List> */}
-    {/* <Ssd/> */}
+    <Ssd/>
     {/* <Upload></Upload> */}
     {/* <Client></Client> */}
     {/* <ListClient/> */}
-    {/* <Navbar></Navbar> */}
-    {/* <Home></Home> */}
-    <SsdList></SsdList>
+    {/* <SsdList></SsdList> */}
   </React.StrictMode>
 );
 

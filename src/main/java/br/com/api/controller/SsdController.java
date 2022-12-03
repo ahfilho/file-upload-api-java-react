@@ -31,7 +31,7 @@ public class SsdController {
     @ExceptionHandler
     @PostMapping("/new")
     public ResponseEntity<String> ssdSave(@RequestParam("file") MultipartFile file,
-                                          Ssd ssd, Category category) {
+                                          @RequestBody Ssd ssd, Category category) {
         try {
             ssdService.saveProductFileCategory(ssd, file, category);
 

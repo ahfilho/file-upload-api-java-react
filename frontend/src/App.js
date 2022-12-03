@@ -4,7 +4,6 @@ import List from "./listagem/List";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Upload from "./formulario/Upload";
-import Navbar from "./components/Navbar";
   
 const url = 'http://localhost:9090/ssd/new';
 
