@@ -26,13 +26,20 @@ export default class SsdList extends React.Component {
             <div className="Todos"></div>
             <label></label>
             <li>
-              key{ssd.id}
+              {ssd.id}
+              <br></br>
               {ssd.brand}
+              <br></br>
               {ssd.model}
+              <br></br>
               {ssd.serialNumber}
+              <br></br>
               {ssd.purchaseDate}
+              <br></br>
               {ssd.purchasePrice}
+              <br></br>
               {ssd.arrivalDate}
+              <br></br>
               {ssd.saleValue}
             </li>
             ------------- TESTE AQUI -------------------
