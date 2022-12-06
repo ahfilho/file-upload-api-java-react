@@ -20,8 +20,6 @@ public class ApiApplication implements CommandLineRunner {
 		SpringApplication.run(ApiApplication.class, args);
 
 	}
-	// 123456
-
 
 	@Override
 	public void run(String... args) throws Exception {
