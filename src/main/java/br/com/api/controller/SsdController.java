@@ -16,6 +16,8 @@ import br.com.api.entity.Category;
 import br.com.api.entity.Ssd;
 import br.com.api.service.SsdService;
 
+@CrossOrigin(origins = "http://localhost:3000")
+
 @RestController
 @RequestMapping("/ssd")
 public class SsdController {
@@ -24,7 +26,7 @@ public class SsdController {
     private SsdService ssdService;
 
     @ExceptionHandler
-    @PostMapping
+    @PostMapping("/new")
     public ResponseEntity<String> ssdSave(@RequestParam("file") MultipartFile file,
                                           Ssd ssd, Category category) {
         try {
@@ -39,7 +41,7 @@ public class SsdController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public List<Ssd> list() {
         return ssdService.listAllSsd().stream().map(this::linkImgSsd).collect(Collectors.toList());
     }

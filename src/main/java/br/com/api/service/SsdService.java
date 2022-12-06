@@ -60,8 +60,8 @@ public class SsdService {
         //String dataFormatada = df.format(dateAtual);
 
         //DEPOIS VERIFICAR AS DATAS
-        ssd.setPurchaseDate(dateAtual);
-        ssd.setArrivalDate(dateAtual);
+//        ssd.setPurchaseDate(dateAtual);
+//        ssd.setArrivalDate(dateAtual);
 
 
         img.setName(StringUtils.cleanPath(file.getOriginalFilename()));
