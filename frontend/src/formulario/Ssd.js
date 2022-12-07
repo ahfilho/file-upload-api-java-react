@@ -5,6 +5,8 @@ import { useState } from "react";
 const url = "http://localhost:9090/ssd/new";
 
 const AddSsd = () => {
+
+  //SSD
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
   const [serialNumber, setSerialNumber] = useState("");
@@ -14,7 +16,10 @@ const AddSsd = () => {
   const [arrivalDate, setArrivalDate] = useState("");
   const [saleValue, setSaleValue] = useState("");
 
+  //CATEGORY
   const [productCategory, setProductCategory] = useState("");
+
+  //IMAGE
   const [file, setFile] = useState("");
 
   const handleImage = (e) => {
@@ -49,8 +54,10 @@ const AddSsd = () => {
     formData.append("purchasePrice", purchasePrice);
     formData.append("arrivalDate", arrivalDate);
     formData.append("saleValue", saleValue);
+    
     formData.append("productCategory", productCategory);
-console.log(ssd, file, category);
+    
+    console.log(ssd, file, category);
 
     try {
       const response = await axios.post(url, formData, ssd, category, {
@@ -62,7 +69,6 @@ console.log(ssd, file, category);
         purchasePrice: purchasePrice,
         arrivalDate: arrivalDate,
         saleValue: saleValue,
-        
 
         productCategory: productCategory,
       });

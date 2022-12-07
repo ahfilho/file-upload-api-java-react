@@ -1,6 +1,11 @@
 import { Component } from "react";
 import axios from 'axios';
 
+
+
+
+
+
 class Upload extends Component {
 
 
@@ -27,7 +32,7 @@ formdata.append('image',this.state.img_file);
 formdata.append('name',"dinho");
 
 axios({
-  url: "http://localhost:9090/ssd",
+  url: "http://localhost:9090/ssd/new",
   method: "POST",
       headers:{
         'Content-type':'application/json',
@@ -52,20 +57,18 @@ axios({
 render(){
   return (
     <div className="Upload">
-      <h2>FORM</h2>
 
       <form>
         <div className="">
-          <label>FILE</label>
           <input type="file" name="file" onChange={(e) => this.handleFile(e)} />
 
       
           </div>
       </form>
 
-      <button type="button" onClick={(e) => this.handleUpload(e)}>
-        enviar
-      </button>
+      {/* <button type="button" onClick={(e) => this.handleUpload(e)}> */}
+        
+      {/* </button> */}
     </div>
   );
 }
