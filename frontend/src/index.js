@@ -6,7 +6,6 @@ import reportWebVitals from './reportWebVitals';
 
 import List from './listagem/List';
 import Ssd from './formulario/Ssd';
-import Upload from './formulario/Upload';
 import Client from './client/Client';
 import ListClient from './client/ListClient';
 import SsdList from './formulario/SsdList';
@@ -17,7 +16,6 @@ root.render(
     {/* <App /> */}
     {/* <List></List> */}
     <Ssd/>
-    {/* <Upload></Upload> */}
     {/* <Client></Client> */}
     {/* <ListClient/> */}
     {/* <SsdList></SsdList> */}

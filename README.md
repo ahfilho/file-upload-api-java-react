@@ -1,24 +1,28 @@
-# backend_api Rest + React
+# Back-end_Api_Front-end_React
  Documentação aqui: https://documenter.getpostman.com/view/14374394/Uyxkkkyr
  
-## Tecnologias utilizadas no back-end
+## *Back-end
 
 #### Java 11
 #### Spring Data JPA
-#### Spring validation
+#### Spring Validation
 #### Lombok
 #### Maven
 #### PostgreSql
 #### Docker
 
-## Tecnologias utilizadas no front-end
+<hr>
+
+## *Front-end
+
 
 #### React
+#### Javascript
 
 
 <hr>
 
-## IDE utilizada
+## IDE's utilizadas
 
 #### Intellij
 #### VsCode
@@ -28,4 +32,6 @@
 
 ### Postman
 ### Dbeaver
+
+
 

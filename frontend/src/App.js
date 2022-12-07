@@ -3,7 +3,6 @@ import Formulario from "./formulario/Formulario";
 import List from "./listagem/List";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Upload from "./formulario/Upload";
   
 const url = 'http://localhost:9090/ssd/new';
 
