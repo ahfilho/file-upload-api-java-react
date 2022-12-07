@@ -45,10 +45,8 @@ const AddSsd = () => {
     };
     const formData = new FormData();
     formData.append("file", file);
-
     formData.append("brand", brand);
     formData.append("model", model);
-    formData.append("size", size);
     formData.append("serialNumber", serialNumber);
     formData.append("purchaseDate", purchaseDate);
     formData.append("purchasePrice", purchasePrice);
@@ -127,7 +125,7 @@ const AddSsd = () => {
               id="serialNumber"
               className="form-control"
               value={serialNumber}
-              placeholder="Nº de sérieee"
+              placeholder="Nº de série"
               onChange={(e) => setSerialNumber(e.target.value)}
             />
           </div>
