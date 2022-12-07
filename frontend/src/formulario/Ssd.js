@@ -40,31 +40,30 @@ const AddSsd = () => {
     };
     const formData = new FormData();
     formData.append("file", file);
-
     formData.append("brand", brand);
     formData.append("model", model);
-    formData.append("size", size);
     formData.append("serialNumber", serialNumber);
     formData.append("purchaseDate", purchaseDate);
     formData.append("purchasePrice", purchasePrice);
     formData.append("arrivalDate", arrivalDate);
     formData.append("saleValue", saleValue);
     formData.append("productCategory", productCategory);
-console.log(ssd, file, category);
+    
+console.log(ssd,file,category);
 
     try {
       const response = await axios.post(url, formData, ssd, category, {
-        brand: brand,
-        model: model,
-        serialNumber: serialNumber,
-        size: size,
-        purchaseDate: purchaseDate,
-        purchasePrice: purchasePrice,
-        arrivalDate: arrivalDate,
-        saleValue: saleValue,
-        
+        brand:brand,
+        model:model,
+        serialNumber:serialNumber,
+        size:size,
+        purchaseDate:purchaseDate,
+        purchasePrice:purchasePrice,
+        arrivalDate:arrivalDate,
+        saleValue:saleValue,
 
-        productCategory: productCategory,
+        productCategory:productCategory
+
       });
       console.log(response.data);
     } catch (error) {
@@ -121,7 +120,7 @@ console.log(ssd, file, category);
               id="serialNumber"
               className="form-control"
               value={serialNumber}
-              placeholder="Nº de sérieee"
+              placeholder="Nº de série"
               onChange={(e) => setSerialNumber(e.target.value)}
             />
           </div>
