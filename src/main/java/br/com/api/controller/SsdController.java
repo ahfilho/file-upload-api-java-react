@@ -30,15 +30,15 @@ public class SsdController {
     @ExceptionHandler
     @PostMapping("/new")
     public ResponseEntity<String> ssdSave(@RequestParam("file") MultipartFile file,
-                                          @RequestBody Ssd ssd, Category category) {
+                                          Ssd ssd, Category category) {
         try {
             ssdService.saveProductFileCategory(ssd, file, category);
 
             return status(HttpStatus.OK)
-                    .body(String.format("sucesso no cadastro: %s", file.getOriginalFilename()));
+                    .body(String.format("sucesso no upload: %s", file.getOriginalFilename()));
         } catch (Exception e) {
-            return status(HttpStatus.OK)
-                    .body(String.format("Falha no cadastro: %s", file.getOriginalFilename()));
+            return status(HttpStatus.BAD_REQUEST)
+                    .body(String.format("Falha no upload: %s. Já existe um arquivo com o mesmo nome.", file.getOriginalFilename()));
         }
     }
 
