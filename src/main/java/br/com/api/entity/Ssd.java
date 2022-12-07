@@ -22,12 +22,12 @@ public class Ssd {
     @Column(name = "SSD_ID")
     private Long id;
 
-    @NotNull
     @Column(name = "brand")
+    @NotNull
     private String brand;
 
-    @NotNull
     @Column(name = "serial_number", length = 17)
+    @NotNull
     private String serialNumber;
 
     @NotNull
@@ -40,14 +40,14 @@ public class Ssd {
 
     @NotNull
     @Column(name = "purchase_date")
-    private String purchaseDate;
+    private Date purchaseDate;
 
     @NotNull
     @Column(name = "sale_value")
     private float saleValue;
-    @NotNull
+
     @Column(name = "arrival_date")
-    private String arrivalDate;
+    private Date arrivalDate;
 
     @Column(name = "url")
     private String url;
@@ -55,6 +55,9 @@ public class Ssd {
     @NotNull
     @Column(name = "model")
     private String model;
+
+    //TODO -- QUANTIDADE
+
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SSD_ID")
