@@ -77,10 +77,8 @@ const AddSsd = () => {
     };
     const formData = new FormData();
     formData.append("file", file);
-
     formData.append("brand", brand);
     formData.append("model", model);
-    formData.append("size", size);
     formData.append("serialNumber", serialNumber);
     formData.append("purchaseDate", purchaseDate);
     formData.append("purchasePrice", purchasePrice);
@@ -188,6 +186,7 @@ const AddSsd = () => {
             onChange={(e) => setPurchasePrice(e.target.value)}
           />
           <div className="inputs">
+
             Data de venda
             <input
               type={"date"}
