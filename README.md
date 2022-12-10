@@ -16,7 +16,7 @@
 ## *Front-end
 
 
-#### React
+#### ReactJs
 #### Javascript
 
 

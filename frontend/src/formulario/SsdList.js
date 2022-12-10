@@ -1,13 +1,14 @@
 import React from "react";
 import axios from "axios";
+import "./SsdList.css";
 
 export default class SsdList extends React.Component {
   state = {
     ssds: [],
-  };
-  // state = {
-  //   categories: []
-  // }
+    };
+    // state = {
+    //   categories: []
+    // }
 
   componentDidMount() {
     axios.get("http://localhost:9090/ssd/list").then((res) => {
@@ -23,7 +24,7 @@ export default class SsdList extends React.Component {
       <ul>
         {this.state.ssds.map((ssd) => (
           <li>
-            <div className="Todos"></div>
+            <div className="todos"></div>
             <label></label>
             <li>
               {ssd.id}
@@ -31,6 +32,8 @@ export default class SsdList extends React.Component {
               {ssd.brand}
               <br></br>
               {ssd.model}
+              <br></br>
+              {ssd.size}
               <br></br>
               {ssd.serialNumber}
               <br></br>
@@ -41,6 +44,8 @@ export default class SsdList extends React.Component {
               {ssd.arrivalDate}
               <br></br>
               {ssd.saleValue}
+              <br></br>
+            <a href={ssd.url}>url</a>
             </li>
             ------------- TESTE AQUI -------------------
           </li>
