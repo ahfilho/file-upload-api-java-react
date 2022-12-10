@@ -5,7 +5,7 @@ import "./Ssd.css";
 
 const url = "http://localhost:9090/ssd/new";
 
-const AddSsd = () => {
+const SsdEdit = () => {
   //SSD
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
@@ -22,32 +22,12 @@ const AddSsd = () => {
   //IMAGE
   const [file, setFile] = useState("");
 
-  const fun = () => {
-    document.getElementById("brand").value = "";
-    document.getElementById("model").value = "";
-    document.getElementById("serialNumber").value = "";
-    document.getElementById("size").value = "";
-    document.getElementById("purchaseDate").value = "";
-    document.getElementById("purchasePrice").value = "";
-    document.getElementById("arrivalDate").value = "";
-    document.getElementById("saleValue").value = "";
-  };
   const handleImage = (e) => {
     console.log(e.target.files);
     setFile(e.target.files[0]);
   };
-  const apagaInput = () => {
-    document.getElementById("brand").reset();
-  };
-  const resetForm = () => {
-    setBrand("");
-    setModel("");
-    setSerialNumber("");
-    setSize("");
-    setPurchaseDate("");
-    setPurchasePrice("");
-    setArrivalDate("");
-    setProductCategory("");
+  const apagaInput = (e) => {
+    document.getElementById("brand").value = "";
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,16 +41,6 @@ const AddSsd = () => {
       purchasePrice,
       arrivalDate,
       saleValue,
-    };
-    const resetForm = () => {
-      setBrand("");
-      setModel("");
-      setSerialNumber("");
-      setSize("");
-      setPurchaseDate("");
-      setPurchasePrice("");
-      setArrivalDate("");
-      setProductCategory("");
     };
     const category = {
       productCategory,
@@ -104,7 +74,6 @@ const AddSsd = () => {
 
         productCategory: productCategory,
       });
-
       console.log(response.data);
     } catch (error) {
       console.log(error.response);
@@ -114,8 +83,8 @@ const AddSsd = () => {
   return (
     <div className="meuForm">
       <div className="form-row">
-        <form id="meuForm" onSubmit={(e) => handleSubmit(e)}>
-          <div className="title">Cadastrar novo SSD</div>
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <div className="title">Alteração de cadastro para SSD</div>
           <div className="file">
             <input type="file" name="file" onChange={handleImage} />
           </div>
@@ -168,7 +137,7 @@ const AddSsd = () => {
             placeholder="Capacidade/GB"
             onChange={(e) => setSize(e.target.value)}
           />
-          <div className="inputs"> Data de compra</div>
+          <div className="data"> Data de compra</div>
           <input
             type={"date"}
             name="purchaseDate"
@@ -188,6 +157,7 @@ const AddSsd = () => {
             onChange={(e) => setPurchasePrice(e.target.value)}
           />
           <div className="inputs">
+            {" "}
             Data de venda
             <input
               type={"date"}
@@ -199,22 +169,23 @@ const AddSsd = () => {
               onChange={(e) => setArrivalDate(e.target.value)}
             />
           </div>
-          <input
-            type={"text"}
-            name="saleValue"
-            id="saleValue"
-            value={saleValue}
-            className="form-control"
-            placeholder="Preço de venda"
-            onChange={(e) => setSaleValue(e.target.value)}
-          />
+          <div className="inputs">
+            <input
+              type={"text"}
+              name="saleValue"
+              id="saleValue"
+              value={saleValue}
+              className="form-control"
+              placeholder="Preço de venda"
+              onChange={(e) => setSaleValue(e.target.value)}
+            />
+          </div>
           <div className="input">
             <br></br>
             <button
               type="submit"
               className="btn btn-success"
               onChange={(e) => this.handleSubmit(e)}
-              onClick={() => resetForm()}
             >
               Salvar
             </button>
