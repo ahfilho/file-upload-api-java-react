@@ -22,33 +22,23 @@ const AddSsd = () => {
   //IMAGE
   const [file, setFile] = useState("");
 
-  const fun = () => {
-    document.getElementById("brand").value = "";
-    document.getElementById("model").value = "";
-    document.getElementById("serialNumber").value = "";
-    document.getElementById("size").value = "";
-    document.getElementById("purchaseDate").value = "";
-    document.getElementById("purchasePrice").value = "";
-    document.getElementById("arrivalDate").value = "";
-    document.getElementById("saleValue").value = "";
-  };
   const handleImage = (e) => {
     console.log(e.target.files);
     setFile(e.target.files[0]);
   };
-  const apagaInput = () => {
-    document.getElementById("brand").reset();
-  };
-  const resetForm = () => {
-    setBrand("");
-    setModel("");
-    setSerialNumber("");
-    setSize("");
-    setPurchaseDate("");
-    setPurchasePrice("");
-    setArrivalDate("");
-    setProductCategory("");
-  };
+
+  // const resetForm = () => {
+  //   setBrand("");
+  //   setModel("");
+  //   setSerialNumber("");
+  //   setSize("");
+  //   setPurchaseDate("");
+  //   setPurchasePrice("");
+  //   setArrivalDate("");
+  //   setProductCategory("");
+  //   setSaleValue("");
+
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -62,16 +52,7 @@ const AddSsd = () => {
       arrivalDate,
       saleValue,
     };
-    const resetForm = () => {
-      setBrand("");
-      setModel("");
-      setSerialNumber("");
-      setSize("");
-      setPurchaseDate("");
-      setPurchasePrice("");
-      setArrivalDate("");
-      setProductCategory("");
-    };
+
     const category = {
       productCategory,
     };
@@ -84,6 +65,7 @@ const AddSsd = () => {
     formData.append("purchasePrice", purchasePrice);
     formData.append("arrivalDate", arrivalDate);
     formData.append("saleValue", saleValue);
+    formData.append("size", size);
 
     formData.append("productCategory", productCategory);
 
@@ -102,7 +84,6 @@ const AddSsd = () => {
 
         productCategory: productCategory,
       });
-
       console.log(response.data);
     } catch (error) {
       console.log(error.response);
@@ -126,7 +107,6 @@ const AddSsd = () => {
             value={productCategory}
             placeholder="Categoria do produto"
             onChange={(e) => setProductCategory(e.target.value)}
-            onClick={apagaInput}
           />
           <input
             type={"text"}
@@ -134,9 +114,9 @@ const AddSsd = () => {
             id="brand"
             value={brand}
             className="form-control"
+            y
             placeholder="Marca"
             onChange={(e) => setBrand(e.target.value)}
-            onClick={apagaInput}
           />
 
           <input
@@ -186,7 +166,6 @@ const AddSsd = () => {
             onChange={(e) => setPurchasePrice(e.target.value)}
           />
           <div className="inputs">
-
             Data de venda
             <input
               type={"date"}
@@ -207,13 +186,13 @@ const AddSsd = () => {
             placeholder="Preço de venda"
             onChange={(e) => setSaleValue(e.target.value)}
           />
-          <div className="input">
+          <div className="botaoSave">
             <br></br>
             <button
               type="submit"
               className="btn btn-success"
-              onChange={(e) => this.handleSubmit(e)}
-              onClick={() => resetForm()}
+              onChange={(e) => this.handleSubmit(e)} 
+              // onClick={() => resetForm()}
             >
               Salvar
             </button>
