@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.api.entity.Ram;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -30,10 +32,9 @@ public class SsdController {
     @ExceptionHandler
     @PostMapping("/new")
     public ResponseEntity<String> ssdSave(@RequestParam("file") MultipartFile file,
-                                          @RequestBody Ssd ssd, Category category) {
+                                           Ssd ssd, Category category) {
         try {
             ssdService.saveProductFileCategory(ssd, file, category);
-
             return status(HttpStatus.OK)
                     .body(String.format("sucesso no cadastro: %s", file.getOriginalFilename()));
         } catch (Exception e) {
@@ -55,6 +56,11 @@ public class SsdController {
         ssd.setUrl(download);
         return ssd;
 
+    }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Ssd> updateSsd(@PathVariable Long id, @RequestBody Ssd ssd) throws Exception{
+        ssd.getId();
+        return ResponseEntity.ok().body(this.ssdService.update(ssd));
     }
 
     @DeleteMapping("/{id}")

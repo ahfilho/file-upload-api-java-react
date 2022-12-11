@@ -60,8 +60,8 @@ public class SsdService {
         //String dataFormatada = df.format(dateAtual);
 
         //DEPOIS VERIFICAR AS DATAS
-        ssd.setPurchaseDate(dateAtual);
-        ssd.setArrivalDate(dateAtual);
+//        ssd.setPurchaseDate(dateAtual);
+//        ssd.setArrivalDate(dateAtual);
 
 
         img.setName(StringUtils.cleanPath(file.getOriginalFilename()));
@@ -99,6 +99,27 @@ public class SsdService {
         } else {
             throw new Exception("Erro ao atualizar o produto, categoria e a imagem." + ssd.getId());
         }
+    }
+
+    public Ssd update(Ssd ssd) throws Exception {
+        Optional<Ssd> optSsd = this.ssdRespository.findById(ssd.getId());
+        if (optSsd.isPresent()) {
+
+            Ssd objSsdAux = optSsd.get();
+            objSsdAux.setBrand(ssd.getBrand());
+            objSsdAux.setModel(ssd.getModel());
+            objSsdAux.setArrivalDate(ssd.getArrivalDate());
+            objSsdAux.setCategory(ssd.getCategory());
+            objSsdAux.setPurchasePrice(ssd.getPurchasePrice());
+            objSsdAux.setSaleValue(ssd.getSaleValue());
+            objSsdAux.setSerialNumber(ssd.getSerialNumber());
+            objSsdAux.setSize(ssd.getSize());
+
+            return objSsdAux;
+        } else {
+            throw new Exception("ERRO AO ATUALIZAR O SSD" + ssd.getId());
+        }
+
     }
 
     public void deleteProduct(Long id) throws Exception {

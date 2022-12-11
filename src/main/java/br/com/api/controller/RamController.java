@@ -43,8 +43,7 @@ public class RamController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Ram> ramUpdate(@PathVariable Long id,
-                                         @NotNull @RequestBody Ram ram) throws Exception {
+    public ResponseEntity<Ram> ramUpdate(@PathVariable Long id, @NotNull @RequestBody Ram ram) throws Exception {
         ram.setId(id);
         return ResponseEntity.ok().body(this.ramService.ramUpdate(ram));
     }
