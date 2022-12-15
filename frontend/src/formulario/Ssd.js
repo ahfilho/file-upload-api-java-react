@@ -99,7 +99,7 @@ const AddSsd = () => {
             <input type="file" name="file" onChange={handleImage} />
           </div>
           <div className="inputs"></div>
-          <input
+          {/* <input
             type={"text"}
             name="productCategory"
             id="productCategory"
@@ -107,7 +107,7 @@ const AddSsd = () => {
             value={productCategory}
             placeholder="Categoria do produto"
             onChange={(e) => setProductCategory(e.target.value)}
-          />
+          /> */}
           <input
             type={"text"}
             name="brand"

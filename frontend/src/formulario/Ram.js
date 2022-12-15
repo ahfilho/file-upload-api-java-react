@@ -1,7 +1,6 @@
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
-import Upload from './Upload'
         const url = 'http://localhost:9090/ssd/new';
 
 const AddSsd = () => {

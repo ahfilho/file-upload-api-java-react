@@ -28,12 +28,15 @@ public class SsdController {
     @Autowired
     private SsdService ssdService;
 
+    //TODO FAZER O METODO DE ZERAR O FORM DEPOIS DE SALVAR. O OUTRO ESTAVA DANDO ERRADO, ZERAVA ANTES DE SALVAR.
 
     @ExceptionHandler
     @PostMapping("/new")
     public ResponseEntity<String> ssdSave(@RequestParam("file") MultipartFile file,
-                                           Ssd ssd, Category category) {
+                                          Ssd ssd, Category category) {
         try {
+            String setCategory = "SSD";
+            category.setProductCategory("SSD");
             ssdService.saveProductFileCategory(ssd, file, category);
             return status(HttpStatus.OK)
                     .body(String.format("sucesso no cadastro: %s", file.getOriginalFilename()));
@@ -57,8 +60,9 @@ public class SsdController {
         return ssd;
 
     }
+
     @PutMapping("/update/{id}")
-    public ResponseEntity<Ssd> updateSsd(@PathVariable Long id, @RequestBody Ssd ssd) throws Exception{
+    public ResponseEntity<Ssd> updateSsd(@PathVariable Long id, @RequestBody Ssd ssd) throws Exception {
         ssd.getId();
         return ResponseEntity.ok().body(this.ssdService.update(ssd));
     }
