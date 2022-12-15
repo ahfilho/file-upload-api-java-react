@@ -44,7 +44,7 @@ public class CpuController {
     @PostMapping
     public ResponseEntity<String> save(@RequestParam("file") MultipartFile file, Cpu cpu, Category category) {
         try {
-            category.setProductCategory("SSD");
+            category.setProductCategory("CPU");
             cpuService.save(cpu, file, category);
             return ResponseEntity.status(HttpStatus.OK).body(String.format("Cpu " + cpu.getModel() + "cadastrado com sucesso!") + file.getOriginalFilename());
         } catch (Exception e) {
