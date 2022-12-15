@@ -35,7 +35,6 @@ public class SsdController {
     public ResponseEntity<String> ssdSave(@RequestParam("file") MultipartFile file,
                                           Ssd ssd, Category category) {
         try {
-            String setCategory = "SSD";
             category.setProductCategory("SSD");
             ssdService.saveProductFileCategory(ssd, file, category);
             return status(HttpStatus.OK)
