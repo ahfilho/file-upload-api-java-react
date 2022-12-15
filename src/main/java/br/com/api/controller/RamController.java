@@ -26,6 +26,7 @@ public class RamController {
     public ResponseEntity<String> ramSave(@RequestParam("file") MultipartFile file, Ram ram, Category category) {
 
         try {
+            category.setProductCategory("SSD");
             ramService.ramSave(ram, file, category);
 
             return ResponseEntity.status(HttpStatus.OK)
