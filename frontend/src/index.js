@@ -3,22 +3,28 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
 
 import List from './listagem/List';
 import Ssd from './formulario/Ssd';
 import Client from './client/Client';
 import ListClient from './client/ListClient';
 import SsdList from './formulario/SsdList';
+import Home from './home/Home';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    {/* <App /> */}
-    {/* <List></List> */}
-    <Ssd/>
-    {/* <Client></Client> */}
-    {/* <ListClient/> */}
-    {/* <SsdList></SsdList> */}
+    <BrowserRouter>
+      {/* <App /> */}
+      {/* <List></List> */}
+      <Ssd/>
+      {/* <Client></Client> */}
+      {/* <ListClient/> */}
+      {/* <SsdList></SsdList> */}
+{/* <Home/> */}
+  
+      </BrowserRouter>
   </React.StrictMode>
 );
 
