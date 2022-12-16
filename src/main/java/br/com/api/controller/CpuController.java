@@ -2,6 +2,7 @@ package br.com.api.controller;
 
 import br.com.api.entity.Category;
 import br.com.api.entity.Cpu;
+import br.com.api.enume.CategoryEnum;
 import br.com.api.service.CpuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,7 +45,7 @@ public class CpuController {
     @PostMapping
     public ResponseEntity<String> save(@RequestParam("file") MultipartFile file, Cpu cpu, Category category) {
         try {
-            category.setProductCategory("CPU");
+            category.setProductCategory(CategoryEnum.CPU.name());
             cpuService.save(cpu, file, category);
             return ResponseEntity.status(HttpStatus.OK).body(String.format("Cpu " + cpu.getModel() + "cadastrado com sucesso!") + file.getOriginalFilename());
         } catch (Exception e) {
