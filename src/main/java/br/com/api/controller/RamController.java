@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.api.entity.Category;
+import br.com.api.enume.CategoryEnum;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,7 @@ public class RamController {
     public ResponseEntity<String> ramSave(@RequestParam("file") MultipartFile file, Ram ram, Category category) {
 
         try {
-            category.setProductCategory("RAM");
+            category.setProductCategory(CategoryEnum.RAM.name());
             ramService.ramSave(ram, file, category);
 
             return ResponseEntity.status(HttpStatus.OK)
