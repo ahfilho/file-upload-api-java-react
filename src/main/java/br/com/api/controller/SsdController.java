@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.api.entity.Ram;
+import br.com.api.enume.CategoryEnum;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,7 @@ public class SsdController {
     @Autowired
     private SsdService ssdService;
 
+
     //TODO FAZER O METODO DE ZERAR O FORM DEPOIS DE SALVAR. O OUTRO ESTAVA DANDO ERRADO, ZERAVA ANTES DE SALVAR.
 
     @ExceptionHandler
@@ -35,7 +37,7 @@ public class SsdController {
     public ResponseEntity<String> ssdSave(@RequestParam("file") MultipartFile file,
                                           Ssd ssd, Category category) {
         try {
-            category.setProductCategory("SSD");
+            category.setProductCategory(CategoryEnum.SSD.name());
             ssdService.saveProductFileCategory(ssd, file, category);
             return status(HttpStatus.OK)
                     .body(String.format("sucesso no cadastro: %s", file.getOriginalFilename()));
