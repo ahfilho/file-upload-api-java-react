@@ -21,7 +21,7 @@ public interface SsdRepository extends JpaRepository<Ssd, Long> {
     public List<Ssd> teste();
 
 
-    @Query("SELECT x FROM Ssd x INNER JOIN Category c ON x.id = c.id INNER JOIN Image i ON x.id = i.id")
+    @Query("SELECT x FROM Ssd x INNER JOIN Category c ON x.id = c.id INNER JOIN File i ON x.id = i.id")
     public List<Ssd> a();
 
     @Query(value = "SELECT s FROM Ssd inner join category, inner join image", nativeQuery = true)

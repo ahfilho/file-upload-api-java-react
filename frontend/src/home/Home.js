@@ -1,4 +1,5 @@
 import "./home.css";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -7,10 +8,9 @@ const Home = () => {
         <h2>Cadastro de produtos importados</h2>
       </div>
       <div className="botoes">
-      botao 1
-      botao 2
+        <Link to="/ssd">Novo ssd</Link>
 
-
+        <Link to="/ssdlist">Listar todos</Link>
       </div>
     </>
   );

@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import "./Ssd.css";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";        
 
 const url = "http://localhost:9090/ssd/new";
 
@@ -85,6 +86,7 @@ const AddSsd = () => {
         productCategory: productCategory,
       });
       console.log(response.data);
+      alert("SALVO COM SUCESSO!");
     } catch (error) {
       console.log(error.response);
     }
@@ -98,6 +100,7 @@ const AddSsd = () => {
           <div className="file">
             <input type="file" name="file" onChange={handleImage} />
           </div>
+          
           <div className="inputs">
             {/* <input
             type={"text"}

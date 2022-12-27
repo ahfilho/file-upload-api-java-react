@@ -1,39 +1,64 @@
 import "./App.css";
-import List from "./listagem/List";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import React, { Fragment } from "react";
+import "./index.css";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import Home from "./home/Home";
+import Ssd from "./formulario/Ssd"; 
+import SsdList from "./formulario/SsdList"; 
 
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-
-import Ram from "./formulario/Ram";
-
-import Ssd from "./formulario/Ssd";
-import SsdEdit from "./formulario/SsdEdit";
-import SsdList from "./formulario/SsdList";
-
-const url = "http://localhost:9090/ssd/new";
-
-const App = () => {
+export default function App() {
   return (
-    <div className="">
-      <Routes>
-        <Route path="/home" element={<home />} />
-
-        <Route path="/ssd" element={<Ssd />} />
-        <Route path="/ssd/list" element={<SsdList />} />
-        <Route path="/ssd/update" element={<SsdEdit />} />
-
-        <Route path="/ram" element={<Ssd />} />
-        <Route path="/ram/list" element={<SsdList />} />
-        <Route path="/ram/update" element={<SsdEdit />} />
-
-        <Route path="/cpu" element={<Ssd />} />
-        <Route path="/cpu/list" element={<SsdList />} />
-        <Route path="/cpu/update" element={<SsdEdit />} />
-      </Routes>
-    </div>
+    <Router>
+      <main>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/contact">Contact</Link>
+            </li>
+          </ul>
+        </nav>
+        <Route path="/" exact component={Home}></Route>
+        <Route path="/ssd" component={Ssd}></Route>
+        <Route path="/ssdlist" component={SsdList}></Route>
+      </main>
+    </Router>
   );
-};
+}
+// Home Page
+// const Home = () => (
+//   <Fragment>
+//     <h1>Home</h1>
+//     <FakeText />
+//   </Fragment>
+// );
+// About Page
+const About = () => (
+  <Fragment>
+    <h1>About</h1>
+    <FakeText />
+  </Fragment>
+);
+// Contact Page
+const Contact = () => (
+  <Fragment>
+    <h1>Contact</h1>
+    <FakeText />
+  </Fragment>
+);
 
-export default App;
+const FakeText = () => (
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+    non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </p>
+);

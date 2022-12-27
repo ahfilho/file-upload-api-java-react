@@ -11,8 +11,8 @@ import java.util.Optional;
 import java.util.List;
 import javax.transaction.Transactional;
 
-import br.com.api.controller.ImageController;
-import br.com.api.entity.Image;
+import br.com.api.controller.FileUploadController;
+import br.com.api.entity.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -22,7 +22,7 @@ import br.com.api.entity.Category;
 import br.com.api.entity.Ssd;
 import br.com.api.repository.CategoryRepository;
 import br.com.api.repository.SsdRepository;
-import br.com.api.repository.OfferImageRepository;
+import br.com.api.repository.FileRepository;
 
 @Transactional
 @Service
@@ -35,10 +35,10 @@ public class SsdService {
     @Autowired
     private CategoryRepository catRepository;
     @Autowired
-    private OfferImageRepository offerImageRepository;
+    private FileRepository offerImageRepository;
 
     @Autowired
-    private ImageController imageController;
+    private FileUploadController imageController;
 
     public void init() {
 
@@ -53,7 +53,7 @@ public class SsdService {
     public void saveProductFileCategory(Ssd ssd, MultipartFile file, Category category)
             throws IOException {
         Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
-        Image img = new Image();
+        File img = new File();
 
         Date dateAtual = new Date();
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");

@@ -22,7 +22,6 @@ root.render(
       {/* <Client></Client> */}
       {/* <ListClient/> */}
       {/* <SsdList></SsdList> */}
-{/* <Home/> */}
   
       </BrowserRouter>
   </React.StrictMode>

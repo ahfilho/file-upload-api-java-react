@@ -2,10 +2,10 @@ package br.com.api.service;
 
 import br.com.api.entity.Category;
 import br.com.api.entity.Cpu;
-import br.com.api.entity.Image;
+import br.com.api.entity.File;
 import br.com.api.repository.CategoryRepository;
 import br.com.api.repository.CpuRepository;
-import br.com.api.repository.OfferImageRepository;
+import br.com.api.repository.FileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -35,7 +35,7 @@ public class CpuService {
     private CategoryRepository categoryRepository;
 
     @Autowired
-    private OfferImageRepository offerImageRepository;
+    private FileRepository offerImageRepository;
 
     public void init() {
         try {
@@ -48,7 +48,7 @@ public class CpuService {
     public void save(Cpu cpu, MultipartFile file, Category category) throws IOException {
 
         Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
-        Image img = new Image();
+        File img = new File();
         Date dateNow = new Date();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 

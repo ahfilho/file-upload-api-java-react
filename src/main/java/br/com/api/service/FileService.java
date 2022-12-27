@@ -15,18 +15,18 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.api.entity.Category;
-import br.com.api.entity.Image;
+import br.com.api.entity.File;
 import br.com.api.entity.Ssd;
-import br.com.api.repository.OfferImageRepository;
+import br.com.api.repository.FileRepository;
 
 @Transactional
 @Service
-public class OfferImageService {
+public class FileService {
 
 	private final Path root = Paths.get("uploadFile");
 
 	@Autowired
-	private OfferImageRepository ofertasRepository;
+	private FileRepository ofertasRepository;
 
 	public void init() {
 		try {
@@ -39,7 +39,7 @@ public class OfferImageService {
 	public void saveFile(MultipartFile file, Ssd productModel, Category categoryModel)
 			throws IOException {
 		Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
-		Image img = new Image();
+		File img = new File();
 
 		img.setName(StringUtils.cleanPath(file.getOriginalFilename()));
 		img.setContentType(file.getContentType());
@@ -78,24 +78,24 @@ public class OfferImageService {
 
 	}
 
-	public Optional<Image> getFile(Long id) {
+	public Optional<File> getFile(Long id) {
 		return ofertasRepository.findById(id);
 	}
 	// LISTA COMPLETA
-	public List<Image> getAllFiles() {
+	public List<File> getAllFiles() {
 		return ofertasRepository.findAll();
 	}
 
-	public List<Image> getSql() {
+	public List<File> getSql() {
 		return ofertasRepository.consulta_personalizada();
 	}
 
-	public List<Image> terca() {
+	public List<File> terca() {
 		return ofertasRepository.terca();
 	}
 
 	public void imgDelete(Long id) throws Exception {
-		Optional<Image> im = this.ofertasRepository.findById(id);
+		Optional<File> im = this.ofertasRepository.findById(id);
 		if (im.isPresent()) {
 			this.ofertasRepository.delete(im.get());
 		} else {
@@ -105,8 +105,8 @@ public class OfferImageService {
 	}
 
 	public void imgDeleteDiretory(Long id) {
-		Image img = new Image();
-		Optional<Image> opt = this.ofertasRepository.findById(id);
+		File img = new File();
+		Optional<File> opt = this.ofertasRepository.findById(id);
 		if (opt.isPresent()) {
 
 			try {
@@ -121,9 +121,9 @@ public class OfferImageService {
 	}
 
 	// VERIFICAR AQUI DEPOIS
-	public Image updateImg(MultipartFile file, Ssd ssd) throws IOException {
+	public File updateImg(MultipartFile file, Ssd ssd) throws IOException {
 		Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
-		Image ofertas = new Image();
+		File ofertas = new File();
 
 		ofertas.setName(StringUtils.cleanPath(file.getOriginalFilename()));
 		ofertas.setContentType(file.getContentType());

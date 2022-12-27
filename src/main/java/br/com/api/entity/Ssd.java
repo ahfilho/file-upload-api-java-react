@@ -3,12 +3,9 @@ package br.com.api.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -61,7 +58,7 @@ public class Ssd {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SSD_ID")
-    private Image image;
+    private File image;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SSD_ID")

@@ -21,17 +21,17 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.api.entity.Category;
-import br.com.api.entity.Image;
+import br.com.api.entity.File;
 import br.com.api.entity.Ssd;
-import br.com.api.entity.ImageResponse;
-import br.com.api.service.OfferImageService;
+import br.com.api.entity.FileResponse;
+import br.com.api.service.FileService;
 
 @RestController
 @RequestMapping("/files")
-public class ImageController {
+public class FileUploadController {
 
     @Autowired
-    private OfferImageService ofertasService;
+    private FileService ofertasService;
 
     /*
      * Envia mais de um arquivo por requisição; vai ficar aqui caso precise.
@@ -71,15 +71,15 @@ public class ImageController {
 
     @GetMapping("terca")
     // @Scheduled(fixedRate = 2000)
-    public List<ImageResponse> teste3() {
+    public List<FileResponse> teste3() {
         return ofertasService.terca().stream().map(this::mapToQuery).collect(Collectors.toList());
     }
 
-    private ImageResponse mapTo_Terca_Feira(Image img) {
+    private FileResponse mapTo_Terca_Feira(File img) {
         long l1 = img.getId();
         String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/")
                 .path(Long.toString(l1)).toUriString();
-        ImageResponse iqr = new ImageResponse();
+        FileResponse iqr = new FileResponse();
         iqr.setId(img.getId());
         iqr.setName(img.getName());
         iqr.setContentType(img.getContentType());
@@ -92,16 +92,16 @@ public class ImageController {
     @GetMapping("teste")
     // @Scheduled(fixedRate = 2000) // Vou usar isso para exibir as determinadas
     // consultas de acordo com o dia da semana.
-    public List<ImageResponse> teste2() {
+    public List<FileResponse> teste2() {
         return ofertasService.getSql().stream().map(this::mapToQuery).collect(Collectors.toList());
     }
 
-    private ImageResponse mapToQuery(Image img) {
+    private FileResponse mapToQuery(File img) {
 
         long l1 = img.getId();
         String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/")
                 .path(Long.toString(l1)).toUriString();
-        ImageResponse iqr = new ImageResponse();
+        FileResponse iqr = new FileResponse();
         iqr.setId(img.getId());
         iqr.setName(img.getName());
         iqr.setContentType(img.getContentType());
@@ -110,16 +110,16 @@ public class ImageController {
     }
 
     @GetMapping
-    public List<ImageResponse> list() {
+    public List<FileResponse> list() {
         return ofertasService.getAllFiles().stream().map(this::mapToFileResponse).collect(Collectors.toList());
     }
 
-    private ImageResponse mapToFileResponse(Image ofertasModel) {
+    private FileResponse mapToFileResponse(File ofertasModel) {
 
         long l2 = ofertasModel.getId();
         String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/")
                 .path(Long.toString(l2)).toUriString();
-        ImageResponse offer = new ImageResponse();
+        FileResponse offer = new FileResponse();
         offer.setId(ofertasModel.getId());
         offer.setName(ofertasModel.getName());
         offer.setContentType(ofertasModel.getContentType());
@@ -131,11 +131,11 @@ public class ImageController {
 
     @GetMapping("/{id}")
     public ResponseEntity<byte[]> getFile(@PathVariable Long id) {
-        Optional<Image> file = ofertasService.getFile(id);
+        Optional<File> file = ofertasService.getFile(id);
         if (!file.isPresent()) {
             return ResponseEntity.notFound().build();
         }
-        Image imageOffer = file.get();
+        File imageOffer = file.get();
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "teste de upload/ filename=" + imageOffer.getName() + "\"")
                 .contentType(MediaType.valueOf(imageOffer.getContentType())).body(imageOffer.getData());
