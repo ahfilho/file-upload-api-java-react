@@ -10,13 +10,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import br.com.api.controller.ClientController;
-import br.com.api.controller.ImageController;
+import br.com.api.controller.FileUploadController;
 import br.com.api.controller.SacController;
 import br.com.api.controller.RamController;
 import br.com.api.entity.Client;
 import br.com.api.repository.ClientRepository;
 import br.com.api.service.ClientService;
-import br.com.api.service.OfferImageService;
+import br.com.api.service.FileService;
 import br.com.api.service.SacService;
 import br.com.api.service.RamService;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
@@ -40,10 +40,10 @@ class ApiApplicationTests {
 	private ClientService contactService;
 
 	@Autowired
-	private ImageController ioc;
+	private FileUploadController ioc;
 
 	@MockBean
-	private OfferImageService ios;
+	private FileService ios;
 
 	@Autowired
 	private SacController sacController;

@@ -1,37 +1,5 @@
-# Back-end_Api_Front-end_React
- Documentação aqui: https://documenter.getpostman.com/view/14374394/Uyxkkkyr
- 
-## *Back-end
+A sua api deve fornecer os dados de transferência de acordo com o número da conta bacária.
+SELECT * FROM conta INNER JOIN transferencia WHERE ID=1
 
-#### Java 11
-#### Spring Data JPA
-#### Spring Validation
-#### Lombok
-#### Maven
-#### PostgreSql
-#### Docker
-
-<hr>
-
-## *Front-end
-
-
-#### ReactJs
-#### Javascript
-
-
-<hr>
-
-## IDE's utilizadas
-
-#### Intellij
-#### VsCode
-<hr>
-
-## ---
-
-### Postman
-### Dbeaver
-
-
-
+Caso não seja informado nenhum filtro, retornar todos os dados de transferência.
+select * from transferencia

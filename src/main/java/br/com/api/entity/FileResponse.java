@@ -3,7 +3,7 @@ package br.com.api.entity;
 import lombok.Data;
 
 @Data
-public class ImageResponse {
+public class FileResponse {
 
 	// @Id
 	// @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -57,7 +57,7 @@ public class Cpu {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "CPU_ID")
-    private Image image;
+    private File image;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "CPU_ID")

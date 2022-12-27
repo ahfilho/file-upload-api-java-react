@@ -1,7 +1,5 @@
 package br.com.api.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -14,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "IMAGE")
-public class Image {
+public class File {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -19,6 +19,8 @@ public class ApiApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(ApiApplication.class, args);
 
+
+
 	}
 
 	@Override
