@@ -1,5 +1,17 @@
-A sua api deve fornecer os dados de transferência de acordo com o número da conta bacária.
-SELECT * FROM conta INNER JOIN transferencia WHERE ID=1
+Backend_frontend_api
 
-Caso não seja informado nenhum filtro, retornar todos os dados de transferência.
-select * from transferencia
+Tecnologias utilizadas no back-end:
+
+Java - 11
+Spring
+Jpa
+Postgres
+
+Tenologias utilizadas no front-end:
+
+React JS
+Javascript
+
+Tenologias utilizada no banco:
+
+PostgreSql
