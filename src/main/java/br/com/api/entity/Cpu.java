@@ -40,8 +40,8 @@ public class Cpu {
     @Column(name = "arrival_date")
     private Date arrivalDate;
 
-    @Column(name = "cores")
-    private int cores;
+    @Column(name = "core")
+    private int core;
 
     @Column(name = "threads")
     private int threads;
