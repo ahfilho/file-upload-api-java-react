@@ -7,7 +7,8 @@ import Ssd from "./formulario/Ssd";
 import SsdList from "./formulario/SsdList";
 import Ram from "./formulario/Ram";
 import RamList from "./formulario/RamList";
-
+import Cpu from "./formulario/Cpu";
+import CpuList from "./formulario/CpuList";
 export default function App() {
   return (
     <Router>
@@ -36,6 +37,9 @@ export default function App() {
 
             <Route path="/ram" exact component={Ram}></Route>
             <Route path="/ramlist" exact component={RamList}></Route>
+
+            <Route path="/cpu" exact component={Cpu}></Route>
+            <Route path="/cpulist" exact component={CpuList}></Route>
           </th>
         </tr>
       </main>

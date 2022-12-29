@@ -31,7 +31,9 @@ public class SsdController {
 
 
     //TODO FAZER O METODO DE ZERAR O FORM DEPOIS DE SALVAR. O OUTRO ESTAVA DANDO ERRADO, ZERAVA ANTES DE SALVAR.
-
+    //TODO FAZER UM MODAL PARA ALGUM TELA
+    //TODO BOOTSTRAP OFFCANVAS PARA MENU LATERAL
+    //TODO COLOCAR QUANTIDADES NAS ENTITY
     @ExceptionHandler
     @PostMapping("/new")
     public ResponseEntity<String> ssdSave(@RequestParam("file") MultipartFile file,

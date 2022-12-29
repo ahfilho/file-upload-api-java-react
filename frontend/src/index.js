@@ -11,6 +11,7 @@ import Client from './client/Client';
 import ListClient from './client/ListClient';
 import SsdList from './formulario/SsdList';
 import Home from './home/Home';
+import CpuList from './formulario/CpuList';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -22,7 +23,7 @@ root.render(
       {/* <Client></Client> */}
       {/* <ListClient/> */}
       {/* <SsdList></SsdList> */}
-  
+    {/* <CpuList></CpuList> */}
       </BrowserRouter>
   </React.StrictMode>
 );
