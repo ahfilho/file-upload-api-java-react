@@ -1,0 +1,19 @@
+
+.flex-container{
+    background-color: yellow;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.botao1{
+    display: flex;
+        justify-content: center;
+}
+.botao2{
+    display: flex;
+        justify-content: center;
+}
+.botao3{
+    display: flex;
+        justify-content: center;
+}

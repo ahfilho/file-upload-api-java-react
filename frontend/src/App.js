@@ -3,8 +3,10 @@ import React, { Fragment } from "react";
 import "./index.css";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Home from "./home/Home";
-import Ssd from "./formulario/Ssd"; 
-import SsdList from "./formulario/SsdList"; 
+import Ssd from "./formulario/Ssd";
+import SsdList from "./formulario/SsdList";
+import Ram from "./formulario/Ram";
+import RamList from "./formulario/RamList";
 
 export default function App() {
   return (
@@ -12,20 +14,30 @@ export default function App() {
       <main>
         <nav>
           <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/contact">Contact</Link>
-            </li>
+            <tr>
+              {/* <th>
+                <Link to="/">Ssd</Link>
+              </th>
+              <th>
+                <Link to="/ram">Ram</Link>
+              </th>
+              <th>
+                <Link to="/cpu">Cpu</Link>
+              </th> */}
+            </tr>
           </ul>
         </nav>
-        <Route path="/" exact component={Home}></Route>
-        <Route path="/ssd" component={Ssd}></Route>
-        <Route path="/ssdlist" component={SsdList}></Route>
+        {/* exact faz renderizar aquele determinado component */}
+        <tr>
+          <th>
+            <Route path="/" exact component={Home}></Route>
+            <Route path="/ssd" exact component={Ssd}></Route>
+            <Route path="/ssdlist" exact component={SsdList}></Route>
+
+            <Route path="/ram" exact component={Ram}></Route>
+            <Route path="/ramlist" exact component={RamList}></Route>
+          </th>
+        </tr>
       </main>
     </Router>
   );

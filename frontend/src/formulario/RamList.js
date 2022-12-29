@@ -2,35 +2,32 @@ import React from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
-import "./SsdList.css";
+import "./RamList.css";
 
-export default class SsdList extends React.Component {
+export default class RamList extends React.Component {
   state = {
-    ssds: [],
+    rams: [],
   };
- 
+
   componentDidMount() {
-    axios.get("http://localhost:9090/ssd/list").then((res) => {
-      const ssds = res.data;
-      this.setState({ ssds });
-      
+    axios.get("http://localhost:9090/ram/list").then((res) => {
+      const rams = res.data;
+      this.setState({ rams });
     });
   }
   render() {
     return (
       <tbody>
-        <div className="tabela">Ssd's Cadastrados
-        
-         <Link to="/">Início</Link>
-        
+        <div className="tabela">
+          Ram Cadastradas
+          <Link to="/">Início</Link>
         </div>
-          <div className="botoes">
-       
-        </div>
+        <div className="botoes"></div>
         <table>
           <tr>
             <th>Id</th>
             <th>Marca</th>
+            <th>Frequência</th>
             <th>Modelo</th>
             <th>Nº de série</th>
             <th>Capacidade</th>
@@ -42,20 +39,21 @@ export default class SsdList extends React.Component {
             <th>Url</th>
             <th></th>
           </tr>
-          {this.state.ssds.map((ssd) => (
+          {this.state.rams.map((ram) => (
             <tr>
-              <td>{ssd.id}</td>
-              <td>{ssd.brand}</td>
-              <td>{ssd.model}</td>
-              <td>{ssd.serialNumber}</td>
-              <td>{ssd.size}</td>
-              <td>{ssd.purchaseDate}</td>
-              <td>{ssd.purchasePrice}</td>
-              <td>{ssd.arrivalDate}</td>
-              <td>{ssd.saleValue}</td>
-              <td>{ssd.productCategory}</td>
+              <td>{ram.id}</td>
+              <td>{ram.brand}</td>
+              <td>{ram.mhz}</td>
+              <td>{ram.model}</td>
+              <td>{ram.serialNumber}</td>
+              <td>{ram.size}</td>
+              <td>{ram.purchaseDate}</td>
+              <td>{ram.purchasePrice}</td>
+              <td>{ram.arrivalDate}</td>
+              <td>{ram.saleValue}</td>
+              <td>{ram.productCategory}</td>
               <td>
-                <a href={ssd.url}>url</a>
+                <a href={ram.url}>url</a>
               </td>
 
               <td>Alterar</td>

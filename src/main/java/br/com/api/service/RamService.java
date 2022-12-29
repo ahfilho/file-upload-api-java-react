@@ -45,8 +45,8 @@ public class RamService {
         Date dateAtual = new Date();
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         String dataFormatada = df.format(dateAtual);
-        ram.setArrivalDate(dateAtual);
-        ram.setPurchaseDate(dateAtual);
+//        ram.setArrivalDate(dateAtual);
+//        ram.setPurchaseDate(dateAtual);
 
         File img = new File();
 

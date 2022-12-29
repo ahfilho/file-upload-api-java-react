@@ -40,7 +40,7 @@ public class Ram {
 
     @NotNull
     @Column(name = "purchase_date")
-    private Date purchaseDate;
+    private String purchaseDate;
 
     @NotNull
     @Column(name = "sale_value")
@@ -48,7 +48,7 @@ public class Ram {
 
     @NotNull
     @Column(name = "arrival_date")
-    private Date arrivalDate;
+    private String arrivalDate;
 
     @NotNull
     @Column(name = "model")

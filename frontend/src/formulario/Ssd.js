@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import "./Ssd.css";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";        
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 
 const url = "http://localhost:9090/ssd/new";
 
@@ -20,7 +20,7 @@ const AddSsd = () => {
   //CATEGORY
   const [productCategory, setProductCategory] = useState("");
 
-  //IMAGE
+  //file
   const [file, setFile] = useState("");
 
   const handleImage = (e) => {
@@ -28,18 +28,6 @@ const AddSsd = () => {
     setFile(e.target.files[0]);
   };
 
-  // const resetForm = () => {
-  //   setBrand("");
-  //   setModel("");
-  //   setSerialNumber("");
-  //   setSize("");
-  //   setPurchaseDate("");
-  //   setPurchasePrice("");
-  //   setArrivalDate("");
-  //   setProductCategory("");
-  //   setSaleValue("");
-
-  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -86,7 +74,7 @@ const AddSsd = () => {
         productCategory: productCategory,
       });
       console.log(response.data);
-      alert("SALVO COM SUCESSO!");
+      alert("SALVO COM SUCESSO -- apenas para testes!");
     } catch (error) {
       console.log(error.response);
     }
@@ -97,20 +85,18 @@ const AddSsd = () => {
       <div className="form-row">
         <form id="meuForm" onSubmit={(e) => handleSubmit(e)}>
           <div className="title">Cadastrar novo SSD</div>
+
+          <button>
+            <Link to="/">Home</Link>
+          </button>
+          <button>
+            <Link to="/ssdlist">Listar todos</Link>
+          </button>
           <div className="file">
             <input type="file" name="file" onChange={handleImage} />
           </div>
-          
+
           <div className="inputs">
-            {/* <input
-            type={"text"}
-            name="productCategory"
-            id="productCategory"
-            className="form-control"
-            value={productCategory}
-            placeholder="Categoria do produto"
-            onChange={(e) => setProductCategory(e.target.value)}
-          /> */}
             <input
               type={"text"}
               name="brand"
