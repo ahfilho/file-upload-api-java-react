@@ -17,6 +17,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+@CrossOrigin(origins = "http://localhost:3000")
 @Controller
 @RestController
 @RequestMapping("/cpu")
@@ -26,7 +28,7 @@ public class CpuController {
     private CpuService cpuService;
 
     @ExceptionHandler
-    @GetMapping
+    @GetMapping("/list")
     public List<Cpu> list() {
         return cpuService.listAll().stream().map(this::link).collect(Collectors.toList());
 
@@ -42,7 +44,7 @@ public class CpuController {
     }
 
     @ExceptionHandler
-    @PostMapping
+    @PostMapping("/new")
     public ResponseEntity<String> save(@RequestParam("file") MultipartFile file, Cpu cpu, Category category) {
         try {
             category.setProductCategory(CategoryEnum.CPU.name());

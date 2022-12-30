@@ -4,7 +4,7 @@ import { useState } from "react";
 import "./Ssd.css";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 
-const url = "http://localhost:9090/ssd/new";
+const url = "http://localhost:9090/cpu/new";
 
 const AddCpu = () => {
   //CPU
@@ -13,7 +13,7 @@ const AddCpu = () => {
   const [serialNumber, setSerialNumber] = useState("");
   const [core, setCore] = useState("");
   const [threads, setThreads] = useState("");
-    const [clock, setClock] = useState("");
+  const [clock, setClock] = useState("");
 
   const [overClock, setOverclock] = useState("");
   const [purchaseDate, setPurchaseDate] = useState("");
@@ -61,10 +61,10 @@ const AddCpu = () => {
     formData.append("purchasePrice", purchasePrice);
     formData.append("arrivalDate", arrivalDate);
     formData.append("saleValue", saleValue);
-    formData.append("clock",clock);
+    formData.append("clock", clock);
     formData.append("core", core);
-    formData.append("overclock",overClock);
-    formData.append("threads",threads);
+    formData.append("overclock", overClock);
+    formData.append("threads", threads);
 
     formData.append("productCategory", productCategory);
 
@@ -76,8 +76,8 @@ const AddCpu = () => {
         model: model,
         threads: threads,
         core: core,
-        clock:clock,
-        overClock:overClock,
+        clock: clock,
+        overClock: overClock,
         serialNumber: serialNumber,
         purchaseDate: purchaseDate,
         purchasePrice: purchasePrice,
@@ -103,7 +103,7 @@ const AddCpu = () => {
             <Link to="/">Home</Link>
           </button>
           <button>
-            <Link to="/ssdlist">Listar todos</Link>
+            <Link to="/cpulist">Listar todos</Link>
           </button>
           <div className="file">
             <input type="file" name="file" onChange={handleImage} />
@@ -177,19 +177,7 @@ const AddCpu = () => {
               onChange={(e) => setThreads(e.target.value)}
             />
           </div>
-          <div className="inputs">
-            <input
-              type={"text"}
-              name="overClock"
-              id="overClock"
-              className="form-control"
-              value={overClock}
-              placeholder="Nº de série"
-              onChange={(e) => setOverclock(e.target.value)}
-            />
-          </div>
 
-         
           <div className="inputs">
             {" "}
             Data de compra

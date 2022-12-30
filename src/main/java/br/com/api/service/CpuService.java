@@ -52,20 +52,20 @@ public class CpuService {
         Date dateNow = new Date();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-        cpu.setPurchaseDate(dateNow);
-        cpu.setArrivalDate(dateNow);
+//        cpu.setPurchaseDate(dateNow);
+//        cpu.setArrivalDate(dateNow);
 
         img.setName(StringUtils.cleanPath(file.getOriginalFilename()));
         img.setContentType(file.getContentType());
         img.setData(file.getBytes());
         img.setSize(file.getSize());
 
-        if (cpu.isOverclock()) {
-            System.out.println("This processor has been overclocked");
-        } else {
-            System.out.println("This processor has not been overclocked");
-
-        }
+//        if (cpu.isOverclock()) {
+//            System.out.println("This processor has been overclocked");
+//        } else {
+//            System.out.println("This processor has not been overclocked");
+//
+//        }
 
         this.cpuRepository.save(cpu);
         this.categoryRepository.save(category);
@@ -93,7 +93,7 @@ public class CpuService {
             c.setBrand(cpu.getBrand());
             c.setArrivalDate(cpu.getArrivalDate());
             c.setClock(cpu.getClock());
-            c.setCores(cpu.getCores());
+            c.setCore(cpu.getCore());
             c.setModel(cpu.getModel());
             c.setPurchaseDate(cpu.getPurchaseDate());
             c.setPurchasePrice(cpu.getPurchasePrice());
