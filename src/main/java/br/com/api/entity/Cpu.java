@@ -32,13 +32,13 @@ public class Cpu {
     private float purchasePrice;
 
     @Column(name = "purchase_date")
-    private Date purchaseDate;
+    private String purchaseDate;
 
     @Column(name = "sale_value")
     private float saleValue;
 
     @Column(name = "arrival_date")
-    private Date arrivalDate;
+    private String arrivalDate;
 
     @Column(name = "core")
     private int core;
@@ -49,8 +49,8 @@ public class Cpu {
     @Column(name = "clock")
     private float clock;
 
-    @Column(name = "overclock")
-    private boolean overclock;
+//    @Column(name = "overclock")
+//    private boolean overclock;
 
     @Column(name = "url")
     private String url;
