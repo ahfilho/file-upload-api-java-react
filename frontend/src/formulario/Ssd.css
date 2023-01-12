@@ -1,7 +1,18 @@
 
 .meuForm{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        
+        color: white;
+        font-size: 15px;
 
+}
+.title{
+        font-size: 18px;
+}
+.inputs{
+        justify-content: space-between;
+        margin-top: 5px;
+}
+.botoes{
+        margin-top: 10px;
+        justify-content: space-between;
 }

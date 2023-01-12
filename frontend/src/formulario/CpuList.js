@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { FaFontAwesome } from "react-icons/fa";
 
 import "./RamList.css";
 
@@ -60,11 +61,7 @@ export default class CpuList extends React.Component {
               <td>Excluir</td>
             </tr>
           ))}
-          {/* {this.state.categories.map((cate) => (
-            <tr>
-              <td>{cate.productCategory}</td>
-            </tr>
-          ))} */}
+          <i class="fa-solid fa-download"></i>
         </table>
       </tbody>
     );

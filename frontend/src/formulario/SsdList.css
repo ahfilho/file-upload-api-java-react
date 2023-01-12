@@ -1,5 +1,7 @@
-.todos{
+.tabela{
+    display: flex;
     color: white;
+    justify-content: flex-start ;
 }
 li{
     display: flex;

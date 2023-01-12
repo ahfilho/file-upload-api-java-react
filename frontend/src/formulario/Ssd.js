@@ -83,15 +83,19 @@ const AddSsd = () => {
   return (
     <div className="meuForm">
       <div className="form-row">
+        <div className="botoes">
+          <button type="button" class="btn">
+            <Link to="/">
+              Home <i class="fa-regular fa-user"></i>
+            </Link>
+          </button>
+          <button type="button" class="btn">
+            <Link to="/ssdlist">Listar todos</Link>
+          </button>
+        </div>
         <form id="meuForm" onSubmit={(e) => handleSubmit(e)}>
           <div className="title">Cadastrar novo SSD</div>
 
-          <button>
-            <Link to="/">Home</Link>
-          </button>
-          <button>
-            <Link to="/ssdlist">Listar todos</Link>
-          </button>
           <div className="file">
             <input type="file" name="file" onChange={handleImage} />
           </div>
