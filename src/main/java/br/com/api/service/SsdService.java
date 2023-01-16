@@ -131,4 +131,14 @@ public class SsdService {
         }
 
     }
+
+    public Ssd searchId(Long id) throws Exception {
+        Optional<Ssd> result = this.ssdRespository.findById(id);
+        if (result.isPresent()) {
+            return result.get();
+        } else {
+            throw new Exception("ERRO O BUSCAR PELO ID" + id);
+        }
+    }
+
 }
