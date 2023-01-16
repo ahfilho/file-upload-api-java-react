@@ -4,13 +4,10 @@ package br.com.api.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import br.com.api.entity.Ram;
 import br.com.api.enume.CategoryEnum;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -78,6 +75,11 @@ public class SsdController {
         } catch (Exception e) {
             return HttpStatus.BAD_REQUEST;
         }
+    }
+    @GetMapping("/findById/{id}")
+    public ResponseEntity<Ssd> searchForId(@PathVariable Long id, @RequestBody Ssd ssd) throws Exception{
+        ssd.getId();
+        return ResponseEntity.ok().body(ssdService.searchId(id));
     }
 
 }
