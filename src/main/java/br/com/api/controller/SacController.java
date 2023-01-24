@@ -25,8 +25,8 @@ public class SacController {
     private SacService service;
 
     @PostMapping
-    public ResponseEntity<Contact> sacSave(@RequestBody Contact sac) {
-        return ResponseEntity.ok().body(this.service.saveSac(sac));
+    public ResponseEntity<Contact> sacSave(@RequestBody Contact contact) {
+        return ResponseEntity.ok().body(this.service.saveSac(contact));
     }
 
     @GetMapping
