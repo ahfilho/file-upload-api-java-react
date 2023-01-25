@@ -6,12 +6,12 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 
 import List from './listagem/List';
-import Ssd from './formulario/Ssd';
+import Ssd from './pages/ssd/Ssd';
 import Client from './client/Client';
 import ListClient from './client/ListClient';
-import SsdList from './formulario/SsdList';
+import SsdList from './pages/ssd/SsdList';
 import Home from './home/Home';
-import CpuList from './formulario/CpuList';
+import CpuList from './pages/CpuList';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

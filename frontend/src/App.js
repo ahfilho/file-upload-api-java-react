@@ -3,12 +3,12 @@ import React, { Fragment } from "react";
 import "./index.css";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Home from "./home/Home";
-import Ssd from "./formulario/Ssd";
-import SsdList from "./formulario/SsdList";
-import Ram from "./formulario/Ram";
-import RamList from "./formulario/RamList";
-import Cpu from "./formulario/Cpu";
-import CpuList from "./formulario/CpuList";
+import Ssd from "./pages/ssd/Ssd";
+import SsdList from "./pages/ssd/SsdList";
+import Ram from "./pages/Ram";
+import RamList from "./pages/RamList";
+import Cpu from "./pages/Cpu";
+import CpuList from "./pages/CpuList";
 
 export default function App() {
   return (

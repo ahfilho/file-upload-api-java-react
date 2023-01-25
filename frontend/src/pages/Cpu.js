@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
-import "./Ssd.css";
+import "./ssd/Ssd.css";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 
 const url = "http://localhost:9090/cpu/new";
