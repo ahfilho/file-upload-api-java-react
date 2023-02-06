@@ -1,12 +1,27 @@
 import axios from "axios";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect, useParams } from "react";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+
 import "./Ssd.css";
 
-const url = "http://localhost:9090/ssd/new";
+const url = "http://localhost:9090/ssd";
 
 const SsdEdit = () => {
+
+  const ssd = {
+    brand: "",
+    model: "",
+    serialNumber: "",
+    size: "",
+    purchaseDate: "",
+    purchasePrice: "",
+    arrivalDate: "",
+    saleValue: "",
+  };
+
   //SSD
+  const [id, setId] = useState(null);
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
   const [serialNumber, setSerialNumber] = useState("");
@@ -26,32 +41,26 @@ const SsdEdit = () => {
     console.log(e.target.files);
     setFile(e.target.files[0]);
   };
+  useEffect(() => {
+    load();
+  }, []);
 
-  // const resetForm = () => {
-  //   setBrand("");
-  //   setModel("");
-  //   setSerialNumber("");
-  //   setSize("");
-  //   setPurchaseDate("");
-  //   setPurchasePrice("");
-  //   setArrivalDate("");
-  //   setProductCategory("");
-  //   setSaleValue("");
+  console.log("aqui 1");
 
-  // };
+  const load = async(id) =>{
+    console.log(typeof id);
+    Number(id)
+    console.log(typeof Number(id)+"~~~~~~");
+    axios.get(`http://localhost:9090/ssd/findById/${id}`).then((res) => {
+      const ssds = res.data;
+      this.setState({ ssds });
+
+    });
+
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const ssd = {
-      brand,
-      model,
-      serialNumber,
-      size,
-      purchaseDate,
-      purchasePrice,
-      arrivalDate,
-      saleValue,
-    };
 
     const category = {
       productCategory,
@@ -73,28 +82,43 @@ const SsdEdit = () => {
 
     try {
       const response = await axios.post(url, formData, ssd, category, {
-        brand: brand,
-        model: model,
-        serialNumber: serialNumber,
-        size: size,
-        purchaseDate: purchaseDate,
-        purchasePrice: purchasePrice,
-        arrivalDate: arrivalDate,
-        saleValue: saleValue,
+        brand,
+        model,
+        serialNumber,
+        size,
+        purchaseDate,
+        purchasePrice,
+        arrivalDate,
+        saleValue,
 
-        productCategory: productCategory,
+        productCategory,
       });
       console.log(response.data);
     } catch (error) {
       console.log(error.response);
     }
   };
+  useEffect(() => {
+    setBrand(localStorage.getItem('brand'));
+    setId(localStorage.getItem('id'));
+    setModel(localStorage.getItem('model'));
 
+  }, [])
   return (
     <div className="meuForm">
       <div className="form-row">
         <form id="meuForm" onSubmit={(e) => handleSubmit(e)}>
           <div className="title">Cadastrar novo SSD</div>
+          <div className="botoes">
+            <button type="button" class="btn">
+              <Link to="/">
+                Home <i class="fa-regular fa-user"></i>
+              </Link>
+            </button>
+            <button type="button" class="btn">
+              <Link to="/ssdlist">Listar todos</Link>
+            </button>
+          </div>
           <div className="file">
             <input type="file" name="file" onChange={handleImage} />
           </div>
@@ -192,7 +216,7 @@ const SsdEdit = () => {
               type="submit"
               className="btn btn-success"
               onChange={(e) => this.handleSubmit(e)}
-              // onClick={() => resetForm()}
+            // onClick={() => resetForm()}
             >
               Salvar
             </button>

@@ -1,31 +1,57 @@
-import React from "react";
+import React, { Component } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 import "./SsdList.css";
+import { Button } from "bootstrap";
 
-export default class SsdList extends React.Component {
+class SsdList extends Component {
+  
   state = {
     ssds: [],
   };
- 
+
+  async remove(id) {
+      alert("Deseja mesmo excluir?")
+    axios.delete(`http://localhost:9090/ssd/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(() => {
+      let updateSsd = [...this.state.ssds].filter(i => i.id !== id);
+      this.setState({ ssds: updateSsd });
+    })
+
+  }
+
   componentDidMount() {
-    axios.get("http://localhost:9090/ssd/list").then((res) => {
+    axios.get("http://localhost:9090/ssd/").then((res) => {
       const ssds = res.data;
       this.setState({ ssds });
-      
+
     });
+
   }
+
   render() {
     return (
       <tbody>
         <div className="tabela">Ssd's Cadastrados
-        
-         <Link to="/">Início</Link>
-        
+
+          <button type="button" class="btn">
+            <Link to="/">
+              Home <i class="fa-regular fa-user"></i>
+            </Link>
+          </button>
+          <button type="button" class="btn">
+            <Link to="/ssdlist">Listar todos</Link>
+          </button>
         </div>
-          <div className="botoes">
-       
+        <div className="botoes">
+
         </div>
         <table>
           <tr>
@@ -38,9 +64,7 @@ export default class SsdList extends React.Component {
             <th>Preço de compra</th>
             <th>Data de venda</th>
             <th>Preço de venda</th>
-            <th>Categoria do produto</th>
             <th>Url</th>
-            <th></th>
           </tr>
           {this.state.ssds.map((ssd) => (
             <tr>
@@ -53,22 +77,17 @@ export default class SsdList extends React.Component {
               <td>{ssd.purchasePrice}</td>
               <td>{ssd.arrivalDate}</td>
               <td>{ssd.saleValue}</td>
-              <td>{ssd.productCategory}</td>
               <td>
                 <a href={ssd.url}>url</a>
               </td>
 
-              <td>Alterar</td>
-              <td>Excluir</td>
+              <td><button><Link to={`/ssdEdit/${ssd.id}`} className="btn btn-sucess">Editar </Link></button></td>
+              <td><button onClick={() => this.remove(ssd.id)} className="btn btn-danger">Excluir </button></td>
             </tr>
           ))}
-          {/* {this.state.categories.map((cate) => (
-            <tr>
-              <td>{cate.productCategory}</td>
-            </tr>
-          ))} */}
         </table>
       </tbody>
     );
   }
 }
+export default SsdList;

@@ -32,7 +32,7 @@ public class SsdController {
     //TODO BOOTSTRAP OFFCANVAS PARA MENU LATERAL
     //TODO COLOCAR QUANTIDADES NAS ENTITY
     @ExceptionHandler
-    @PostMapping("/new")
+    @PostMapping
     public ResponseEntity<String> ssdSave(@RequestParam("file") MultipartFile file,
                                           Ssd ssd, Category category) {
         try {
@@ -46,7 +46,7 @@ public class SsdController {
         }
     }
 
-    @GetMapping("/list")
+    @GetMapping
     public List<Ssd> list() {
         return ssdService.listAllSsd().stream().map(this::linkImgSsd).collect(Collectors.toList());
     }
@@ -61,7 +61,7 @@ public class SsdController {
 
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Ssd> updateSsd(@PathVariable Long id, @RequestBody Ssd ssd) throws Exception {
         ssd.getId();
         return ResponseEntity.ok().body(this.ssdService.update(ssd));
@@ -76,10 +76,11 @@ public class SsdController {
             return HttpStatus.BAD_REQUEST;
         }
     }
-    @GetMapping("/findById/{id}")
-    public ResponseEntity<Ssd> searchForId(@PathVariable Long id, @RequestBody Ssd ssd) throws Exception{
+        @GetMapping("/findById/{id}")
+    public Ssd searchForId(@PathVariable Long id) throws Exception{
+        Ssd ssd = new Ssd();
         ssd.getId();
-        return ResponseEntity.ok().body(ssdService.searchId(id));
+        return ssdService.searchId(id);
     }
 
 }

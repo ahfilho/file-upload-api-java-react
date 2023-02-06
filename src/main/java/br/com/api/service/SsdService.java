@@ -134,6 +134,16 @@ public class SsdService {
 
     public Ssd searchId(Long id) throws Exception {
         Optional<Ssd> result = this.ssdRespository.findById(id);
+
+
+        Ssd ssd = new Ssd();
+        Long l = ssd.getId();
+        String s = String.valueOf(l);
+        Long ll = Long.valueOf(String.valueOf(s));
+
+
+        System.out.println("AGORA É STRING"+ll.toString());
+
         if (result.isPresent()) {
             return result.get();
         } else {
