@@ -9,6 +9,7 @@ import Ram from "./pages/Ram";
 import RamList from "./pages/RamList";
 import Cpu from "./pages/Cpu";
 import CpuList from "./pages/CpuList";
+import SsdEdit from "./pages/ssd/SsdEdit";
 
 export default function App() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="/" exact component={Home}></Route>
           <Route path="/ssd" exact component={Ssd}></Route>
           <Route path="/ssdlist" exact component={SsdList}></Route>
+          <Route path="/ssdEdit/:id" exact component={SsdEdit}></Route>
 
           <Route path="/ram" exact component={Ram}></Route>
           <Route path="/ramlist" exact component={RamList}></Route>

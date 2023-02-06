@@ -4,7 +4,7 @@ import { useState } from "react";
 import "./Ssd.css";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 
-const url = "http://localhost:9090/ssd/new";
+const url = "http://localhost:9090/ssd";
 
 const AddSsd = () => {
   //SSD
