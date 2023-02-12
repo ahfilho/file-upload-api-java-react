@@ -1,15 +1,17 @@
 import axios from "axios";
 import React from "react";
-import { useState, useEffect, useParams } from "react";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { useState, useEffect, useNavigate } from "react";
+import { BrowserRouter as Router, Route, Link, Switch, useParams } from "react-router-dom";
 
 import "./Ssd.css";
 
-const url = "http://localhost:9090/ssd";
+// const url = "http://localhost:9090/ssd";
 
-const SsdEdit = () => {
+export default function SsdEdit() {
 
-  const ssd = {
+  const { id } = useParams();
+
+  const [ssd, setSsd] = useState({
     brand: "",
     model: "",
     serialNumber: "",
@@ -18,18 +20,11 @@ const SsdEdit = () => {
     purchasePrice: "",
     arrivalDate: "",
     saleValue: "",
-  };
+  });
 
-  //SSD
-  const [id, setId] = useState(null);
-  const [brand, setBrand] = useState("");
-  const [model, setModel] = useState("");
-  const [serialNumber, setSerialNumber] = useState("");
-  const [size, setSize] = useState("");
-  const [purchaseDate, setPurchaseDate] = useState("");
-  const [purchasePrice, setPurchasePrice] = useState("");
-  const [arrivalDate, setArrivalDate] = useState("");
-  const [saleValue, setSaleValue] = useState("");
+  const { brand, model, serialNumber, size,
+    purchaseDate, purchasePrice, arrivalDate, saleValue } = ssd;
+
 
   //CATEGORY
   const [productCategory, setProductCategory] = useState("");
@@ -37,26 +32,41 @@ const SsdEdit = () => {
   //IMAGE
   const [file, setFile] = useState("");
 
+  const onInputChange = (e) => {
+    setSsd({
+      ...ssd, [e.target.brand]: e.target.value,
+      [e.target.model]: e.target.value,
+      [e.target.size]: e.target.value,
+      [e.target.serialNumber]: e.target.value,
+      [e.target.purchaseDate]: e.target.value,
+      [e.target.purchasePrice]: e.target.value,
+      [e.target.arrivalDate]: e.target.value,
+      [e.target.saleValue]: e.target.value,
+
+    });
+  };
+
+  // const [brand, setBrand] = useState("");
+  // const [model, setModel] = useState("");
+  // const [serialNumber, setSerialNumber] = useState("");
+  // const [size, setSize] = useState("");
+  // const [purchaseDate, setPurchaseDate] = useState("");
+  // const [purchasePrice, setPurchasePrice] = useState("");
+  // const [arrivalDate, setArrivalDate] = useState("");
+  // const [saleValue, setSaleValue] = useState("");
+
   const handleImage = (e) => {
     console.log(e.target.files);
     setFile(e.target.files[0]);
   };
+
   useEffect(() => {
     load();
   }, []);
 
-  console.log("aqui 1");
-
-  const load = async(id) =>{
-    console.log(typeof id);
-    Number(id)
-    console.log(typeof Number(id)+"~~~~~~");
-    axios.get(`http://localhost:9090/ssd/findById/${id}`).then((res) => {
-      const ssds = res.data;
-      this.setState({ ssds });
-
-    });
-
+  const load = async () => {
+    const result = await axios.get(`http://localhost:9090/ssd/${id}`);
+    setSsd(result.data);
   }
 
   const handleSubmit = async (e) => {
@@ -76,20 +86,12 @@ const SsdEdit = () => {
     formData.append("saleValue", saleValue);
     formData.append("size", size);
 
-    formData.append("productCategory", productCategory);
+    // formData.append("productCategory", productCategory);
 
     console.log(ssd, file, category);
 
     try {
-      const response = await axios.post(url, formData, ssd, category, {
-        brand,
-        model,
-        serialNumber,
-        size,
-        purchaseDate,
-        purchasePrice,
-        arrivalDate,
-        saleValue,
+      const response = await axios.put(`http://localhost:9090/ssd/${id}`, formData, ssd, file, category, {
 
         productCategory,
       });
@@ -98,12 +100,7 @@ const SsdEdit = () => {
       console.log(error.response);
     }
   };
-  useEffect(() => {
-    setBrand(localStorage.getItem('brand'));
-    setId(localStorage.getItem('id'));
-    setModel(localStorage.getItem('model'));
 
-  }, [])
   return (
     <div className="meuForm">
       <div className="form-row">
@@ -123,72 +120,77 @@ const SsdEdit = () => {
             <input type="file" name="file" onChange={handleImage} />
           </div>
           <div className="inputs"></div>
-          <input
-            type={"text"}
-            name="productCategory"
-            id="productCategory"
-            className="form-control"
-            value={productCategory}
-            placeholder="Categoria do produto"
-            onChange={(e) => setProductCategory(e.target.value)}
-          />
-          <input
-            type={"text"}
-            name="brand"
-            id="brand"
-            value={brand}
-            className="form-control"
-            y
-            placeholder="Marca"
-            onChange={(e) => setBrand(e.target.value)}
-          />
 
-          <input
-            type={"text"}
-            name="model"
-            id="model"
-            className="form-control"
-            value={model}
-            placeholder="Modelo"
-            onChange={(e) => setModel(e.target.value)}
-          />
-          <input
-            type={"text"}
-            name="serialNumber"
-            id="serialNumber"
-            className="form-control"
-            value={serialNumber}
-            placeholder="Nº de série"
-            onChange={(e) => setSerialNumber(e.target.value)}
-          />
-          <input
-            type={"text"}
-            name="size"
-            id="size"
-            className="form-control"
-            value={size}
-            placeholder="Capacidade/GB"
-            onChange={(e) => setSize(e.target.value)}
-          />
-          <div className="inputs"> Data de compra</div>
-          <input
-            type={"date"}
-            name="purchaseDate"
-            id="purchaseDate"
-            className="form-control"
-            value={purchaseDate}
-            placeholder="Data de compra"
-            onChange={(e) => setPurchaseDate(e.target.value)}
-          />
-          <input
-            type={"text"}
-            name="purchasePrice"
-            id="purchasePrice"
-            className="form-control"
-            value={purchasePrice}
-            placeholder="Preço de compra"
-            onChange={(e) => setPurchasePrice(e.target.value)}
-          />
+
+          <div className="inputs">
+            <input
+              onChangeText={(text) => this.setState({ place: text })}
+              type={"text"}
+              name="brand"
+              id="brand"
+              value={brand}
+              className="form-control"
+              placeholder="Marca"
+              onChange={(e) => onInputChange(e)}
+            />
+          </div>
+          <div className="inputs">
+            <input
+              type={"text"}
+              name="model"
+              id="model"
+              className="form-control"
+              value={model}
+              placeholder="Modelo"
+              onChange={(e) => onInputChange(e)}
+            />
+          </div>
+          <div className="inputs">
+            <input
+              type={"text"}
+              name="serialNumber"
+              id="serialNumber"
+              className="form-control"
+              value={serialNumber}
+              placeholder="Nº de série"
+              onChange={(e) => onInputChange(e)}
+            />
+          </div>
+          <div className="inputs">
+            <input
+              type={"text"}
+              name="size"
+              id="size"
+              className="form-control"
+              value={size}
+              placeholder="Capacidade/GB"
+              onChange={(e) => onInputChange(e)}
+            />
+          </div>
+          <div className="inputs">
+            {" "}
+            Data de compra
+            <input
+              type={"date"}
+              name="purchaseDate"
+              id="purchaseDate"
+              className="form-control"
+              value={purchaseDate}
+              placeholder="Data de compra"
+              onChange={(e) => onInputChange(e)}
+            />
+          </div>
+          <div className="inputs">
+            <input
+              type={"text"}
+              name="purchasePrice"
+              id="purchasePrice"
+              className="form-control"
+              value={purchasePrice}
+              placeholder="Preço de compra"
+              onChange={(e) => onInputChange(e)}
+            />
+          </div>
           <div className="inputs">
             Data de venda
             <input
@@ -198,18 +200,20 @@ const SsdEdit = () => {
               className="form-control"
               value={arrivalDate}
               placeholder="Arrival date"
-              onChange={(e) => setArrivalDate(e.target.value)}
+              onChange={(e) => onInputChange(e)}
             />
           </div>
-          <input
-            type={"text"}
-            name="saleValue"
-            id="saleValue"
-            value={saleValue}
-            className="form-control"
-            placeholder="Preço de venda"
-            onChange={(e) => setSaleValue(e.target.value)}
-          />
+          <div className="inputs">
+            <input
+              type={"text"}
+              name="saleValue"
+              id="saleValue"
+              value={saleValue}
+              className="form-control"
+              placeholder="Preço de venda"
+              onChange={(e) => onInputChange(e)}
+            />
+          </div>
           <div className="botaoSave">
             <br></br>
             <button
@@ -220,10 +224,13 @@ const SsdEdit = () => {
             >
               Salvar
             </button>
+            <button class="btn btn-danger">
+              <Link to="/ssdlist">Cancelar</Link>
+            </button>
           </div>
         </form>
       </div>
     </div>
   );
 };
-export default SsdEdit;
+// export default SsdEdit;

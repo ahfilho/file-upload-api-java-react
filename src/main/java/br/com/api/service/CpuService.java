@@ -55,10 +55,10 @@ public class CpuService {
 //        cpu.setPurchaseDate(dateNow);
 //        cpu.setArrivalDate(dateNow);
 
-        img.setName(StringUtils.cleanPath(file.getOriginalFilename()));
+        img.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
         img.setContentType(file.getContentType());
         img.setData(file.getBytes());
-        img.setSize(file.getSize());
+        img.setFileSize(file.getSize());
 
 //        if (cpu.isOverclock()) {
 //            System.out.println("This processor has been overclocked");

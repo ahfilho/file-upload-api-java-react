@@ -50,10 +50,10 @@ public class RamService {
 
         File img = new File();
 
-        img.setName(StringUtils.cleanPath(file.getOriginalFilename()));
+        img.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
         img.setContentType(file.getContentType());
         img.setData(file.getBytes());
-        img.setSize(file.getSize());
+        img.setFileSize(file.getSize());
         this.ramRepository.save(ram);
         this.offerImageRepository.save(img);
         this.categoryRepository.save(category);

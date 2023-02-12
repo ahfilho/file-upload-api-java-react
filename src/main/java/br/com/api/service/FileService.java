@@ -41,10 +41,10 @@ public class FileService {
 		Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
 		File img = new File();
 
-		img.setName(StringUtils.cleanPath(file.getOriginalFilename()));
+		img.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
 		img.setContentType(file.getContentType());
 		img.setData(file.getBytes());
-		img.setSize(file.getSize());
+		img.setFileSize(file.getSize());
 
 		this.ofertasRepository.save(img);
 		this.ofertasRepository.save(productModel);
@@ -123,14 +123,14 @@ public class FileService {
 	// VERIFICAR AQUI DEPOIS
 	public File updateImg(MultipartFile file, Ssd ssd) throws IOException {
 		Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
-		File ofertas = new File();
+		File otherFiles = new File();
 
-		ofertas.setName(StringUtils.cleanPath(file.getOriginalFilename()));
-		ofertas.setContentType(file.getContentType());
-		ofertas.setData(file.getBytes());
-		ofertas.setSize(file.getSize());
+		otherFiles.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
+		otherFiles.setContentType(file.getContentType());
+		otherFiles.setData(file.getBytes());
+		otherFiles.setFileSize(file.getSize());
 
-		return ofertas;
+		return otherFiles;
 	}
 
 }

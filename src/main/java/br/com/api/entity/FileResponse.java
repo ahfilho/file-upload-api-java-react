@@ -9,7 +9,7 @@ public class FileResponse {
 	// @GeneratedValue(strategy = GenerationType.IDENTITY)
 
 	private Long id;
-	private String name;
+	private String fileName;
 	private Long size;
 	private String url;
 	private String contentType;

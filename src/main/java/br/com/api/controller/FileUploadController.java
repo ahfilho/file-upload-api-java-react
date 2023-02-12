@@ -81,7 +81,7 @@ public class FileUploadController {
                 .path(Long.toString(l1)).toUriString();
         FileResponse iqr = new FileResponse();
         iqr.setId(img.getId());
-        iqr.setName(img.getName());
+        iqr.setFileName(img.getFileName());
         iqr.setContentType(img.getContentType());
         // iqr.setSize(img.getSize());
         iqr.setUrl(downloadURL);
@@ -103,7 +103,7 @@ public class FileUploadController {
                 .path(Long.toString(l1)).toUriString();
         FileResponse iqr = new FileResponse();
         iqr.setId(img.getId());
-        iqr.setName(img.getName());
+        iqr.setFileName(img.getFileName());
         iqr.setContentType(img.getContentType());
         iqr.setUrl(downloadURL);
         return iqr;
@@ -121,9 +121,9 @@ public class FileUploadController {
                 .path(Long.toString(l2)).toUriString();
         FileResponse offer = new FileResponse();
         offer.setId(ofertasModel.getId());
-        offer.setName(ofertasModel.getName());
+        offer.setFileName(ofertasModel.getFileName());
         offer.setContentType(ofertasModel.getContentType());
-        offer.setSize(ofertasModel.getSize());
+        offer.setSize(ofertasModel.getFileSize());
         offer.setUrl(downloadURL);
 
         return offer;
@@ -137,7 +137,7 @@ public class FileUploadController {
         }
         File imageOffer = file.get();
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "teste de upload/ filename=" + imageOffer.getName() + "\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "teste de upload/ filename=" + imageOffer.getFileName() + "\"")
                 .contentType(MediaType.valueOf(imageOffer.getContentType())).body(imageOffer.getData());
 
     }

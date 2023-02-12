@@ -4,7 +4,9 @@ package br.com.api.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.com.api.entity.File;
 import br.com.api.enume.CategoryEnum;
+import br.com.api.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,8 @@ public class SsdController {
 
     @Autowired
     private SsdService ssdService;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
 
     //TODO FAZER O METODO DE ZERAR O FORM DEPOIS DE SALVAR. O OUTRO ESTAVA DANDO ERRADO, ZERAVA ANTES DE SALVAR.
@@ -62,22 +66,26 @@ public class SsdController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Ssd> updateSsd(@PathVariable Long id, @RequestBody Ssd ssd) throws Exception {
+    public ResponseEntity<Ssd> updateSsd(@RequestParam("file") MultipartFile file,
+                                         @PathVariable Long id, Ssd ssd, Category category) throws Exception {
         ssd.getId();
-        return ResponseEntity.ok().body(this.ssdService.update(ssd));
+
+        return ResponseEntity.ok().body(this.ssdService.update(ssd, file, category));
     }
 
     @DeleteMapping("/{id}")
     public HttpStatus deleteProduct(@PathVariable Long id) throws Exception {
         try {
             ssdService.deleteProduct(id);
+            File img = new File();
             return HttpStatus.OK;
         } catch (Exception e) {
             return HttpStatus.BAD_REQUEST;
         }
     }
-        @GetMapping("/findById/{id}")
-    public Ssd searchForId(@PathVariable Long id) throws Exception{
+
+    @GetMapping("/{id}")
+    public Ssd searchForId(@PathVariable Long id) throws Exception {
         Ssd ssd = new Ssd();
         ssd.getId();
         return ssdService.searchId(id);

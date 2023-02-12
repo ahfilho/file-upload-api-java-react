@@ -64,10 +64,10 @@ public class SsdService {
 //        ssd.setArrivalDate(dateAtual);
 
 
-        img.setName(StringUtils.cleanPath(file.getOriginalFilename()));
+        img.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
         img.setContentType(file.getContentType());
         img.setData(file.getBytes());
-        img.setSize(file.getSize());
+        img.setFileSize(file.getSize());
 
         this.ssdRespository.save(ssd);
         this.catRepository.save(category);
@@ -101,7 +101,7 @@ public class SsdService {
         }
     }
 
-    public Ssd update(Ssd ssd) throws Exception {
+    public Ssd update(Ssd ssd, MultipartFile file, Category category) throws Exception {
         Optional<Ssd> optSsd = this.ssdRespository.findById(ssd.getId());
         if (optSsd.isPresent()) {
 
@@ -134,15 +134,6 @@ public class SsdService {
 
     public Ssd searchId(Long id) throws Exception {
         Optional<Ssd> result = this.ssdRespository.findById(id);
-
-
-        Ssd ssd = new Ssd();
-        Long l = ssd.getId();
-        String s = String.valueOf(l);
-        Long ll = Long.valueOf(String.valueOf(s));
-
-
-        System.out.println("AGORA É STRING"+ll.toString());
 
         if (result.isPresent()) {
             return result.get();
