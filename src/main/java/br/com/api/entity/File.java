@@ -11,21 +11,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "IMAGE")
+@Table(name = "FILE")
 public class File {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "file_name")
+    private String fileName;
 
     @Column(name = "content_type")
     private String contentType;
 
-    @Column(name = "size")
-    private Long size;
+    @Column(name = "file_size")
+    private Long fileSize;
 
     @JsonIgnore
     @Column(name = "url")
@@ -50,4 +50,6 @@ public class File {
     @JoinColumn(name = "CPU_ID")
     private Cpu cpu;
 
+    public void getFile_size(long size) {
+    }
 }
