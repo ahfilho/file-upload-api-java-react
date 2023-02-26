@@ -66,18 +66,29 @@ public class SsdController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Ssd> updateSsd(@RequestParam("file") MultipartFile file,
-                                         @PathVariable Long id, Ssd ssd, Category category) throws Exception {
-        ssd.getId();
+    public HttpStatus updateSsd(@PathVariable String id, @RequestParam("file") MultipartFile file, Ssd ssd, Category category) throws Exception {
 
-        return ResponseEntity.ok().body(this.ssdService.update(ssd, file, category));
+        try {
+            long convertStringToLong = Long.parseLong(id);
+            System.out.println(convertStringToLong);
+            ssd.setId(convertStringToLong);
+        } catch (NumberFormatException e) {
+            System.out.println("Existem dados que não são string" + e.getMessage());
+        }
+        try {
+            category.setProductCategory(CategoryEnum.SSD.name());
+            this.ssdService.update(ssd, file, category);
+            return HttpStatus.OK;
+        } catch (Exception e) {
+            return HttpStatus.BAD_REQUEST;
+        }
     }
 
     @DeleteMapping("/{id}")
     public HttpStatus deleteProduct(@PathVariable Long id) throws Exception {
         try {
             ssdService.deleteProduct(id);
-            File img = new File();
+//            File img = new File();
             return HttpStatus.OK;
         } catch (Exception e) {
             return HttpStatus.BAD_REQUEST;
