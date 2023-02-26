@@ -5,13 +5,15 @@ import { BrowserRouter as Router, Route, Link, Switch, useParams } from "react-r
 
 import "./Ssd.css";
 
-// const url = "http://localhost:9090/ssd";
+const url = "http://localhost:9090/ssd";
 
 export default function SsdEdit() {
 
   const { id } = useParams();
 
+
   const [ssd, setSsd] = useState({
+    id:"",
     brand: "",
     model: "",
     serialNumber: "",
@@ -22,9 +24,9 @@ export default function SsdEdit() {
     saleValue: "",
   });
 
+  //SSD
   const { brand, model, serialNumber, size,
     purchaseDate, purchasePrice, arrivalDate, saleValue } = ssd;
-
 
   //CATEGORY
   const [productCategory, setProductCategory] = useState("");
@@ -42,18 +44,9 @@ export default function SsdEdit() {
       [e.target.purchasePrice]: e.target.value,
       [e.target.arrivalDate]: e.target.value,
       [e.target.saleValue]: e.target.value,
-
+      [e.target.file]: e.target.value
     });
   };
-
-  // const [brand, setBrand] = useState("");
-  // const [model, setModel] = useState("");
-  // const [serialNumber, setSerialNumber] = useState("");
-  // const [size, setSize] = useState("");
-  // const [purchaseDate, setPurchaseDate] = useState("");
-  // const [purchasePrice, setPurchasePrice] = useState("");
-  // const [arrivalDate, setArrivalDate] = useState("");
-  // const [saleValue, setSaleValue] = useState("");
 
   const handleImage = (e) => {
     console.log(e.target.files);
@@ -69,7 +62,7 @@ export default function SsdEdit() {
     setSsd(result.data);
   }
 
-  const handleSubmit = async (e) => {
+  const UpdatehandleSubmit = async (e) => {
     e.preventDefault();
 
     const category = {
@@ -77,6 +70,8 @@ export default function SsdEdit() {
     };
     const formData = new FormData();
     formData.append("file", file);
+
+    formData.append("id",id);
     formData.append("brand", brand);
     formData.append("model", model);
     formData.append("serialNumber", serialNumber);
@@ -86,14 +81,11 @@ export default function SsdEdit() {
     formData.append("saleValue", saleValue);
     formData.append("size", size);
 
-    // formData.append("productCategory", productCategory);
-
-    console.log(ssd, file, category);
+    formData.append("productCategory", productCategory);
 
     try {
-      const response = await axios.put(`http://localhost:9090/ssd/${id}`, formData, ssd, file, category, {
+      const response = await axios.put(`${url}/id`, formData, ssd, file, {
 
-        productCategory,
       });
       console.log(response.data);
     } catch (error) {
@@ -104,8 +96,9 @@ export default function SsdEdit() {
   return (
     <div className="meuForm">
       <div className="form-row">
-        <form id="meuForm" onSubmit={(e) => handleSubmit(e)}>
-          <div className="title">Cadastrar novo SSD</div>
+
+        <form id="meuForm" onSubmit={(e) => UpdatehandleSubmit(e)}>
+          <div className="title">Alteração de produto</div>
           <div className="botoes">
             <button type="button" class="btn">
               <Link to="/">
@@ -117,18 +110,16 @@ export default function SsdEdit() {
             </button>
           </div>
           <div className="file">
-            <input type="file" name="file" onChange={handleImage} />
+            <input type="file" name="file"
+              defaultValue={file}
+              onChange={handleImage} />
           </div>
-          <div className="inputs"></div>
-
-
           <div className="inputs">
             <input
-              onChangeText={(text) => this.setState({ place: text })}
               type={"text"}
               name="brand"
               id="brand"
-              value={brand}
+              defaultValue={brand}
               className="form-control"
               placeholder="Marca"
               onChange={(e) => onInputChange(e)}
@@ -140,7 +131,7 @@ export default function SsdEdit() {
               name="model"
               id="model"
               className="form-control"
-              value={model}
+              defaultValue={model}
               placeholder="Modelo"
               onChange={(e) => onInputChange(e)}
             />
@@ -151,7 +142,7 @@ export default function SsdEdit() {
               name="serialNumber"
               id="serialNumber"
               className="form-control"
-              value={serialNumber}
+              defaultValue={serialNumber}
               placeholder="Nº de série"
               onChange={(e) => onInputChange(e)}
             />
@@ -162,7 +153,7 @@ export default function SsdEdit() {
               name="size"
               id="size"
               className="form-control"
-              value={size}
+              defaultValue={size}
               placeholder="Capacidade/GB"
               onChange={(e) => onInputChange(e)}
             />
@@ -175,7 +166,7 @@ export default function SsdEdit() {
               name="purchaseDate"
               id="purchaseDate"
               className="form-control"
-              value={purchaseDate}
+              defaultValue={purchaseDate}
               placeholder="Data de compra"
               onChange={(e) => onInputChange(e)}
             />
@@ -186,7 +177,7 @@ export default function SsdEdit() {
               name="purchasePrice"
               id="purchasePrice"
               className="form-control"
-              value={purchasePrice}
+              defaultValue={purchasePrice}
               placeholder="Preço de compra"
               onChange={(e) => onInputChange(e)}
             />
@@ -198,7 +189,7 @@ export default function SsdEdit() {
               name="arrivalDate"
               id="arrivalDate"
               className="form-control"
-              value={arrivalDate}
+              defaultValue={arrivalDate}
               placeholder="Arrival date"
               onChange={(e) => onInputChange(e)}
             />
@@ -208,7 +199,7 @@ export default function SsdEdit() {
               type={"text"}
               name="saleValue"
               id="saleValue"
-              value={saleValue}
+              defaultValue={saleValue}
               className="form-control"
               placeholder="Preço de venda"
               onChange={(e) => onInputChange(e)}
@@ -222,7 +213,7 @@ export default function SsdEdit() {
               onChange={(e) => this.handleSubmit(e)}
             // onClick={() => resetForm()}
             >
-              Salvar
+              Atualizar
             </button>
             <button class="btn btn-danger">
               <Link to="/ssdlist">Cancelar</Link>
@@ -233,4 +224,3 @@ export default function SsdEdit() {
     </div>
   );
 };
-// export default SsdEdit;

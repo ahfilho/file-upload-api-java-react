@@ -148,9 +148,6 @@ public class FileUploadController {
         this.ofertasService.imgDelete(id);
         return HttpStatus.OK;
     }
-
-    //TODO
-    // VERIFICAR AQUI DEPOIS
     @PutMapping("/{id}")
     public ResponseEntity<String> uploadImgOferta(@RequestParam("file") MultipartFile file) {
 

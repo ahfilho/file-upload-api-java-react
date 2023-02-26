@@ -53,7 +53,7 @@ public class SsdService {
     public void saveProductFileCategory(Ssd ssd, MultipartFile file, Category category)
             throws IOException {
         Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
-        File img = new File();
+        File ff = new File();
 
         Date dateAtual = new Date();
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -64,14 +64,14 @@ public class SsdService {
 //        ssd.setArrivalDate(dateAtual);
 
 
-        img.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
-        img.setContentType(file.getContentType());
-        img.setData(file.getBytes());
-        img.setFileSize(file.getSize());
+        ff.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
+        ff.setContentType(file.getContentType());
+        ff.setData(file.getBytes());
+        ff.setFileSize(file.getSize());
 
         this.ssdRespository.save(ssd);
         this.catRepository.save(category);
-        this.offerImageRepository.save(img);
+        this.offerImageRepository.save(ff);
 
     }
 
@@ -87,7 +87,7 @@ public class SsdService {
     }
 
 
-    //TODO - fazer ou corrigir o update
+    //Não tem uso
     public Ssd updateProduct(Ssd ssd) throws Exception {
         Optional<Ssd> opt = this.ssdRespository.findById(ssd.getId());
         if (opt.isPresent()) {
@@ -101,6 +101,7 @@ public class SsdService {
         }
     }
 
+    //TODO ESTÁ PASSANDO, MAS NÃO ESTÁ PEGANDO OS DADOS ATUALIZADOS, APENAS O FILE
     public Ssd update(Ssd ssd, MultipartFile file, Category category) throws Exception {
         Optional<Ssd> optSsd = this.ssdRespository.findById(ssd.getId());
         if (optSsd.isPresent()) {
@@ -114,6 +115,17 @@ public class SsdService {
             objSsdAux.setSaleValue(ssd.getSaleValue());
             objSsdAux.setSerialNumber(ssd.getSerialNumber());
             objSsdAux.setSize(ssd.getSize());
+
+            File filee = new File();
+
+            filee.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
+            filee.setContentType(file.getContentType());
+            filee.setData(file.getBytes());
+            filee.setFileSize(file.getSize());
+
+            this.ssdRespository.save(objSsdAux);
+            this.catRepository.save(category);
+            this.offerImageRepository.save(filee);
 
             return objSsdAux;
         } else {
