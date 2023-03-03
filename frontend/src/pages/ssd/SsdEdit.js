@@ -7,13 +7,11 @@ import "./Ssd.css";
 
 const url = "http://localhost:9090/ssd";
 
-export default function SsdEdit() {
+const SsdEdit = () => {
 
   const { id } = useParams();
 
-
   const [ssd, setSsd] = useState({
-    id:"",
     brand: "",
     model: "",
     serialNumber: "",
@@ -24,13 +22,10 @@ export default function SsdEdit() {
     saleValue: "",
   });
 
-  //SSD
-  const { brand, model, serialNumber, size,
+  let { brand, model, serialNumber, size,
     purchaseDate, purchasePrice, arrivalDate, saleValue } = ssd;
-
   //CATEGORY
   const [productCategory, setProductCategory] = useState("");
-
   //IMAGE
   const [file, setFile] = useState("");
 
@@ -71,7 +66,7 @@ export default function SsdEdit() {
     const formData = new FormData();
     formData.append("file", file);
 
-    formData.append("id",id);
+    formData.append("id", id);
     formData.append("brand", brand);
     formData.append("model", model);
     formData.append("serialNumber", serialNumber);
@@ -85,7 +80,6 @@ export default function SsdEdit() {
 
     try {
       const response = await axios.put(`${url}/id`, formData, ssd, file, {
-
       });
       console.log(response.data);
     } catch (error) {
@@ -109,11 +103,13 @@ export default function SsdEdit() {
               <Link to="/ssdlist">Listar todos</Link>
             </button>
           </div>
+
           <div className="file">
             <input type="file" name="file"
               defaultValue={file}
               onChange={handleImage} />
           </div>
+
           <div className="inputs">
             <input
               type={"text"}
@@ -211,7 +207,6 @@ export default function SsdEdit() {
               type="submit"
               className="btn btn-success"
               onChange={(e) => this.handleSubmit(e)}
-            // onClick={() => resetForm()}
             >
               Atualizar
             </button>
@@ -224,3 +219,4 @@ export default function SsdEdit() {
     </div>
   );
 };
+export default SsdEdit;
