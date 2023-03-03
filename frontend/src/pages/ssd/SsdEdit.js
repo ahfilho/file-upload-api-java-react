@@ -7,7 +7,7 @@ import "./Ssd.css";
 
 const url = "http://localhost:9090/ssd";
 
-const SsdEdit=()=> {
+const SsdEdit = () => {
 
   const { id } = useParams();
 
@@ -24,10 +24,8 @@ const SsdEdit=()=> {
 
   let { brand, model, serialNumber, size,
     purchaseDate, purchasePrice, arrivalDate, saleValue } = ssd;
-
   //CATEGORY
   const [productCategory, setProductCategory] = useState("");
-
   //IMAGE
   const [file, setFile] = useState("");
 
@@ -84,7 +82,6 @@ const SsdEdit=()=> {
 
     try {
       const response = await axios.put(`${url}/id`, formData, ssd, file, {
-
       });
       console.log(response.data);
     } catch (error) {
@@ -212,7 +209,6 @@ const SsdEdit=()=> {
               type="submit"
               className="btn btn-success"
               onChange={(e) => this.handleSubmit(e)}
-            // onClick={() => resetForm()}
             >
               Atualizar
             </button>
