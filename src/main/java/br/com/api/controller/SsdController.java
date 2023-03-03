@@ -66,21 +66,22 @@ public class SsdController {
     }
 
     @PutMapping("/{id}")
-    public HttpStatus updateSsd(@PathVariable String id, @RequestParam("file") MultipartFile file, Ssd ssd, Category category) throws Exception {
+    public ResponseEntity<String> updateSsd(@PathVariable String id, @RequestParam("file") MultipartFile file, Ssd ssd, Category category) throws Exception {
 
         try {
             long convertStringToLong = Long.parseLong(id);
             System.out.println(convertStringToLong);
             ssd.setId(convertStringToLong);
         } catch (NumberFormatException e) {
-            System.out.println("Existem dados que não são string" + e.getMessage());
+            System.out.println("Alguns dados além do ID, não são do tipo String." + e.getMessage());
         }
         try {
+            System.out.println(ssd.getModel()+"kkkkkkkkkkkk");
             category.setProductCategory(CategoryEnum.SSD.name());
             this.ssdService.update(ssd, file, category);
-            return HttpStatus.OK;
+            return ResponseEntity.status(HttpStatus.OK).body(String.format("SSD atualizado... EU ACHO"));
         } catch (Exception e) {
-            return HttpStatus.BAD_REQUEST;
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(String.format("ERRO AO ATT"));
         }
     }
 
@@ -88,7 +89,6 @@ public class SsdController {
     public HttpStatus deleteProduct(@PathVariable Long id) throws Exception {
         try {
             ssdService.deleteProduct(id);
-//            File img = new File();
             return HttpStatus.OK;
         } catch (Exception e) {
             return HttpStatus.BAD_REQUEST;
