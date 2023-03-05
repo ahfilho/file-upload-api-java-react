@@ -42,7 +42,7 @@ const SsdEdit = () => {
       [e.target.file]: e.target.value
     });
   };
-
+  
   const handleImage = (e) => {
     console.log(e.target.files);
     setFile(e.target.files[0]);
@@ -77,6 +77,8 @@ const SsdEdit = () => {
     formData.append("size", size);
 
     formData.append("productCategory", productCategory);
+
+    console.log(ssd, file, category);
 
     try {
       const response = await axios.put(`${url}/id`, formData, ssd, file, {
