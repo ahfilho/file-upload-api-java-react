@@ -1,4 +1,4 @@
-package br.com.api.authentication;
+package br.com.api.oauth;
 
 
 import org.springframework.web.bind.annotation.CrossOrigin;
