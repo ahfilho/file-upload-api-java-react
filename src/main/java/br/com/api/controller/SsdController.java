@@ -73,7 +73,7 @@ public class SsdController {
             System.out.println(convertStringToLong);
             ssd.setId(convertStringToLong);
         } catch (NumberFormatException e) {
-            System.out.println("Alguns dados ainda pdem ser do tipo String." + e.getMessage());
+            System.out.println("Alguns dados ainda podem ser do tipo String." + e.getMessage());
         }
         try {
             category.setProductCategory(CategoryEnum.SSD.name());
