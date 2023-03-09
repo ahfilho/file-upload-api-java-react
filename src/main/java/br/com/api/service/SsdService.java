@@ -101,7 +101,6 @@ public class SsdService {
         }
     }
 
-    //TODO ESTÁ PASSANDO, MAS NÃO ESTÁ PEGANDO OS DADOS ATUALIZADOS, APENAS O FILE
     public Ssd update(Ssd ssd, MultipartFile file, Category category) throws Exception {
         Optional<Ssd> optSsd = this.ssdRespository.findById(ssd.getId());
         if (optSsd.isPresent()) {
