@@ -73,15 +73,14 @@ public class SsdController {
             System.out.println(convertStringToLong);
             ssd.setId(convertStringToLong);
         } catch (NumberFormatException e) {
-            System.out.println("Alguns dados além do ID, não são do tipo String." + e.getMessage());
+            System.out.println("Alguns dados ainda pdem ser do tipo String." + e.getMessage());
         }
         try {
-            System.out.println(ssd.getModel()+"kkkkkkkkkkkk");
             category.setProductCategory(CategoryEnum.SSD.name());
             this.ssdService.update(ssd, file, category);
-            return ResponseEntity.status(HttpStatus.OK).body(String.format("SSD atualizado... EU ACHO"));
+            return ResponseEntity.status(HttpStatus.OK).body(String.format("Atualizado com sucesso!"));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(String.format("ERRO AO ATT"));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(String.format("Erro durante a atualizaçao."));
         }
     }
 
