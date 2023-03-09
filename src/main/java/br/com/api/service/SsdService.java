@@ -128,7 +128,7 @@ public class SsdService {
 
             return objSsdAux;
         } else {
-            throw new Exception("ERRO AO ATUALIZAR O SSD" + ssd.getId());
+            throw new Exception("Erro durante a atualização." + ssd.getId());
         }
 
     }
