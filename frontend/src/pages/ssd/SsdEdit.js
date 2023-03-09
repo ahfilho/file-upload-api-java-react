@@ -20,6 +20,7 @@ const SsdEdit = () => {
     arrivalDate: "",
     saleValue: "",
   });
+
   const [file, setFile] = useState("");
 
   useEffect(() => {
@@ -47,6 +48,7 @@ const SsdEdit = () => {
     e.preventDefault();
 
     const formData = new FormData();
+    
     formData.append("file", file);
     formData.append("brand", ssd.brand);
     formData.append("model", ssd.model);
@@ -66,6 +68,7 @@ const SsdEdit = () => {
       })
       .catch((error) => {
         console.log(error.response);
+
       });
   };
 
