@@ -43,7 +43,7 @@ public class SsdController {
             category.setProductCategory(CategoryEnum.SSD.name());
             ssdService.saveProductFileCategory(ssd, file, category);
             return status(HttpStatus.OK)
-                    .body(String.format("sucesso no cadastro: %s", file.getOriginalFilename()));
+                    .body(String.format("Cadastro realizado com sucesso.: %s", file.getOriginalFilename()));
         } catch (Exception e) {
             return status(HttpStatus.OK)
                     .body(String.format("Falha no cadastro: %s", file.getOriginalFilename()));
@@ -73,14 +73,14 @@ public class SsdController {
             System.out.println(convertStringToLong);
             ssd.setId(convertStringToLong);
         } catch (NumberFormatException e) {
-            System.out.println("Alguns dados ainda pdem ser do tipo String." + e.getMessage());
+            System.out.println("Alguns dados ainda podem conter Strings." + e.getMessage());
         }
         try {
             category.setProductCategory(CategoryEnum.SSD.name());
             this.ssdService.update(ssd, file, category);
             return ResponseEntity.status(HttpStatus.OK).body(String.format("Atualizado com sucesso!"));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(String.format("Erro durante a atualizaçao."));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(String.format("Erro durante a atualização."));
         }
     }
 

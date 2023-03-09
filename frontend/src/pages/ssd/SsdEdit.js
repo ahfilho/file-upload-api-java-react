@@ -20,7 +20,6 @@ const SsdEdit = () => {
     arrivalDate: "",
     saleValue: "",
   });
-
   const [file, setFile] = useState("");
 
   useEffect(() => {
@@ -48,7 +47,7 @@ const SsdEdit = () => {
     e.preventDefault();
 
     const formData = new FormData();
-    
+
     formData.append("file", file);
     formData.append("brand", ssd.brand);
     formData.append("model", ssd.model);
@@ -68,7 +67,6 @@ const SsdEdit = () => {
       })
       .catch((error) => {
         console.log(error.response);
-
       });
   };
 
@@ -78,11 +76,12 @@ const SsdEdit = () => {
         <form id="meuForm" onSubmit={handleSubmit}>
           <div className="title">Alteração de produto</div>
           <div className="botoes">
-            <button type="button" className="btn">
-              Home
+            <button>
+            <Link to="/">
+              Home <i class="fa-regular fa-user"></i>
+            </Link>
             </button>
             <button type="button"
-
               class="btn">
               <Link to="/ssdlist">Listar todos</Link>
             </button>
