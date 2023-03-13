@@ -1,8 +1,7 @@
 import axios from "axios";
-import React from "react";
-import { useState } from "react";
-import "./Ssd.css";
+import React, { useState } from "react";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import "./Ssd.css";
 
 const url = "http://localhost:9090/ssd";
 
@@ -21,7 +20,7 @@ const AddSsd = () => {
   const [productCategory, setProductCategory] = useState("");
 
   //file
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState(null);
 
   const handleImage = (e) => {
     console.log(e.target.files);
@@ -31,20 +30,6 @@ const AddSsd = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const ssd = {
-      brand,
-      model,
-      serialNumber,
-      size,
-      purchaseDate,
-      purchasePrice,
-      arrivalDate,
-      saleValue,
-    };
-
-    const category = {
-      productCategory,
-    };
     const formData = new FormData();
     formData.append("file", file);
     formData.append("brand", brand);
@@ -55,25 +40,16 @@ const AddSsd = () => {
     formData.append("arrivalDate", arrivalDate);
     formData.append("saleValue", saleValue);
     formData.append("size", size);
-
     formData.append("productCategory", productCategory);
 
-    console.log(ssd, file, category);
+    console.log(formData);
 
     try {
-      const response = await axios.post(url, formData, ssd, category, {
-        brand: brand,
-        model: model,
-        serialNumber: serialNumber,
-        size: size,
-        purchaseDate: purchaseDate,
-        purchasePrice: purchasePrice,
-        arrivalDate: arrivalDate,
-        saleValue: saleValue,
-
-        productCategory: productCategory,
+      const response = await axios.post(url, formData, {
       });
+
       console.log(response.data);
+
       alert("SALVO COM SUCESSO -- apenas para testes!");
     } catch (error) {
       console.log(error.response);
@@ -84,16 +60,14 @@ const AddSsd = () => {
     <div className="meuForm">
       <div className="form-row">
         <div className="botoes">
-          <button type="button" class="btn">
-            <Link to="/">
-              Home <i class="fa-regular fa-user"></i>
-            </Link>
+          <button type="button" className="btn">
+            <Link to="/">Home</Link>
           </button>
-          <button type="button" class="btn">
+          <button type="button" className="btn">
             <Link to="/ssdlist">Listar todos</Link>
           </button>
         </div>
-        <form id="meuForm" onSubmit={(e) => handleSubmit(e)}>
+        <form id="meuForm" onSubmit={handleSubmit}>
           <div className="title">Cadastrar novo SSD</div>
 
           <div className="file">
@@ -107,7 +81,6 @@ const AddSsd = () => {
               id="brand"
               value={brand}
               className="form-control"
-              y
               placeholder="Marca"
               onChange={(e) => setBrand(e.target.value)}
             />
@@ -131,7 +104,8 @@ const AddSsd = () => {
               className="form-control"
               value={serialNumber}
               placeholder="Nº de série"
-              onChange={(e) => setSerialNumber(e.target.value)}
+              onChange={(e) => setSerialNumber(e.target
+                .value)}
             />
           </div>
           <div className="inputs">
@@ -197,7 +171,7 @@ const AddSsd = () => {
             type="submit"
             className="btn btn-success"
             onChange={(e) => this.handleSubmit(e)}
-            // onClick={() => resetForm()}
+          // onClick={() => resetForm()}
           >
             Salvar
           </button>
