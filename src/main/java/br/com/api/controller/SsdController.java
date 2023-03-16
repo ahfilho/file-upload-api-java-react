@@ -22,8 +22,8 @@ import br.com.api.service.SsdService;
 import static org.springframework.http.ResponseEntity.*;
 
 @RestController
-@CrossOrigin(/*origins = "http://localhost:3000"*/
-)
+@CrossOrigin(origins = "http://localhost:3000")
+
 @RequestMapping("/ssd")
 public class SsdController {
 
@@ -31,7 +31,6 @@ public class SsdController {
     private SsdService ssdService;
     @Autowired
     private CategoryRepository categoryRepository;
-
     @Autowired
     private MyCorsConfiguration myCorsConfiguration;
 
