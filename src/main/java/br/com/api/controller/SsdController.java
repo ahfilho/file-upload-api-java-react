@@ -34,7 +34,6 @@ public class SsdController {
     @Autowired
     private MyCorsConfiguration myCorsConfiguration;
 
-    //TODO FAZER O METODO DE ZERAR O FORM DEPOIS DE SALVAR. O OUTRO ESTAVA DANDO ERRADO, ZERAVA ANTES DE SALVAR.
     //TODO FAZER UM MODAL PARA ALGUM TELA
     //TODO COLOCAR QUANTIDADES NAS ENTITY
     @ExceptionHandler
