@@ -50,7 +50,17 @@ const AddSsd = () => {
 
       console.log(response.data);
 
-      alert("SALVO COM SUCESSO -- apenas para testes!");
+      // alert("SALVO COM SUCESSO -- apenas para testes!");
+      setBrand("");
+      setModel("");
+      setSerialNumber("");
+      setSize("");
+      setPurchaseDate("");
+      setPurchasePrice("");
+      setArrivalDate("");
+      setSaleValue("");
+      setProductCategory("");
+      setFile(null);
     } catch (error) {
       console.log(error.response);
     }
