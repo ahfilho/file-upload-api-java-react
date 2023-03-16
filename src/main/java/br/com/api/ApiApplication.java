@@ -3,11 +3,12 @@ package br.com.api;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 //import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class })  //remove password default of spring security = (exclude = {SecurityAutoConfiguration.class })
 @EnableScheduling
 public class ApiApplication implements CommandLineRunner {
 

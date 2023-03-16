@@ -4,6 +4,7 @@ package br.com.api.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.com.api.cors.MyCorsConfiguration;
 import br.com.api.entity.File;
 import br.com.api.enume.CategoryEnum;
 import br.com.api.repository.CategoryRepository;
@@ -21,7 +22,8 @@ import br.com.api.service.SsdService;
 import static org.springframework.http.ResponseEntity.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(/*origins = "http://localhost:3000"*/
+)
 @RequestMapping("/ssd")
 public class SsdController {
 
@@ -30,15 +32,16 @@ public class SsdController {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private MyCorsConfiguration myCorsConfiguration;
 
     //TODO FAZER O METODO DE ZERAR O FORM DEPOIS DE SALVAR. O OUTRO ESTAVA DANDO ERRADO, ZERAVA ANTES DE SALVAR.
     //TODO FAZER UM MODAL PARA ALGUM TELA
-    //TODO BOOTSTRAP OFFCANVAS PARA MENU LATERAL
     //TODO COLOCAR QUANTIDADES NAS ENTITY
     @ExceptionHandler
     @PostMapping
     public ResponseEntity<String> ssdSave(@RequestParam("file") MultipartFile file,
-                                          Ssd ssd, Category category) {
+                                          Ssd ssd, Category category, MyCorsConfiguration myCorsConfiguration) {
         try {
             category.setProductCategory(CategoryEnum.SSD.name());
             ssdService.saveProductFileCategory(ssd, file, category);
