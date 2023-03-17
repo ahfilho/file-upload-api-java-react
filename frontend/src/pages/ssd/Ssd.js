@@ -68,17 +68,26 @@ const AddSsd = () => {
 
   return (
     <div className="meuForm">
+      <div className="nome">Gerenciador de produtos</div>
+          <div className="title">Cadastrar</div>
       <div className="form-row">
         <div className="botoes">
-          <button type="button" className="btn">
-            <Link to="/">Home</Link>
+          <button type="button" className="btn btn-outline-primary">
+            <Link to="/">Início</Link>
           </button>
-          <button type="button" className="btn">
+
+          <button type="button" className="btn btn-outline-primary">
             <Link to="/ssdlist">Listar todos</Link>
           </button>
+          <button type="button" className="btn btn-outline-primary">
+            <Link to="//">Pesquisar produto</Link>
+          </button>
+          <button type="button" className="btn btn-outline-primary">
+            <Link to="//">Garantia</Link>
+          </button>
+          
         </div>
-        <form id="meuForm" onSubmit={handleSubmit}>
-          <div className="title">Cadastrar novo SSD</div>
+        <form id="formulario" onSubmit={handleSubmit}>
 
           <div className="file">
             <input type="file" name="file" onChange={handleImage} />
@@ -179,7 +188,7 @@ const AddSsd = () => {
           <br></br>
           <button
             type="submit"
-            className="btn btn-success"
+            className="btn btn-outline-success"
             onChange={(e) => this.handleSubmit(e)}
           // onClick={() => resetForm()}
           >
