@@ -13,7 +13,7 @@ Docker,
 <hr>
 Tenologias utilizadas no front-end:
 
-React JS
+React JS, Bootstrap
 <hr>
 
 Tenologia utilizada no banco:
