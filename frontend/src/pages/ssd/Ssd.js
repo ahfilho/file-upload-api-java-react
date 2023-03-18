@@ -69,24 +69,43 @@ const AddSsd = () => {
   return (
     <div className="meuForm">
       <div className="nome">Gerenciador de produtos</div>
-          <div className="title">Cadastrar</div>
+      <div className="title">Cadastro</div>
+      <nav class="nav nav-pills nav-fill">
+        <button type="button" class="btn btn-primary">
+          <a class="nav-item nav-link">
+            <Link to="/">Início</Link>
+          </a></button>
+        <button type="button" class="btn btn-primary">
+          <a class="nav-item nav-link">
+            <Link to="/ssdlist">Listar todos</Link>
+          </a> </button>
+        <button type="button" class="btn btn-primary">
+          <a class="nav-item nav-link">
+            <Link to="//">Pesquisar produto</Link>
+          </a> </button>
+        <button type="button" class="btn btn-primary">
+          <a class="nav-item nav-link">
+            <Link to="//">Garantia</Link>
+          </a> </button>
+      </nav>
+      <hr></hr>
       <div className="form-row">
-        <div className="botoes">
-          <button type="button" className="btn btn-outline-primary">
+        {/* <div className="botoes">
+          <button type="button" className="btn btn-primary">
             <Link to="/">Início</Link>
           </button>
 
-          <button type="button" className="btn btn-outline-primary">
+          <button type="button" className="btn btn-primary">
             <Link to="/ssdlist">Listar todos</Link>
           </button>
-          <button type="button" className="btn btn-outline-primary">
+          <button type="button" className="btn btn-primary">
             <Link to="//">Pesquisar produto</Link>
           </button>
-          <button type="button" className="btn btn-outline-primary">
+          <button type="button" className="btn btn-primary">
             <Link to="//">Garantia</Link>
           </button>
           
-        </div>
+        </div> */}
         <form id="formulario" onSubmit={handleSubmit}>
 
           <div className="file">
@@ -186,15 +205,12 @@ const AddSsd = () => {
             />
           </div>
           <br></br>
-          <button
-            type="submit"
-            className="btn btn-outline-success"
-            onChange={(e) => this.handleSubmit(e)}
-          // onClick={() => resetForm()}
-          >
-            Salvar
-          </button>
+          <div className="inputs">
+
+            <input class="btn btn-primary" type="submit" value="Submit" onChange={(e) => this.handleSubmit(e)}></input>
+          </div>
         </form>
+        
       </div>
     </div>
   );
