@@ -90,7 +90,7 @@ const AddSsd = () => {
       </nav>
       <hr></hr>
       <div className="form-row">
-       
+
         <form id="formulario" onSubmit={handleSubmit}>
 
           <div className="file">
@@ -142,6 +142,12 @@ const AddSsd = () => {
               onChange={(e) => setSize(e.target.value)}
             />
           </div>
+{/*           
+          <div className="radio">  <input type="radio" value="Male" name="gender" /> À vista
+            <input type="radio" value="Female" name="gender" /> Pix
+            <input type="radio" value="Male" name="gender" /> Crédito
+          </div> */}
+
           <div className="inputs">
             {" "}
             Data de compra
@@ -195,7 +201,7 @@ const AddSsd = () => {
             <input class="btn btn-primary" type="submit" value="Submit" onChange={(e) => this.handleSubmit(e)}></input>
           </div>
         </form>
-        
+
       </div>
     </div>
   );

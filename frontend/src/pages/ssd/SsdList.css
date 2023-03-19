@@ -1,7 +1,7 @@
 .tabela {
 
     color: white;
-    font-size: 15px;
+    font-size: 13px;
     display: flexbox;
     position: reltive;
     font-family: "Poppins", sans-serif;
@@ -36,6 +36,7 @@ table {
     width: 100%;
     background-color: #dddddd;
     margin-top: 8px;
+    font-size: 15px;
 }
 
 td,
@@ -43,6 +44,7 @@ th {
     border: 1px solid #0c0101;
     text-align: left;
     padding: 8px;
+    font-size: 14px;
 }
 
 tr:nth-child(even) {
@@ -84,4 +86,8 @@ th {
     color: #0c0101;
     font-family: "Poppins", sans-serif;
     text-align: center;
+    font-size: 15px;
+}
+h4{
+    margin-top: 20px;
 }

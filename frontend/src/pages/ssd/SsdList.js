@@ -41,7 +41,7 @@ class SsdList extends Component {
       <tbody>
         <div className="tabela">
           <div className="title">Produtos cadastrados</div>
-          <nav class="nav-pills  fixed-top nav-fill">
+          <nav class="nav-pills fixed-top nav-fill">
             <button type="button" class="btn btn-primary">
               <a class="nav-item nav-link">
                 <Link to="/">Início</Link>

@@ -73,9 +73,30 @@ const SsdEdit = () => {
   return (
     <div className="meuForm">
       <div className="form-row">
-        <form id="meuForm" onSubmit={handleSubmit}>
-          <div className="title">Alteração de produto</div>
-          <div className="botoes">
+      <div className="nome">Gerenciador de produtos</div>
+
+      <h4>Alteração</h4>
+
+      <nav class="nav-pills nav-fill">
+        <button type="button" class="btn btn-primary">
+          <a class="nav-item nav-link">
+            <Link to="/">Início</Link>
+          </a></button>
+        <button type="button" class="btn btn-primary">
+          <a class="nav-item nav-link">
+            <Link to="/ssdlist">Listar todos</Link>
+          </a> </button>
+        <button type="button" class="btn btn-primary">
+          <a class="nav-item nav-link">
+            <Link to="//">Pesquisar produto</Link>
+          </a> </button>
+        <button type="button" class="btn btn-primary">
+          <a class="nav-item nav-link">
+            <Link to="//">Garantia</Link>
+          </a> </button>
+      </nav>
+        <form id="meuForm" onSubmit={handleSubmit}>          
+          {/* <div className="botoes">
             <button>
             <Link to="/">
               Home <i class="fa-regular fa-user"></i>
@@ -85,7 +106,7 @@ const SsdEdit = () => {
               class="btn">
               <Link to="/ssdlist">Listar todos</Link>
             </button>
-          </div>
+          </div> */}
 
           <div className="file">
             <input type="file" name="file"
@@ -188,7 +209,7 @@ const SsdEdit = () => {
             <br></br>
             <button
               type="submit"
-              className="btn btn-success"
+              className="btn btn-primary"
               onChange={(e) => this.handleSubmit(e)}
             >
               Atualizar
