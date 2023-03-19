@@ -1,7 +1,19 @@
 .tabela {
-    display: flex;
+
     color: white;
-    justify-content: flex-start;
+    font-size: 15px;
+    display: flexbox;
+    position: reltive;
+    font-family: "Poppins", sans-serif;
+
+}
+
+.title {
+    font-size: 22px;
+    text-align: center;
+    margin-top: 0px;
+    position: absolute;
+
 }
 
 li {
@@ -23,7 +35,7 @@ table {
     border-collapse: collapse;
     width: 100%;
     background-color: #dddddd;
-
+    margin-top: 8px;
 }
 
 td,
@@ -41,5 +53,35 @@ tr:nth-child(even) {
 tbody {
     font-size: 16px;
     width: auto;
+    text-align: center;
+}
+
+.nav-fill {
+    font-size: 20px;
+    text-decoration: none !important;
+    margin-top: 30px;
+
+}
+
+a {
+    text-decoration: none !important;
+    /* text-shadow: 1px 1px white; */
+    font-size: 15px;
+    text-align: center;
+    align-items: center;
+}
+
+.fa-download {
+    color: #0c0101;
+}
+
+tr {
+    color: #0c0101;
+    text-align: center;
+}
+
+th {
+    color: #0c0101;
+    font-family: "Poppins", sans-serif;
     text-align: center;
 }

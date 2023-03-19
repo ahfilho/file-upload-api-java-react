@@ -7,13 +7,13 @@ import "./SsdList.css";
 import { Button } from "bootstrap";
 
 class SsdList extends Component {
-  
+
   state = {
     ssds: [],
   };
 
   async remove(id) {
-      alert("Deseja mesmo excluir?")
+    alert("Deseja mesmo excluir?")
     axios.delete(`http://localhost:9090/ssd/${id}`, {
       method: 'DELETE',
       headers: {
@@ -39,16 +39,26 @@ class SsdList extends Component {
   render() {
     return (
       <tbody>
-        <div className="tabela">Ssd's Cadastrados
-
-          <button type="button" class="btn">
-            <Link to="/">
-              Home <i class="fa-regular fa-user"></i>
-            </Link>
-          </button>
-          <button type="button" class="btn">
-            <Link to="/ssdlist">Listar todos</Link>
-          </button>
+        <div className="tabela">
+          <div className="title">Produtos cadastrados</div>
+          <nav class="nav-pills  fixed-top nav-fill">
+            <button type="button" class="btn btn-primary">
+              <a class="nav-item nav-link">
+                <Link to="/">Início</Link>
+              </a></button>
+            <button type="button" class="btn btn-primary">
+              <a class="nav-item nav-link">
+                <Link to="/ssdlist">Listar todos</Link>
+              </a> </button>
+            <button type="button" class="btn btn-primary">
+              <a class="nav-item nav-link">
+                <Link to="//">Pesquisar produto</Link>
+              </a> </button>
+            <button type="button" class="btn btn-primary">
+              <a class="nav-item nav-link">
+                <Link to="//">Garantia</Link>
+              </a> </button>
+          </nav>
         </div>
         <div className="botoes">
 
@@ -64,7 +74,7 @@ class SsdList extends Component {
             <th>Preço de compra</th>
             <th>Data de venda</th>
             <th>Preço de venda</th>
-            <th>Url</th>
+            <th>File</th>
           </tr>
           {this.state.ssds.map((ssd) => (
             <tr>
@@ -78,11 +88,11 @@ class SsdList extends Component {
               <td>{ssd.arrivalDate}</td>
               <td>{ssd.saleValue}</td>
               <td>
-                <a href={ssd.url}>url</a>
+                <a href={ssd.url}><i class="fas fa-download"></i></a>
               </td>
-
-              <td><button><Link to={`/ssdEdit/${ssd.id}`} className="btn btn-sucess">Editar </Link></button></td>
-              <td><button onClick={() => this.remove(ssd.id)} className="btn btn-danger">Excluir </button></td>
+              <td><button> <Link to={`/ssdEdit/${ssd.id}`} className="btn btn-sucess"><i class='far fa-edit'></i>
+              </Link></button></td>
+              <td><button onClick={() => this.remove(ssd.id)} className="btn btn-danger"><i class="fas fa-eraser"></i> </button></td>
             </tr>
           ))}
         </table>

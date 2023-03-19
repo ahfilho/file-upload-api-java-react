@@ -70,7 +70,7 @@ const AddSsd = () => {
     <div className="meuForm">
       <div className="nome">Gerenciador de produtos</div>
       <div className="title">Cadastro</div>
-      <nav class="nav nav-pills nav-fill">
+      <nav class="nav-pills nav-fill">
         <button type="button" class="btn btn-primary">
           <a class="nav-item nav-link">
             <Link to="/">Início</Link>
@@ -90,22 +90,7 @@ const AddSsd = () => {
       </nav>
       <hr></hr>
       <div className="form-row">
-        {/* <div className="botoes">
-          <button type="button" className="btn btn-primary">
-            <Link to="/">Início</Link>
-          </button>
-
-          <button type="button" className="btn btn-primary">
-            <Link to="/ssdlist">Listar todos</Link>
-          </button>
-          <button type="button" className="btn btn-primary">
-            <Link to="//">Pesquisar produto</Link>
-          </button>
-          <button type="button" className="btn btn-primary">
-            <Link to="//">Garantia</Link>
-          </button>
-          
-        </div> */}
+       
         <form id="formulario" onSubmit={handleSubmit}>
 
           <div className="file">
