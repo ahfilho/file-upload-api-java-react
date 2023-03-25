@@ -20,13 +20,6 @@ public class User {
     @Column(name = "USER_ID")
     private Long id;
 
-    @Column(name = "name")
-    @NotNull
-    private String name;
-
-    @Column(name = "login")
-    @NotNull
-    private String login;
 
     @Column(name = "email")
     @NotNull
