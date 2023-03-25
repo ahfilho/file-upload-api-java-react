@@ -55,14 +55,8 @@ public class SsdService {
         Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
         File ff = new File();
 
-        Date dateAtual = new Date();
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        //String dataFormatada = df.format(dateAtual);
-
-        //DEPOIS VERIFICAR AS DATAS
-//        ssd.setPurchaseDate(dateAtual);
-//        ssd.setArrivalDate(dateAtual);
-
+//        Date dateAtual = new Date();
+//        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
         ff.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
         ff.setContentType(file.getContentType());
