@@ -8,7 +8,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 //import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 
-@SpringBootApplication(exclude = {SecurityAutoConfiguration.class })  //remove password default of spring security = (exclude = {SecurityAutoConfiguration.class })
+@SpringBootApplication
+		//(exclude = {SecurityAutoConfiguration.class })  //remove password default of spring security = (exclude = {SecurityAutoConfiguration.class })
 @EnableScheduling
 public class ApiApplication implements CommandLineRunner {
 
