@@ -1,7 +1,7 @@
 package br.com.api.controller;
 
 import br.com.api.entity.User;
-import br.com.api.service.UserService;
+import br.com.api.service.CustomUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +17,7 @@ public class UserController {
 
 
     @Autowired
-    private UserService userService;
-
-    @PostMapping("/new/user")
-    public ResponseEntity<String> saveUser(@RequestBody User user) {
-        userService.saveNewUser(user);
-        return ResponseEntity.status(HttpStatus.OK).body(String.format("DEU CERTO"));
-    }
+    private CustomUserService userService;
 
     @GetMapping
     public String list() {
