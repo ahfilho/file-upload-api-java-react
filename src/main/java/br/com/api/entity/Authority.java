@@ -4,10 +4,9 @@ import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Data
-@Table(name = "AUTH_USER_AUTHORITY")
+@Table(name = "AUTH_AUTHORITY")
 @Entity
 public class Authority implements GrantedAuthority {
 
@@ -18,7 +17,7 @@ public class Authority implements GrantedAuthority {
     @Column(name = "ROLE_CODE")
     private String roleCode;
 
-    @Column(name = "USER_DESCRIPTION")
+    @Column(name = "ROLE_DESCRIPTION")
     private String roleDescription;
 
     @Override

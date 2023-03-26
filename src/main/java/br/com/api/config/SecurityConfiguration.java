@@ -1,6 +1,8 @@
 package br.com.api.config;
 
 
+import br.com.api.service.CustomUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,16 +15,31 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
+
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private CustomUserService customUserService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+        //em memória
         auth.inMemoryAuthentication().withUser("user").password(passwordEncoder().encode("123456")).authorities("USER", "ADMIN");
+
+        //autenticação do banco
+        auth.userDetailsService(customUserService).passwordEncoder(passwordEncoder());
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     @Override

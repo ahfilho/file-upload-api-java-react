@@ -22,30 +22,31 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "USER_ID")
     private Long id;
 
     @Column(name = "USER_NAME", unique = true)
-    @NotNull
     private String userName;
+
+    @Column(name = "USER_FIRST_NAME")
+    private String firstName;
+
+    @Column(name = "USER_LAST_NAME")
+    private String lastName;
+
     @Column(name = "USER_EMAIL")
-    @NotNull
     private String email;
 
     @Column(name = "USER_CREATE")
-    @NotNull
     private LocalDate userCreate;
 
     @Column(name = "USER_UPDATE")
-    @NotNull
-    private String userUpdate;
+    private LocalDate userUpdate;
 
     @Column(name = "USER_PASSWORD")
-    @NotNull
+
     private String password;
 
     @Column(name = "ENABLED")
-    @NotNull
     private Boolean enable = true;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
