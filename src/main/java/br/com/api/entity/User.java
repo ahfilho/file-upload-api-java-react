@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -45,35 +46,45 @@ public class User implements UserDetails {
 
     @Column(name = "ENABLED")
     @NotNull
-    private Boolean enable;
+    private Boolean enable = true;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "AUTH_USER_AUTHORITY", joinColumns = @JoinColumn(referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(referencedColumnName = "id"))
+    private List<Authority> authorities;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return this.userName;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return this.enable;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return this.enable;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return this.enable;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return this.enable;
     }
+
 }
