@@ -9,6 +9,7 @@ Spring boot,
 Api Rest,
 Jpa,
 Docker,
+JWT
 
 <hr>
 Tenologias utilizadas no front-end:
