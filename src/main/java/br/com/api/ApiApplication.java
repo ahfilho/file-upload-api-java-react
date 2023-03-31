@@ -2,12 +2,12 @@ package br.com.api;
 
 import br.com.api.entity.Authority;
 import br.com.api.entity.User;
+
 import br.com.api.repository.UserDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -26,6 +26,8 @@ public class ApiApplication implements CommandLineRunner {
 
     // Agendar tarefas para exibir determinado recurso no horario definido
     // Scheduling
+
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -42,18 +44,21 @@ public class ApiApplication implements CommandLineRunner {
     @PostConstruct
     protected void init() {
         List<Authority> authorityList = new ArrayList<>();
+
         authorityList.add(createAuthorithy("USER", "User role"));
-        authorityList.add(createAuthorithy("ADMIN", "Admin role"));
+//        authorityList.add(createAuthorithy("ADMIN", "Admin role"));
 
         User user = new User();
-        user.setUserName("user");
+        user.setUserName("dinho");
         user.setFirstName("arlindo");
         user.setLastName("lima");
 
         user.setPassword(passwordEncoder.encode("123456"));
-        user.setEnable(true);
-        userDetailsRepository.save(user);
+        user.setEnabled(true);
         user.setAuthorities(authorityList);
+
+        userDetailsRepository.save(user);
+
     }
 
     private Authority createAuthorithy(String roleCode, String roleDescription) {

@@ -8,9 +8,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
@@ -27,27 +27,30 @@ public class User implements UserDetails {
     @Column(name = "USER_NAME", unique = true)
     private String userName;
 
-    @Column(name = "USER_FIRST_NAME")
-    private String firstName;
-
-    @Column(name = "USER_LAST_NAME")
-    private String lastName;
-
-    @Column(name = "USER_EMAIL")
-    private String email;
-
-    @Column(name = "USER_CREATE")
-    private LocalDate userCreate;
-
-    @Column(name = "USER_UPDATE")
-    private LocalDate userUpdate;
-
-    @Column(name = "USER_PASSWORD")
-
+    @Column(name = "USER_KEY")
     private String password;
 
-    @Column(name = "ENABLED")
-    private Boolean enable = true;
+    @Column(name = "CREATED_ON")
+    private Date createdAt;
+
+    @Column(name = "UPDATED_ON")
+    private Date updatedAt;
+
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(name = "enabled")
+    private boolean enabled = true;
+
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "AUTH_USER_AUTHORITY", joinColumns = @JoinColumn(referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(referencedColumnName = "id"))
@@ -70,22 +73,22 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return this.enable;
+        return this.enabled;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return this.enable;
+        return this.enabled;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return this.enable;
+        return this.enabled;
     }
 
     @Override
     public boolean isEnabled() {
-        return this.enable;
+        return this.enabled;
     }
 
 }

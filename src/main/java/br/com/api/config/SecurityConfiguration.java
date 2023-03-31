@@ -1,34 +1,45 @@
 package br.com.api.config;
 
 
+import br.com.api.auth.JWTAuthenticationFilter;
+import br.com.api.auth.JWTTokenHelper;
 import br.com.api.service.CustomUserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 @Configuration
 @EnableWebSecurity
-
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private CustomUserService customUserService;
+    private CustomUserService userService;
+
+    @Autowired
+    private JWTTokenHelper jWTTokenHelper;
+
+    @Autowired
+    private AuthenticationEntryPoint authenticationEntryPoint;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        //em memória
-        auth.inMemoryAuthentication().withUser("user").password(passwordEncoder().encode("123456")).authorities("USER", "ADMIN");
+        auth.inMemoryAuthentication().withUser("Pardeep").password(passwordEncoder().encode("test@123"))
+                .authorities("USER", "ADMIN");
 
-        //autenticação do banco
-        auth.userDetailsService(customUserService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
+
     }
 
     @Bean
@@ -43,10 +54,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests().anyRequest().authenticated();
-        httpSecurity.formLogin();
-        httpSecurity.httpBasic();
+    protected void configure(HttpSecurity http) throws Exception {
 
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
+                .authenticationEntryPoint(authenticationEntryPoint).and()
+                .authorizeRequests((request) -> request.antMatchers("/localhost:3000/**", "/user/auth/login").permitAll()
+                        .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated())
+                .addFilterBefore(new JWTAuthenticationFilter(userService, jWTTokenHelper),
+                        UsernamePasswordAuthenticationFilter.class);
+
+        http.csrf().disable().cors().and().headers().frameOptions().disable();
+//                .authorizeRequests((request) -> request.antMatchers("/h2-console/**", "/api/v1/auth/login").permitAll()
     }
 }
