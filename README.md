@@ -10,7 +10,6 @@ Api Rest,
 Jpa,
 JWT Authentication
 Docker,
-JWT
 
 <hr>
 Tenologias utilizadas no front-end:
