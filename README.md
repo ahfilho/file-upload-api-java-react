@@ -8,6 +8,7 @@ Spring validation,
 Spring boot,
 Api Rest,
 Jpa,
+JWT Authentication
 Docker,
 
 <hr>
