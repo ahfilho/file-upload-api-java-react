@@ -32,6 +32,15 @@ const Home = () => {
           <span></span>
           Ssd
         </a>
+      </div> 
+      <div className="animated-button4">
+        <a href="/login" class="animated-button5">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          Login
+        </a>
       </div>
       {/* <div className="a1">
         <Link to="/ssd">Ssd</Link>

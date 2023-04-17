@@ -53,7 +53,7 @@ public class ApiApplication implements CommandLineRunner {
         user.setFirstName("arlindo");
         user.setLastName("lima");
 
-        user.setPassword(passwordEncoder.encode("123456"));
+        user.setPassword(passwordEncoder.encode("arlindo123@56"));
         user.setEnabled(true);
         user.setAuthorities(authorityList);
 
