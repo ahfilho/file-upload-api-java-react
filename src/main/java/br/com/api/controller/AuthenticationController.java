@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -38,11 +39,10 @@ public class AuthenticationController {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    //TODO 1:07:40 TEMMPO
-
+    private CorsConfigurationSource corsConfigurationSource;
 
     @PostMapping("/auth/login")
-    public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest) throws InvalidKeySpecException, NoSuchAlgorithmException {
+    public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest, MyCorsConfiguration myCorsConfiguration) throws InvalidKeySpecException, NoSuchAlgorithmException {
 
         final Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 authenticationRequest.getUserName(), authenticationRequest.getPassword()));
@@ -62,6 +62,7 @@ public class AuthenticationController {
 
     @GetMapping("/auth/userinfo")
     public ResponseEntity<?> getUserInfo(Principal user) {
+
         User userObj = (User) userDetailsService.loadUserByUsername(user.getName());
 
         UserInfo userInfo = new UserInfo();

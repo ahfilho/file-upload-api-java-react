@@ -142,7 +142,7 @@ const AddSsd = () => {
               onChange={(e) => setSize(e.target.value)}
             />
           </div>
-{/*           
+          {/*           
           <div className="radio">  <input type="radio" value="Male" name="gender" /> À vista
             <input type="radio" value="Female" name="gender" /> Pix
             <input type="radio" value="Male" name="gender" /> Crédito

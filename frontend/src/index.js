@@ -5,28 +5,34 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 
-import List from './listagem/List';
-import Ssd from './pages/ssd/Ssd';
-import Client from './client/Client';
-import ListClient from './client/ListClient';
-import SsdList from './pages/ssd/SsdList';
-import Home from './home/Home';
-import CpuList from './pages/CpuList';
+// import List from './listagem/List';
+// import Ssd from './pages/ssd/Ssd';
+// import Client from './client/Client';
+// import ListClient from './client/ListClient';
+// import SsdList from './pages/ssd/SsdList';
+// import Home from './home/Home';
+// import CpuList from './pages/CpuList';
+import store from './redux/store';
+import { Provider } from 'react-redux';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-      {/* <List></List> */}
-      {/* <Ssd/> */}
-      {/* <Client></Client> */}
-      {/* <ListClient/> */}
-      {/* <SsdList></SsdList> */}
-    {/* <CpuList></CpuList> */}
+const root = ReactDOM.createRoot(
+    document.getElementById('root'),
+)
+.render(
+   <Provider store={store}>
+    <React.StrictMode>
+      <BrowserRouter>
+        <App />
+        {/* <List></List> */}
+        {/* <Ssd/> */}
+        {/* <Client></Client> */}
+        {/* <ListClient/> */}
+        {/* <SsdList></SsdList> */}
+        {/* <CpuList></CpuList> */}
       </BrowserRouter>
-  </React.StrictMode>
-);
+    </React.StrictMode>
+  </Provider>,
+)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
