@@ -42,7 +42,8 @@ public class AuthenticationController {
     private CorsConfigurationSource corsConfigurationSource;
 
     @PostMapping("/auth/login")
-    public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest, MyCorsConfiguration myCorsConfiguration) throws InvalidKeySpecException, NoSuchAlgorithmException {
+    public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest, MyCorsConfiguration myCorsConfiguration)
+            throws InvalidKeySpecException, NoSuchAlgorithmException {
 
         final Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 authenticationRequest.getUserName(), authenticationRequest.getPassword()));

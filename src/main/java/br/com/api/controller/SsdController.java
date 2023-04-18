@@ -34,8 +34,6 @@ public class SsdController {
     @Autowired
     private MyCorsConfiguration myCorsConfiguration;
 
-    //TODO FAZER UM MODAL PARA ALGUM TELA
-    //TODO COLOCAR QUANTIDADES NAS ENTITY
     @ExceptionHandler
     @PostMapping
     public ResponseEntity<String> ssdSave(@RequestParam("file") MultipartFile file,
