@@ -35,7 +35,7 @@ public class MyCorsConfiguration implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         String origin = req.getHeader("http://localhost:3000");
         ((HttpServletResponse) response).setHeader("Access-Control-Allow-Credentials", "true");
-        ((HttpServletResponse) response).setHeader("Access-Control-Allow-Origin", origin != null && origin.contains("ws") ? "" : origin );
+        ((HttpServletResponse) response).setHeader("Access-Control-Allow-Origin", origin != null && origin.contains("ws") ? "" : origin);
         ((HttpServletResponse) response).setHeader("Vary", "Origin");
         ((HttpServletResponse) response).setHeader("Access-Control-Allow-Methods", "*");
         ((HttpServletResponse) response).setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Authorization, Content-Type, Accept, X-CSRF-TOKEN");
