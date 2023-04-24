@@ -7,7 +7,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.api.cors.MyCorsConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,11 +36,9 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
         String authToken = jwtTokenHelper.getToken(request);
 
         if (null != authToken) {
-
             String userName = jwtTokenHelper.getUsernameFromToken(authToken);
 
             if (null != userName) {
-
                 UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
 
                 if (jwtTokenHelper.validateToken(authToken, userDetails)) {

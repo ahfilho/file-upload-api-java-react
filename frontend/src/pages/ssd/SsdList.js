@@ -28,7 +28,7 @@ class SsdList extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:9090/ssd/").then((res) => {
+    axios.get("http://localhost:9090/ssd").then((res) => {
       const ssds = res.data;
       this.setState({ ssds });
 

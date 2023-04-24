@@ -2,7 +2,6 @@ package br.com.api.controller;
 
 
 import br.com.api.auth.JWTTokenHelper;
-import br.com.api.cors.MyCorsConfiguration;
 import br.com.api.entity.User;
 import br.com.api.response.AuthenticationRequest;
 import br.com.api.response.LoginResponse;
@@ -17,18 +16,16 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.cors.CorsConfigurationSource;
 
+import javax.servlet.http.HttpServletResponse;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
 import java.security.spec.InvalidKeySpecException;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/user")
 public class AuthenticationController {
-
-    @Autowired
-    private MyCorsConfiguration myCorsConfiguration;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -42,7 +39,7 @@ public class AuthenticationController {
     private CorsConfigurationSource corsConfigurationSource;
 
     @PostMapping("/auth/login")
-    public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest, MyCorsConfiguration myCorsConfiguration)
+    public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest, HttpServletResponse res)
             throws InvalidKeySpecException, NoSuchAlgorithmException {
 
         final Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -55,7 +52,6 @@ public class AuthenticationController {
 
         LoginResponse response = new LoginResponse();
         response.setToken(jwtToken);
-
 
         return ResponseEntity.ok(response);
     }

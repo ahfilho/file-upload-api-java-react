@@ -1,30 +1,31 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { Button, Container } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import {fetchUserData} from '../../api/authenticationService';
+import { fetchUserData } from '../../api/authenticationService';
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 
-const MainWrapper=styled.div`
+const MainWrapper = styled.div`
     padding-top:40px;
 `;
 
-export const Dashboard=(props)=>{
+export const Dashboard = (props) => {
 
-    const dispatch=useDispatch();
-    const [loading,setLoading]=useState(false);
-    const [data,setData]=useState({});
+    const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState({});
 
-    React.useEffect(()=>{
-        fetchUserData().then((response)=>{
+    React.useEffect(() => {
+        fetchUserData().then((response) => {
             setData(response.data);
-        }).catch((e)=>{
+        }).catch((e) => {
             localStorage.clear();
             props.history.push('/');
         })
-    },[])
+    }, [])
 
-    const logOut=()=>{
+    const logOut = () => {
 
         localStorage.clear();
         props.history.push('/');
@@ -32,15 +33,40 @@ export const Dashboard=(props)=>{
     }
 
     return (
+        
         <Container>
+            
             <MainWrapper>
                 <h4>Hello {data && `${data.firstName} ${data.lastName}`}</h4>
                 <br></br>
-                {data && data.roles && data.roles.filter(value => value.roleCode==='ADMIN').length>0 && <Button type="variant">Add User</Button> }
+                {data && data.roles && data.roles.filter(value => value.roleCode === 'ADMIN').length > 0 && <Button type="variant">Add User</Button>}
+            
                 <br></br>
-
-                <Button style={{marginTop:'5px'}} onClick={() =>logOut()}>Logout</Button>
+                <nav class="nav-pills fixed-top nav-fill">
+            <button type="button" class="btn btn-primary">
+              <a class="nav-item nav-link">
+                <Link to="/ssd">Início</Link>
+              </a></button>
+            <button type="button" class="btn btn-primary">
+              <a class="nav-item nav-link">
+                <Link to="/ssdlist">Listar todos</Link>
+              </a> </button>
+            <button type="button" class="btn btn-primary">
+              <a class="nav-item nav-link">
+                <Link to="//">Pesquisar produto</Link>
+              </a> </button>
+            <button type="button" class="btn btn-primary">
+              <a class="nav-item nav-link">
+                <Link to="//">Garantia</Link>
+              </a> </button>
+          </nav>
+          <br></br>
             </MainWrapper>
+
+
+            <Button style={{ marginTop: '5px' }} onClick={() => logOut()}>Logout</Button>
+
         </Container>
+
     )
 }
