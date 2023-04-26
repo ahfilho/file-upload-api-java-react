@@ -4,7 +4,6 @@ package br.com.api.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import br.com.api.cors.MyCorsConfiguration;
 import br.com.api.entity.File;
 import br.com.api.enume.CategoryEnum;
 import br.com.api.repository.CategoryRepository;
@@ -31,13 +30,11 @@ public class SsdController {
     private SsdService ssdService;
     @Autowired
     private CategoryRepository categoryRepository;
-    @Autowired
-    private MyCorsConfiguration myCorsConfiguration;
 
     @ExceptionHandler
     @PostMapping
     public ResponseEntity<String> ssdSave(@RequestParam("file") MultipartFile file,
-                                          Ssd ssd, Category category, MyCorsConfiguration myCorsConfiguration) {
+                                          Ssd ssd, Category category) {
         try {
             category.setProductCategory(CategoryEnum.SSD.name());
             ssdService.saveProductFileCategory(ssd, file, category);
@@ -49,7 +46,7 @@ public class SsdController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public List<Ssd> list() {
         return ssdService.listAllSsd().stream().map(this::linkImgSsd).collect(Collectors.toList());
     }
