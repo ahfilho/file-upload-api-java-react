@@ -3,7 +3,19 @@
 display: inline-block;
 text-align: center;
     
-}.a1{
+}
+.col-sm-4{
+padding: 20px 40px;
+margin: 12px;
+display: inline-block;
+overflow: hidden;
+color: #d4e0f7;
+font-size: 20px;
+letter-spacing: 2.5px;
+text-align: center;
+}
+
+.a1{
   display: inline-block;
   width: 100px;
   height: 100px;
@@ -11,6 +23,7 @@ text-align: center;
 }
 h2{
     color:white;
+    margin-top: 70px;
 }
 html {
   height: 100%;

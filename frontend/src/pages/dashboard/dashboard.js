@@ -45,7 +45,7 @@ export const Dashboard = (props) => {
                 <nav class="nav-pills fixed-top nav-fill">
             <button type="button" class="btn btn-primary">
               <a class="nav-item nav-link">
-                <Link to="/ssd">Início</Link>
+                <Link to="/home">Produtos</Link>
               </a></button>
             <button type="button" class="btn btn-primary">
               <a class="nav-item nav-link">

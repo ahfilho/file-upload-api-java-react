@@ -4,17 +4,29 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Home = () => {
   return (
+
     <div className="flex-container">
-      <h2>Alimports</h2>
-      <div className="animated-button1">
-        <a href="/cpu" class="animated-button3">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          Cpu
-        </a>
+
+      <div class="container mt-3">
+        <h2>Meus produtos</h2>
+        <p>Gerenciador de hardware.</p>
+        <ul class="nav">
+          <li class="nav-item">
+            <a href="/cpu" class="animated-button9">CPU</a>
+          </li>
+          <li class="nav-item">
+            <a href="/ram" class="animated-button9">RAM</a>
+          </li>
+          <li class="nav-item">
+            <a href="/ssd" class="animated-button9">SSD</a>
+          </li>
+          <li class="nav-item">
+          <a href="#" class="animated-button9">M.2</a>
+          </li>
+        </ul>
       </div>
+
+      {/*       
       <div className="animated-button2">
         <a href="/ram" class="animated-button1">
           <span></span>
@@ -32,16 +44,8 @@ const Home = () => {
           <span></span>
           Ssd
         </a>
-      </div> 
-      <div className="animated-button4">
-        <a href="/login" class="animated-button5">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          Login
-        </a>
-      </div>
+      </div> */}
+
       {/* <div className="a1">
         <Link to="/ssd">Ssd</Link>
 

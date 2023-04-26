@@ -73,7 +73,7 @@ const AddSsd = () => {
       <nav class="nav-pills nav-fill">
         <button type="button" class="btn btn-primary">
           <a class="nav-item nav-link">
-            <Link to="/">Início</Link>
+            <Link to="/home">Início</Link>
           </a></button>
         <button type="button" class="btn btn-primary">
           <a class="nav-item nav-link">
