@@ -46,7 +46,7 @@ public class SsdController {
         }
     }
 
-    @GetMapping("/list")
+    @GetMapping
     public List<Ssd> list() {
         return ssdService.listAllSsd().stream().map(this::linkImgSsd).collect(Collectors.toList());
     }
