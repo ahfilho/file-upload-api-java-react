@@ -74,7 +74,7 @@ class SsdList extends Component {
             <th>Preço de compra</th>
             <th>Data de venda</th>
             <th>Preço de venda</th>
-            <th>File</th>
+            <th>Mídia</th>
           </tr>
           {this.state.ssds.map((ssd) => (
             <tr>

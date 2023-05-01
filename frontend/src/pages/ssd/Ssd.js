@@ -68,7 +68,7 @@ const AddSsd = () => {
 
   return (
     <div className="meuForm">
-      <div className="nome">Gerenciador de produtos</div>
+      <div className="nome"></div>
       <div className="title">Cadastro</div>
       <nav class="nav-pills nav-fill">
         <button type="button" class="btn btn-primary">

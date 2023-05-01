@@ -56,6 +56,10 @@ tbody {
     font-size: 16px;
     width: auto;
     text-align: center;
+    display: inline-block;
+    text-align: center;
+
+    margin-top: 70px;
 }
 
 .nav-fill {
@@ -88,6 +92,7 @@ th {
     text-align: center;
     font-size: 15px;
 }
-h4{
+
+h4 {
     margin-top: 20px;
 }

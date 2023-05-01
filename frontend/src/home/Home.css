@@ -4,6 +4,9 @@ display: inline-block;
 text-align: center;
     
 }
+p{
+color: white;
+}
 .col-sm-4{
 padding: 20px 40px;
 margin: 12px;

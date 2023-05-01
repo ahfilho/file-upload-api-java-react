@@ -1,5 +1,7 @@
 .meuForm {
-
+  display: inline-block;
+  text-align: center;
+      
   color: white;
   font-size: 15px;
   display: flexbox;
