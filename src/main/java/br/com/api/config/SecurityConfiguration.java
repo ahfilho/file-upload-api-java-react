@@ -36,7 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        auth.inMemoryAuthentication().withUser("Pardeep").password(passwordEncoder().encode("test@123"))
+        auth.inMemoryAuthentication().withUser("Arlindo").password(passwordEncoder().encode("test@123"))
                 .authorities("USER", "ADMIN");
 
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
@@ -59,7 +59,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint).and()
-                .authorizeRequests((request -> request.antMatchers("/localhost:3000/**", "/user/auth/login", "/ssd", "/ssd/{id}").permitAll()
+                .authorizeRequests((request -> request.antMatchers("/localhost:3000/**","/localhost:9090/**", "/user/auth/login", "/ssd", "/ssd/{id}","/files/","/download").permitAll()
                         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated()))
                 .addFilterBefore(new JWTAuthenticationFilter(userService, jWTTokenHelper),
                         UsernamePasswordAuthenticationFilter.class);

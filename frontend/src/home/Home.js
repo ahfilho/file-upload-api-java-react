@@ -9,7 +9,9 @@ const Home = () => {
 
       <div class="container mt-3">
         <h2>Meus produtos</h2>
-        <p>Gerenciador de hardware.</p>
+        <p>Gerenciador de hardware novo/usado.
+         Cadastrar cliente/máquina.
+        </p>
         <ul class="nav">
           <li class="nav-item">
             <a href="/cpu" class="animated-button9">CPU</a>
