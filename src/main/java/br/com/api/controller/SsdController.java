@@ -4,11 +4,15 @@ package br.com.api.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.com.api.auth.JWTTokenHelper;
 import br.com.api.entity.File;
 import br.com.api.enume.CategoryEnum;
 import br.com.api.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +30,8 @@ import static org.springframework.http.ResponseEntity.*;
 @RequestMapping("/ssd")
 public class SsdController {
 
+    @Autowired
+    private JWTTokenHelper jwtTokenHelper;
     @Autowired
     private SsdService ssdService;
     @Autowired
@@ -51,7 +57,9 @@ public class SsdController {
         return ssdService.listAllSsd().stream().map(this::linkImgSsd).collect(Collectors.toList());
     }
 
+    @GetMapping("/files/{id}")
     private Ssd linkImgSsd(Ssd ssd) {
+
         long l1 = ssd.getId();
         String download = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/").path(Long.toString(l1))
                 .toUriString();
