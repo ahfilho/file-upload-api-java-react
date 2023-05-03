@@ -105,6 +105,7 @@ public class SsdService {
             objSsdAux.setArrivalDate(ssd.getArrivalDate());
             objSsdAux.setCategory(ssd.getCategory());
             objSsdAux.setPurchasePrice(ssd.getPurchasePrice());
+            objSsdAux.setPurchaseDate(ssd.getPurchaseDate());
             objSsdAux.setSaleValue(ssd.getSaleValue());
             objSsdAux.setSerialNumber(ssd.getSerialNumber());
             objSsdAux.setSize(ssd.getSize());
