@@ -72,30 +72,30 @@ const SsdEdit = () => {
 
   return (
     <div className="meuForm">
-      <div className="form-row">
-      <div className="nome">Gerenciador de produtos</div>
 
-      <h4>Alteração</h4>
+        <div className="title">Alteração</div>
 
-      <nav class="nav-pills nav-fill">
-        <button type="button" class="btn btn-primary">
-          <a class="nav-item nav-link">
-            <Link to="/">Início</Link>
-          </a></button>
-        <button type="button" class="btn btn-primary">
-          <a class="nav-item nav-link">
-            <Link to="/ssdlist">Listar todos</Link>
-          </a> </button>
-        <button type="button" class="btn btn-primary">
-          <a class="nav-item nav-link">
-            <Link to="//">Pesquisar produto</Link>
-          </a> </button>
-        <button type="button" class="btn btn-primary">
-          <a class="nav-item nav-link">
-            <Link to="//">Garantia</Link>
-          </a> </button>
-      </nav>
-        <form id="meuForm" onSubmit={handleSubmit}>          
+        <nav class="nav-pills nav-fill">
+          <button type="button" class="btn btn-primary">
+            <a class="nav-item nav-link">
+              <Link to="/">Início</Link>
+            </a></button>
+          <button type="button" class="btn btn-primary">
+            <a class="nav-item nav-link">
+              <Link to="/ssdlist">Listar todos</Link>
+            </a> </button>
+          <button type="button" class="btn btn-primary">
+            <a class="nav-item nav-link">
+              <Link to="//">Pesquisar produto</Link>
+            </a> </button>
+          <button type="button" class="btn btn-primary">
+            <a class="nav-item nav-link">
+              <Link to="//">Garantia</Link>
+            </a> </button>
+        </nav>
+        <hr></hr>
+
+        <form id="formulario" onSubmit={handleSubmit}>
           {/* <div className="botoes">
             <button>
             <Link to="/">
@@ -110,7 +110,6 @@ const SsdEdit = () => {
 
           <div className="file">
             <input type="file" name="file"
-              defaultValue={file}
               onChange={handleImage} />
           </div>
 
@@ -220,7 +219,6 @@ const SsdEdit = () => {
           </div>
         </form>
       </div>
-    </div>
   );
 };
 export default SsdEdit;

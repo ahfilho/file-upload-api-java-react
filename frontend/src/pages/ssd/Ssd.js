@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import "./Ssd.css";
+import NavBar from "../../navbar/NavBar";
 
 const url = "http://localhost:9090/ssd";
 
@@ -68,8 +69,10 @@ const AddSsd = () => {
 
   return (
     <div className="meuForm">
-      <div className="nome"></div>
+      <NavBar></NavBar>
+
       <div className="title">Cadastro</div>
+      {/* 
       <nav class="nav-pills nav-fill">
         <button type="button" class="btn btn-primary">
           <a class="nav-item nav-link">
@@ -87,122 +90,121 @@ const AddSsd = () => {
           <a class="nav-item nav-link">
             <Link to="//">Garantia</Link>
           </a> </button>
-      </nav>
+      </nav> */}
       <hr></hr>
-      <div className="form-row">
 
-        <form id="formulario" onSubmit={handleSubmit}>
 
-          <div className="file">
-            <input type="file" name="file" onChange={handleImage} />
-          </div>
+      <form id="formulario" onSubmit={handleSubmit}>
 
-          <div className="inputs">
-            <input
-              type={"text"}
-              name="brand"
-              id="brand"
-              value={brand}
-              className="form-control"
-              placeholder="Marca"
-              onChange={(e) => setBrand(e.target.value)}
-            />
-          </div>
-          <div className="inputs">
-            <input
-              type={"text"}
-              name="model"
-              id="model"
-              className="form-control"
-              value={model}
-              placeholder="Modelo"
-              onChange={(e) => setModel(e.target.value)}
-            />
-          </div>
-          <div className="inputs">
-            <input
-              type={"text"}
-              name="serialNumber"
-              id="serialNumber"
-              className="form-control"
-              value={serialNumber}
-              placeholder="Nº de série"
-              onChange={(e) => setSerialNumber(e.target
-                .value)}
-            />
-          </div>
-          <div className="inputs">
-            <input
-              type={"text"}
-              name="size"
-              id="size"
-              className="form-control"
-              value={size}
-              placeholder="Capacidade/GB"
-              onChange={(e) => setSize(e.target.value)}
-            />
-          </div>
-          {/*           
+        <div className="file">
+          <input type="file" name="file" onChange={handleImage} />
+        </div>
+
+        <div className="inputs">
+          <input
+            type={"text"}
+            name="brand"
+            id="brand"
+            value={brand}
+            className="form-control"
+            placeholder="Marca"
+            onChange={(e) => setBrand(e.target.value)}
+          />
+        </div>
+        <div className="inputs">
+          <input
+            type={"text"}
+            name="model"
+            id="model"
+            className="form-control"
+            value={model}
+            placeholder="Modelo"
+            onChange={(e) => setModel(e.target.value)}
+          />
+        </div>
+        <div className="inputs">
+          <input
+            type={"text"}
+            name="serialNumber"
+            id="serialNumber"
+            className="form-control"
+            value={serialNumber}
+            placeholder="Nº de série"
+            onChange={(e) => setSerialNumber(e.target
+              .value)}
+          />
+        </div>
+        <div className="inputs">
+          <input
+            type={"text"}
+            name="size"
+            id="size"
+            className="form-control"
+            value={size}
+            placeholder="Capacidade/GB"
+            onChange={(e) => setSize(e.target.value)}
+          />
+        </div>
+        {/*           
           <div className="radio">  <input type="radio" value="Male" name="gender" /> À vista
             <input type="radio" value="Female" name="gender" /> Pix
             <input type="radio" value="Male" name="gender" /> Crédito
           </div> */}
 
-          <div className="inputs">
-            {" "}
-            Data de compra
-            <input
-              type={"date"}
-              name="purchaseDate"
-              id="purchaseDate"
-              className="form-control"
-              value={purchaseDate}
-              placeholder="Data de compra"
-              onChange={(e) => setPurchaseDate(e.target.value)}
-            />
-          </div>
-          <div className="inputs">
-            <input
-              type={"text"}
-              name="purchasePrice"
-              id="purchasePrice"
-              className="form-control"
-              value={purchasePrice}
-              placeholder="Preço de compra"
-              onChange={(e) => setPurchasePrice(e.target.value)}
-            />
-          </div>
-          <div className="inputs">
-            Data de venda
-            <input
-              type={"date"}
-              name="arrivalDate"
-              id="arrivalDate"
-              className="form-control"
-              value={arrivalDate}
-              placeholder="Arrival date"
-              onChange={(e) => setArrivalDate(e.target.value)}
-            />
-          </div>
-          <div className="inputs">
-            <input
-              type={"text"}
-              name="saleValue"
-              id="saleValue"
-              value={saleValue}
-              className="form-control"
-              placeholder="Preço de venda"
-              onChange={(e) => setSaleValue(e.target.value)}
-            />
-          </div>
-          <br></br>
-          <div className="inputs">
+        <div className="inputs">
+          {" "}
+          Data de compra
+          <input
+            type={"date"}
+            name="purchaseDate"
+            id="purchaseDate"
+            className="form-control"
+            value={purchaseDate}
+            placeholder="Data de compra"
+            onChange={(e) => setPurchaseDate(e.target.value)}
+          />
+        </div>
+        <div className="inputs">
+          <input
+            type={"text"}
+            name="purchasePrice"
+            id="purchasePrice"
+            className="form-control"
+            value={purchasePrice}
+            placeholder="Preço de compra"
+            onChange={(e) => setPurchasePrice(e.target.value)}
+          />
+        </div>
+        <div className="inputs">
+          Data de venda
+          <input
+            type={"date"}
+            name="arrivalDate"
+            id="arrivalDate"
+            className="form-control"
+            value={arrivalDate}
+            placeholder="Arrival date"
+            onChange={(e) => setArrivalDate(e.target.value)}
+          />
+        </div>
+        <div className="inputs">
+          <input
+            type={"text"}
+            name="saleValue"
+            id="saleValue"
+            value={saleValue}
+            className="form-control"
+            placeholder="Preço de venda"
+            onChange={(e) => setSaleValue(e.target.value)}
+          />
+        </div>
+        <br></br>
+        <div className="inputs">
 
-            <input class="btn btn-primary" type="submit" value="Submit" onChange={(e) => this.handleSubmit(e)}></input>
-          </div>
-        </form>
+          <input class="btn btn-primary" type="submit" value="Submit" onChange={(e) => this.handleSubmit(e)}></input>
+        </div>
+      </form>
 
-      </div>
     </div>
   );
 };
