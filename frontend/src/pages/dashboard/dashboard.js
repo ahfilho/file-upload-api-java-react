@@ -12,44 +12,64 @@ const MainWrapper = styled.div`
 
 export const Dashboard = (props) => {
 
-  const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState({});
+    const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState({});
 
-  React.useEffect(() => {
-    fetchUserData().then((response) => {
-      setData(response.data);
-    }).catch((e) => {
-      localStorage.clear();
-      props.history.push('/');
-    })
-  }, [])
+    React.useEffect(() => {
+        fetchUserData().then((response) => {
+            setData(response.data);
+        }).catch((e) => {
+            localStorage.clear();
+            props.history.push('/');
+        })
+    }, [])
 
-  const logOut = () => {
+    const logOut = () => {
 
-    localStorage.clear();
-    props.history.push('/');
+        localStorage.clear();
+        props.history.push('/');
 
-  }
+    }
 
-  return (
-
-    <Container>
-
-      <MainWrapper>
-        <NavBar></NavBar>
-        <h3> Olá, {data && `${data.firstName} ${data.lastName}.`}</h3>
-        <br></br>
-        {data && data.roles && data.roles.filter(value => value.roleCode === 'ADMIN').length > 0 && <Button type="variant">Add User</Button>}
-        <br></br>
+    return (
         
-        <br></br>
-      </MainWrapper>
+        <Container>
+            
+            <MainWrapper>
+            <NavBar></NavBar>
+
+                <h3> Olá, {data && `${data.firstName} ${data.lastName}.`}</h3>
+                
+                <br></br>
+                {data && data.roles && data.roles.filter(value => value.roleCode === 'ADMIN').length > 0 && <Button type="variant">Add User</Button>}
+            
+                <br></br>
+                {/* <nav class="nav-pills fixed-top nav-fill">
+            <button type="button" class="btn btn-primary">
+              <a class="nav-item nav-link">
+                <Link to="/home">Produtos</Link>
+              </a></button>
+            <button type="button" class="btn btn-primary">
+              <a class="nav-item nav-link">
+                <Link to="/ssdlist">Listar todos</Link>
+              </a> </button>
+            <button type="button" class="btn btn-primary">
+              <a class="nav-item nav-link">
+                <Link to="//">Pesquisar produto</Link>
+              </a> </button>
+            <button type="button" class="btn btn-primary">
+              <a class="nav-item nav-link">
+                <Link to="//">Garantia</Link>
+              </a> </button>
+          </nav> */}
+          <br></br>
+            </MainWrapper>
 
 
-      <Button style={{ marginTop: '5px' }} onClick={() => logOut()}>Logout</Button>
+            <Button style={{ marginTop: '5px' }} onClick={() => logOut()}>Logout</Button>
 
-    </Container>
+        </Container>
 
-  )
+    )
 }
