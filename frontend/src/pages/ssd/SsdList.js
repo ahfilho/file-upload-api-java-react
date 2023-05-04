@@ -40,31 +40,13 @@ class SsdList extends Component {
     return (
       <tbody>
         <div className="tabela">
-        <NavBar></NavBar>
-
+          <NavBar></NavBar>
+          <br></br>
           <div className="title">Produtos cadastrados</div>
-
-          {/* <nav class="nav-pills fixed-top nav-fill">
-            <button type="button" class="btn btn-primary">
-              <a class="nav-item nav-link">
-                <Link to="/home">Início</Link>
-              </a></button>
-            <button type="button" class="btn btn-primary">
-              <a class="nav-item nav-link">
-                <Link to="/ssdlist">Listar todos</Link>
-              </a> </button>
-            <button type="button" class="btn btn-primary">
-              <a class="nav-item nav-link">
-                <Link to="//">Pesquisar produto</Link>
-              </a> </button>
-            <button type="button" class="btn btn-primary">
-              <a class="nav-item nav-link">
-                <Link to="//">Garantia</Link>
-              </a> </button>
-          </nav> */}
+          <br></br>
+          <hr></hr>
         </div>
         <div className="botoes">
-
         </div>
         <table>
           <tr>
