@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { useHistory, useParams } from "react-router-dom";
-
+import NavBar from "../../navbar/NavBar";
 import "./SsdList.css";
 import { Button } from "bootstrap";
 
@@ -40,8 +40,11 @@ class SsdList extends Component {
     return (
       <tbody>
         <div className="tabela">
+        <NavBar></NavBar>
+
           <div className="title">Produtos cadastrados</div>
-          <nav class="nav-pills fixed-top nav-fill">
+
+          {/* <nav class="nav-pills fixed-top nav-fill">
             <button type="button" class="btn btn-primary">
               <a class="nav-item nav-link">
                 <Link to="/home">Início</Link>
@@ -58,7 +61,7 @@ class SsdList extends Component {
               <a class="nav-item nav-link">
                 <Link to="//">Garantia</Link>
               </a> </button>
-          </nav>
+          </nav> */}
         </div>
         <div className="botoes">
 
