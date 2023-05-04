@@ -70,36 +70,14 @@ const AddSsd = () => {
   return (
     <div className="meuForm">
       <NavBar></NavBar>
-
+      <br></br>
       <div className="title">Cadastro</div>
-      {/* 
-      <nav class="nav-pills nav-fill">
-        <button type="button" class="btn btn-primary">
-          <a class="nav-item nav-link">
-            <Link to="/home">Início</Link>
-          </a></button>
-        <button type="button" class="btn btn-primary">
-          <a class="nav-item nav-link">
-            <Link to="/ssdlist">Listar todos</Link>
-          </a> </button>
-        <button type="button" class="btn btn-primary">
-          <a class="nav-item nav-link">
-            <Link to="//">Pesquisar produto</Link>
-          </a> </button>
-        <button type="button" class="btn btn-primary">
-          <a class="nav-item nav-link">
-            <Link to="//">Garantia</Link>
-          </a> </button>
-      </nav> */}
+      <br></br>
       <hr></hr>
-
-
       <form id="formulario" onSubmit={handleSubmit}>
-
         <div className="file">
           <input type="file" name="file" onChange={handleImage} />
         </div>
-
         <div className="inputs">
           <input
             type={"text"}
@@ -145,12 +123,6 @@ const AddSsd = () => {
             onChange={(e) => setSize(e.target.value)}
           />
         </div>
-        {/*           
-          <div className="radio">  <input type="radio" value="Male" name="gender" /> À vista
-            <input type="radio" value="Female" name="gender" /> Pix
-            <input type="radio" value="Male" name="gender" /> Crédito
-          </div> */}
-
         <div className="inputs">
           {" "}
           Data de compra
