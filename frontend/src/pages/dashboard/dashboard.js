@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { fetchUserData } from '../../api/authenticationService';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-
-
+import './dashboard.css';
+import NavBar from '../../navbar/NavBar';
 const MainWrapper = styled.div`
     padding-top:40px;
 `;
@@ -37,12 +37,15 @@ export const Dashboard = (props) => {
         <Container>
             
             <MainWrapper>
-                <h4>Hello {data && `${data.firstName} ${data.lastName}`}</h4>
+            <NavBar></NavBar>
+
+                <h3> Olá, {data && `${data.firstName} ${data.lastName}.`}</h3>
+                
                 <br></br>
                 {data && data.roles && data.roles.filter(value => value.roleCode === 'ADMIN').length > 0 && <Button type="variant">Add User</Button>}
             
                 <br></br>
-                <nav class="nav-pills fixed-top nav-fill">
+                {/* <nav class="nav-pills fixed-top nav-fill">
             <button type="button" class="btn btn-primary">
               <a class="nav-item nav-link">
                 <Link to="/home">Produtos</Link>
@@ -59,7 +62,7 @@ export const Dashboard = (props) => {
               <a class="nav-item nav-link">
                 <Link to="//">Garantia</Link>
               </a> </button>
-          </nav>
+          </nav> */}
           <br></br>
             </MainWrapper>
 

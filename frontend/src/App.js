@@ -16,6 +16,7 @@ import CpuList from "./pages/CpuList";
 import SsdEdit from "./pages/ssd/SsdEdit";
 import LoginPage from "./pages/LoginPage";
 import { Dashboard } from './pages/dashboard/dashboard';
+import NavBar from "./navbar/NavBar";
 function App() {
   return (
     <BrowserRouter>
@@ -25,6 +26,8 @@ function App() {
         {/* <div className="opcoes"> */}
           {/* <header> */}
           <Switch>
+          <Route path="/navbar" exact component={NavBar} />
+
           <Route path="/" exact component={LoginPage} />
           <Route path="/dashboard" exact component={Dashboard} />
 
