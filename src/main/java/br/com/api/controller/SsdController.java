@@ -5,14 +5,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.api.auth.JWTTokenHelper;
-import br.com.api.entity.File;
 import br.com.api.enume.CategoryEnum;
 import br.com.api.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -103,6 +99,10 @@ public class SsdController {
         Ssd ssd = new Ssd();
         ssd.getId();
         return ssdService.searchId(id);
+    }
+    @GetMapping("/sale/day")
+    public  List<String> listDayOfSale() {
+        return ssdService.dayOfSale();
     }
 
 }
