@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
 import java.util.List;
@@ -13,6 +16,7 @@ import javax.transaction.Transactional;
 
 import br.com.api.controller.FileUploadController;
 import br.com.api.entity.File;
+import org.hibernate.type.IntegerType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -31,14 +35,14 @@ public class SsdService {
     private final Path root = Paths.get("uploads");
 
     @Autowired
-    private SsdRepository ssdRespository;
+    private SsdRepository ssdRepository;
     @Autowired
-    private CategoryRepository catRepository;
+    private CategoryRepository categoryRepository;
     @Autowired
-    private FileRepository offerImageRepository;
+    private FileRepository fileRepository;
 
     @Autowired
-    private FileUploadController imageController;
+    private FileUploadController fileUploadController;
 
     public void init() {
 
@@ -63,14 +67,14 @@ public class SsdService {
         ff.setData(file.getBytes());
         ff.setFileSize(file.getSize());
 
-        this.ssdRespository.save(ssd);
-        this.catRepository.save(category);
-        this.offerImageRepository.save(ff);
+        this.ssdRepository.save(ssd);
+        this.categoryRepository.save(category);
+        this.fileRepository.save(ff);
 
     }
 
     public List<Ssd> listAllSsd() {
-        List<Ssd> ssdALl = ssdRespository.findAll();
+        List<Ssd> ssdALl = ssdRepository.findAll();
         for (Ssd s : ssdALl
         ) {
             System.out.println(s.getCategory());
@@ -80,10 +84,9 @@ public class SsdService {
         return ssdALl;
     }
 
-
     //Não tem uso
     public Ssd updateProduct(Ssd ssd) throws Exception {
-        Optional<Ssd> opt = this.ssdRespository.findById(ssd.getId());
+        Optional<Ssd> opt = this.ssdRepository.findById(ssd.getId());
         if (opt.isPresent()) {
             Ssd pm = opt.get();
             pm.setModel(ssd.getModel());
@@ -96,7 +99,7 @@ public class SsdService {
     }
 
     public Ssd update(Ssd ssd, MultipartFile file, Category category) throws Exception {
-        Optional<Ssd> optSsd = this.ssdRespository.findById(ssd.getId());
+        Optional<Ssd> optSsd = this.ssdRepository.findById(ssd.getId());
         if (optSsd.isPresent()) {
 
             Ssd objSsdAux = optSsd.get();
@@ -117,9 +120,9 @@ public class SsdService {
             filee.setData(file.getBytes());
             filee.setFileSize(file.getSize());
 
-            this.ssdRespository.save(objSsdAux);
-            this.catRepository.save(category);
-            this.offerImageRepository.save(filee);
+            this.ssdRepository.save(objSsdAux);
+            this.categoryRepository.save(category);
+            this.fileRepository.save(filee);
 
             return objSsdAux;
         } else {
@@ -129,9 +132,9 @@ public class SsdService {
     }
 
     public void deleteProduct(Long id) throws Exception {
-        Optional<Ssd> product = this.ssdRespository.findById(id);
+        Optional<Ssd> product = this.ssdRepository.findById(id);
         if (product.isPresent()) {
-            this.ssdRespository.delete(product.get());
+            this.ssdRepository.delete(product.get());
         } else {
             throw new Exception("Erro ao deletar");
         }
@@ -139,13 +142,31 @@ public class SsdService {
     }
 
     public Ssd searchId(Long id) throws Exception {
-        Optional<Ssd> result = this.ssdRespository.findById(id);
+        Optional<Ssd> result = this.ssdRepository.findById(id);
 
         if (result.isPresent()) {
             return result.get();
         } else {
             throw new Exception("ERRO O BUSCAR PELO ID" + id);
         }
+    }
+
+    public List<String> dayOfSale() {
+        List<String> total = ssdRepository.dataDeVenda();
+        List<String> result = new ArrayList<>();
+
+        for (String dateString : total) {
+            LocalDate dateInicial = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            LocalDate dateAtual = LocalDate.now();
+            long diferencaEmDias = ChronoUnit.DAYS.between(dateInicial, dateAtual);
+
+            if (diferencaEmDias >= 90) {
+                result.add(dateString);
+                System.out.println("igual ou maior que 90 dias");
+            }
+        }
+
+        return result;
     }
 
 }

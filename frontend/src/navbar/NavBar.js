@@ -19,7 +19,7 @@ return(
   </a> </button>
 <button type="button" class="btn btn-primary">
   <a class="nav-item nav-link">
-    <Link to="dashboard">Dashboard</Link>
+    <Link to="/dashboard">Dashboard</Link>
   </a> </button>
 </nav>
 

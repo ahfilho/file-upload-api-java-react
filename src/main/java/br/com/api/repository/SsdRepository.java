@@ -28,6 +28,7 @@ public interface SsdRepository extends JpaRepository<Ssd, Long> {
     public List<Ssd> testee();
 
 
-
+    @Query("SELECT p.purchaseDate FROM Ssd p")
+    public List<String> dataDeVenda();
 
 }
