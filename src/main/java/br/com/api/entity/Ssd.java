@@ -49,6 +49,9 @@ public class Ssd {
     @Column(name = "url")
     private String url;
 
+    @Column(name = "amount")
+    private int amount;
+
     @NotNull
     @Column(name = "model")
     private String model;

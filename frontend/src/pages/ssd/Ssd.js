@@ -16,6 +16,7 @@ const AddSsd = () => {
   const [purchasePrice, setPurchasePrice] = useState("");
   const [arrivalDate, setArrivalDate] = useState("");
   const [saleValue, setSaleValue] = useState("");
+  const [amount, setAmount] = useState("");
 
   //CATEGORY
   const [productCategory, setProductCategory] = useState("");
@@ -41,6 +42,7 @@ const AddSsd = () => {
     formData.append("arrivalDate", arrivalDate);
     formData.append("saleValue", saleValue);
     formData.append("size", size);
+    formData.append("amount",amount);
     formData.append("productCategory", productCategory);
 
     console.log(formData);
@@ -61,6 +63,7 @@ const AddSsd = () => {
       setArrivalDate("");
       setSaleValue("");
       setProductCategory("");
+      setAmount("");
       setFile(null);
     } catch (error) {
       console.log(error.response);
@@ -124,7 +127,17 @@ const AddSsd = () => {
           />
         </div>
         <div className="inputs">
-          {" "}
+          <input
+            type={"text"}
+            name="amount"
+            id="amount"
+            value={amount}
+            className="form-control"
+            placeholder="Quantidade"
+            onChange={(e) => setAmount(e.target.value)}
+          />
+        </div>
+        <div className="inputs">
           Data de compra
           <input
             type={"date"}
