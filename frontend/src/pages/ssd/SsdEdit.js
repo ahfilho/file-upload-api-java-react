@@ -18,6 +18,7 @@ const SsdEdit = () => {
     purchasePrice: "",
     arrivalDate: "",
     saleValue: "",
+    amount:""
   });
   const [file, setFile] = useState("");
 
@@ -56,6 +57,7 @@ const SsdEdit = () => {
     formData.append("purchasePrice", ssd.purchasePrice);
     formData.append("arrivalDate", ssd.arrivalDate);
     formData.append("saleValue", ssd.saleValue);
+    formData.append("amount",ssd.amount);
 
     axios
       .put(`${url}/${id}`, formData)
@@ -123,6 +125,17 @@ const SsdEdit = () => {
             className="form-control"
             defaultValue={ssd.size}
             placeholder="Capacidade/GB"
+            onChange={(e) => onInputChange(e)}
+          />
+        </div>
+        <div className="inputs">
+          <input
+            type={"text"}
+            name="amount"
+            id="amount"
+            className="form-control"
+            defaultValue={ssd.amount}
+            placeholder="Quantidade(UN)"
             onChange={(e) => onInputChange(e)}
           />
         </div>
