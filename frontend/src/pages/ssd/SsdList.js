@@ -56,6 +56,7 @@ class SsdList extends Component {
             <th>Modelo</th>
             <th>Nº de série</th>
             <th>Capacidade</th>
+            <th>Unidade(s)</th>
             <th>Data de compra</th>
             <th>Preço de compra</th>
             <th>Data de venda</th>
@@ -69,6 +70,7 @@ class SsdList extends Component {
               <td>{ssd.model}</td>
               <td>{ssd.serialNumber}</td>
               <td>{ssd.size}</td>
+              <td>{ssd.amount}</td>
               <td>{ssd.purchaseDate}</td>
               <td>{ssd.purchasePrice}</td>
               <td>{ssd.arrivalDate}</td>
