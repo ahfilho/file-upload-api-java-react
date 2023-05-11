@@ -162,7 +162,7 @@ public class SsdService {
 
             if (diferencaEmDias >= 90) {
                 result.add(dateString);
-                System.out.println("igual ou maior que 90 dias");
+                System.out.println(dateString+"igual ou maior que 90 dias");
             }
         }
 
