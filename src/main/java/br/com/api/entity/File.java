@@ -50,6 +50,6 @@ public class File {
     @JoinColumn(name = "CPU_ID")
     private Cpu cpu;
 
-    public void getFile_size(long size) {
+    public void getFile_size(Long size) {
     }
 }

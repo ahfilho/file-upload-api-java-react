@@ -1,167 +1,189 @@
-import { useEffect, useState } from "react";
 import axios from "axios";
-import "./ClientStyle.css";
+import React, { useState } from "react";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import "./Client.css";
+import NavBar from "../navbar/NavBar";
 
-const url = "http://localhost:9090/client/new/client";
+const url = "http://localhost:9090/client";
 
-const Client = () => {
+const AddClient = () => {
+  //cliente
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [cpf, setCpf] = useState("");
   const [contact, setContact] = useState("");
+  const [dataRegister, setDataRegister] = useState("");
 
-  const [street, setStret] = useState("");
+  //address
+  const [street, setStreet] = useState("");
   const [number, setNumber] = useState("");
-  const [bairro, setBairro] = useState("");
   const [district, setDistrict] = useState("");
   const [city, setCity] = useState("");
 
-  const [image, setImage] = useState("");
-
-  const handleImage = (e) => {
-    console.log(e.target.files);
-    setImage(e.target.files[0]);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("bate e fica aqui");
 
-    const formData = new FormData();
-    formData.append("image", image);
-    formData.append("name", name);
+    const address = {
+      street,
+      number,
+      district,
+      city
+    };
+    const client = {
+      name,
+      email,
+      cpf,
+      dataRegister: new Date(),
+      contact,
+      address: address
+    };
+
+    console.log(street)
     try {
-      const response = await axios.post(url, formData, {
-        name: name,
-        email: email,
-        cpf: cpf,
-        cpf,
-        contact: contact,
-        street: street,
-        number: number,
-        district: district,
-        city: city,
+      const response = await axios.post(url, client, {
+        if(response = true) {
+          console.log('Cliente salvo com sucesso!');
+
+        }
       });
 
       console.log(response.data);
+
+      setName("");
+      setEmail("");
+      setCpf("");
+      setCity("");
+      setContact("");
+      setStreet("");
+      setNumber("");
+      setDistrict("");
+      setDataRegister("");
+
+
     } catch (error) {
-      console.log(error.response);
+      console.error('Erro ao salvar cliente e endereço:', error);
     }
   };
 
   return (
     <div className="meuForm">
-      <div className="form-row">
-        <form onSubmit={handleSubmit}>
-          <div className="col-md-6 offset-md-3"></div>
-          <div className="menu">Alguns botões aqui</div>
-          <div className="clientTitle">Novo Cliente</div>
+      <NavBar></NavBar>
+      <br></br>
+      <div className="title">Cadastro</div>
+      <br></br>
+      <hr></hr>
+      <form id="formulario" onSubmit={handleSubmit}>
+        <p>Dados pessoais</p>
+        <div className="inputs">
+          <input
+            type="text"
+            name="name"
+            id="name"
+            value={name}
+            className="form-control"
+            placeholder="Nome"
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div className="inputs">
+          <input
+            type="text"
+            name="email"
+            id="email"
+            className="form-control"
+            value={email}
+            placeholder="E-mail"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="inputs">
+          <input
+            type="text"
+            name="cpf"
+            id="cpf"
+            className="form-control"
+            value={cpf}
+            placeholder="Cpf"
+            onChange={(e) => setCpf(e.target.value)}
+          />
+        </div>
+        <div className="inputs">
+          <input
+            type="text"
+            name="contact"
+            id="contact"
+            className="form-control"
+            value={contact}
+            placeholder="Celular/whatsapp"
+            onChange={(e) => setContact(e.target.value)}
+          />
+        </div>
+        <div className="inputs">
+          Endereço
+          <input
+            type="text"
+            name="street"
+            id="street"
+            value={street}
+            className="form-control"
+            placeholder="Rua"
+            onChange={(e) => setStreet(e.target.value)}
+          />
+        </div>
 
-          <div className="col-md-6 offset-md-3">
-            <input type="file" name="file" onChange={handleImage} />
-          </div>
+        <div className="inputs">
+          <input
+            type="text"
+            name="number"
+            id="number"
+            className="form-control"
+            value={number}
+            placeholder="Nº casa"
+            onChange={(e) => setNumber(e.target.value)}
+          />
+        </div>
+        <div className="inputs">
+          <input
+            type={"text"}
+            name="district"
+            id="district"
+            className="form-control"
+            value={district}
+            placeholder="Estado"
+            onChange={(e) => setDistrict(e.target.value)}
+          />
+        </div>
+        <div className="inputs">
+          <input
+            type={"text"}
+            name="city"
+            id="city"
+            className="form-control"
+            value={city}
+            placeholder="Cidade"
+            onChange={(e) => setCity(e.target.value)}
+          />
+        </div>
+        <div className="inputs">
+          <p>Criação do cadastro</p>
+          <input
+            type={"date"}
+            name="dataRegister"
+            id="dataRegister"
+            className="form-control"
+            value={dataRegister}
+            placeholder="Casa Nº"
+            onChange={(e) => setDataRegister(e.target.value)}
+          />
+        </div>
+        <br></br>
+        <div className="inputs">
 
-          <div className="col-md-6 offset-md-3">
-            <input
-              type={"text"}
-              name="name"
-              id="name"
-              value={name}
-              className="form-control"
-              placeholder="Nome"
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div className="col-md-6 offset-md-3">
-            <input
-              type={"text"}
-              name="email"
-              id="email"
-              className="form-control"
-              value={email}
-              placeholder="E-mail"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="col-md-6 offset-md-3">
-            <input
-              type={"text"}
-              name="contact"
-              id="contact"
-              className="form-control"
-              value={contact}
-              placeholder="Contato"
-              onChange={(e) => setContact(e.target.value)}
-            />
-          </div>
-          <div className="col-md-6 offset-md-3">
-            <input
-              type={"text"}
-              name="cpf"
-              id="cpf"
-              className="form-control"
-              value={cpf}
-              placeholder="Cpf"
-              onChange={(e) => setCpf(e.target.value)}
-            />
-          </div>
-          <div className="col-md-6 offset-md-3">
-            <input
-              type={"text"}
-              name="street"
-              id="stree"
-              value={street}
-              className="form-control"
-              placeholder="Rua"
-              onChange={(e) => setStret(e.target.value)}
-            />
-          </div>
-          <div className="col-md-6 offset-md-3">
-            <input
-              type={"text"}
-              name="number"
-              id="number"
-              value={number}
-              className="form-control"
-              placeholder="Número"
-              onChange={(e) => setNumber(e.target.value)}
-            />
-          </div>
-          <div className="col-md-6 offset-md-3">
-            <input
-              type={"text"}
-              name="district"
-              id="district"
-              value={district}
-              className="form-control"
-              placeholder="Bairro"
-              onChange={(e) => setDistrict(e.target.value)}
-            />
-          </div>
-          <div className="col-md-6 offset-md-3">
-            <input
-              type={"text"}
-              name="city"
-              id="city"
-              value={city}
-              className="form-control"
-              placeholder="Cidade"
-              onChange={(e) => setCity(e.target.value)}
-            />
-          </div>
+          <input class="btn btn-primary" type="submit" value="Submit"></input>
+        </div>
+      </form>
 
-          <div className="col-md-6 offset-md-3">
-            <button
-              type="submit"
-              className="btn btn-success"
-              onChange={(e) => this.handleSubmit(e)}
-            >
-              Salvar
-            </button>
-          </div>
-        </form>
-      </div>
     </div>
   );
 };
-export default Client;
+export default AddClient;

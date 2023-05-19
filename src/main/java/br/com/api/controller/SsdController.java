@@ -1,4 +1,3 @@
-
 package br.com.api.controller;
 
 import java.util.List;
@@ -22,7 +21,6 @@ import static org.springframework.http.ResponseEntity.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-
 @RequestMapping("/ssd")
 public class SsdController {
 
@@ -100,8 +98,9 @@ public class SsdController {
         ssd.getId();
         return ssdService.searchId(id);
     }
+
     @GetMapping("/sale/day")
-    public  List<String> listDayOfSale() {
+    public List<String> listDayOfSale() {
         return ssdService.dayOfSale();
     }
 

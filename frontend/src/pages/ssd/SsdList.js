@@ -59,9 +59,10 @@ class SsdList extends Component {
             <th>Unidade(s)</th>
             <th>Data de compra</th>
             <th>Preço de compra</th>
-            <th>Data de venda</th>
+            {/* <th>Data de venda</th> */}
             <th>Preço de venda</th>
             <th>Mídia</th>
+            <th>Bytes</th>
           </tr>
           {this.state.ssds.map((ssd) => (
             <tr>
@@ -73,8 +74,11 @@ class SsdList extends Component {
               <td>{ssd.amount}</td>
               <td>{ssd.purchaseDate}</td>
               <td>{ssd.purchasePrice}</td>
-              <td>{ssd.arrivalDate}</td>
+              {/* <td>{ssd.arrivalDate}</td> */}
               <td>{ssd.saleValue}</td>
+              <td>{ssd.image ? ssd.image.fileName : ""}</td>
+              <td>{ssd.image ? ssd.image.fileSize : ""}</td>
+
               <td>
                 <a href={ssd.url}><i class="fas fa-download"></i></a>
               </td>
