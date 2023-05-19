@@ -1,6 +1,5 @@
 package br.com.api.config;
 
-
 import br.com.api.auth.JWTAuthenticationFilter;
 import br.com.api.auth.JWTTokenHelper;
 import br.com.api.service.CustomUserService;
@@ -60,9 +59,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint).and()
                 .authorizeRequests((request -> request.antMatchers("/localhost:3000/**","/localhost:9090/**",
-                                "/user/auth/login", "/ssd",
-                                "/ssd/{id}","/files/{id}","/ssd/download",
-                                "/ssd/files/download","/ssd/files/{id}","/ssd/download/","/ssd/sale/day").permitAll()
+                                "/user/auth/login", "/ssd","/client",
+                                "/ssd/{id}","/files/{id}","/ssd/download","/client",
+                                "/ssd/files/download","/ssd/files/{id}","/ssd/download/","/ssd/sale/day","/client").permitAll()
                         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated()))
                 .addFilterBefore(new JWTAuthenticationFilter(userService, jWTTokenHelper),
                         UsernamePasswordAuthenticationFilter.class);

@@ -160,7 +160,7 @@ const AddSsd = () => {
             onChange={(e) => setPurchasePrice(e.target.value)}
           />
         </div>
-        <div className="inputs">
+        {/* <div className="inputs">
           Data de venda
           <input
             type={"date"}
@@ -168,10 +168,10 @@ const AddSsd = () => {
             id="arrivalDate"
             className="form-control"
             value={arrivalDate}
-            placeholder="Arrival date"
+            placeholder="Data de venda"
             onChange={(e) => setArrivalDate(e.target.value)}
           />
-        </div>
+        </div> */}
         <div className="inputs">
           <input
             type={"text"}

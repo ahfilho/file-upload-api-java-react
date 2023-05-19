@@ -17,6 +17,9 @@ import SsdEdit from "./pages/ssd/SsdEdit";
 import LoginPage from "./pages/LoginPage";
 import { Dashboard } from './pages/dashboard/dashboard';
 import NavBar from "./navbar/NavBar";
+import Client from "./client/Client";
+import ClientList from "./client/ClientList";
+
 function App() {
   return (
     <BrowserRouter>
@@ -27,6 +30,8 @@ function App() {
           {/* <header> */}
           <Switch>
           <Route path="/navbar" exact component={NavBar} />
+          <Route path="/client" exact component={Client} />
+          <Route path="/clientList" exact component={ClientList} />
 
           <Route path="/" exact component={LoginPage} />
           <Route path="/dashboard" exact component={Dashboard} />

@@ -11,7 +11,11 @@ return(
   </a></button>
 <button type="button" class="btn btn-primary">
   <a class="nav-item nav-link">
-    <Link to="/ssdlist">Listar todos</Link>
+    <Link to="/ssdlist">Listar SSDs</Link>
+  </a> </button>
+  <button type="button" class="btn btn-primary">
+  <a class="nav-item nav-link">
+    <Link to="/clientList">Listar Clientes</Link>
   </a> </button>
 <button type="button" class="btn btn-primary">
   <a class="nav-item nav-link">

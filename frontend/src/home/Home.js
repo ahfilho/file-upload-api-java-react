@@ -13,6 +13,9 @@ const Home = () => {
          Cadastrar cliente/máquina.
         </p>
         <ul class="nav">
+        <li class="nav-item">
+            <a href="/client" class="animated-button9">Cliente</a>
+          </li>
           <li class="nav-item">
             <a href="/cpu" class="animated-button9">CPU</a>
           </li>

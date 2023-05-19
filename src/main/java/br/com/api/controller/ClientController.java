@@ -1,7 +1,9 @@
 package br.com.api.controller;
 
+import java.util.Collections;
 import java.util.List;
 
+import br.com.api.auth.JWTTokenHelper;
 import br.com.api.entity.Address;
 import br.com.api.entity.Ssd;
 import br.com.api.exceptions.ErrorHandling;
@@ -15,23 +17,42 @@ import org.springframework.web.bind.annotation.*;
 
 import br.com.api.entity.Client;
 import br.com.api.service.ClientService;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/client")
-public class  ClientController {
+public class ClientController {
 
+    @Autowired
+    private JWTTokenHelper jwtTokenHelper;
     @Autowired
     private ClientService clientService;
 
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<String> handleIllegalStateException(IllegalStateException ex) {
+        // Lógica para lidar com a exceção
+        // Pode retornar uma ResponseEntity com o status HTTP e uma mensagem de erro
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocorreu um erro durante o salvamento do cliente.");
+    }
+
     @ExceptionHandler
-    @PostMapping("/new/client")
-    public ResponseEntity<String> clientSave(@RequestBody Client client, Address address, String cpf) {
-        int a = clientService.searchCpf(cpf);
-        if (a == 1) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(String.format("Cliente já cadastrado na base de dados: " + client.getCpf() + "."));
-        }
+    @PostMapping
+    public ResponseEntity<String> clientSave(@RequestBody Client client) {
         try {
-            clientService.clientSave(client, address);
+            if (client.getName().equals("") ||
+                    client.getCpf().equals("") ||
+                    client.getEmail().equals("") ||
+                    client.getContact().equals("") ||
+                    client.getAddress().getStreet().equals("") ||
+                    client.getAddress().getNumber().equals("") ||
+                    client.getAddress().getCity().equals("") ||
+                    client.getAddress().getDistrict().equals(""))
+            {
+                return ResponseEntity.status(HttpStatus.OK).body(String.format("Os campos não podem ser vazios."));
+
+            }
+            clientService.clientSave(client);
             return ResponseEntity.status(HttpStatus.OK).body(String.format("Cliente: " + client.getName() + " cadastrado com sucesso!"));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(String.format("Não foi possível cadastrar o cliente: " + client.getName() + "."));
@@ -39,7 +60,7 @@ public class  ClientController {
     }
 
     @ExceptionHandler
-    @GetMapping("/list/client")
+    @GetMapping
     public ResponseEntity<List<Client>> clientList() throws Exception {
         return ResponseEntity.ok().body(clientService.clientList());
 

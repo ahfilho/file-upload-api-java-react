@@ -20,19 +20,19 @@ public class Address {
     private Long id;
 
     @Column(name = "street")
-//    @NotNull
+    @NotNull
     private String street;
 
     @Column(name = "number")
-//    @NotNull
-    private int number;
+    @NotNull
+    private String number;
 
     @Column(name = "district")
-//    @NotNull
+    @NotNull
     private String district;
 
     @Column(name = "city")
-//    @NotNull
+    @NotNull
     private String city;
 
     @JsonIgnore

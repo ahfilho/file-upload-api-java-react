@@ -6,7 +6,6 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import br.com.api.entity.Address;
-import br.com.api.entity.Ssd;
 import br.com.api.repository.AddressRepository;
 import br.com.api.repository.SsdRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +27,13 @@ public class ClientService {
     @Autowired
     private SsdRepository ssdRepository;
 
-    public void clientSave(Client client, Address address ) {
+    public void clientSave(Client client) {
+        Address address = client.getAddress();
+
+        client.setAddress(address);
+        address.setClient(client);
+
         this.clientRepository.save(client);
-        this.addressRepository.save(address);
 
     }
 
@@ -65,9 +68,8 @@ public class ClientService {
         }
     }
 
-    public int searchCpf(String cpf) {
-        List<Client> cli = null;
-        cli = clientRepository.searchCpf(cpf);
-        return cli.size();
+    public String searchCpf(String cpf) {
+        List<Client> cli = clientRepository.searchCpf(cpf);
+        return cpf;
     }
 }
