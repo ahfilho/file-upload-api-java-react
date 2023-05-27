@@ -13,7 +13,7 @@ Hibernate,
 
 <hr>
 Tenologias utilizadas no front-end:
-React JS, Bootstrap
+React JS, Bootstrap, Axios
 <hr>
 
 Tenologia utilizada no banco:
