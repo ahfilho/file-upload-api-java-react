@@ -8,8 +8,10 @@ Spring validation,
 Spring boot,
 Api Rest,
 Jpa,
-JWT Authentication
+JWT Authentication,
+Hibernate,
 Docker,
+
 
 <hr>
 Tenologias utilizadas no front-end:

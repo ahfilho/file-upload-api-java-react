@@ -31,8 +31,7 @@ public class ClientController {
 
     @ExceptionHandler(IllegalStateException.class)
     public ResponseEntity<String> handleIllegalStateException(IllegalStateException ex) {
-        // Lógica para lidar com a exceção
-        // Pode retornar uma ResponseEntity com o status HTTP e uma mensagem de erro
+
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocorreu um erro durante o salvamento do cliente.");
     }
 
