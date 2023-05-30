@@ -24,12 +24,13 @@ import static org.springframework.http.ResponseEntity.*;
 @RequestMapping("/ssd")
 public class SsdController {
 
-    @Autowired
-    private JWTTokenHelper jwtTokenHelper;
-    @Autowired
-    private SsdService ssdService;
-    @Autowired
-    private CategoryRepository categoryRepository;
+    private final JWTTokenHelper jwtTokenHelper;
+    private final SsdService ssdService;
+
+    public SsdController(JWTTokenHelper jwtTokenHelper, SsdService ssdService) {
+        this.jwtTokenHelper = jwtTokenHelper;
+        this.ssdService = ssdService;
+    }
 
     @ExceptionHandler
     @PostMapping
