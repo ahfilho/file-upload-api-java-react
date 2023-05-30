@@ -4,20 +4,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Optional;
 import java.util.List;
 import javax.transaction.Transactional;
 
-import br.com.api.controller.FileUploadController;
 import br.com.api.entity.File;
-import org.hibernate.type.IntegerType;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,16 +28,16 @@ import br.com.api.repository.FileRepository;
 public class SsdService {
 
     private final Path root = Paths.get("uploads");
+    private final SsdRepository ssdRepository;
+    private final CategoryRepository categoryRepository;
+    private final FileRepository fileRepository;
 
-    @Autowired
-    private SsdRepository ssdRepository;
-    @Autowired
-    private CategoryRepository categoryRepository;
-    @Autowired
-    private FileRepository fileRepository;
+    public SsdService(SsdRepository ssdRepository, CategoryRepository categoryRepository, FileRepository fileRepository) {
+        this.ssdRepository = ssdRepository;
+        this.categoryRepository = categoryRepository;
+        this.fileRepository = fileRepository;
 
-    @Autowired
-    private FileUploadController fileUploadController;
+    }
 
     public void init() {
 
@@ -58,9 +53,6 @@ public class SsdService {
             throws IOException {
         Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
         File ff = new File();
-
-//        Date dateAtual = new Date();
-//        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
         ff.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
         ff.setContentType(file.getContentType());
@@ -78,8 +70,6 @@ public class SsdService {
         for (Ssd s : ssdALl
         ) {
             System.out.println(s.getCategory());
-            //System.out.println(s.getImage().getName());
-
         }
         return ssdALl;
     }
@@ -162,7 +152,7 @@ public class SsdService {
 
             if (diferencaEmDias >= 90) {
                 result.add(dateString);
-                System.out.println(dateString+"igual ou maior que 90 dias");
+                System.out.println(dateString + "igual ou maior que 90 dias");
             }
         }
 
