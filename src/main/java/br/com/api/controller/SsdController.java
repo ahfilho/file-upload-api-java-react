@@ -1,17 +1,16 @@
 package br.com.api.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.api.auth.JWTTokenHelper;
 import br.com.api.enume.CategoryEnum;
-import br.com.api.repository.CategoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import br.com.api.storage.BuildFileLinkController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.api.entity.Category;
 import br.com.api.entity.Ssd;
@@ -26,10 +25,12 @@ public class SsdController {
 
     private final JWTTokenHelper jwtTokenHelper;
     private final SsdService ssdService;
+    private final BuildFileLinkController buildFileLink;
 
-    public SsdController(JWTTokenHelper jwtTokenHelper, SsdService ssdService) {
+    public SsdController(JWTTokenHelper jwtTokenHelper, SsdService ssdService, BuildFileLinkController buildFileLink) {
         this.jwtTokenHelper = jwtTokenHelper;
         this.ssdService = ssdService;
+        this.buildFileLink = buildFileLink;
     }
 
     @ExceptionHandler
@@ -38,7 +39,7 @@ public class SsdController {
                                           Ssd ssd, Category category) {
         try {
             category.setProductCategory(CategoryEnum.SSD.name());
-            ssdService.saveProductFileCategory(ssd, file, category);
+            saveSsdWithFileAndCategory(file, ssd, category);
             return status(HttpStatus.OK)
                     .body(String.format("Cadastro realizado com sucesso.: %s", file.getOriginalFilename()));
         } catch (Exception e) {
@@ -47,21 +48,18 @@ public class SsdController {
         }
     }
 
-    @GetMapping
-    public List<Ssd> list() {
-        return ssdService.listAllSsd().stream().map(this::linkImgSsd).collect(Collectors.toList());
+    private void saveSsdWithFileAndCategory(MultipartFile file, Ssd ssd, Category category) throws IOException {
+        ssdService.saveProductFileCategory(ssd, file, category);
     }
 
-    @GetMapping("/files/{id}")
-    private Ssd linkImgSsd(Ssd ssd) {
+    @GetMapping
+    public List<Ssd> list() {
+        return ssdService.listAllSsd().stream().map(this::linkFile).collect(Collectors.toList());
+    }
 
-        long l1 = ssd.getId();
-        String download = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/").path(Long.toString(l1))
-                .toUriString();
-        ssd.setId(ssd.getId());
-        ssd.setUrl(download);
+    private Ssd linkFile(Ssd ssd) {
+        buildFileLink.linkFile(ssd);
         return ssd;
-
     }
 
     @PutMapping("/{id}")
