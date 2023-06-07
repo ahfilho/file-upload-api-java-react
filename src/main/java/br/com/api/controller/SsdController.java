@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import br.com.api.auth.JWTTokenHelper;
 import br.com.api.enume.CategoryEnum;
+import br.com.api.interfaces.SsdControllerInterface;
 import br.com.api.storage.BuildFileLinkController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ import static org.springframework.http.ResponseEntity.*;
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/ssd")
-public class SsdController {
+public class SsdController implements SsdControllerInterface {
 
     private final JWTTokenHelper jwtTokenHelper;
     private final SsdService ssdService;
@@ -33,10 +34,10 @@ public class SsdController {
         this.buildFileLink = buildFileLink;
     }
 
-    @ExceptionHandler
     @PostMapping
-    public ResponseEntity<String> ssdSave(@RequestParam("file") MultipartFile file,
-                                          Ssd ssd, Category category) {
+    @Override
+    public ResponseEntity<String> save(MultipartFile file, Ssd ssd, Category category) {
+
         try {
             category.setProductCategory(CategoryEnum.SSD.name());
             saveSsdWithFileAndCategory(file, ssd, category);
@@ -52,6 +53,7 @@ public class SsdController {
         ssdService.saveProductFileCategory(ssd, file, category);
     }
 
+    @Override
     @GetMapping
     public List<Ssd> list() {
         return ssdService.listAllSsd().stream().map(this::linkFile).collect(Collectors.toList());
@@ -63,7 +65,8 @@ public class SsdController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateSsd(@PathVariable String id, @RequestParam("file") MultipartFile file, Ssd ssd, Category category) throws Exception {
+    @Override
+    public ResponseEntity<String> update(String id, MultipartFile file, Ssd ssd, Category category) throws Exception {
 
         try {
             long convertStringToLong = Long.parseLong(id);
@@ -81,6 +84,7 @@ public class SsdController {
         }
     }
 
+    @Override
     @DeleteMapping("/{id}")
     public HttpStatus deleteProduct(@PathVariable Long id) throws Exception {
         try {
@@ -91,6 +95,7 @@ public class SsdController {
         }
     }
 
+    @Override
     @GetMapping("/{id}")
     public Ssd searchForId(@PathVariable Long id) throws Exception {
         Ssd ssd = new Ssd();
@@ -98,9 +103,9 @@ public class SsdController {
         return ssdService.searchId(id);
     }
 
+    @Override
     @GetMapping("/sale/day")
     public List<String> listDayOfSale() {
         return ssdService.dayOfSale();
     }
-
 }

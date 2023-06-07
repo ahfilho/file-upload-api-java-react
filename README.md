@@ -11,6 +11,7 @@ Jpa,
 JWT Authentication,
 Hibernate,
 
+
 <hr>
 Tenologias utilizadas no front-end:
 React JS, Bootstrap, Axios
@@ -20,4 +21,6 @@ Tenologia utilizada no banco:
 PostgreSql
 
 
-*Docker
+*Docker,
+
+*SOLID
