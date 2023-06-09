@@ -1,11 +1,11 @@
 package br.com.api.entity;
 
+import br.com.api.abstracts.ContactAbstract;
+
 import javax.persistence.Entity;
 
 @Entity
-//@Table(name = "contact")
 public class Contact extends ContactAbstract {
 
-	// Herda de SacAbstract
 
 }
