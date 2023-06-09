@@ -2,6 +2,7 @@ package br.com.api.entity;
 
 import javax.persistence.*;
 
+import br.com.api.abstracts.SsdAbstract;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,7 +39,7 @@ public class File {
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SSD_ID")
-    private Ssd ssd;
+    private SsdAbstract ssdAbstract;
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)

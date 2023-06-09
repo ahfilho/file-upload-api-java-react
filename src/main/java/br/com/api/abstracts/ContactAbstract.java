@@ -1,4 +1,4 @@
-package br.com.api.entity;
+package br.com.api.abstracts;
 
 import javax.persistence.*;
 

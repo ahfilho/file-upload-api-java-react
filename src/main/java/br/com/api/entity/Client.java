@@ -1,5 +1,6 @@
 package br.com.api.entity;
 
+import br.com.api.abstracts.SsdAbstract;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -49,6 +50,6 @@ public class Client {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "SSD_ID")
-    private Ssd ssd;
+    private SsdAbstract ssdAbstract;
 
 }
