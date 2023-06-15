@@ -1,6 +1,5 @@
 package br.com.api.entity;
 
-import br.com.api.abstracts.SsdAbstract;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

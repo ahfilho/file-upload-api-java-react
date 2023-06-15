@@ -61,7 +61,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests((request -> request.antMatchers("/localhost:3000/**","/localhost:9090/**",
                                 "/user/auth/login", "/ssd","/client",
                                 "/ssd/{id}","/files/{id}","/ssd/download","/client",
-                                "/ssd/files/download","/ssd/files/{id}","/ssd/download/","/ssd/sale/day","/client").permitAll()
+                                "/ssd/files/download","/ssd/files/{id}","/ssd/download/","/ssd/sale/day","/client","/cpu","/url/cpu/","url/cpu/files/{id}/",
+                                "/cpu/{id}").permitAll()
                         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated()))
                 .addFilterBefore(new JWTAuthenticationFilter(userService, jWTTokenHelper),
                         UsernamePasswordAuthenticationFilter.class);

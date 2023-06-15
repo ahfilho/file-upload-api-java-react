@@ -49,9 +49,6 @@ public class Cpu {
     @Column(name = "clock")
     private float clock;
 
-//    @Column(name = "overclock")
-//    private boolean overclock;
-
     @Column(name = "url")
     private String url;
 
