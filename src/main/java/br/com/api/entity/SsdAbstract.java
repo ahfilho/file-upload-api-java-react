@@ -1,4 +1,4 @@
-package br.com.api.abstracts;
+package br.com.api.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

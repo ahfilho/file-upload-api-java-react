@@ -27,15 +27,17 @@ import java.util.Optional;
 public class CpuService {
 
     private final Path root = Paths.get("uploads");
+    private final CpuRepository cpuRepository;
+    private final CategoryRepository categoryRepository;
+    private final FileRepository offerImageRepository;
 
-    @Autowired
-    private CpuRepository cpuRepository;
 
-    @Autowired
-    private CategoryRepository categoryRepository;
+    public CpuService(CpuRepository cpuRepository, CategoryRepository categoryRepository, FileRepository offerImageRepository) {
+        this.cpuRepository = cpuRepository;
+        this.categoryRepository = categoryRepository;
+        this.offerImageRepository = offerImageRepository;
 
-    @Autowired
-    private FileRepository offerImageRepository;
+    }
 
     public void init() {
         try {
@@ -52,20 +54,10 @@ public class CpuService {
         Date dateNow = new Date();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-//        cpu.setPurchaseDate(dateNow);
-//        cpu.setArrivalDate(dateNow);
-
         img.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
         img.setContentType(file.getContentType());
         img.setData(file.getBytes());
         img.setFileSize(file.getSize());
-
-//        if (cpu.isOverclock()) {
-//            System.out.println("This processor has been overclocked");
-//        } else {
-//            System.out.println("This processor has not been overclocked");
-//
-//        }
 
         this.cpuRepository.save(cpu);
         this.categoryRepository.save(category);
@@ -86,7 +78,7 @@ public class CpuService {
         }
     }
 
-    public Cpu update(Cpu cpu) throws Exception {
+    public Cpu update(MultipartFile file, Category category, Cpu cpu) throws Exception {
         Optional<Cpu> editCpu = this.cpuRepository.findById(cpu.getId());
         if (editCpu.isPresent()) {
             Cpu c = editCpu.get();

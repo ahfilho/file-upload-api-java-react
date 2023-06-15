@@ -1,4 +1,4 @@
-package br.com.api.abstracts;
+package br.com.api.entity;
 
 import javax.persistence.*;
 
@@ -17,7 +17,7 @@ public abstract class ContactAbstract {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
 	@NotNull
 	@Column(name = "name")

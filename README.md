@@ -21,6 +21,8 @@ Tenologia utilizada no banco:
 PostgreSql
 
 
+Testes automatizados: Postman
+
 *Docker,
 
 *SOLID

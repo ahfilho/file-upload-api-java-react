@@ -2,12 +2,10 @@ package br.com.api.entity;
 
 import javax.persistence.*;
 
-import br.com.api.abstracts.SsdAbstract;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Fetch;
 
 @NoArgsConstructor
 @AllArgsConstructor

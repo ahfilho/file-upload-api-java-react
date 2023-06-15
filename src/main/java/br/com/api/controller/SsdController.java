@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import br.com.api.auth.JWTTokenHelper;
 import br.com.api.enume.CategoryEnum;
 import br.com.api.interfaces.SsdControllerInterface;
-import br.com.api.storage.BuildFileLinkController;
+import br.com.api.storage.BuildFileLinkControllerSsd;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +17,9 @@ import br.com.api.entity.Category;
 import br.com.api.entity.Ssd;
 import br.com.api.service.SsdService;
 
+
 import static org.springframework.http.ResponseEntity.*;
+
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -25,10 +27,12 @@ import static org.springframework.http.ResponseEntity.*;
 public class SsdController implements SsdControllerInterface {
 
     private final JWTTokenHelper jwtTokenHelper;
-    private final SsdService ssdService;
-    private final BuildFileLinkController buildFileLink;
 
-    public SsdController(JWTTokenHelper jwtTokenHelper, SsdService ssdService, BuildFileLinkController buildFileLink) {
+    private final SsdService ssdService;
+
+    private final BuildFileLinkControllerSsd buildFileLink;
+
+    public SsdController(JWTTokenHelper jwtTokenHelper, SsdService ssdService, BuildFileLinkControllerSsd buildFileLink) {
         this.jwtTokenHelper = jwtTokenHelper;
         this.ssdService = ssdService;
         this.buildFileLink = buildFileLink;
