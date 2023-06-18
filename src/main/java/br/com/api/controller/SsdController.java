@@ -1,12 +1,11 @@
 package br.com.api.controller;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.api.auth.JWTTokenHelper;
 import br.com.api.enume.CategoryEnum;
-import br.com.api.interfaces.SsdControllerInterface;
+import br.com.api.persistence.SsdPersitenceController;
 import br.com.api.storage.BuildFileLinkControllerSsd;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +19,10 @@ import br.com.api.service.SsdService;
 
 import static org.springframework.http.ResponseEntity.*;
 
-
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/ssd")
-public class SsdController implements SsdControllerInterface {
+public class SsdController {
 
     private final JWTTokenHelper jwtTokenHelper;
 
@@ -32,19 +30,21 @@ public class SsdController implements SsdControllerInterface {
 
     private final BuildFileLinkControllerSsd buildFileLink;
 
-    public SsdController(JWTTokenHelper jwtTokenHelper, SsdService ssdService, BuildFileLinkControllerSsd buildFileLink) {
+    private final SsdPersitenceController ssdPersitenceController;
+
+    public SsdController(JWTTokenHelper jwtTokenHelper, SsdService ssdService, BuildFileLinkControllerSsd buildFileLink, SsdPersitenceController ssdPersitenceController) {
         this.jwtTokenHelper = jwtTokenHelper;
         this.ssdService = ssdService;
         this.buildFileLink = buildFileLink;
+        this.ssdPersitenceController = ssdPersitenceController;
     }
 
     @PostMapping
-    @Override
     public ResponseEntity<String> save(MultipartFile file, Ssd ssd, Category category) {
 
         try {
             category.setProductCategory(CategoryEnum.SSD.name());
-            saveSsdWithFileAndCategory(file, ssd, category);
+            ssdPersitenceController.saveSsdWithFileAndCategory(file, ssd, category);
             return status(HttpStatus.OK)
                     .body(String.format("Cadastro realizado com sucesso.: %s", file.getOriginalFilename()));
         } catch (Exception e) {
@@ -53,11 +53,6 @@ public class SsdController implements SsdControllerInterface {
         }
     }
 
-    private void saveSsdWithFileAndCategory(MultipartFile file, Ssd ssd, Category category) throws IOException {
-        ssdService.saveProductFileCategory(ssd, file, category);
-    }
-
-    @Override
     @GetMapping
     public List<Ssd> list() {
         return ssdService.listAllSsd().stream().map(this::linkFile).collect(Collectors.toList());
@@ -69,7 +64,6 @@ public class SsdController implements SsdControllerInterface {
     }
 
     @PutMapping("/{id}")
-    @Override
     public ResponseEntity<String> update(String id, MultipartFile file, Ssd ssd, Category category) throws Exception {
 
         try {
@@ -88,7 +82,6 @@ public class SsdController implements SsdControllerInterface {
         }
     }
 
-    @Override
     @DeleteMapping("/{id}")
     public HttpStatus deleteProduct(@PathVariable Long id) throws Exception {
         try {
@@ -99,7 +92,6 @@ public class SsdController implements SsdControllerInterface {
         }
     }
 
-    @Override
     @GetMapping("/{id}")
     public Ssd searchForId(@PathVariable Long id) throws Exception {
         Ssd ssd = new Ssd();
@@ -107,9 +99,9 @@ public class SsdController implements SsdControllerInterface {
         return ssdService.searchId(id);
     }
 
-    @Override
     @GetMapping("/sale/day")
     public List<String> listDayOfSale() {
+
         return ssdService.dayOfSale();
     }
 }
