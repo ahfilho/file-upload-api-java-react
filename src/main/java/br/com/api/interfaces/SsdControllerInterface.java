@@ -10,17 +10,5 @@ import java.util.List;
 
 public interface SsdControllerInterface {
 
-    ResponseEntity<String> save(MultipartFile file, Ssd ssd, Category category);
-
-    List<Ssd> list();
-
-    ResponseEntity<String> update(String id, MultipartFile file, Ssd ssd, Category category) throws Exception;
-
-    HttpStatus deleteProduct(Long id) throws Exception;
-
-    Ssd searchForId(Long id) throws Exception;
-
-    List<String> listDayOfSale();
-
 
 }
