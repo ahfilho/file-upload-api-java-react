@@ -15,6 +15,10 @@ return(
   </a> </button>
   <button type="button" class="btn btn-primary">
   <a class="nav-item nav-link">
+    <Link to="/cpulist">Listar Cpus</Link>
+  </a> </button>
+  <button type="button" class="btn btn-primary">
+  <a class="nav-item nav-link">
     <Link to="/clientList">Listar Clientes</Link>
   </a> </button>
 <button type="button" class="btn btn-primary">
