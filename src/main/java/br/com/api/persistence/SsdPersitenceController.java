@@ -19,7 +19,7 @@ public class SsdPersitenceController {
     private final SsdService ssdService;
     private final BuildFileLinkControllerSsd buildFileLink;
 
-    public SsdPersitenceController(JWTTokenHelper jwtTokenHelper,SsdService ssdService,BuildFileLinkControllerSsd buildFileLink){
+    public SsdPersitenceController(JWTTokenHelper jwtTokenHelper, SsdService ssdService, BuildFileLinkControllerSsd buildFileLink) {
         this.jwtTokenHelper = jwtTokenHelper;
         this.ssdService = ssdService;
         this.buildFileLink = buildFileLink;
@@ -27,10 +27,6 @@ public class SsdPersitenceController {
 
     public void saveSsdWithFileAndCategory(MultipartFile file, Ssd ssd, Category category) throws IOException {
         ssdService.saveProductFileCategory(ssd, file, category);
-//    }
-//    public List<Ssd> list(){
-//        return ssdService.listAllSsd().stream().map(this::linkFile).collect(Collectors.toList());
 
     }
 }
-        //FALTA VER ISSO AQUII DA RESPONSABILIDADE UNICA

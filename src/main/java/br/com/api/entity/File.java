@@ -38,7 +38,7 @@ public class File {
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SSD_ID")
-    private SsdAbstract ssdAbstract;
+    private Ssd ssdAbstract;
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)

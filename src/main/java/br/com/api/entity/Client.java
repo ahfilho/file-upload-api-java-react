@@ -49,6 +49,6 @@ public class Client {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "SSD_ID")
-    private SsdAbstract ssdAbstract;
+    private Ssd ssdAbstract;
 
 }

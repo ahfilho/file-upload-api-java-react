@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import br.com.api.auth.JWTTokenHelper;
 import br.com.api.enume.CategoryEnum;
 import br.com.api.persistence.SsdPersitenceController;
+import br.com.api.search.SearchSsd;
 import br.com.api.storage.BuildFileLinkControllerSsd;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,18 +33,20 @@ public class SsdController {
 
     private final SsdPersitenceController ssdPersitenceController;
 
-    public SsdController(JWTTokenHelper jwtTokenHelper, SsdService ssdService, BuildFileLinkControllerSsd buildFileLink, SsdPersitenceController ssdPersitenceController) {
+    private final SearchSsd searchSsd;
+
+    public SsdController(JWTTokenHelper jwtTokenHelper, SearchSsd searchSsd, SsdService ssdService, BuildFileLinkControllerSsd buildFileLink, SsdPersitenceController ssdPersitenceController) {
         this.jwtTokenHelper = jwtTokenHelper;
         this.ssdService = ssdService;
         this.buildFileLink = buildFileLink;
         this.ssdPersitenceController = ssdPersitenceController;
+        this.searchSsd = searchSsd;
     }
 
     @PostMapping
     public ResponseEntity<String> save(MultipartFile file, Ssd ssd, Category category) {
 
         try {
-            category.setProductCategory(CategoryEnum.SSD.name());
             ssdPersitenceController.saveSsdWithFileAndCategory(file, ssd, category);
             return status(HttpStatus.OK)
                     .body(String.format("Cadastro realizado com sucesso.: %s", file.getOriginalFilename()));
@@ -54,21 +57,16 @@ public class SsdController {
     }
 
     @GetMapping
-    public List<Ssd> list() {
-        return ssdService.listAllSsd().stream().map(this::linkFile).collect(Collectors.toList());
+    public List<Ssd> listAllWithFileLink(Ssd ssd) {
+        return ssdService.listAllSsd().stream().map(buildFileLink::linkFile).collect(Collectors.toList());
     }
 
-    private Ssd linkFile(Ssd ssd) {
-        buildFileLink.linkFile(ssd);
-        return ssd;
-    }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> update(String id, MultipartFile file, Ssd ssd, Category category) throws Exception {
 
         try {
             long convertStringToLong = Long.parseLong(id);
-            System.out.println(convertStringToLong);
             ssd.setId(convertStringToLong);
         } catch (NumberFormatException e) {
             System.out.println("Alguns dados ainda podem conter Strings." + e.getMessage());
@@ -94,14 +92,12 @@ public class SsdController {
 
     @GetMapping("/{id}")
     public Ssd searchForId(@PathVariable Long id) throws Exception {
-        Ssd ssd = new Ssd();
-        ssd.getId();
-        return ssdService.searchId(id);
+        return searchSsd.searchForId(id);
     }
 
     @GetMapping("/sale/day")
     public List<String> listDayOfSale() {
-
-        return ssdService.dayOfSale();
+        searchSsd.listDayOfSale();
+        return listDayOfSale();
     }
 }
