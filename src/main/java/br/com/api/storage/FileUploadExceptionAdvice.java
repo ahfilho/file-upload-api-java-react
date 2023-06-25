@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import br.com.api.response.ResponseMessage;
+import br.com.api.response.MessageResponse;
 
 @ControllerAdvice
 public class FileUploadExceptionAdvice extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(MaxUploadSizeExceededException.class)
-	public ResponseEntity<ResponseMessage> handlerMaxSixeException(MaxUploadSizeExceededException exc) {
+	public ResponseEntity<MessageResponse> handlerMaxSixeException(MaxUploadSizeExceededException exc) {
 
-		return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage("Arquivo muito grande."));
+		return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new MessageResponse("Arquivo muito grande."));
 	}
 
 }

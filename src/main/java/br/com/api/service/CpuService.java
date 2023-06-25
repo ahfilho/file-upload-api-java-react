@@ -6,7 +6,6 @@ import br.com.api.entity.File;
 import br.com.api.repository.CategoryRepository;
 import br.com.api.repository.CpuRepository;
 import br.com.api.repository.FileRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -84,13 +83,13 @@ public class CpuService {
             Cpu c = editCpu.get();
             c.setBrand(cpu.getBrand());
             c.setArrivalDate(cpu.getArrivalDate());
-            c.setClock(cpu.getClock());
-            c.setCore(cpu.getCore());
+            c.setClockCount(cpu.getClockCount());
+            c.setCoreCount(cpu.getCoreCount());
             c.setModel(cpu.getModel());
             c.setPurchaseDate(cpu.getPurchaseDate());
             c.setPurchasePrice(cpu.getPurchasePrice());
             c.setSaleValue(cpu.getSaleValue());
-            c.setThreads(cpu.getThreads());
+            c.setThreadCount(cpu.getThreadCount());
             return c;
         } else {
             throw new Exception("ERRO AO ATUALIZAR" + cpu.getId());

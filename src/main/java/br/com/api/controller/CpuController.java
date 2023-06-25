@@ -4,16 +4,15 @@ import br.com.api.auth.JWTTokenHelper;
 import br.com.api.entity.Category;
 import br.com.api.entity.Cpu;
 import br.com.api.enume.CategoryEnum;
-import br.com.api.interfaces.CpuControllerInterface;
 import br.com.api.service.CpuService;
 import br.com.api.storage.BuildFileLinkControllerCpu;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.text.NumberFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,7 +20,7 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/cpu")
-public class CpuController implements CpuControllerInterface {
+public class CpuController {
 
     private final JWTTokenHelper jwtTokenHelper;
 
@@ -33,13 +32,15 @@ public class CpuController implements CpuControllerInterface {
         this.jwtTokenHelper = jwtTokenHelper;
         this.cpuService = cpuService;
         this.buildFileLink = buildFileLink;
+
     }
 
     @ExceptionHandler
     @PostMapping
-    public ResponseEntity<String> save(MultipartFile file, Cpu cpu, Category category) {
+    public ResponseEntity<String> save(MultipartFile file, Cpu cpu, Category category) throws Exception {
 
         try {
+
             category.setProductCategory(CategoryEnum.CPU.name());
             saveCpuWithFile(file, cpu, category);
             return ResponseEntity.status(HttpStatus.OK).body(String.format("Cpu " + cpu.getModel() + "cadastrado com sucesso!") + file.getOriginalFilename());
@@ -52,7 +53,6 @@ public class CpuController implements CpuControllerInterface {
         cpuService.save(cpu, file, category);
     }
 
-    @ExceptionHandler
     @GetMapping
     public List<Cpu> list() {
         return cpuService.listAll().stream().map(this::linkFile).collect(Collectors.toList());
@@ -73,7 +73,6 @@ public class CpuController implements CpuControllerInterface {
 
     }
 
-    @Override
     @PutMapping("/{id}")
     public ResponseEntity<String> update(String id, MultipartFile file, Cpu cpu, Category category) throws Exception {
 
