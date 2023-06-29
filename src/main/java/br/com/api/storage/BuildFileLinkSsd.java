@@ -1,8 +1,8 @@
 package br.com.api.storage;
 
 
-import br.com.api.entity.Cpu;
-import br.com.api.interfaces.FileLinkCreatorCpu;
+import br.com.api.entity.Ssd;
+import br.com.api.interfaces.FileLinkCreatorSsd;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,18 +11,18 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/url/cpu/")
-public class BuildFileLinkControllerCpu implements FileLinkCreatorCpu {
+@RequestMapping("/url/ssd")
+public class BuildFileLinkSsd implements FileLinkCreatorSsd {
 
     @GetMapping("/files/{id}")
-    public Cpu linkFile(Cpu cpu) {
+    public Ssd linkFile(Ssd ssd) {
 
-        long l1 = cpu.getId();
+        long l1 = ssd.getId();
         String download = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/").path(Long.toString(l1))
                 .toUriString();
-        cpu.setId(cpu.getId());
-        cpu.setUrl(download);
-        return cpu;
+        ssd.setId(ssd.getId());
+        ssd.setUrl(download);
+        return ssd;
 
     }
 }

@@ -3,10 +3,8 @@ package br.com.api.search;
 import br.com.api.auth.JWTTokenHelper;
 import br.com.api.entity.Ssd;
 import br.com.api.service.SsdService;
-import br.com.api.storage.BuildFileLinkControllerSsd;
-import org.springframework.stereotype.Component;
+import br.com.api.storage.BuildFileLinkSsd;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
@@ -18,9 +16,9 @@ public class SearchSsd {
     private final JWTTokenHelper jwtTokenHelper;
 
     private final SsdService ssdService;
-    private final BuildFileLinkControllerSsd buildFileLink;
+    private final BuildFileLinkSsd buildFileLink;
 
-    public SearchSsd(JWTTokenHelper jwtTokenHelper, SsdService ssdService, BuildFileLinkControllerSsd buildFileLink) {
+    public SearchSsd(JWTTokenHelper jwtTokenHelper, SsdService ssdService, BuildFileLinkSsd buildFileLink) {
         this.jwtTokenHelper = jwtTokenHelper;
         this.ssdService = ssdService;
         this.buildFileLink = buildFileLink;
