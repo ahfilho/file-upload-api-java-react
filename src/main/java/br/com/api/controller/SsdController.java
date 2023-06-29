@@ -5,9 +5,9 @@ import java.util.stream.Collectors;
 
 import br.com.api.auth.JWTTokenHelper;
 import br.com.api.enume.CategoryEnum;
-import br.com.api.persistence.SsdPersitenceController;
+import br.com.api.persistence.SsdPersistenceService;
 import br.com.api.search.SearchSsd;
-import br.com.api.storage.BuildFileLinkControllerSsd;
+import br.com.api.storage.BuildFileLinkSsd;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,17 +29,17 @@ public class SsdController {
 
     private final SsdService ssdService;
 
-    private final BuildFileLinkControllerSsd buildFileLink;
+    private final BuildFileLinkSsd buildFileLink;
 
-    private final SsdPersitenceController ssdPersitenceController;
+    private final SsdPersistenceService ssdPersistenceController;
 
     private final SearchSsd searchSsd;
 
-    public SsdController(JWTTokenHelper jwtTokenHelper, SearchSsd searchSsd, SsdService ssdService, BuildFileLinkControllerSsd buildFileLink, SsdPersitenceController ssdPersitenceController) {
+    public SsdController(JWTTokenHelper jwtTokenHelper, SearchSsd searchSsd, SsdService ssdService, BuildFileLinkSsd buildFileLink, SsdPersistenceService ssdPersitenceController) {
         this.jwtTokenHelper = jwtTokenHelper;
         this.ssdService = ssdService;
         this.buildFileLink = buildFileLink;
-        this.ssdPersitenceController = ssdPersitenceController;
+        this.ssdPersistenceController = ssdPersitenceController;
         this.searchSsd = searchSsd;
     }
 
@@ -47,7 +47,7 @@ public class SsdController {
     public ResponseEntity<String> save(MultipartFile file, Ssd ssd, Category category) {
 
         try {
-            ssdPersitenceController.saveSsdWithFileAndCategory(file, ssd, category);
+            ssdPersistenceController.saveSsdWithFileAndCategory(file, ssd, category);
             return status(HttpStatus.OK)
                     .body(String.format("Cadastro realizado com sucesso.: %s", file.getOriginalFilename()));
         } catch (Exception e) {
@@ -57,7 +57,7 @@ public class SsdController {
     }
 
     @GetMapping
-    public List<Ssd> listAllWithFileLink(Ssd ssd) {
+    public List<Ssd> listAllWithFileLink() {
         return ssdService.listAllSsd().stream().map(buildFileLink::linkFile).collect(Collectors.toList());
     }
 

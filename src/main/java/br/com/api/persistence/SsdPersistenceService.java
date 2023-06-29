@@ -4,7 +4,7 @@ import br.com.api.auth.JWTTokenHelper;
 import br.com.api.entity.Category;
 import br.com.api.entity.Ssd;
 import br.com.api.service.SsdService;
-import br.com.api.storage.BuildFileLinkControllerSsd;
+import br.com.api.storage.BuildFileLinkSsd;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,14 +12,14 @@ import java.io.IOException;
 
 //@AllArgsConstructor
 @Controller
-public class SsdPersitenceController {
+public class SsdPersistenceService {
 
     private final JWTTokenHelper jwtTokenHelper;
 
     private final SsdService ssdService;
-    private final BuildFileLinkControllerSsd buildFileLink;
+    private final BuildFileLinkSsd buildFileLink;
 
-    public SsdPersitenceController(JWTTokenHelper jwtTokenHelper, SsdService ssdService, BuildFileLinkControllerSsd buildFileLink) {
+    public SsdPersistenceService(JWTTokenHelper jwtTokenHelper, SsdService ssdService, BuildFileLinkSsd buildFileLink) {
         this.jwtTokenHelper = jwtTokenHelper;
         this.ssdService = ssdService;
         this.buildFileLink = buildFileLink;

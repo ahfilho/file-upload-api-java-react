@@ -41,7 +41,7 @@ const AddCpu = () => {
     formData.append("model", model);
     formData.append("serialNumber", serialNumber);
     formData.append("purchaseDate", purchaseDate);
-    formData.append("purchasePrice", purchasePrice);
+    formData.append("purchasePrice", parseFloat(purchasePrice));
     formData.append("arrivalDate", arrivalDate);
     formData.append("saleValue", saleValue);
     formData.append("amount", amount);
