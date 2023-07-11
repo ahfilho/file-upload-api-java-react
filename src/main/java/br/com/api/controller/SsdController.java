@@ -31,15 +31,15 @@ public class SsdController {
 
     private final BuildFileLinkSsd buildFileLink;
 
-    private final SsdPersistenceService ssdPersistenceController;
+    private final SsdPersistenceService ssdPersistenceService;
 
     private final SearchSsd searchSsd;
 
-    public SsdController(JWTTokenHelper jwtTokenHelper, SearchSsd searchSsd, SsdService ssdService, BuildFileLinkSsd buildFileLink, SsdPersistenceService ssdPersitenceController) {
+    public SsdController(JWTTokenHelper jwtTokenHelper, SearchSsd searchSsd, SsdService ssdService, BuildFileLinkSsd buildFileLink, SsdPersistenceService ssdPersistenceService) {
         this.jwtTokenHelper = jwtTokenHelper;
         this.ssdService = ssdService;
         this.buildFileLink = buildFileLink;
-        this.ssdPersistenceController = ssdPersitenceController;
+        this.ssdPersistenceService = ssdPersistenceService;
         this.searchSsd = searchSsd;
     }
 
@@ -47,7 +47,8 @@ public class SsdController {
     public ResponseEntity<String> save(MultipartFile file, Ssd ssd, Category category) {
 
         try {
-            ssdPersistenceController.saveSsdWithFileAndCategory(file, ssd, category);
+            ssdPersistenceService.saveSsdWithFileAndCategory(file, ssd, category);
+
             return status(HttpStatus.OK)
                     .body(String.format("Cadastro realizado com sucesso.: %s", file.getOriginalFilename()));
         } catch (Exception e) {

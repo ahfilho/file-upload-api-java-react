@@ -11,13 +11,13 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/url/cpu/")
+@RequestMapping("/url/cpu")
 public class BuildFileLinkCpu implements FileLinkCreatorCpu {
 
     @GetMapping("/files/{id}")
     public Cpu linkFile(Cpu cpu) {
 
-        long l1 = cpu.getId();
+        Long l1 = cpu.getId();
         String download = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/").path(Long.toString(l1))
                 .toUriString();
         cpu.setId(cpu.getId());

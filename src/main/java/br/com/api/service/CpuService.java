@@ -1,5 +1,6 @@
 package br.com.api.service;
 
+import br.com.api.auth.JWTTokenHelper;
 import br.com.api.entity.Category;
 import br.com.api.entity.Cpu;
 import br.com.api.entity.File;
@@ -30,12 +31,10 @@ public class CpuService {
     private final CategoryRepository categoryRepository;
     private final FileRepository offerImageRepository;
 
-
     public CpuService(CpuRepository cpuRepository, CategoryRepository categoryRepository, FileRepository offerImageRepository) {
         this.cpuRepository = cpuRepository;
         this.categoryRepository = categoryRepository;
         this.offerImageRepository = offerImageRepository;
-
     }
 
     public void init() {
@@ -97,5 +96,15 @@ public class CpuService {
 
     }
 
+
+    public Cpu searchId(Long id) throws Exception {
+        Optional<Cpu> resultSearchCpuId = cpuRepository.findById(id);
+        if (resultSearchCpuId.isPresent()) {
+            return resultSearchCpuId.get();
+
+        } else {
+            throw new Exception("Id inexistente ou erro na busca.");
+        }
+    }
 
 }

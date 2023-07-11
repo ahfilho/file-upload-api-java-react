@@ -2,18 +2,20 @@ import axios from "axios";
 import React from "react";
 import { useState, useEffect, useNavigate } from "react";
 import { BrowserRouter as Router, Route, Link, Switch, useParams } from "react-router-dom";
-import "./Ssd.css";
-import NavBar from "../../navbar/NavBar";
+import "./Cpu.css";
+import NavBar from "../navbar/NavBar";
 
-const url = "http://localhost:9090/ssd";
+const url = "http://localhost:9090/cpu";
 
-const SsdEdit = () => {
+const CpuEdit = () => {
   const { id } = useParams();
-  const [ssd, setSsd] = useState({
+  const [cpu, setCpu] = useState({
     brand: "",
     model: "",
     serialNumber: "",
-    size: "",
+    coreCount: "",
+    threadCount: "",
+    clockCount: "",
     purchaseDate: "",
     purchasePrice: "",
     arrivalDate: "",
@@ -25,7 +27,7 @@ const SsdEdit = () => {
   useEffect(() => {
     axios.get(`${url}/${id}`)
       .then((result) => {
-        setSsd(result.data);
+        setCpu(result.data);
       })
       .catch((error) => {
         console.log(error);
@@ -33,8 +35,8 @@ const SsdEdit = () => {
   }, [id]);
 
   const onInputChange = (e) => {
-    setSsd({
-      ...ssd,
+    setCpu({
+      ...cpu,
       [e.target.name]: e.target.value,
     });
   };
@@ -49,15 +51,16 @@ const SsdEdit = () => {
     const formData = new FormData();
 
     formData.append("file", file);
-    formData.append("brand", ssd.brand);
-    formData.append("model", ssd.model);
-    formData.append("serialNumber", ssd.serialNumber);
-    formData.append("size", ssd.size);
-    formData.append("purchaseDate", ssd.purchaseDate);
-    formData.append("purchasePrice", ssd.purchasePrice);
-    formData.append("arrivalDate", ssd.arrivalDate);
-    formData.append("saleValue", ssd.saleValue);
-    formData.append("amount", ssd.amount);
+    formData.append("brand", cpu.brand);
+    formData.append("model", cpu.model);
+    formData.append("serialNumber", cpu.serialNumber);
+    formData.append("coreCount", cpu.coreCount);
+    formData.append("threadCount", cpu.threadCount);
+    formData.append("clockCount", cpu.clockCount);
+    formData.append("purchasePrice", cpu.purchasePrice);
+    formData.append("arrivalDate", cpu.arrivalDate);
+    formData.append("saleValue", cpu.saleValue);
+    formData.append("amount", cpu.amount);
 
     axios
       .put(`${url}/${id}`, formData)
@@ -89,7 +92,7 @@ const SsdEdit = () => {
             type={"text"}
             name="brand"
             id="brand"
-            defaultValue={ssd.brand}
+            defaultValue={cpu.brand}
             className="form-control"
             placeholder="Marca"
             onChange={(e) => onInputChange(e)}
@@ -101,7 +104,7 @@ const SsdEdit = () => {
             name="model"
             id="model"
             className="form-control"
-            defaultValue={ssd.model}
+            defaultValue={cpu.model}
             placeholder="Modelo"
             onChange={(e) => onInputChange(e)}
           />
@@ -112,19 +115,41 @@ const SsdEdit = () => {
             name="serialNumber"
             id="serialNumber"
             className="form-control"
-            defaultValue={ssd.serialNumber}
-            placeholder="Nº de série"
+            defaultValue={cpu.serialNumber}
+            placeholder="Referência"
             onChange={(e) => onInputChange(e)}
           />
         </div>
         <div className="inputs">
           <input
             type={"text"}
-            name="size"
-            id="size"
+            name="coreCount"
+            id="coreCount"
             className="form-control"
-            defaultValue={ssd.size}
-            placeholder="Capacidade/GB"
+            defaultValue={cpu.coreCount}
+            placeholder="Cores(Núcleos)"
+            onChange={(e) => onInputChange(e)}
+          />
+        </div>
+        <div className="inputs">
+          <input
+            type={"text"}
+            name="threadCount"
+            id="coreCouthreadCountnt"
+            className="form-control"
+            defaultValue={cpu.threadCount}
+            placeholder="Threads"
+            onChange={(e) => onInputChange(e)}
+          />
+        </div>
+        <div className="inputs">
+          <input
+            type={"text"}
+            name="clockCount"
+            id="clockCount"
+            className="form-control"
+            defaultValue={cpu.clockCount}
+            placeholder="Velocidade"
             onChange={(e) => onInputChange(e)}
           />
         </div>
@@ -134,7 +159,7 @@ const SsdEdit = () => {
             name="amount"
             id="amount"
             className="form-control"
-            defaultValue={ssd.amount}
+            defaultValue={cpu.amount}
             placeholder="Quantidade(UN)"
             onChange={(e) => onInputChange(e)}
           />
@@ -147,7 +172,7 @@ const SsdEdit = () => {
             name="purchaseDate"
             id="purchaseDate"
             className="form-control"
-            defaultValue={ssd.purchaseDate}
+            defaultValue={cpu.purchaseDate}
             placeholder="Data de compra"
             onChange={(e) => onInputChange(e)}
           />
@@ -158,7 +183,7 @@ const SsdEdit = () => {
             name="purchasePrice"
             id="purchasePrice"
             className="form-control"
-            defaultValue={ssd.purchasePrice}
+            defaultValue={cpu.purchasePrice}
             placeholder="Preço de compra"
             onChange={(e) => onInputChange(e)}
           />
@@ -170,7 +195,7 @@ const SsdEdit = () => {
             name="arrivalDate"
             id="arrivalDate"
             className="form-control"
-            defaultValue={ssd.arrivalDate}
+            defaultValue={cpu.arrivalDate}
             placeholder="Arrival date"
             onChange={(e) => onInputChange(e)}
           />
@@ -180,7 +205,7 @@ const SsdEdit = () => {
             type={"text"}
             name="saleValue"
             id="saleValue"
-            defaultValue={ssd.saleValue}
+            defaultValue={cpu.saleValue}
             className="form-control"
             placeholder="Preço de venda"
             onChange={(e) => onInputChange(e)}
@@ -203,4 +228,4 @@ const SsdEdit = () => {
     </div>
   );
 };
-export default SsdEdit;
+export default CpuEdit;

@@ -121,17 +121,39 @@ const AddCpu = () => {
               .value)}
           />
         </div>
-        {/* <div className="inputs">
+        <div className="inputs">
           <input
             type={"text"}
-            name="core"
-            id="core"
+            name="coreCount"
+            id="coreCount"
+            value={coreCount}
             className="form-control"
-            value={core}
-            placeholder="Capacidade/GB"
-            onChange={(e) => setCore(e.target.value)}
+            placeholder="Cores"
+            onChange={(e) => setCoreCount(e.target.value)}
           />
-        </div> */}
+        </div>
+        <div className="inputs">
+          <input
+            type={"text"}
+            name="threadCount"
+            id="threadCount"
+            value={threadCount}
+            className="form-control"
+            placeholder="Threads"
+            onChange={(e) => setThreadCount(e.target.value)}
+          />
+        </div>
+        <div className="inputs">
+          <input
+            type={"text"}
+            name="clockSpeed"
+            id="clockSpeed"
+            value={clockCount}
+            className="form-control"
+            placeholder="Clock"
+            onChange={(e) => setClockCount(e.target.value)}
+          />
+        </div>
         <div className="inputs">
           <input
             type={"text"}
@@ -178,39 +200,7 @@ const AddCpu = () => {
             onChange={(e) => setSaleValue(e.target.value)}
           />
         </div>
-        <div className="inputs">
-          <input
-            type={"text"}
-            name="coreCount"
-            id="coreCount"
-            value={coreCount}
-            className="form-control"
-            placeholder="Cores"
-            onChange={(e) => setCoreCount(e.target.value)}
-          />
-        </div>
-        <div className="inputs">
-          <input
-            type={"text"}
-            name="threadCount"
-            id="threadCount"
-            value={threadCount}
-            className="form-control"
-            placeholder="Threads"
-            onChange={(e) => setThreadCount(e.target.value)}
-          />
-        </div>
-        <div className="inputs">
-          <input
-            type={"text"}
-            name="clockSpeed"
-            id="clockSpeed"
-            value={clockCount}
-            className="form-control"
-            placeholder="Clock"
-            onChange={(e) => setClockCount(e.target.value)}
-          />
-        </div>
+    
 
         <br></br>
         <div className="inputs">

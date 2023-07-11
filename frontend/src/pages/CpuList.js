@@ -77,6 +77,7 @@ class CpuList extends Component {
               <td>{cpu.purchaseDate}</td>
               <td>{cpu.purchasePrice}</td>
               <td>{cpu.saleValue}</td>
+              <td>{cpu.dateOfSale}</td>
               <td>{cpu.image ? cpu.image.fileName : ""}</td>
               <td>{cpu.image ? cpu.image.fileSize : ""}</td>
 

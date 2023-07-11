@@ -58,11 +58,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint).and()
-                .authorizeRequests((request -> request.antMatchers("/localhost:3000/**","/localhost:9090/**",
-                                "/user/auth/login", "/ssd","/client",
-                                "/ssd/{id}","/files/{id}","/ssd/download","/client",
-                                "/ssd/files/download","/ssd/files/{id}","/ssd/download/","/ssd/sale/day","/client","/cpu","/url/cpu/","url/cpu/files/{id}/",
-                                "/cpu/{id}").permitAll()
+                .authorizeRequests((request -> request.antMatchers("/localhost:3000/**", "/localhost:9090/**",
+                                "/user/auth/login", "/client",
+                                "/ssd", "/ssd/{id}", "/files/{id}",
+                                "/ssd/files/download", "/ssd/files/{id}", "/ssd/sale/day", "/client",
+                                "/cpu", "/cpu/{id}","/cpu/edit/{id}").permitAll()
                         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated()))
                 .addFilterBefore(new JWTAuthenticationFilter(userService, jWTTokenHelper),
                         UsernamePasswordAuthenticationFilter.class);
