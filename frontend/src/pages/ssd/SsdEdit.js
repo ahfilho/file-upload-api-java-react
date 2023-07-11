@@ -18,7 +18,7 @@ const SsdEdit = () => {
     purchasePrice: "",
     arrivalDate: "",
     saleValue: "",
-    amount:""
+    amount: ""
   });
   const [file, setFile] = useState("");
 
@@ -57,7 +57,7 @@ const SsdEdit = () => {
     formData.append("purchasePrice", ssd.purchasePrice);
     formData.append("arrivalDate", ssd.arrivalDate);
     formData.append("saleValue", ssd.saleValue);
-    formData.append("amount",ssd.amount);
+    formData.append("amount", ssd.amount);
 
     axios
       .put(`${url}/${id}`, formData)

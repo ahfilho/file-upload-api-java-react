@@ -5,6 +5,7 @@ import br.com.api.entity.Category;
 import br.com.api.entity.Cpu;
 import br.com.api.enume.CategoryEnum;
 import br.com.api.persistence.CpuPersistenceController;
+import br.com.api.search.SearchCpu;
 import br.com.api.service.CpuService;
 import br.com.api.storage.BuildFileLinkCpu;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -29,11 +31,14 @@ public class CpuController {
 
     private final CpuPersistenceController cpuPersistenceController;
 
-    public CpuController(JWTTokenHelper jwtTokenHelper, CpuService cpuService, BuildFileLinkCpu buildFileLink, CpuPersistenceController cpuPersistenceController) {
+    private final SearchCpu searchCpu;
+
+    public CpuController(SearchCpu searchCpu, JWTTokenHelper jwtTokenHelper, CpuService cpuService, BuildFileLinkCpu buildFileLink, CpuPersistenceController cpuPersistenceController) {
         this.jwtTokenHelper = jwtTokenHelper;
         this.cpuService = cpuService;
         this.buildFileLink = buildFileLink;
         this.cpuPersistenceController = cpuPersistenceController;
+        this.searchCpu = searchCpu;
     }
 
     @ExceptionHandler
@@ -50,7 +55,7 @@ public class CpuController {
     }
 
     @GetMapping
-    public List<Cpu> list() {
+    public List<Cpu> listWhitFileLink() {
         return cpuService.listAll().stream().map(buildFileLink::linkFile).collect(Collectors.toList());
     }
 
@@ -76,6 +81,11 @@ public class CpuController {
     public HttpStatus delete(@PathVariable Long id) throws Exception {
         cpuService.delete(id);
         return HttpStatus.OK;
+    }
+
+    @GetMapping("/{id}")
+    public Cpu searchIdCpu(@PathVariable Long id) throws Exception {
+        return searchCpu.searchForCpuId(id);
     }
 
 }

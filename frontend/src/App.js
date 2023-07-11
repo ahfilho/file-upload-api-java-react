@@ -19,7 +19,7 @@ import { Dashboard } from './pages/dashboard/dashboard';
 import NavBar from "./navbar/NavBar";
 import Client from "./client/Client";
 import ClientList from "./client/ClientList";
-
+import CpuEdit from "./pages/CpuEdit";
 function App() {
   return (
     <BrowserRouter>
@@ -46,6 +46,8 @@ function App() {
 
           <Route path="/cpu" exact component={Cpu} />
           <Route path="/cpulist" exact component={CpuList} />
+          <Route path="/cpuEdit/:id" exact component={CpuEdit} />
+
           </Switch>
           {/* /</header>
            */}
