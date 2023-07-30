@@ -21,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.api.entity.Category;
-import br.com.api.entity.File;
+import br.com.api.entity.Img;
 import br.com.api.entity.Ssd;
 import br.com.api.entity.FileResponse;
 import br.com.api.service.FileService;
@@ -75,7 +75,7 @@ public class FileUploadController {
         return ofertasService.terca().stream().map(this::mapToQuery).collect(Collectors.toList());
     }
 
-    private FileResponse mapTo_Terca_Feira(File img) {
+    private FileResponse mapTo_Terca_Feira(Img img) {
         long l1 = img.getId();
         String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/")
                 .path(Long.toString(l1)).toUriString();
@@ -96,7 +96,7 @@ public class FileUploadController {
         return ofertasService.getSql().stream().map(this::mapToQuery).collect(Collectors.toList());
     }
 
-    private FileResponse mapToQuery(File img) {
+    private FileResponse mapToQuery(Img img) {
 
         long l1 = img.getId();
         String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/")
@@ -114,7 +114,7 @@ public class FileUploadController {
         return ofertasService.getAllFiles().stream().map(this::mapToFileResponse).collect(Collectors.toList());
     }
 
-    private FileResponse mapToFileResponse(File ofertasModel) {
+    private FileResponse mapToFileResponse(Img ofertasModel) {
 
         long l2 = ofertasModel.getId();
         String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/")
@@ -131,11 +131,11 @@ public class FileUploadController {
 
     @GetMapping("/{id}")
     public ResponseEntity<byte[]> getFile(@PathVariable Long id) {
-        Optional<File> file = ofertasService.getFile(id);
+        Optional<Img> file = ofertasService.getFile(id);
         if (!file.isPresent()) {
             return ResponseEntity.notFound().build();
         }
-        File imageOffer = file.get();
+        Img imageOffer = file.get();
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "teste de upload/ filename=" + imageOffer.getFileName() + "\"")
                 .contentType(MediaType.valueOf(imageOffer.getContentType())).body(imageOffer.getData());

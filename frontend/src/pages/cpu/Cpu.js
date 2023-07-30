@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import "./Cpu.css";
-import NavBar from "../navbar/NavBar";
+import NavBar from "../../navbar/NavBar";
 import { useTheme } from "styled-components";
 
 const url = "http://localhost:9090/cpu";

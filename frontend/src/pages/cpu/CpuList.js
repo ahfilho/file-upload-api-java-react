@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { useHistory, useParams } from "react-router-dom";
-import NavBar from "../../src/navbar/NavBar";
+import NavBar from "../../navbar/NavBar";
 import "./Cpu.css";
 import { Button } from "bootstrap";
 
@@ -52,7 +52,7 @@ class CpuList extends Component {
         <table>
           <tr>
             <th>Id</th>
-            <th>Marca</th>
+            <th>Fabricante</th>
             <th>Modelo</th>
             <th>Referência</th>
             <th>Cores</th>
@@ -60,7 +60,7 @@ class CpuList extends Component {
             <th>Clock</th>
             <th>Data de compra</th>
             <th>Preço de compra</th>
-            <th>Data de venda</th>
+            {/* <th>Data de venda</th> */}
             <th>Preço de venda</th>
             <th>Mídia</th>
             <th>Bytes</th>
@@ -76,10 +76,11 @@ class CpuList extends Component {
               <th>{cpu.clockCount}</th>
               <td>{cpu.purchaseDate}</td>
               <td>{cpu.purchasePrice}</td>
+              {/* <td>{cpu.dateOfSale}</td> */}
+              
               <td>{cpu.saleValue}</td>
-              <td>{cpu.dateOfSale}</td>
-              <td>{cpu.image ? cpu.image.fileName : ""}</td>
-              <td>{cpu.image ? cpu.image.fileSize : ""}</td>
+              <td>{cpu.img ? cpu.img.fileName : ""}</td>
+              <td>{cpu.img ? cpu.img.fileSize : ""}</td>
 
               <td>
                 <a href={cpu.url}><i class="fas fa-download"></i></a>

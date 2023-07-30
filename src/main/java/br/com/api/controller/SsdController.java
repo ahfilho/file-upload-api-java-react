@@ -67,7 +67,7 @@ public class SsdController {
     public ResponseEntity<String> update(String id, MultipartFile file, Ssd ssd, Category category) throws Exception {
 
         try {
-            long convertStringToLong = Long.parseLong(id);
+            Long convertStringToLong = Long.parseLong(id);
             ssd.setId(convertStringToLong);
         } catch (NumberFormatException e) {
             System.out.println("Alguns dados ainda podem conter Strings." + e.getMessage());

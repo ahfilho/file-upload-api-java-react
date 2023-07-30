@@ -3,7 +3,7 @@ import React from "react";
 import { useState, useEffect, useNavigate } from "react";
 import { BrowserRouter as Router, Route, Link, Switch, useParams } from "react-router-dom";
 import "./Cpu.css";
-import NavBar from "../navbar/NavBar";
+import NavBar from "../../navbar/NavBar";
 
 const url = "http://localhost:9090/cpu";
 
@@ -34,6 +34,7 @@ const CpuEdit = () => {
       });
   }, [id]);
 
+  console.log(cpu);
   const onInputChange = (e) => {
     setCpu({
       ...cpu,

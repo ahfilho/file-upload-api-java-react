@@ -11,15 +11,15 @@ import Ssd from "./pages/ssd/Ssd";
 import SsdList from "./pages/ssd/SsdList";
 import Ram from "./pages/Ram";
 import RamList from "./pages/RamList";
-import Cpu from "./pages/Cpu";
-import CpuList from "./pages/CpuList";
+import Cpu from "./pages/cpu/Cpu";
+import CpuList from "./pages/cpu/CpuList";
 import SsdEdit from "./pages/ssd/SsdEdit";
 import LoginPage from "./pages/LoginPage";
 import { Dashboard } from './pages/dashboard/dashboard';
 import NavBar from "./navbar/NavBar";
 import Client from "./client/Client";
 import ClientList from "./client/ClientList";
-import CpuEdit from "./pages/CpuEdit";
+import CpuEdit from "./pages/cpu/CpuEdit";
 function App() {
   return (
     <BrowserRouter>

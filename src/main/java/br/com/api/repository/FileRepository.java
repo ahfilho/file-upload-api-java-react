@@ -6,16 +6,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import br.com.api.entity.Category;
-import br.com.api.entity.File;
+import br.com.api.entity.Img;
 import br.com.api.entity.Ssd;
 
-public interface FileRepository extends JpaRepository<File, Long> {
+public interface FileRepository extends JpaRepository<Img, Long> {
 
 	@Query(value = "SELECT * FROM imagem", nativeQuery = true)
-	public List<File> consulta_personalizada();
+	public List<Img> consulta_personalizada();
 
 	@Query(value = "SELECT * FROM image", nativeQuery = true)
-	public List<File> terca();
+	public List<Img> terca();
 
 	void save(Ssd pm);
 
