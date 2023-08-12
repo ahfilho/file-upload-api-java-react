@@ -4,20 +4,20 @@ Documentação aqui: https://documenter.getpostman.com/view/14374394/Uyxkkkyr
 
 
 Tecnologias utilizadas no back-end:
-Java 11,
-Spring validation,
-Spring boot,
-Api Rest,
-Jpa,
-JWT Authentication,
-Hibernate,
-Dto,
-Lombok
+Java 11,<br>
+Spring validation,<br>
+Spring boot,<br>
+Api Rest,<br>
+Jpa,<br>
+JWT Authentication,<br>
+Hibernate,<br>
+Dto,<br>
+Lombok<br>
 
 
 <hr>
 Tenologias utilizadas no front-end:
-React JS, Axios, Bootstrap
+React JS,<br> Axios<br> Bootstrap
 
 <hr>
 
@@ -27,6 +27,6 @@ PostgreSql
 
 Testes automatizados: Postman
 
-*Docker,
+*Docker,<br>
 
 *SOLID
