@@ -1,5 +1,6 @@
 package br.com.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import com.sun.istack.NotNull;
 
 import java.time.LocalDate;
 
-@NoArgsConstructor(force = true)
+@NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
@@ -43,12 +44,13 @@ public class Client {
     @Column(name = "data_register")
     private LocalDate dataRegister;
 
-    @OneToOne(mappedBy = "client" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "CLIENT_ID")
     private Address address;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "SSD_ID")
+    @JsonIgnore
     private Ssd ssdAbstract;
 
 }

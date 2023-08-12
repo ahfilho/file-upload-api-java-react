@@ -1,9 +1,8 @@
 package br.com.api.repository;
 
-import br.com.api.entity.Ssd;
+import br.com.api.entity.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.api.entity.Client;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
