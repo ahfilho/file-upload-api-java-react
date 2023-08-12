@@ -13,7 +13,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import br.com.api.entity.Category;
-import br.com.api.entity.File;
+import br.com.api.entity.Img;
 import br.com.api.repository.CategoryRepository;
 import br.com.api.repository.FileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,7 @@ public class RamService {
 //        ram.setArrivalDate(dateAtual);
 //        ram.setPurchaseDate(dateAtual);
 
-        File img = new File();
+        Img img = new Img();
 
         img.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
         img.setContentType(file.getContentType());

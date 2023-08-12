@@ -15,7 +15,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.api.entity.Category;
-import br.com.api.entity.File;
+import br.com.api.entity.Img;
 import br.com.api.entity.Ssd;
 import br.com.api.repository.FileRepository;
 
@@ -39,7 +39,7 @@ public class FileService {
 	public void saveFile(MultipartFile file, Ssd productModel, Category categoryModel)
 			throws IOException {
 		Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
-		File img = new File();
+		Img img = new Img();
 
 		img.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
 		img.setContentType(file.getContentType());
@@ -78,24 +78,24 @@ public class FileService {
 
 	}
 
-	public Optional<File> getFile(Long id) {
+	public Optional<Img> getFile(Long id) {
 		return ofertasRepository.findById(id);
 	}
 	// LISTA COMPLETA
-	public List<File> getAllFiles() {
+	public List<Img> getAllFiles() {
 		return ofertasRepository.findAll();
 	}
 
-	public List<File> getSql() {
+	public List<Img> getSql() {
 		return ofertasRepository.consulta_personalizada();
 	}
 
-	public List<File> terca() {
+	public List<Img> terca() {
 		return ofertasRepository.terca();
 	}
 
 	public void imgDelete(Long id) throws Exception {
-		Optional<File> im = this.ofertasRepository.findById(id);
+		Optional<Img> im = this.ofertasRepository.findById(id);
 		if (im.isPresent()) {
 			this.ofertasRepository.delete(im.get());
 		} else {
@@ -105,8 +105,8 @@ public class FileService {
 	}
 
 	public void imgDeleteDiretory(Long id) {
-		File img = new File();
-		Optional<File> opt = this.ofertasRepository.findById(id);
+		Img img = new Img();
+		Optional<Img> opt = this.ofertasRepository.findById(id);
 		if (opt.isPresent()) {
 
 			try {
@@ -121,9 +121,9 @@ public class FileService {
 	}
 
 	// VERIFICAR AQUI DEPOIS
-	public File updateImg(MultipartFile file, Ssd ssd) throws IOException {
+	public Img updateImg(MultipartFile file, Ssd ssd) throws IOException {
 		Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
-		File otherFiles = new File();
+		Img otherFiles = new Img();
 
 		otherFiles.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
 		otherFiles.setContentType(file.getContentType());
