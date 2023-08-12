@@ -13,7 +13,6 @@ import br.com.api.controller.ClientController;
 import br.com.api.controller.FileUploadController;
 import br.com.api.controller.SacController;
 import br.com.api.controller.RamController;
-import br.com.api.entity.Client;
 import br.com.api.repository.ClientRepository;
 import br.com.api.service.ClientService;
 import br.com.api.service.FileService;
@@ -29,9 +28,6 @@ class ApiApplicationTests {
 
 	@Autowired
 	private ClientController contactController;
-
-	@Qualifier("contact")
-	private Client contactModel;
 
 	@Autowired 
 	private ClientRepository contactRepository;

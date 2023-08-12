@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import br.com.api.dto.ClientDto;
 import br.com.api.entity.Address;
 import br.com.api.repository.AddressRepository;
 import br.com.api.repository.SsdRepository;
@@ -27,28 +28,23 @@ public class ClientService {
     @Autowired
     private SsdRepository ssdRepository;
 
-    public void clientSave(Client client) {
-        Address address = client.getAddress();
-
-        client.setAddress(address);
-        address.setClient(client);
-
-        this.clientRepository.save(client);
-
+    public void clientSave(ClientDto clientDto) {
+        //TODO filtro para verificar se o cpf ja está cadastrado e assim não permitir repetições
+        clientRepository.save(clientDto);
     }
 
     public List<Client> clientList() throws Exception {
-        List<Client> cli = clientRepository.findAll();
-        if (cli.isEmpty()) {
+        List<Client> clientList = clientRepository.findAll();
+        if (clientList.isEmpty()) {
             System.out.println("Não existe cliente cadastrado.");
         }
         return this.clientRepository.findAll();
     }
 
     public Client clientUpdate(Client client) throws Exception {
-        Optional<Client> cmo = this.clientRepository.findById(client.getId());
-        if (cmo.isPresent()) {
-            Client cm = cmo.get();
+        Optional<Client> optionalClient = this.clientRepository.findById(client.getId());
+        if (optionalClient.isPresent()) {
+            Client cm = optionalClient.get();
             cm.setName(client.getName());
             cm.setEmail(client.getEmail());
             cm.setCpf(client.getCpf());

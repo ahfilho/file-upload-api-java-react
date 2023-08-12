@@ -4,12 +4,15 @@ import java.util.Collections;
 import java.util.List;
 
 import br.com.api.auth.JWTTokenHelper;
+import br.com.api.dto.AddressDto;
+import br.com.api.dto.ClientDto;
 import br.com.api.entity.Address;
 import br.com.api.entity.Ssd;
 import br.com.api.exceptions.ErrorHandling;
 import io.restassured.mapper.ObjectMapper;
 import io.restassured.mapper.ObjectMapperDeserializationContext;
 import io.restassured.mapper.ObjectMapperSerializationContext;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,23 +41,23 @@ public class ClientController {
     @ExceptionHandler
     @PostMapping
     public ResponseEntity<String> clientSave(@RequestBody Client client) {
-        try {
-            if (client.getName().equals("") ||
-                    client.getCpf().equals("") ||
-                    client.getEmail().equals("") ||
-                    client.getContact().equals("") ||
-                    client.getAddress().getStreet().equals("") ||
-                    client.getAddress().getNumber().equals("") ||
-                    client.getAddress().getCity().equals("") ||
-                    client.getAddress().getDistrict().equals(""))
-            {
-                return ResponseEntity.status(HttpStatus.OK).body(String.format("Os campos não podem ser vazios."));
 
-            }
-            clientService.clientSave(client);
+        ModelMapper mapper = new ModelMapper();
+        ClientDto clientDto = mapper.map(client, ClientDto.class);
+
+        Address address = client.getAddress();
+        AddressDto addressDto = new AddressDto();
+
+        addressDto.setStreet(address.getStreet());
+        addressDto.setNumber(address.getNumber());
+        addressDto.setCity(address.getCity());
+        addressDto.setDistrict(address.getDistrict());
+
+        try {
+            clientService.clientSave(clientDto);
             return ResponseEntity.status(HttpStatus.OK).body(String.format("Cliente: " + client.getName() + " cadastrado com sucesso!"));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(String.format("Não foi possível cadastrar o cliente: " + client.getName() + "."));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(String.format("Não foi possível cadastrar o cliente: " + clientDto.getName() + "."));
         }
     }
 
