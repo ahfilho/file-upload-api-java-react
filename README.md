@@ -4,18 +4,20 @@ Documentação aqui: https://documenter.getpostman.com/view/14374394/Uyxkkkyr
 
 
 Tecnologias utilizadas no back-end:
-Java,
+Java 11,
 Spring validation,
 Spring boot,
 Api Rest,
 Jpa,
 JWT Authentication,
 Hibernate,
+Dto,
+Lombok
 
 
 <hr>
 Tenologias utilizadas no front-end:
-React JS, Bootstrap
+React JS, Axios, Bootstrap
 <hr>
 
 Tenologia utilizada no banco:
