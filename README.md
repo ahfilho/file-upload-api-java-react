@@ -3,7 +3,7 @@
 Documentação aqui: https://documenter.getpostman.com/view/14374394/Uyxkkkyr
 
 
-Tecnologias utilizadas no back-end:
+Tecnologias utilizadas no back-end:<br>
 Java 11,<br>
 Spring validation,<br>
 Spring boot,<br>
