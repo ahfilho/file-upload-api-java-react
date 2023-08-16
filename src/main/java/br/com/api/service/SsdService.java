@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.List;
 import javax.transaction.Transactional;
 
-import br.com.api.entity.File;
+import br.com.api.entity.Img;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -52,7 +52,7 @@ public class SsdService {
     public void saveProductFileCategory(Ssd ssd, MultipartFile file, Category category)
             throws IOException {
         Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
-        File ff = new File();
+        Img ff = new Img();
 
         ff.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
         ff.setContentType(file.getContentType());
@@ -69,7 +69,7 @@ public class SsdService {
         List<Ssd> ssdALl = ssdRepository.findAll();
         for (Ssd s : ssdALl
         ) {
-            System.out.println(s.getCategory());
+            System.out.println(s.getBrand());
         }
         return ssdALl;
     }
@@ -80,7 +80,7 @@ public class SsdService {
         if (opt.isPresent()) {
             Ssd pm = opt.get();
             pm.setModel(ssd.getModel());
-            pm.setCategory(ssd.getCategory());
+//            pm.setCategory(ssd.getCategory());
             pm.setModel(ssd.getModel());
             return pm;
         } else {
@@ -96,14 +96,14 @@ public class SsdService {
             objSsdAux.setBrand(ssd.getBrand());
             objSsdAux.setModel(ssd.getModel());
             objSsdAux.setArrivalDate(ssd.getArrivalDate());
-            objSsdAux.setCategory(ssd.getCategory());
+//            objSsdAux.setCategory(ssd.getCategory());
             objSsdAux.setPurchasePrice(ssd.getPurchasePrice());
             objSsdAux.setPurchaseDate(ssd.getPurchaseDate());
             objSsdAux.setSaleValue(ssd.getSaleValue());
             objSsdAux.setSerialNumber(ssd.getSerialNumber());
             objSsdAux.setSize(ssd.getSize());
 
-            File filee = new File();
+            Img filee = new Img();
 
             filee.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
             filee.setContentType(file.getContentType());

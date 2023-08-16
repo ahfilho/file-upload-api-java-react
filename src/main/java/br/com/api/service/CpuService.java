@@ -1,9 +1,8 @@
 package br.com.api.service;
 
-import br.com.api.auth.JWTTokenHelper;
 import br.com.api.entity.Category;
 import br.com.api.entity.Cpu;
-import br.com.api.entity.File;
+import br.com.api.entity.Img;
 import br.com.api.repository.CategoryRepository;
 import br.com.api.repository.CpuRepository;
 import br.com.api.repository.FileRepository;
@@ -48,7 +47,7 @@ public class CpuService {
     public void save(Cpu cpu, MultipartFile file, Category category) throws IOException {
 
         Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
-        File img = new File();
+        Img img = new Img();
         Date dateNow = new Date();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 

@@ -59,7 +59,7 @@ public class Ssd {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SSD_ID")
-    private File image;
+    private Img img;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SSD_ID")

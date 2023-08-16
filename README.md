@@ -18,6 +18,7 @@ Lombok
 <hr>
 Tenologias utilizadas no front-end:
 React JS, Axios, Bootstrap
+
 <hr>
 
 Tenologia utilizada no banco:

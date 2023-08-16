@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "FILE")
-public class File {
+public class Img {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,6 +50,5 @@ public class File {
     @JoinColumn(name = "CPU_ID")
     private Cpu cpu;
 
-    public void getFile_size(Long size) {
-    }
+
 }
