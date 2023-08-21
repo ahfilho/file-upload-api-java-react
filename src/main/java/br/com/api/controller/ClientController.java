@@ -1,6 +1,9 @@
 package br.com.api.controller;
 
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import br.com.api.auth.JWTTokenHelper;
@@ -48,6 +51,7 @@ public class ClientController {
         Address address = client.getAddress();
         AddressDto addressDto = new AddressDto();
 
+        clientDto.setDataRegister(LocalDate.now());
         addressDto.setStreet(address.getStreet());
         addressDto.setNumber(address.getNumber());
         addressDto.setCity(address.getCity());
@@ -55,7 +59,7 @@ public class ClientController {
 
         try {
             clientService.clientSave(clientDto);
-            return ResponseEntity.status(HttpStatus.OK).body(String.format("Cliente: " + client.getName() + " cadastrado com sucesso!"));
+            return ResponseEntity.status(HttpStatus.OK).body(String.format(client.getName() + " cadastrado com sucesso. \n Cadastro realizado em: " + clientDto.getDataRegister()));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(String.format("Não foi possível cadastrar o cliente: " + clientDto.getName() + "."));
         }
