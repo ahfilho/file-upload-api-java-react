@@ -47,6 +47,7 @@ public class SsdController {
     public ResponseEntity<String> save(MultipartFile file, Ssd ssd, Category category) {
 
         try {
+            category.setProductCategory(String.valueOf(CategoryEnum.SSD));
             ssdPersistenceService.saveSsdWithFileAndCategory(file, ssd, category);
 
             return status(HttpStatus.OK)
