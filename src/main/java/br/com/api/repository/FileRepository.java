@@ -1,13 +1,19 @@
 package br.com.api.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import br.com.api.entity.Category;
 import br.com.api.entity.Img;
 import br.com.api.entity.Ssd;
+import org.springframework.data.repository.query.Param;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.transaction.Transactional;
 
 public interface FileRepository extends JpaRepository<Img, Long> {
 
@@ -20,5 +26,8 @@ public interface FileRepository extends JpaRepository<Img, Long> {
 	void save(Ssd pm);
 
 	void save(Category cpm);
+	@Query("SELECT f FROM Img f WHERE f.fileName = :fileName")
+	List<Img> deleteByName(@Param("fileName") String fileName);
+
 
 }

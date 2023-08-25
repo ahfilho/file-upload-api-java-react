@@ -1,5 +1,6 @@
 package br.com.api.service;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -27,7 +28,7 @@ import br.com.api.repository.FileRepository;
 @Service
 public class SsdService {
 
-    private final Path root = Paths.get("uploads");
+    private final Path root = Paths.get("uploads/");
     private final SsdRepository ssdRepository;
     private final CategoryRepository categoryRepository;
     private final FileRepository fileRepository;
@@ -122,11 +123,44 @@ public class SsdService {
     }
 
     public void deleteProduct(Long id) throws Exception {
-        Optional<Ssd> product = this.ssdRepository.findById(id);
+        Optional<Ssd> product = ssdRepository.findById(id);
         if (product.isPresent()) {
-            this.ssdRepository.delete(product.get());
+            Ssd ssd = product.get();
+
+            // Delete associated file
+            deleteFile(ssd.getImg().getFileName());
+            ssdRepository.delete(ssd);
+            fileRepository.delete(ssd.getImg());
         } else {
-            throw new Exception("Erro ao deletar");
+            throw new Exception("Produto não encontrado");
+        }
+    }
+
+    private void deleteFile(String fileName) {
+        List<Img> imgList = fileRepository.deleteByName(fileName);
+
+        for (Img img : imgList) {
+            fileRepository.delete(img);
+            String imgFileName = img.getFileName();
+            Path physicalFilePath = root.resolve(imgFileName);
+            File physicalFile = physicalFilePath.toFile();
+            if (physicalFile.exists()) {
+                File fil = new File("uploads");
+                physicalFile.delete();
+            }
+            File f = new File(String.valueOf(root));
+            if (f.isDirectory()) {
+                File[] fi = f.listFiles();
+
+                // Excluindo arquivos no diretório correspondentes aos objetos Img
+                for (File ff : fi) {
+                    for (Img im : imgList) {
+                        if (ff.getName().equals(im.getFileName())) {
+                            ff.delete();
+                        }
+                    }
+                }
+            }
         }
 
     }
