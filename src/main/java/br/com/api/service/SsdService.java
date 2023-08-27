@@ -14,6 +14,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import br.com.api.entity.Img;
+import br.com.api.enume.Condition;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -59,6 +60,13 @@ public class SsdService {
         ff.setContentType(file.getContentType());
         ff.setData(file.getBytes());
         ff.setFileSize(file.getSize());
+
+        if (ssd.getCondition().equals("NEW")) {
+            ssd.setCondition(String.valueOf(Condition.NEW));
+        } else {
+            ssd.setCondition(String.valueOf(Condition.USED));
+        }
+        // TODO FAZER UM BOTÃO RADIO NO FRONT
 
         this.ssdRepository.save(ssd);
         this.categoryRepository.save(category);
