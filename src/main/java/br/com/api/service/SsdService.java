@@ -148,19 +148,19 @@ public class SsdService {
                 File fil = new File("uploads");
                 physicalFile.delete();
             }
-            File f = new File(String.valueOf(root));
-            if (f.isDirectory()) {
-                File[] fi = f.listFiles();
-
-                // Excluindo arquivos no diretório correspondentes aos objetos Img
-                for (File ff : fi) {
-                    for (Img im : imgList) {
-                        if (ff.getName().equals(im.getFileName())) {
-                            ff.delete();
-                        }
-                    }
-                }
-            }
+//            File f = new File(String.valueOf(root));
+//            if (f.isDirectory()) {
+//                File[] fi = f.listFiles();
+//
+//                // Excluindo arquivos no diretório correspondentes aos objetos Img
+//                for (File ff : fi) {
+//                    for (Img im : imgList) {
+//                        if (ff.getName().equals(im.getFileName())) {
+//                            ff.delete();
+//                        }
+//                    }
+//                }
+//            }
         }
 
     }
