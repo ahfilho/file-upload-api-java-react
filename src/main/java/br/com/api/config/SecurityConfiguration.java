@@ -59,7 +59,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint).and()
                 .authorizeRequests((request -> request.antMatchers("/localhost:3000/**", "/localhost:9090/**",
-                                "/user/auth/login", "/client",
+                                "/user/auth/login", "/client", "/client/{id}",
                                 "/ssd", "/ssd/{id}", "/files/{id}",
                                 "/ssd/files/download", "/ssd/files/{id}", "/ssd/sale/day",
                                 "/cpu", "/cpu/{id}").permitAll()

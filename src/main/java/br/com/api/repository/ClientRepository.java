@@ -14,6 +14,6 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
     public List<Client> b();
 
     @Query("SELECT c FROM Client c WHERE c.cpf = ?1")
-    public List<Client> searchCpf(String cpf);
+    public Client clientWithSameCpf(String cpf);
 
 }

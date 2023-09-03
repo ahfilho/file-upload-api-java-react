@@ -25,8 +25,8 @@ public class SsdPersistenceService {
         this.buildFileLink = buildFileLink;
     }
 
-    public void saveSsdWithFileAndCategory(MultipartFile file, Ssd ssd, Category category) throws IOException {
-        ssdService.saveProductFileCategory(ssd, file, category);
+    public void SsdPersistence(MultipartFile file, Ssd ssd, Category category) throws IOException {
+        ssdService.saveSsd(ssd, file, category);
 
     }
 }
