@@ -8,9 +8,9 @@ const Home = () => {
     <div className="flex-container">
 
       <div class="container mt-3">
-        <h2>Meus produtos</h2>
+        {/* <h2>Meus produtos</h2> */}
         <p>Gerenciador de hardware novo/usado.
-         Cadastrar cliente/máquina.
+         Cadastrar cliente, máquina e produtos para venda.
         </p>
         <ul class="nav">
         <li class="nav-item">

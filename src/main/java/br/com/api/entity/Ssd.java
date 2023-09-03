@@ -20,41 +20,41 @@ public class Ssd {
     @Column(name = "SSD_ID")
     private Long id;
 
-    @Column(name = "brand")
+    @Column(name = "BRAND")
     @NotNull
     private String brand;
 
-    @Column(name = "serial_number", length = 17)
+    @Column(name = "SERIAL_NUMBER", length = 17)
     @NotNull
     private String serialNumber;
 
     @NotNull
-    @Column(name = "size_storage", length = 4)
+    @Column(name = "SIZE_STORAGE", length = 4)
     private String size;
 
     @NotNull
-    @Column(name = "purchase_price")
+    @Column(name = "PURCHASE_PRICE")
     private String purchasePrice;
 
     @NotNull
-    @Column(name = "purchase_date")
+    @Column(name = "PURCHASE_DATE")
     private String purchaseDate;
 
     @NotNull
-    @Column(name = "sale_value")
+    @Column(name = "SALE_SALUE")
     private float saleValue;
 
-    @Column(name = "arrival_date")
+    @Column(name = "ARRIVAL_DATE")
     private String arrivalDate;
 
-    @Column(name = "url")
+    @Column(name = "URL")
     private String url;
 
-    @Column(name = "amount")
+    @Column(name = "AMOUNT")
     private int amount;
 
     @NotNull
-    @Column(name = "model")
+    @Column(name = "MODEL")
     private String model;
 
     @OneToOne(fetch = FetchType.LAZY)

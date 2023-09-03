@@ -44,12 +44,10 @@ public class SsdController {
     }
 
     @PostMapping
-    public ResponseEntity<String> save(MultipartFile file, Ssd ssd, Category category) {
+    public ResponseEntity<String> saveSsd(MultipartFile file, Ssd ssd, Category category) {
 
         try {
-            category.setProductCategory(String.valueOf(CategoryEnum.SSD));
-            ssdPersistenceService.saveSsdWithFileAndCategory(file, ssd, category);
-
+            ssdPersistenceService.SsdPersistence(file, ssd, category);
             return status(HttpStatus.OK)
                     .body(String.format("Cadastro realizado com sucesso.: %s", file.getOriginalFilename()));
         } catch (Exception e) {
@@ -59,13 +57,12 @@ public class SsdController {
     }
 
     @GetMapping
-    public List<Ssd> listAllWithFileLink() {
+    public List<Ssd> listSsd() {
         return ssdService.listAllSsd().stream().map(buildFileLink::linkFile).collect(Collectors.toList());
     }
 
-
     @PutMapping("/{id}")
-    public ResponseEntity<String> update(String id, MultipartFile file, Ssd ssd, Category category) throws Exception {
+    public ResponseEntity<String> updateSsd(String id, MultipartFile file, Ssd ssd, Category category) throws Exception {
 
         try {
             Long convertStringToLong = Long.parseLong(id);
@@ -83,7 +80,7 @@ public class SsdController {
     }
 
     @DeleteMapping("/{id}")
-    public HttpStatus deleteProduct(@PathVariable Long id) throws Exception {
+    public HttpStatus deleteSsd(@PathVariable Long id) throws Exception {
         try {
             ssdService.deleteProduct(id);
             return HttpStatus.OK;
@@ -99,7 +96,6 @@ public class SsdController {
 
     @GetMapping("/sale/day")
     public List<String> listDayOfSale() {
-        searchSsd.listDayOfSale();
-        return listDayOfSale();
+        return searchSsd.listDayOfSale();
     }
 }

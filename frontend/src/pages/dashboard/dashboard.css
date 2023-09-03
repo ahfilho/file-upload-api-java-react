@@ -1,4 +1,20 @@
-h3{
-    color:white;
-    margin-top: 20%;
+h3 {
+    font-size: 20px;
+    color: white;
+    margin-top: 0%;
+    display: flex;
+    align-items: center; /* Alinha verticalmente ao centro */
 }
+
+h4 {
+    color: white;
+}
+.button-container {
+    display: flex;
+    align-items: center; /* Alinha verticalmente ao centro */
+  }
+  
+  .btn-primary {
+    margin-right: 10px; /* Espaço entre os botões */
+  }
+  
