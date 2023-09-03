@@ -57,10 +57,6 @@ public class Ssd {
     @Column(name = "MODEL")
     private String model;
 
-    @NotNull
-    @Column(name = "CONDITION")
-    private String condition;
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SSD_ID")
     private Img img;

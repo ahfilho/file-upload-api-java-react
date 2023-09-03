@@ -20,6 +20,10 @@ const SsdEdit = () => {
     saleValue: "",
     amount: ""
   });
+  const [img, setImg] = useState({
+    fileName: "",
+  });
+
   const [file, setFile] = useState("");
 
   useEffect(() => {
@@ -59,6 +63,8 @@ const SsdEdit = () => {
     formData.append("saleValue", ssd.saleValue);
     formData.append("amount", ssd.amount);
 
+    formData.append("fileName", img.fileName);
+
     axios
       .put(`${url}/${id}`, formData)
       .then((response) => {
@@ -79,10 +85,22 @@ const SsdEdit = () => {
       <br></br>
       <hr></hr>
       <form id="formulario" onSubmit={handleSubmit}>
+
         <div className="file">
           <input type="file" name="file"
             onChange={handleImage} />
         </div>
+        <br></br>
+        <div className="file">
+
+          <input name="file"
+            type={"text"}
+            id="fileName"
+            value={ssd.img.fileName}
+
+            onChange={handleImage} disabled />
+        </div>
+
 
         <div className="inputs">
           <input

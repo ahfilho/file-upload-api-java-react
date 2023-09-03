@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 
 import com.sun.istack.NotNull;
 
@@ -35,10 +36,12 @@ public class Client {
 
     @NotNull
     @Column(name = "cpf")
+    @Size(min = 11, max = 11)
     private String cpf;
 
     @NotNull
     @Column(name = "contact")
+    @Size(min = 11, max = 11)
     private String contact;
 
     @Column(name = "data_register")

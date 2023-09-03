@@ -1,5 +1,7 @@
 package br.com.api.service;
 
+import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,17 +30,24 @@ public class ClientService {
     @Autowired
     private SsdRepository ssdRepository;
 
-    public void clientSave(ClientDto clientDto) {
+    public void clientSave(Client client) {
         //TODO filtro para verificar se o cpf ja está cadastrado e assim não permitir repetições
-        clientRepository.save(clientDto);
+        client.setDataRegister(LocalDate.now());
+        clientRepository.save(client);
     }
 
     public List<Client> clientList() throws Exception {
         List<Client> clientList = clientRepository.findAll();
+
+        clientList.sort(Comparator.comparing(Client::getName));
+        for (Client client : clientList) {
+            Client client1 = client.getAddress().getClient();
+            System.out.println(client1);
+        }
         if (clientList.isEmpty()) {
             System.out.println("Não existe cliente cadastrado.");
         }
-        return this.clientRepository.findAll();
+        return clientList;
     }
 
     public Client clientUpdate(Client client) throws Exception {
@@ -64,8 +73,4 @@ public class ClientService {
         }
     }
 
-    public String searchCpf(String cpf) {
-        List<Client> cli = clientRepository.searchCpf(cpf);
-        return cpf;
-    }
 }
