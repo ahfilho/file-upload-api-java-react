@@ -6,6 +6,7 @@ import NavBar from "../../navbar/NavBar";
 import "./SsdList.css";
 import { Button } from "bootstrap";
 
+
 class SsdList extends Component {
 
   state = {
@@ -76,8 +77,8 @@ class SsdList extends Component {
               <td>{ssd.purchasePrice}</td>
               {/* <td>{ssd.arrivalDate}</td> */}
               <td>{ssd.saleValue}</td>
-              <td>{ssd.img ? ssd.img.fileName : ""}</td>
-              <td>{ssd.img ? ssd.img.fileSize : ""}</td>
+              <td>{ssd.img ? ssd.img.fileName : "N/A "}</td>
+              <td>{ssd.img ? ssd.img.fileSize : "N/A "}</td>
 
               <td>
                 <a href={ssd.url}><i class="fas fa-download"></i></a>

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.api.auth.JWTTokenHelper;
+import br.com.api.controller.extension.SsdControllerExtension;
 import br.com.api.enume.CategoryEnum;
 import br.com.api.persistence.SsdPersistenceService;
 import br.com.api.search.SearchSsd;
@@ -89,13 +90,28 @@ public class SsdController {
         }
     }
 
-    @GetMapping("/{id}")
-    public Ssd searchForId(@PathVariable Long id) throws Exception {
-        return searchSsd.searchForId(id);
+    @GetMapping("/redirect/{param}")
+    public ResponseEntity<?> newResources(@PathVariable String param) throws Exception {
+        SsdControllerExtension sec = new SsdControllerExtension(jwtTokenHelper);
+
+        if ("list".equals(param)) {
+            List<String> list = sec.listDayOfSale();
+            return ResponseEntity.status(HttpStatus.OK).body(list);
+        } else {
+            try {
+                Long id = Long.parseLong(param);
+                Ssd ssd = sec.searchForId(id);
+                if (ssd != null) {
+                    return ResponseEntity.status(HttpStatus.OK).body(ssd);
+                } else {
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nada encontrado para o ID: " + id);
+                }
+            } catch (NumberFormatException ex) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Parâmetro inválido: " + param);
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao processar a solicitação");
+            }
+        }
     }
 
-    @GetMapping("/sale/day")
-    public List<String> listDayOfSale() {
-        return searchSsd.listDayOfSale();
-    }
 }

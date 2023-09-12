@@ -5,5 +5,6 @@ import java.nio.file.Paths;
 
 public interface FilePath {
 
-    public final Path root = Paths.get("uploads");
+    public final Path rootCpu = Paths.get("uploads/cpu");
+    public final Path rootSsd = Paths.get("uploads/ssd");
 }

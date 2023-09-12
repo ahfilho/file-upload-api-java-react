@@ -9,13 +9,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.List;
 import javax.transaction.Transactional;
 
+import br.com.api.FilePath;
 import br.com.api.entity.Img;
 import br.com.api.enume.CategoryEnum;
-import br.com.api.enume.Condition;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,7 +31,7 @@ import br.com.api.repository.FileRepository;
 @Service
 public class SsdService {
 
-    private final Path root = Paths.get("uploads/");
+    private final Path rootSsd = Paths.get("uploads/ssd");
     private final SsdRepository ssdRepository;
     private final CategoryRepository categoryRepository;
     private final FileRepository fileRepository;
@@ -45,7 +46,7 @@ public class SsdService {
     public void init() {
 
         try {
-            Files.createDirectory(root);
+            Files.createDirectory(rootSsd);
         } catch (IOException e) {
             throw new RuntimeException("erro ao inicializar o diretório");
         }
@@ -53,7 +54,7 @@ public class SsdService {
 
     public void saveSsd(Ssd ssd, MultipartFile file, Category category)
             throws IOException {
-        Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
+        Files.copy(file.getInputStream(), this.rootSsd.resolve(file.getOriginalFilename()));
         Img img = new Img();
         category.setProductCategory(String.valueOf(CategoryEnum.SSD));
         img.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
@@ -122,42 +123,46 @@ public class SsdService {
     }
 
     public void deleteProduct(Long id) throws Exception {
-        Optional<Ssd> product = ssdRepository.findById(id);
-        if (product.isPresent()) {
-            Ssd ssd = product.get();
-            deleteFile(ssd.getImg().getFileName());
-            ssdRepository.delete(ssd);
-            fileRepository.delete(ssd.getImg());
-        } else {
-            throw new Exception("Produto não encontrado");
+        Optional<Ssd> ssdOptional = ssdRepository.findById(id);
+        if (ssdOptional.isPresent()) {
+            Ssd ssd = ssdOptional.get();
+            if (ssd.getImg().getFileName() != null) {
+                String fileName = ssd.getImg().getFileName();
+
+                System.out.println(ssd.getImg().getFileName());
+
+                deleteFile(fileName);
+                ssdRepository.delete(ssdOptional.get());
+                fileRepository.delete(ssd.getImg());
+            } else {
+                throw new Exception("Produto não encontrado");
+            }
         }
     }
 
+
     private void deleteFile(String fileName) {
-        List<Img> imgList = fileRepository.deleteByName(fileName);
+        List<Img> imgList = fileRepository.findByName(fileName);
 
         for (Img img : imgList) {
             fileRepository.delete(img);
             String imgFileName = img.getFileName();
-            Path physicalFilePath = root.resolve(imgFileName);
+            Path physicalFilePath = rootSsd.resolve(imgFileName);
             File physicalFile = physicalFilePath.toFile();
+            File[] files = new File(String.valueOf(FilePath.rootCpu)).listFiles();
+            System.out.println(Arrays.toString(files));
+            System.out.println();
+
+            for (File f : files
+            ) {
+
+                System.out.println(f.getName());
+
+            }
             if (physicalFile.exists()) {
-                File fil = new File("uploads");
+                File fil = new File("uploads/ssd");
                 physicalFile.delete();
             }
-//            File f = new File(String.valueOf(root));
-//            if (f.isDirectory()) {
-//                File[] fi = f.listFiles();
-//
-//                // Excluindo arquivos no diretório correspondentes aos objetos Img
-//                for (File ff : fi) {
-//                    for (Img im : imgList) {
-//                        if (ff.getName().equals(im.getFileName())) {
-//                            ff.delete();
-//                        }
-//                    }
-//                }
-//            }
         }
 
     }

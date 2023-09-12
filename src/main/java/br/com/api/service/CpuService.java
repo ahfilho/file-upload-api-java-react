@@ -1,8 +1,10 @@
 package br.com.api.service;
 
+import br.com.api.FilePath;
 import br.com.api.entity.Category;
 import br.com.api.entity.Cpu;
 import br.com.api.entity.Img;
+import br.com.api.enume.CategoryEnum;
 import br.com.api.repository.CategoryRepository;
 import br.com.api.repository.CpuRepository;
 import br.com.api.repository.FileRepository;
@@ -11,12 +13,14 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -25,20 +29,20 @@ import java.util.Optional;
 @Transactional
 public class CpuService {
 
-    private final Path root = Paths.get("uploads");
+    private final Path rootCpu = Paths.get("uploads/cpu");
     private final CpuRepository cpuRepository;
     private final CategoryRepository categoryRepository;
-    private final FileRepository offerImageRepository;
+    private final FileRepository fileRepository;
 
-    public CpuService(CpuRepository cpuRepository, CategoryRepository categoryRepository, FileRepository offerImageRepository) {
+    public CpuService(CpuRepository cpuRepository, CategoryRepository categoryRepository, FileRepository fileRepository) {
         this.cpuRepository = cpuRepository;
         this.categoryRepository = categoryRepository;
-        this.offerImageRepository = offerImageRepository;
+        this.fileRepository = fileRepository;
     }
 
     public void init() {
         try {
-            Files.createDirectory(root);
+            Files.createDirectory(rootCpu);
         } catch (IOException e) {
             throw new RuntimeException("ERRO AO INICIALIZAR O DIRETÓRIO");
         }
@@ -46,7 +50,8 @@ public class CpuService {
 
     public void save(Cpu cpu, MultipartFile file, Category category) throws IOException {
 
-        Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
+        Files.copy(file.getInputStream(), this.rootCpu.resolve(file.getOriginalFilename()));
+        category.setProductCategory(String.valueOf(CategoryEnum.CPU));
         Img img = new Img();
         Date dateNow = new Date();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -58,7 +63,7 @@ public class CpuService {
 
         this.cpuRepository.save(cpu);
         this.categoryRepository.save(category);
-        this.offerImageRepository.save(img);
+        this.fileRepository.save(img);
 
     }
 
@@ -66,12 +71,44 @@ public class CpuService {
         return this.cpuRepository.findAll();
     }
 
-    public void delete(Long cpu) throws Exception {
-        Optional<Cpu> c = this.cpuRepository.findById(cpu);
-        if (c.isPresent()) {
-            this.cpuRepository.delete(c.get());
+    public void delete(Long id) throws Exception {
+        Optional<Cpu> cpuOptional = this.cpuRepository.findById(id);
+        if (cpuOptional.isPresent()) {
+            Cpu objetoCpu = cpuOptional.get();
+            if (objetoCpu.getImg().getFileName() != null) {
+                String fileName = objetoCpu.getImg().getFileName();
+                deleteFile(fileName);
+                this.cpuRepository.delete(cpuOptional.get());
+                fileRepository.delete(objetoCpu.getImg());
+            }
         } else {
-            throw new Exception(("ERRO AO DELETAR CPU" + cpu));
+            throw new Exception(("ERRO AO DELETAR CPU"));
+        }
+    }
+
+    private void deleteFile(String fileName) {
+        List<Img> imgList = fileRepository.findByName(fileName);
+
+        for (Img img : imgList) {
+            fileRepository.delete(img);
+            String imgFileName = img.getFileName();
+            Path physicalFilePath = rootCpu.resolve(imgFileName);
+            File physicalFile = physicalFilePath.toFile();
+            File[] files = new File(String.valueOf(FilePath.rootCpu)).listFiles();
+            System.out.println(Arrays.toString(files));
+            System.out.println();
+
+            for (File f : files
+            ) {
+
+                System.out.println(f.getName());
+
+            }
+            if (physicalFile.exists()) {
+                File fil = new File("uploads/cpu");
+                physicalFile.delete();
+            }
+
         }
     }
 
