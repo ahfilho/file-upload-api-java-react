@@ -35,19 +35,19 @@ public class Img {
     @JsonIgnore
     private byte[] data;
 
-    @JsonIgnore
+//    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "SSD_ID")
+//    @JoinColumn(name = "SSD_ID")
     private Ssd ssdAbstract;
 
-    @JsonIgnore
+//    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "RAM_ID")
+//    @JoinColumn(name = "RAM_ID")
     private Ram ram;
 
-    @JsonIgnore
+//    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CPU_ID")
+//    @JoinColumn(name = "CPU_ID")
     private Cpu cpu;
 
 
