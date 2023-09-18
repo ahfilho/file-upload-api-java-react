@@ -57,20 +57,13 @@ public class Ssd {
     @Column(name = "MODEL")
     private String model;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "SSD_ID")
     private Img img;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "SSD_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CATEGORY_ID")
     private Category category;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CPU_ID")
-    private Cpu cpu;
-
-    @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "SSD_ID")
-    private Client client;
 }
+

@@ -13,14 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.File;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/url/cpu")
 public class BuildFileLinkCpu implements FileLinkCreatorCpu {
 
-    private  final FileRepository fileRepository;
+    private final FileRepository fileRepository;
 
     public BuildFileLinkCpu(FileRepository fileRepository) {
         this.fileRepository = fileRepository;
@@ -29,28 +31,34 @@ public class BuildFileLinkCpu implements FileLinkCreatorCpu {
     @GetMapping("/files/{id}")
     public Cpu linkFile(Cpu cpu) {
 
-        FileRepository fileRepository;
-        File[] files = new File(String.valueOf(FilePath.rootCpu)).listFiles();
-        System.out.println(Arrays.toString(files));
+        List<File> files = List.of(new File(String.valueOf(FilePath.rootCpu)).listFiles());
+        List<Img> listImg = fileRepository.findAll();
 
-        Img img = new Img();
-        System.out.println();
+        List<String> listaNomeDeImagemDoBanco = listImg.stream().map(Img::getFileName).collect(Collectors.toList());
+        List<String> listaNomeDeImagemDiretorio = files.stream().map(File::getName).collect(Collectors.toList());
 
-        for (File f : files
+        List<String> imagensEmComum = listaNomeDeImagemDoBanco.stream().filter(listaNomeDeImagemDiretorio::contains).collect(Collectors.toList());
+
+        List<String> linkParaImagemEmComum = new ArrayList<>();
+
+        String download = null;
+        for (String nomeDaImagem : imagensEmComum
         ) {
+            Img img1 = listImg.stream().filter(i -> i.getFileName().equals(nomeDaImagem)).findFirst().orElse(null);
 
-                System.out.println(f.getName());
-
-
-
-            String download = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/").path(String.valueOf(cpu.getId()))
-                    .toUriString();
-            cpu.setId(cpu.getId());
-            cpu.setUrl(download);
-            System.out.println(download);
-
+            if (img1 != null) {
+                download = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/").path(String.valueOf(cpu.getImg().getId()))
+                        .toUriString();
+                cpu.setImg(img1);
+                cpu.setId(cpu.getId());
+                cpu.setUrl(download);
+                linkParaImagemEmComum.add(download);
+            }
         }
-        return cpu;
 
+        cpu.setUrl(download);
+
+        return cpu;
     }
+
 }

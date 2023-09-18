@@ -61,6 +61,8 @@ public class CpuService {
         img.setData(file.getBytes());
         img.setFileSize(file.getSize());
 
+        cpu.setImg(img);
+
         this.cpuRepository.save(cpu);
         this.categoryRepository.save(category);
         this.fileRepository.save(img);
@@ -69,6 +71,7 @@ public class CpuService {
 
     public List<Cpu> listAll() {
         return this.cpuRepository.findAll();
+
     }
 
     public void delete(Long id) throws Exception {

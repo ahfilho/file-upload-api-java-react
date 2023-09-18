@@ -21,20 +21,20 @@ public class Category {
     @Column(name = "product_category")
     private String productCategory;
 
-    @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "SSD_ID")
-    private Ssd ssdAbstract;
-
-    @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "RAM_ID")
-    private Ram ram;
-
-    @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "CPU_ID")
-    private Cpu cpu;
+//    @JsonIgnore
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "SSD_ID")
+//    private Ssd ssdAbstract;
+//
+//    @JsonIgnore
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "RAM_ID")
+//    private Ram ram;
+//
+//    @JsonIgnore
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "CPU_ID")
+//    private Cpu cpu;
 
 
 }
