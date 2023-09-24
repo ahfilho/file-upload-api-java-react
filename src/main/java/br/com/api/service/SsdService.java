@@ -145,14 +145,13 @@ public class SsdService {
 
     private void deleteFile(String fileName) {
         List<Img> imgList = fileRepository.findByName(fileName);
-        File[] files = new File(String.valueOf(FilePath.rootSsd)).listFiles();
-
 
         for (Img img : imgList) {
             fileRepository.delete(img);
             String imgFileName = img.getFileName();
             Path physicalFilePath = rootSsd.resolve(imgFileName);
             File physicalFile = physicalFilePath.toFile();
+            File[] files = new File(String.valueOf(FilePath.rootSsd)).listFiles();
             System.out.println(Arrays.toString(files));
             System.out.println();
 
