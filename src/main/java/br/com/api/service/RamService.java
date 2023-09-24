@@ -13,9 +13,9 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import br.com.api.entity.Category;
-import br.com.api.entity.Img;
+import br.com.api.entity.ImgSsd;
 import br.com.api.repository.CategoryRepository;
-import br.com.api.repository.FileRepository;
+import br.com.api.repository.SsdFileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +35,7 @@ public class RamService {
     @Autowired
     private CategoryRepository categoryRepository;
     @Autowired
-    private FileRepository offerImageRepository;
+    private SsdFileRepository offerImageRepository;
 
 
     public void ramSave(Ram ram, MultipartFile file, Category category) throws IOException {
@@ -48,7 +48,7 @@ public class RamService {
 //        ram.setArrivalDate(dateAtual);
 //        ram.setPurchaseDate(dateAtual);
 
-        Img img = new Img();
+        ImgSsd img = new ImgSsd();
 
         img.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
         img.setContentType(file.getContentType());

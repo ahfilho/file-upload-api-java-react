@@ -13,9 +13,8 @@ import java.util.Optional;
 import java.util.List;
 import javax.transaction.Transactional;
 
-import br.com.api.entity.Img;
+import br.com.api.entity.ImgSsd;
 import br.com.api.enume.CategoryEnum;
-import br.com.api.enume.Condition;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,28 +23,28 @@ import br.com.api.entity.Category;
 import br.com.api.entity.Ssd;
 import br.com.api.repository.CategoryRepository;
 import br.com.api.repository.SsdRepository;
-import br.com.api.repository.FileRepository;
+import br.com.api.repository.SsdFileRepository;
 
 @Transactional
 @Service
 public class SsdService {
 
-    private final Path root = Paths.get("uploads/");
+    private final Path rootSsd = Paths.get("uploads/ssd");
     private final SsdRepository ssdRepository;
     private final CategoryRepository categoryRepository;
-    private final FileRepository fileRepository;
+    private final SsdFileRepository ssdFileRepository;
 
-    public SsdService(SsdRepository ssdRepository, CategoryRepository categoryRepository, FileRepository fileRepository) {
+    public SsdService(SsdRepository ssdRepository, CategoryRepository categoryRepository, SsdFileRepository fileRepository) {
         this.ssdRepository = ssdRepository;
         this.categoryRepository = categoryRepository;
-        this.fileRepository = fileRepository;
+        this.ssdFileRepository = fileRepository;
 
     }
 
     public void init() {
 
         try {
-            Files.createDirectory(root);
+            Files.createDirectory(rootSsd);
         } catch (IOException e) {
             throw new RuntimeException("erro ao inicializar o diretório");
         }
@@ -53,27 +52,23 @@ public class SsdService {
 
     public void saveSsd(Ssd ssd, MultipartFile file, Category category)
             throws IOException {
-        Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
-        Img img = new Img();
+        Files.copy(file.getInputStream(), this.rootSsd.resolve(file.getOriginalFilename()));
+        ImgSsd imgSsd = new ImgSsd();
         category.setProductCategory(String.valueOf(CategoryEnum.SSD));
-        img.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
-        img.setContentType(file.getContentType());
-        img.setData(file.getBytes());
-        img.setFileSize(file.getSize());
+        imgSsd.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
+        imgSsd.setContentType(file.getContentType());
+        imgSsd.setData(file.getBytes());
+        imgSsd.setFileSize(file.getSize());
 
         this.ssdRepository.save(ssd);
         this.categoryRepository.save(category);
-        this.fileRepository.save(img);
+        this.ssdFileRepository.save(imgSsd);
 
     }
 
     public List<Ssd> listAllSsd() {
-        List<Ssd> ssdALl = ssdRepository.findAll();
-        for (Ssd s : ssdALl
-        ) {
-            System.out.println(s.getBrand());
-        }
-        return ssdALl;
+        return ssdRepository.findAll();
+
     }
 
     //Não tem uso
@@ -103,7 +98,7 @@ public class SsdService {
             objSsdAux.setSerialNumber(ssd.getSerialNumber());
             objSsdAux.setSize(ssd.getSize());
 
-            Img filee = new Img();
+            ImgSsd filee = new ImgSsd();
 
             filee.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
             filee.setContentType(file.getContentType());
@@ -112,7 +107,7 @@ public class SsdService {
 
             this.ssdRepository.save(objSsdAux);
             this.categoryRepository.save(category);
-            this.fileRepository.save(filee);
+            this.ssdFileRepository.save(filee);
 
             return objSsdAux;
         } else {
@@ -125,24 +120,24 @@ public class SsdService {
         Optional<Ssd> product = ssdRepository.findById(id);
         if (product.isPresent()) {
             Ssd ssd = product.get();
-            deleteFile(ssd.getImg().getFileName());
+            deleteFile(ssd.getImgSsd().getFileName());
             ssdRepository.delete(ssd);
-            fileRepository.delete(ssd.getImg());
+            ssdFileRepository.delete(ssd.getImgSsd());
         } else {
             throw new Exception("Produto não encontrado");
         }
     }
 
     private void deleteFile(String fileName) {
-        List<Img> imgList = fileRepository.deleteByName(fileName);
+        List<ImgSsd> imgList = ssdFileRepository.deleteByName(fileName);
 
-        for (Img img : imgList) {
-            fileRepository.delete(img);
+        for (ImgSsd img : imgList) {
+            ssdFileRepository.delete(img);
             String imgFileName = img.getFileName();
-            Path physicalFilePath = root.resolve(imgFileName);
+            Path physicalFilePath = rootSsd.resolve(imgFileName);
             File physicalFile = physicalFilePath.toFile();
             if (physicalFile.exists()) {
-                File fil = new File("uploads");
+                File fileSsdImg = new File("uploads");
                 physicalFile.delete();
             }
 //            File f = new File(String.valueOf(root));

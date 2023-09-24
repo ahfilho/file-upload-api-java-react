@@ -17,8 +17,7 @@ public class BuildFileLinkCpu implements FileLinkCreatorCpu {
     @GetMapping("/files/{id}")
     public Cpu linkFile(Cpu cpu) {
 
-        Long l1 = cpu.getId();
-        String download = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/").path(Long.toString(l1))
+        String download = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/").path(String.valueOf(cpu.getId()))
                 .toUriString();
         cpu.setId(cpu.getId());
         cpu.setUrl(download);

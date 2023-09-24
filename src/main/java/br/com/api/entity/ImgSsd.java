@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "FILE")
-public class Img {
+@Table(name = "FILE_SSD")
+public class ImgSsd {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,15 +40,6 @@ public class Img {
     @JoinColumn(name = "SSD_ID")
     private Ssd ssdAbstract;
 
-    @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "RAM_ID")
-    private Ram ram;
-
-    @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CPU_ID")
-    private Cpu cpu;
 
 
 }

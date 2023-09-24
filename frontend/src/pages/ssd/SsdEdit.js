@@ -20,9 +20,7 @@ const SsdEdit = () => {
     saleValue: "",
     amount: ""
   });
-  const [img, setImg] = useState({
-    fileName: "",
-  });
+ 
 
   const [file, setFile] = useState("");
 
@@ -63,7 +61,6 @@ const SsdEdit = () => {
     formData.append("saleValue", ssd.saleValue);
     formData.append("amount", ssd.amount);
 
-    formData.append("fileName", img.fileName);
 
     axios
       .put(`${url}/${id}`, formData)
@@ -91,15 +88,7 @@ const SsdEdit = () => {
             onChange={handleImage} />
         </div>
         <br></br>
-        <div className="file">
-
-          <input name="file"
-            type={"text"}
-            id="fileName"
-            value={ssd.img.fileName}
-
-            onChange={handleImage} disabled />
-        </div>
+        
 
 
         <div className="inputs">

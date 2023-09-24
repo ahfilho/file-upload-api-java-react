@@ -3,7 +3,6 @@ package br.com.api.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -59,18 +58,14 @@ public class Ssd {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SSD_ID")
-    private Img img;
+    private ImgSsd imgSsd;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SSD_ID")
     private Category category;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CPU_ID")
-    private Cpu cpu;
-
-    @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "SSD_ID")
-    private Client client;
+//    @JsonIgnore
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "SSD_ID")
+//    private Client client;
 }

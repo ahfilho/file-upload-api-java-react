@@ -17,8 +17,7 @@ public class BuildFileLinkSsd implements FileLinkCreatorSsd {
     @GetMapping("/files/{id}")
     public Ssd linkFile(Ssd ssd) {
 
-        Long l1 = ssd.getId();
-        String download = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/").path(Long.toString(l1))
+        String download = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/").path(String.valueOf(ssd.getId()))
                 .toUriString();
         ssd.setId(ssd.getId());
         ssd.setUrl(download);

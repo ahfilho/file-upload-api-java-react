@@ -77,10 +77,10 @@ class CpuList extends Component {
               <td>{cpu.purchaseDate}</td>
               <td>{cpu.purchasePrice}</td>
               {/* <td>{cpu.dateOfSale}</td> */}
-              
+
               <td>{cpu.saleValue}</td>
-              <td>{cpu.img ? cpu.img.fileName : ""}</td>
-              <td>{cpu.img ? cpu.img.fileSize : ""}</td>
+              <td>{cpu.imgCpu ? cpu.imgCpu.fileName : ""}</td>
+              <td>{cpu.imgCpu ? cpu.imgCpu.fileSize : ""}</td>
 
               <td>
                 <a href={cpu.url}><i class="fas fa-download"></i></a>
