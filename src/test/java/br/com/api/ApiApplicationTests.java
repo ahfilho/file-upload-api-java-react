@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -15,7 +14,7 @@ import br.com.api.controller.SacController;
 import br.com.api.controller.RamController;
 import br.com.api.repository.ClientRepository;
 import br.com.api.service.ClientService;
-import br.com.api.service.FileService;
+import br.com.api.service.SsdFileService;
 import br.com.api.service.SacService;
 import br.com.api.service.RamService;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
@@ -39,7 +38,7 @@ class ApiApplicationTests {
 	private FileUploadController ioc;
 
 	@MockBean
-	private FileService ios;
+	private SsdFileService ios;
 
 	@Autowired
 	private SacController sacController;

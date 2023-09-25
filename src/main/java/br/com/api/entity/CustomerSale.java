@@ -20,16 +20,16 @@ public class CustomerSale {
     @Column(name = "CUSTOMER_ID")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "NAME")
     private String name;
 
-    @Column(name = "cpf")
+    @Column(name = "CPF")
     private String cpf;
 
-    @Column(name = "email")
+    @Column(name = "EMAIL")
     private String email;
 
-    @Column(name = "contact")
+    @Column(name = "CONTACT")
     private String contact;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

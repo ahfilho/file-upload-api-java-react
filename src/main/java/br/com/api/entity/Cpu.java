@@ -19,42 +19,42 @@ public class Cpu {
     @Column(name = "CPU_ID")
     private Long id;
 
-    @Column(name = "brand")
+    @Column(name = "BRAND")
     private String brand;
 
-    @Column(name = "serial_number")
+    @Column(name = "SERIAL_NUMBER")
     private String serialNumber;
 
-    @Column(name = "model")
+    @Column(name = "MODEL")
     private String model;
 
-    @Column(name = "purchase_price")
+    @Column(name = "PURCHASE_PRICE")
     private float purchasePrice;
 
-    @Column(name = "purchase_date")
+    @Column(name = "PURCHASE_DATE")
     private String purchaseDate;
 
-    @Column(name = "sale_value")
+    @Column(name = "SALE_VALUE")
     private float saleValue;
 
-    @Column(name = "arrival_date")
+    @Column(name = "ARRIVAL_DATE")
     private String arrivalDate;
 
-    @Column(name = "core")
+    @Column(name = "CORE")
     private int coreCount;
 
-    @Column(name = "threads")
+    @Column(name = "THREADS")
     private int threadCount;
 
-    @Column(name = "clock")
+    @Column(name = "CLOCK")
     private float clockCount;
 
-    @Column(name = "url")
+    @Column(name = "URL")
     private String url;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "CPU_ID")
-    private Img img;
+    private ImgCpu imgCpu;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "CATEGORY_ID")

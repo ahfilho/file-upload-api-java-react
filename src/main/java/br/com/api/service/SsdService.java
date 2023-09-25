@@ -15,7 +15,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import br.com.api.FilePath;
-import br.com.api.entity.Img;
+import br.com.api.entity.ImgSsd;
 import br.com.api.enume.CategoryEnum;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -55,14 +55,14 @@ public class SsdService {
     public void saveSsd(Ssd ssd, MultipartFile file, Category category)
             throws IOException {
         Files.copy(file.getInputStream(), this.rootSsd.resolve(file.getOriginalFilename()));
-        Img img = new Img();
+        ImgSsd img = new ImgSsd();
         category.setProductCategory(String.valueOf(CategoryEnum.SSD));
         img.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
         img.setContentType(file.getContentType());
         img.setData(file.getBytes());
         img.setFileSize(file.getSize());
 
-        ssd.setImg(img);
+        ssd.setImgSsd(img);
 
         this.ssdRepository.save(ssd);
         this.categoryRepository.save(category);
@@ -71,29 +71,13 @@ public class SsdService {
     }
 
     public List<Ssd> listAllSsd() {
-        List<Ssd> ssdALl = ssdRepository.findAll();
-        for (Ssd s : ssdALl
-        ) {
-            System.out.println(s.getBrand());
-        }
-        return ssdALl;
-    }
+        return ssdRepository.findAll();
 
-    //Não tem uso
-    public Ssd updateSsd(Ssd ssd) throws Exception {
-        Optional<Ssd> result = this.ssdRepository.findById(ssd.getId());
-        if (result.isPresent()) {
-            Ssd pm = result.get();
-            pm.setModel(ssd.getModel());
-            pm.setModel(ssd.getModel());
-            return pm;
-        } else {
-            throw new Exception("Erro ao atualizar o produto, categoria e a imagem." + ssd.getId());
-        }
     }
 
     public Ssd update(Ssd ssd, MultipartFile file, Category category) throws Exception {
         Optional<Ssd> optSsd = this.ssdRepository.findById(ssd.getId());
+
         if (optSsd.isPresent()) {
 
             Ssd objSsdAux = optSsd.get();
@@ -106,7 +90,7 @@ public class SsdService {
             objSsdAux.setSerialNumber(ssd.getSerialNumber());
             objSsdAux.setSize(ssd.getSize());
 
-            Img filee = new Img();
+            ImgSsd filee = new ImgSsd();
 
             filee.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
             filee.setContentType(file.getContentType());
@@ -128,14 +112,14 @@ public class SsdService {
         Optional<Ssd> ssdOptional = ssdRepository.findById(id);
         if (ssdOptional.isPresent()) {
             Ssd ssd = ssdOptional.get();
-            if (ssd.getImg().getFileName() != null) {
-                String fileName = ssd.getImg().getFileName();
+            if (ssd.getImgSsd().getFileName() != null) {
+                String fileName = ssd.getImgSsd().getFileName();
 
-                System.out.println(ssd.getImg().getFileName());
+                System.out.println(ssd.getImgSsd().getFileName());
 
                 deleteFile(fileName);
                 ssdRepository.delete(ssdOptional.get());
-                fileRepository.delete(ssd.getImg());
+                fileRepository.delete(ssd.getImgSsd());
             } else {
                 throw new Exception("Produto não encontrado");
             }
@@ -144,9 +128,9 @@ public class SsdService {
 
 
     private void deleteFile(String fileName) {
-        List<Img> imgList = fileRepository.findByName(fileName);
+        List<ImgSsd> imgList = fileRepository.findByName(fileName);
 
-        for (Img img : imgList) {
+        for (ImgSsd img : imgList) {
             fileRepository.delete(img);
             String imgFileName = img.getFileName();
             Path physicalFilePath = rootSsd.resolve(imgFileName);

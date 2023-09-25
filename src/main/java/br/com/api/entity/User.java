@@ -36,19 +36,19 @@ public class User implements UserDetails {
     @Column(name = "UPDATED_ON")
     private Date updatedAt;
 
-    @Column(name = "first_name")
+    @Column(name = "FIRST_NAME")
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "LAST_NAME")
     private String lastName;
 
-    @Column(name = "email")
+    @Column(name = "EMAIL")
     private String email;
 
-    @Column(name = "phone_number")
+    @Column(name = "´PHONE_NUMBER")
     private String phoneNumber;
 
-    @Column(name = "enabled")
+    @Column(name = "ENABLED")
     private boolean enabled = true;
 
 

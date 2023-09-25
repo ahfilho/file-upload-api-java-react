@@ -77,8 +77,8 @@ class SsdList extends Component {
               <td>{ssd.purchasePrice}</td>
               {/* <td>{ssd.arrivalDate}</td> */}
               <td>{ssd.saleValue}</td>
-              <td>{ssd.img ? ssd.img.fileName : "N/A "}</td>
-              <td>{ssd.img ? ssd.img.fileSize : "N/A "}</td>
+              <td>{ssd.imgSsd ? ssd.imgSsd.fileName : "N/A "}</td>
+              <td>{ssd.imgSsd ? ssd.imgSsd.fileSize : "N/A "}</td>
 
               <td>
                 <a href={ssd.url}><i class="fas fa-download"></i></a>

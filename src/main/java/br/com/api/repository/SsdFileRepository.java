@@ -7,10 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 
 import br.com.api.entity.Category;
 import br.com.api.entity.ImgSsd;
-import br.com.api.entity.Ssd;
 import org.springframework.data.repository.query.Param;
 
-public interface FileRepository extends JpaRepository<ImgSsd, Long> {
+public interface SsdFileRepository extends JpaRepository<ImgSsd, Long> {
 
 	@Query(value = "SELECT * FROM ImgSsd", nativeQuery = true)
 	public List<ImgSsd> consulta_personalizada();
@@ -18,11 +17,9 @@ public interface FileRepository extends JpaRepository<ImgSsd, Long> {
 	@Query(value = "SELECT * FROM ImgSsd", nativeQuery = true)
 	public List<ImgSsd> terca();
 
-	void save(Ssd pm);
-
 	void save(Category cpm);
 	@Query("SELECT f FROM ImgSsd f WHERE f.fileName = :fileName")
-	List<ImgSsd> findByName(@Param("fileName") String fileName);
+	List<ImgSsd> deleteByName(@Param("fileName") String fileName);
 
 
 }

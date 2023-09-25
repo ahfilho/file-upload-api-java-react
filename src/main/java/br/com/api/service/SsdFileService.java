@@ -8,47 +8,53 @@ import java.util.Optional;
 import java.util.List;
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import br.com.api.entity.Ssd;
+import br.com.api.repository.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.api.entity.Category;
-import br.com.api.entity.Img;
-import br.com.api.entity.Ssd;
-import br.com.api.repository.FileRepository;
+import br.com.api.entity.ImgSsd;
 
 @Transactional
 @Service
-public class FileService {
+public class SsdFileService {
 
-	private final Path root = Paths.get("uploadFile");
+	private final Path rootSsd = Paths.get("uploads/ssd");
+	private final CategoryRepository categoryRepository;
+	private final SsdFileRepository ssdFileRepository;
+	private final SsdRepository ssdRepository;
 
-	@Autowired
-	private FileRepository ofertasRepository;
+
+	public SsdFileService(CategoryRepository categoryRepository, SsdFileRepository ssdFileRepository, SsdRepository ssdRepository) {
+		this.categoryRepository = categoryRepository;
+		this.ssdFileRepository = ssdFileRepository;
+		this.ssdRepository = ssdRepository;
+	}
 
 	public void init() {
 		try {
-			Files.createDirectory(root);
+			Files.createDirectory(rootSsd);
 		} catch (IOException e) {
 			throw new RuntimeException("erro ao inicializar o diretório");
 		}
 	}
 
-	public void saveFile(MultipartFile file, Ssd productModel, Category categoryModel)
+	public void saveFile(MultipartFile file, Ssd ssd, Category categoryModel)
 			throws IOException {
-		Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
-		Img img = new Img();
+		Files.copy(file.getInputStream(), this.rootSsd.resolve(file.getOriginalFilename()));
+		ImgSsd img = new ImgSsd();
 
 		img.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
 		img.setContentType(file.getContentType());
 		img.setData(file.getBytes());
 		img.setFileSize(file.getSize());
 
-		this.ofertasRepository.save(img);
-		this.ofertasRepository.save(productModel);
-		this.ofertasRepository.save(categoryModel);
+		this.ssdFileRepository.save(img);
+		this.ssdRepository.save(ssd);
+		this.categoryRepository.save(categoryModel);
 	}
 
 	/*
@@ -74,30 +80,26 @@ public class FileService {
 	public void saveCategoria(Category cpm) {
 	}
 
-	public void saveProduto(Ssd pm) {
-
-	}
-
-	public Optional<Img> getFile(Long id) {
-		return ofertasRepository.findById(id);
+	public Optional<ImgSsd> getFile(Long id) {
+		return ssdFileRepository.findById(id);
 	}
 	// LISTA COMPLETA
-	public List<Img> getAllFiles() {
-		return ofertasRepository.findAll();
+	public List<ImgSsd> getAllFiles() {
+		return ssdFileRepository.findAll();
 	}
 
-	public List<Img> getSql() {
-		return ofertasRepository.consulta_personalizada();
+	public List<ImgSsd> getSql() {
+		return ssdFileRepository.consulta_personalizada();
 	}
 
-	public List<Img> terca() {
-		return ofertasRepository.terca();
+	public List<ImgSsd> terca() {
+		return ssdFileRepository.terca();
 	}
 
 	public void imgDelete(Long id) throws Exception {
-		Optional<Img> im = this.ofertasRepository.findById(id);
+		Optional<ImgSsd> im = this.ssdFileRepository.findById(id);
 		if (im.isPresent()) {
-			this.ofertasRepository.delete(im.get());
+			this.ssdFileRepository.delete(im.get());
 		} else {
 			throw new Exception("ERRO AO DELETAR IMAGEM" + id);
 		}
@@ -105,13 +107,13 @@ public class FileService {
 	}
 
 	public void imgDeleteDiretory(Long id) {
-		Img img = new Img();
-		Optional<Img> opt = this.ofertasRepository.findById(id);
+		ImgSsd img = new ImgSsd();
+		Optional<ImgSsd> opt = this.ssdFileRepository.findById(id);
 		if (opt.isPresent()) {
 
 			try {
 				long l1 = img.getId();
-				boolean teste = FileSystemUtils.deleteRecursively(root.resolve(Long.toString(l1)));
+				boolean teste = FileSystemUtils.deleteRecursively(rootSsd.resolve(Long.toString(l1)));
 				System.out.println("Sucesso ao deletar imagem do path.s");
 			} catch (Exception e) {
 				System.out.println("Erro ao deletar arquivo de imagem do path");
@@ -121,9 +123,9 @@ public class FileService {
 	}
 
 	// VERIFICAR AQUI DEPOIS
-	public Img updateImg(MultipartFile file, Ssd ssd) throws IOException {
-		Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
-		Img otherFiles = new Img();
+	public ImgSsd updateImg(MultipartFile file, Ssd ssd) throws IOException {
+		Files.copy(file.getInputStream(), this.rootSsd.resolve(file.getOriginalFilename()));
+		ImgSsd otherFiles = new ImgSsd();
 
 		otherFiles.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
 		otherFiles.setContentType(file.getContentType());

@@ -20,44 +20,44 @@ public class Ram {
     @Column(name = "RAM_ID")
     private Long id;
 
-    @Column(name = "brand")
+    @Column(name = "BRAND")
     @NotNull
     private String brand;
 
-    @Column(name = "mhz")
+    @Column(name = "MHZ")
     @NotNull
     private int mhz;
 
-    @Column(name = "size", length = 4)
+    @Column(name = "SIZE", length = 4)
     @NotNull
     private int size;
 
     @NotNull
-    @Column(name = "purchase_price")
+    @Column(name = "PURCHASE_PRICE")
     private float purchasePrice;
 
     @NotNull
-    @Column(name = "purchase_date")
+    @Column(name = "PURCHASE_DATE")
     private String purchaseDate;
 
     @NotNull
-    @Column(name = "sale_value")
+    @Column(name = "SALE_VALUE")
     private float saleValue;
 
     @NotNull
-    @Column(name = "arrival_date")
+    @Column(name = "ARRIVAL_DATE")
     private String arrivalDate;
 
     @NotNull
-    @Column(name = "model")
+    @Column(name = "MODEL")
     private String model;
 
-    @Column(name = "url")
+    @Column(name = "URL")
     private String url;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "RAM_ID")
-    private Img image;
+    private ImgSsd image;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "RAM_ID")

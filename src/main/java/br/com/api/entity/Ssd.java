@@ -41,7 +41,7 @@ public class Ssd {
     private String purchaseDate;
 
     @NotNull
-    @Column(name = "SALE_SALUE")
+    @Column(name = "SALE_VALUE")
     private float saleValue;
 
     @Column(name = "ARRIVAL_DATE")
@@ -59,7 +59,7 @@ public class Ssd {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "SSD_ID")
-    private Img img;
+    private ImgSsd imgSsd;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CATEGORY_ID")

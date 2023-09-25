@@ -1,13 +1,12 @@
 package br.com.api.service;
 
-import br.com.api.FilePath;
 import br.com.api.entity.Category;
 import br.com.api.entity.Cpu;
-import br.com.api.entity.Img;
-import br.com.api.enume.CategoryEnum;
+import br.com.api.entity.ImgCpu;
+import br.com.api.entity.ImgSsd;
 import br.com.api.repository.CategoryRepository;
+import br.com.api.repository.CpuFileRepository;
 import br.com.api.repository.CpuRepository;
-import br.com.api.repository.FileRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,7 +19,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -32,12 +30,12 @@ public class CpuService {
     private final Path rootCpu = Paths.get("uploads/cpu");
     private final CpuRepository cpuRepository;
     private final CategoryRepository categoryRepository;
-    private final FileRepository fileRepository;
+    private final CpuFileRepository cpuFileRepository;
 
-    public CpuService(CpuRepository cpuRepository, CategoryRepository categoryRepository, FileRepository fileRepository) {
+    public CpuService(CpuRepository cpuRepository, CategoryRepository categoryRepository, CpuFileRepository cpuFileRepository) {
         this.cpuRepository = cpuRepository;
         this.categoryRepository = categoryRepository;
-        this.fileRepository = fileRepository;
+        this.cpuFileRepository = cpuFileRepository;
     }
 
     public void init() {
@@ -51,70 +49,64 @@ public class CpuService {
     public void save(Cpu cpu, MultipartFile file, Category category) throws IOException {
 
         Files.copy(file.getInputStream(), this.rootCpu.resolve(file.getOriginalFilename()));
-        category.setProductCategory(String.valueOf(CategoryEnum.CPU));
-        Img img = new Img();
+        ImgCpu imgCpu = new ImgCpu();
         Date dateNow = new Date();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-        img.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
-        img.setContentType(file.getContentType());
-        img.setData(file.getBytes());
-        img.setFileSize(file.getSize());
-
-        cpu.setImg(img);
+        imgCpu.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
+        imgCpu.setContentType(file.getContentType());
+        imgCpu.setData(file.getBytes());
+        imgCpu.setFileSize(file.getSize());
 
         this.cpuRepository.save(cpu);
         this.categoryRepository.save(category);
-        this.fileRepository.save(img);
+        this.cpuFileRepository.save(imgCpu);
 
     }
 
     public List<Cpu> listAll() {
         return this.cpuRepository.findAll();
-
     }
 
-    public void delete(Long id) throws Exception {
-        Optional<Cpu> cpuOptional = this.cpuRepository.findById(id);
-        if (cpuOptional.isPresent()) {
-            Cpu objetoCpu = cpuOptional.get();
-            if (objetoCpu.getImg().getFileName() != null) {
-                String fileName = objetoCpu.getImg().getFileName();
-                deleteFile(fileName);
-                this.cpuRepository.delete(cpuOptional.get());
-                fileRepository.delete(objetoCpu.getImg());
-            }
+    public void delete(Long cpu) throws Exception {
+        Optional<Cpu> c = this.cpuRepository.findById(cpu);
+        if (c.isPresent()) {
+            Cpu cpu1 = c.get();
+            deleteFile(cpu1.getImgCpu().getFileName());
+            cpuRepository.delete(cpu1);
+            cpuFileRepository.delete(cpu1.getImgCpu());
         } else {
-            throw new Exception(("ERRO AO DELETAR CPU"));
+            throw new Exception(("ERRO AO DELETAR CPU" + cpu));
         }
     }
-
     private void deleteFile(String fileName) {
-        List<Img> imgList = fileRepository.findByName(fileName);
+        List<ImgCpu> imgList = cpuFileRepository.deleteByName(fileName);
 
-        for (Img img : imgList) {
-            fileRepository.delete(img);
+        for (ImgCpu img : imgList) {
+            cpuFileRepository.delete(img);
             String imgFileName = img.getFileName();
             Path physicalFilePath = rootCpu.resolve(imgFileName);
             File physicalFile = physicalFilePath.toFile();
-            File[] files = new File(String.valueOf(FilePath.rootCpu)).listFiles();
-            System.out.println(Arrays.toString(files));
-            System.out.println();
-
-            for (File f : files
-            ) {
-
-                System.out.println(f.getName());
-
-            }
             if (physicalFile.exists()) {
-                File fil = new File("uploads/cpu");
+                File fileCpuImg = new File("uploads");
                 physicalFile.delete();
             }
-
+//            File f = new File(String.valueOf(root));
+//            if (f.isDirectory()) {
+//                File[] fi = f.listFiles();
+//
+//                // Excluindo arquivos no diretório correspondentes aos objetos Img
+//                for (File ff : fi) {
+//                    for (Img im : imgList) {
+//                        if (ff.getName().equals(im.getFileName())) {
+//                            ff.delete();
+//                        }
+//                    }
+//                }
+//            }
         }
-    }
 
+    }
     public Cpu update(MultipartFile file, Category category, Cpu cpu) throws Exception {
         Optional<Cpu> editCpu = this.cpuRepository.findById(cpu.getId());
         if (editCpu.isPresent()) {

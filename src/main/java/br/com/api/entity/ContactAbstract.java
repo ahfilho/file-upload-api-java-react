@@ -20,19 +20,19 @@ public abstract class ContactAbstract {
 	private Long id;
 
 	@NotNull
-	@Column(name = "name")
+	@Column(name = "NAME")
 	private String name;
 	
 	@NotNull
-	@Column(name = "email")
+	@Column(name = "EMAIL")
 	private String email;
 
 	@NotNull
-	@Column(name = "telephone")
-	private String telephone;
+	@Column(name = "PHONE")
+	private String phone;
 
 	@NotNull
-	@Column(name = "message")
+	@Column(name = "MESSAGE")
 	private String message;
 
 }

@@ -36,7 +36,7 @@ public class SacService {
             s.setName(s.getName());
             s.setEmail(s.getEmail());
             s.setMessage(s.getMessage());
-            s.setTelephone(s.getTelephone());
+            s.setPhone(s.getPhone());
             return s;
         } else {
             throw new Exception("ERRO AO ATUALIZAR O SAC" + sac.getId());
