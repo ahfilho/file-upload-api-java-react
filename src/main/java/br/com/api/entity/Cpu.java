@@ -56,8 +56,8 @@ public class Cpu {
     @JoinColumn(name = "CPU_ID")
     private ImgCpu imgCpu;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "CATEGORY_ID")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "CPU_ID")
     private Category category;
 
 }

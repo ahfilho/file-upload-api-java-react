@@ -22,6 +22,7 @@ const CpuEdit = () => {
     saleValue: "",
     amount: ""
   });
+  
   const [file, setFile] = useState("");
 
   useEffect(() => {
@@ -34,7 +35,6 @@ const CpuEdit = () => {
       });
   }, [id]);
 
-  console.log(cpu);
   const onInputChange = (e) => {
     setCpu({
       ...cpu,

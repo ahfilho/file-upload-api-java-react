@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "FILE_CPU")
-public class ImgCpu{
+public class ImgCpu {
 
 
     @Id
@@ -42,5 +42,14 @@ public class ImgCpu{
     @JoinColumn(name = "CPU_ID")
     private Cpu cpu;
 
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SSD_ID")
+    private Ssd ssdAbstract;
+
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "RAM_ID")
+    private Ram ram;
 
 }

@@ -21,8 +21,9 @@ import br.com.api.service.SsdService;
 
 import static org.springframework.http.ResponseEntity.*;
 
+
+//@CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/ssd")
 public class SsdController {
 

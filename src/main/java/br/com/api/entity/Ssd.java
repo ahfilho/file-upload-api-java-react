@@ -61,8 +61,8 @@ public class Ssd {
     @JoinColumn(name = "SSD_ID")
     private ImgSsd imgSsd;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CATEGORY_ID")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "SSD_ID")
     private Category category;
 
 }

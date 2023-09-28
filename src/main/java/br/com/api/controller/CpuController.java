@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/cpu")
 public class CpuController {
@@ -63,13 +63,8 @@ public class CpuController {
 
     @GetMapping
     public List<Cpu> listWhitFileLink() {
-        List<Cpu> listCpu = cpuService.listAll().stream().map(buildFileLink::linkFile).collect(Collectors.toList());
-        if (listCpu != null) {
-            return cpuService.listAll().stream().map(buildFileLink::linkFile).collect(Collectors.toList());
-        } else if (listCpu == null) {
-            System.out.println("ERROOOO");
-        }
-        return listCpu;
+        return cpuService.listAll().stream().map(buildFileLink::linkFile).collect(Collectors.toList());
+
     }
 
     @PutMapping("/{id}")
