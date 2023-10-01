@@ -12,9 +12,9 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import br.com.api.entity.Category;
+import br.com.api.entity.CpuCategory;
 import br.com.api.entity.ImgSsd;
-import br.com.api.repository.CategoryRepository;
+import br.com.api.repository.CpuCategoryRepository;
 import br.com.api.repository.SsdFileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,12 +33,12 @@ public class RamService {
     @Autowired
     private RamRepository ramRepository;
     @Autowired
-    private CategoryRepository categoryRepository;
+    private CpuCategoryRepository cpuCategoryRepository;
     @Autowired
     private SsdFileRepository offerImageRepository;
 
 
-    public void ramSave(Ram ram, MultipartFile file, Category category) throws IOException {
+    public void ramSave(Ram ram, MultipartFile file, CpuCategory cpuCategory) throws IOException {
 
         Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
 
@@ -56,7 +56,7 @@ public class RamService {
         img.setFileSize(file.getSize());
         this.ramRepository.save(ram);
         this.offerImageRepository.save(img);
-        this.categoryRepository.save(category);
+        this.cpuCategoryRepository.save(cpuCategory);
     }
 
     public List<Ram> ramList() {

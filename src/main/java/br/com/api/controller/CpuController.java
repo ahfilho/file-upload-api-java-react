@@ -1,7 +1,7 @@
 package br.com.api.controller;
 
 import br.com.api.auth.JWTTokenHelper;
-import br.com.api.entity.Category;
+import br.com.api.entity.CpuCategory;
 import br.com.api.entity.Cpu;
 import br.com.api.enume.CategoryEnum;
 import br.com.api.persistence.CpuPersistenceController;
@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/cpu")
 public class CpuController {
@@ -50,11 +50,10 @@ public class CpuController {
 
     @ExceptionHandler
     @PostMapping
-    public ResponseEntity<String> save(MultipartFile file, Cpu cpu, Category category) throws Exception {
+    public ResponseEntity<String> save(MultipartFile file, Cpu cpu, CpuCategory cpuCategory) throws Exception {
 
         try {
-            category.setProductCategory(CategoryEnum.CPU.name());
-            cpuPersistenceController.saveCpuWithFile(file, cpu, category);
+            cpuPersistenceController.saveCpuWithFile(file, cpu, cpuCategory);
             return ResponseEntity.status(HttpStatus.OK).body(String.format("Cpu " + cpu.getModel() + "cadastrado com sucesso!") + file.getOriginalFilename());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.OK).body(String.format("Erro no cadastro.") + file.getOriginalFilename());
@@ -68,7 +67,7 @@ public class CpuController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> update(String id, MultipartFile file, Cpu cpu, Category category) throws Exception {
+    public ResponseEntity<String> update(String id, MultipartFile file, Cpu cpu, CpuCategory cpuCategory) throws Exception {
 
         try {
             long convertStringToLong = Long.parseLong(id);
@@ -77,8 +76,8 @@ public class CpuController {
             System.out.println("Alguns dados ainda podem conter Strings." + e.getMessage());
         }
         try {
-            category.setProductCategory(CategoryEnum.SSD.name());
-            this.cpuService.update(file, category, cpu);
+            cpuCategory.setCpuProductCategory(String.valueOf(CategoryEnum.CPU));
+            this.cpuService.update(file, cpuCategory, cpu);
             return ResponseEntity.status(HttpStatus.OK).body(String.format("Atualizado com sucesso!"));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(String.format("Erro durante a atualização."));

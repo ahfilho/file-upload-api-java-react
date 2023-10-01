@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import br.com.api.entity.CpuCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.api.entity.Category;
 import br.com.api.entity.ImgSsd;
 import br.com.api.entity.Ssd;
 import br.com.api.entity.FileResponse;
@@ -54,11 +54,11 @@ public class FileUploadController {
 
     // SALVA UMA IMAGEM, UM PRODUTO E UMA CATEGORIA
     @PostMapping
-    public ResponseEntity<String> uploadImgOferta(@RequestParam("file") MultipartFile file, Ssd ssd,
-                                                  Category category) {
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, Ssd ssd,
+                                             CpuCategory cpuCategory) {
 
         try {
-            ofertasService.saveFile(file, ssd, category);
+            ofertasService.saveFile(file, ssd, cpuCategory);
 
             return ResponseEntity.status(HttpStatus.OK)
                     .body(String.format("sucesso no upload", file.getOriginalFilename()));
@@ -83,7 +83,6 @@ public class FileUploadController {
         iqr.setId(img.getId());
         iqr.setFileName(img.getFileName());
         iqr.setContentType(img.getContentType());
-        // iqr.setSize(img.getSize());
         iqr.setUrl(downloadURL);
         return iqr;
     }
@@ -149,7 +148,7 @@ public class FileUploadController {
         return HttpStatus.OK;
     }
     @PutMapping("/{id}")
-    public ResponseEntity<String> uploadImgOferta(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
 
         try {
             ofertasService.updateImg(file, null);

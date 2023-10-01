@@ -40,15 +40,6 @@ public class ImgSsd {
     @JoinColumn(name = "SSD_ID")
     private Ssd ssdAbstract;
 
-    @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "RAM_ID")
-    private Ram ram;
-
-    @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CPU_ID")
-    private Cpu cpu;
 
 
 }

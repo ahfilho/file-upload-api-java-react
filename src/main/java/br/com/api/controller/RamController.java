@@ -3,7 +3,7 @@ package br.com.api.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import br.com.api.entity.Category;
+import br.com.api.entity.CpuCategory;
 import br.com.api.enume.CategoryEnum;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import br.com.api.service.RamService;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/ram")
 public class RamController {
@@ -25,11 +25,11 @@ public class RamController {
     private RamService ramService;
 
     @PostMapping("/new")
-    public ResponseEntity<String> ramSave(@RequestParam("file") MultipartFile file, Ram ram, Category category) {
+    public ResponseEntity<String> ramSave(@RequestParam("file") MultipartFile file, Ram ram, CpuCategory cpuCategory) {
 
         try {
-            category.setProductCategory(CategoryEnum.RAM.name());
-            ramService.ramSave(ram, file, category);
+//            cpuCategory.setProductCategory(CategoryEnum.RAM.name());
+            ramService.ramSave(ram, file, cpuCategory);
 
             return ResponseEntity.status(HttpStatus.OK)
                     .body(String.format("Produto %s", file.getOriginalFilename() + "cadastrado com sucesso!"));

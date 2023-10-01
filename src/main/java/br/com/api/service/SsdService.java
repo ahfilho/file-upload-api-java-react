@@ -16,14 +16,14 @@ import javax.transaction.Transactional;
 
 import br.com.api.FilePath;
 import br.com.api.entity.ImgSsd;
+import br.com.api.entity.SsdCategory;
 import br.com.api.enume.CategoryEnum;
+import br.com.api.repository.SsdCategoryRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import br.com.api.entity.Category;
 import br.com.api.entity.Ssd;
-import br.com.api.repository.CategoryRepository;
 import br.com.api.repository.SsdRepository;
 import br.com.api.repository.FileRepository;
 
@@ -33,17 +33,17 @@ public class SsdService {
 
     private final Path rootSsd = Paths.get("uploads/ssd");
     private final SsdRepository ssdRepository;
-    private final CategoryRepository categoryRepository;
+    private final SsdCategoryRepository ssdCategoryRepository;
     private final FileRepository fileRepository;
 
-    public SsdService(SsdRepository ssdRepository, CategoryRepository categoryRepository, FileRepository fileRepository) {
+    public SsdService(SsdRepository ssdRepository, SsdCategoryRepository ssdCategoryRepository, FileRepository fileRepository) {
         this.ssdRepository = ssdRepository;
-        this.categoryRepository = categoryRepository;
+        this.ssdCategoryRepository = ssdCategoryRepository;
         this.fileRepository = fileRepository;
 
     }
 
-    public void init() {
+    public void initalizeDirectory() {
 
         try {
             Files.createDirectory(rootSsd);
@@ -52,60 +52,68 @@ public class SsdService {
         }
     }
 
-    public void saveSsd(Ssd ssd, MultipartFile file, Category category)
+    public void serviceSaveSsd(Ssd ssd, MultipartFile file, SsdCategory ssdCategory)
             throws IOException {
         Files.copy(file.getInputStream(), this.rootSsd.resolve(file.getOriginalFilename()));
-        ImgSsd img = new ImgSsd();
-        category.setProductCategory(String.valueOf(CategoryEnum.SSD));
-        img.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
-        img.setContentType(file.getContentType());
-        img.setData(file.getBytes());
-        img.setFileSize(file.getSize());
+        ImgSsd imgSsd = new ImgSsd();
 
-        ssd.setImgSsd(img);
+        ssdCategory.setSsdProductCategory(String.valueOf(CategoryEnum.SSD));
+        imgSsd.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
+        imgSsd.setContentType(file.getContentType());
+        imgSsd.setData(file.getBytes());
+        imgSsd.setFileSize(file.getSize());
+
+        ssd.setImgSsd(imgSsd);
 
         this.ssdRepository.save(ssd);
-        this.categoryRepository.save(category);
-//        this.fileRepository.save(img);
+        this.ssdCategoryRepository.save(ssdCategory);
 
     }
 
-    public List<Ssd> listAllSsd() {
+    public List<Ssd> serviceListAllSsd() {
         return ssdRepository.findAll();
 
     }
 
-    public Ssd update(Ssd ssd, MultipartFile file, Category category) throws Exception {
-        Optional<Ssd> optSsd = this.ssdRepository.findById(ssd.getId());
+    public Ssd serviceUpdateSsd(Ssd ssd, MultipartFile file, SsdCategory ssdCategory) throws Exception {
+        Optional<Ssd> optionalSsd = this.ssdRepository.findById(ssd.getId());
 
-        if (optSsd.isPresent()) {
+        if (optionalSsd.isPresent()) {
 
-            Ssd objSsdAux = optSsd.get();
-            objSsdAux.setBrand(ssd.getBrand());
-            objSsdAux.setModel(ssd.getModel());
-            objSsdAux.setArrivalDate(ssd.getArrivalDate());
-            objSsdAux.setPurchasePrice(ssd.getPurchasePrice());
-            objSsdAux.setPurchaseDate(ssd.getPurchaseDate());
-            objSsdAux.setSaleValue(ssd.getSaleValue());
-            objSsdAux.setSerialNumber(ssd.getSerialNumber());
-            objSsdAux.setSize(ssd.getSize());
+            Ssd target = optionalSsd.get();
+            copySsdProperties(ssd, target);
 
-            ImgSsd filee = new ImgSsd();
+            ImgSsd fi = new ImgSsd();
+            initializeImgSsd(file, fi);
 
-            filee.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
-            filee.setContentType(file.getContentType());
-            filee.setData(file.getBytes());
-            filee.setFileSize(file.getSize());
+            this.ssdRepository.save(target);
+            this.ssdCategoryRepository.save(ssdCategory);
+            this.fileRepository.save(fi);
 
-            this.ssdRepository.save(objSsdAux);
-            this.categoryRepository.save(category);
-            this.fileRepository.save(filee);
-
-            return objSsdAux;
+            return target;
         } else {
             throw new Exception("Erro durante a atualização." + ssd.getId());
         }
 
+    }
+
+    private void copySsdProperties(Ssd source, Ssd target) {
+        target.setBrand(source.getBrand());
+        target.setModel(source.getModel());
+        target.setArrivalDate(source.getArrivalDate());
+        target.setPurchasePrice(source.getPurchasePrice());
+        target.setPurchaseDate(source.getPurchaseDate());
+        target.setSaleValue(source.getSaleValue());
+        target.setSerialNumber(source.getSerialNumber());
+        target.setSize(source.getSize());
+    }
+
+    private void initializeImgSsd(MultipartFile file, ImgSsd fi) throws IOException {
+
+        fi.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
+        fi.setContentType(file.getContentType());
+        fi.setData(file.getBytes());
+        fi.setFileSize(file.getSize());
     }
 
     public void deleteProduct(Long id) throws Exception {

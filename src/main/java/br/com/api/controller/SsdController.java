@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.api.auth.JWTTokenHelper;
-import br.com.api.controller.extension.SsdControllerExtension;
+import br.com.api.controller.ssd.extension.SsdControllerExtension;
+import br.com.api.controller.ssd.extension.SsdErrorHandling;
+import br.com.api.entity.SsdCategory;
 import br.com.api.enume.CategoryEnum;
+import br.com.api.exceptions.ErrorHandling;
 import br.com.api.persistence.SsdPersistenceService;
 import br.com.api.search.SearchSsd;
 import br.com.api.storage.BuildFileLinkSsd;
@@ -14,15 +17,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import br.com.api.entity.Category;
 import br.com.api.entity.Ssd;
 import br.com.api.service.SsdService;
 
 
-import static org.springframework.http.ResponseEntity.*;
-
-
-//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/ssd")
 public class SsdController {
@@ -37,47 +36,44 @@ public class SsdController {
 
     private final SearchSsd searchSsd;
 
-    public SsdController(JWTTokenHelper jwtTokenHelper, SearchSsd searchSsd, SsdService ssdService, BuildFileLinkSsd buildFileLink, SsdPersistenceService ssdPersistenceService) {
+    private final SsdErrorHandling ssdErrorHandling;
+
+    private final ErrorHandling errorHandling;
+
+    public SsdController(JWTTokenHelper jwtTokenHelper, SearchSsd searchSsd, SsdService ssdService, BuildFileLinkSsd buildFileLink, SsdPersistenceService ssdPersistenceService, SsdErrorHandling ssdErrorHandling, ErrorHandling errorHandling) {
         this.jwtTokenHelper = jwtTokenHelper;
         this.ssdService = ssdService;
         this.buildFileLink = buildFileLink;
         this.ssdPersistenceService = ssdPersistenceService;
         this.searchSsd = searchSsd;
+        this.ssdErrorHandling = ssdErrorHandling;
+        this.errorHandling = errorHandling;
     }
 
     @PostMapping
-    public ResponseEntity<String> saveSsd(MultipartFile file, Ssd ssd, Category category) {
-
+    public ResponseEntity<String> saveSsd(MultipartFile file, Ssd ssd, SsdCategory ssdCategory) {
         try {
-            ssdPersistenceService.SsdPersistence(file, ssd, category);
-            return status(HttpStatus.OK)
-                    .body(String.format("Cadastro realizado com sucesso.: %s", file.getOriginalFilename()));
+            ssdPersistenceService.SsdPersistence(file, ssd, ssdCategory);
+            ssdCategory.setSsdProductCategory(String.valueOf(CategoryEnum.SSD));
+            return ssdErrorHandling.teste(file.getOriginalFilename(), true);
         } catch (Exception e) {
-            return status(HttpStatus.OK)
-                    .body(String.format("Falha no cadastro: %s", file.getOriginalFilename()));
+            return ssdErrorHandling.teste(file.getOriginalFilename(), false);
         }
     }
 
     @GetMapping
     public List<Ssd> listSsd() {
-        return ssdService.listAllSsd().stream().map(buildFileLink::linkFile).collect(Collectors.toList());
+        return ssdService.serviceListAllSsd().stream().map(buildFileLink::linkForFileSsd).collect(Collectors.toList());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateSsd(String id, MultipartFile file, Ssd ssd, Category category) throws Exception {
-
+    public ResponseEntity<String> updateSsd(String id, MultipartFile file, Ssd ssd, SsdCategory ssdCategory) throws Exception {
+        ssdErrorHandling.convertId(id);
         try {
-            Long convertStringToLong = Long.parseLong(id);
-            ssd.setId(convertStringToLong);
-        } catch (NumberFormatException e) {
-            System.out.println("Alguns dados ainda podem conter Strings." + e.getMessage());
-        }
-        try {
-            category.setProductCategory(CategoryEnum.SSD.name());
-            this.ssdService.update(ssd, file, category);
-            return ResponseEntity.status(HttpStatus.OK).body(String.format("Atualizado com sucesso!"));
+            this.ssdService.serviceUpdateSsd(ssd, file, ssdCategory);
+            return ssdErrorHandling.testeUPdate(file.getOriginalFilename(), true);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(String.format("Erro durante a atualização."));
+            return ssdErrorHandling.testeUPdate(file.getOriginalFilename(), false);
         }
     }
 

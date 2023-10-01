@@ -3,7 +3,6 @@ package br.com.api.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -63,7 +62,7 @@ public class Ssd {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "SSD_ID")
-    private Category category;
+    private SsdCategory ssdCategory;
 
 }
 

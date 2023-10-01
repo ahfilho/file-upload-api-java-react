@@ -9,13 +9,13 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import br.com.api.entity.Ssd;
+import br.com.api.entity.CpuCategory;
 import br.com.api.repository.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import br.com.api.entity.Category;
 import br.com.api.entity.ImgSsd;
 
 @Transactional
@@ -23,13 +23,13 @@ import br.com.api.entity.ImgSsd;
 public class SsdFileService {
 
 	private final Path rootSsd = Paths.get("uploads/ssd");
-	private final CategoryRepository categoryRepository;
+	private final CpuCategoryRepository cpuCategoryRepository;
 	private final SsdFileRepository ssdFileRepository;
 	private final SsdRepository ssdRepository;
 
 
-	public SsdFileService(CategoryRepository categoryRepository, SsdFileRepository ssdFileRepository, SsdRepository ssdRepository) {
-		this.categoryRepository = categoryRepository;
+	public SsdFileService(CpuCategoryRepository cpuCategoryRepository, SsdFileRepository ssdFileRepository, SsdRepository ssdRepository) {
+		this.cpuCategoryRepository = cpuCategoryRepository;
 		this.ssdFileRepository = ssdFileRepository;
 		this.ssdRepository = ssdRepository;
 	}
@@ -42,7 +42,7 @@ public class SsdFileService {
 		}
 	}
 
-	public void saveFile(MultipartFile file, Ssd ssd, Category categoryModel)
+	public void saveFile(MultipartFile file, Ssd ssd, CpuCategory cpuCategoryModel)
 			throws IOException {
 		Files.copy(file.getInputStream(), this.rootSsd.resolve(file.getOriginalFilename()));
 		ImgSsd img = new ImgSsd();
@@ -54,7 +54,7 @@ public class SsdFileService {
 
 		this.ssdFileRepository.save(img);
 		this.ssdRepository.save(ssd);
-		this.categoryRepository.save(categoryModel);
+		this.cpuCategoryRepository.save(cpuCategoryModel);
 	}
 
 	/*
@@ -77,7 +77,7 @@ public class SsdFileService {
 	 * this.ofertasRepository.save(product_name);
 	 * this.ofertasRepository.save(product_category); } }
 	 */
-	public void saveCategoria(Category cpm) {
+	public void saveCategoria(CpuCategory cpm) {
 	}
 
 	public Optional<ImgSsd> getFile(Long id) {

@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Link, Switch, useParams } from "react-r
 import "./Ssd.css";
 import NavBar from "../../navbar/NavBar";
 
-const url = "http://localhost:9090/ssd";
+const url = "http://localhost:9090/ssd/";
 
 const SsdEdit = () => {
   const { id } = useParams();
@@ -20,7 +20,6 @@ const SsdEdit = () => {
     saleValue: "",
     amount: ""
   });
-
   const [file, setFile] = useState("");
 
   useEffect(() => {
@@ -60,7 +59,6 @@ const SsdEdit = () => {
     formData.append("saleValue", ssd.saleValue);
     formData.append("amount", ssd.amount);
 
-
     axios
       .put(`${url}/${id}`, formData)
       .then((response) => {
@@ -81,14 +79,10 @@ const SsdEdit = () => {
       <br></br>
       <hr></hr>
       <form id="formulario" onSubmit={handleSubmit}>
-
         <div className="file">
           <input type="file" name="file"
             onChange={handleImage} />
         </div>
-        <br></br>
-      
-
 
         <div className="inputs">
           <input
@@ -197,7 +191,7 @@ const SsdEdit = () => {
           <button
             type="submit"
             className="btn btn-primary"
-            onChange={(e) => this.handleSubmit(e)}
+            onChange={(e) => handleSubmit(e)}
           >
             Atualizar
           </button>
