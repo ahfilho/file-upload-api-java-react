@@ -1,4 +1,4 @@
-package br.com.api.controller.extension;
+package br.com.api.controller.ssd.extension;
 
 import br.com.api.auth.JWTTokenHelper;
 import br.com.api.controller.SsdController;

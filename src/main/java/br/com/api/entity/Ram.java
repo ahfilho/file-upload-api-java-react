@@ -61,7 +61,7 @@ public class Ram {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "RAM_ID")
-    private Category category;
+    private CpuCategory cpuCategory;
 
 }
 

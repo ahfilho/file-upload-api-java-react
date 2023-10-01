@@ -14,7 +14,7 @@ import br.com.api.entity.Client;
 import br.com.api.service.ClientService;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/client")
 public class ClientController {
 

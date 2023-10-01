@@ -1,10 +1,10 @@
 package br.com.api.service;
 
-import br.com.api.entity.Category;
+import br.com.api.entity.CpuCategory;
 import br.com.api.entity.Cpu;
 import br.com.api.entity.ImgSsd;
 import br.com.api.entity.ImgCpu;
-import br.com.api.repository.CategoryRepository;
+import br.com.api.repository.CpuCategoryRepository;
 import br.com.api.repository.CpuFileRepository;
 import br.com.api.repository.CpuRepository;
 import org.springframework.stereotype.Service;
@@ -26,12 +26,12 @@ public class CpuFIleService {
 
     private final Path rootCpu = Paths.get("uploads/cpu");
 
-    private final CategoryRepository categoryRepository;
+    private final CpuCategoryRepository cpuCategoryRepository;
     private final CpuFileRepository cpuFileRepository;
 
     private final CpuRepository cpuRepository;
-    public CpuFIleService(CategoryRepository categoryRepository, CpuFileRepository cpuFileRepository, CpuRepository cpuRepository) {
-        this.categoryRepository = categoryRepository;
+    public CpuFIleService(CpuCategoryRepository cpuCategoryRepository, CpuFileRepository cpuFileRepository, CpuRepository cpuRepository) {
+        this.cpuCategoryRepository = cpuCategoryRepository;
         this.cpuFileRepository = cpuFileRepository;
         this.cpuRepository = cpuRepository;
     }
@@ -45,7 +45,7 @@ public class CpuFIleService {
         }
     }
 
-    public void saveFile(MultipartFile file, Cpu cpu, Category categoryModel)
+    public void saveFile(MultipartFile file, Cpu cpu, CpuCategory cpuCategoryModel)
             throws IOException {
         Files.copy(file.getInputStream(), this.rootCpu.resolve(file.getOriginalFilename()));
         ImgCpu img = new ImgCpu();
@@ -57,7 +57,7 @@ public class CpuFIleService {
 
         this.cpuFileRepository.save(img);
         this.cpuRepository.save(cpu);
-        this.categoryRepository.save(categoryModel);
+        this.cpuCategoryRepository.save(cpuCategoryModel);
     }
 
     /*
@@ -80,7 +80,7 @@ public class CpuFIleService {
      * this.ofertasRepository.save(product_name);
      * this.ofertasRepository.save(product_category); } }
      */
-    public void saveCategoria(Category cpm) {
+    public void saveCategoria(CpuCategory cpm) {
     }
 
     public void saveProduto(Cpu pm) {

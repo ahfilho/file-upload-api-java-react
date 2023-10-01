@@ -1,7 +1,7 @@
 package br.com.api.persistence;
 
 import br.com.api.auth.JWTTokenHelper;
-import br.com.api.entity.Category;
+import br.com.api.entity.CpuCategory;
 import br.com.api.entity.Cpu;
 import br.com.api.service.CpuService;
 import br.com.api.storage.BuildFileLinkSsd;
@@ -22,7 +22,7 @@ public class CpuPersistenceController {
         this.buildFileLink = buildFileLink;
     }
 
-    public void saveCpuWithFile(MultipartFile file, Cpu cpu, Category category) throws Exception {
-        cpuService.save(cpu, file, category);
+    public void saveCpuWithFile(MultipartFile file, Cpu cpu, CpuCategory cpuCategory) throws Exception {
+        cpuService.save(cpu, file, cpuCategory);
     }
 }

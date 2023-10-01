@@ -15,12 +15,12 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 public class BuildFileLinkSsd implements FileLinkCreatorSsd {
 
     @GetMapping("/files/{id}")
-    public Ssd linkFile(Ssd ssd) {
+    public Ssd linkForFileSsd(Ssd ssd) {
 
-        String download = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/").path(String.valueOf(ssd.getId()))
+        String downloadLink = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/").path(String.valueOf(ssd.getId()))
                 .toUriString();
         ssd.setId(ssd.getId());
-        ssd.setUrl(download);
+        ssd.setUrl(downloadLink);
         return ssd;
 
     }

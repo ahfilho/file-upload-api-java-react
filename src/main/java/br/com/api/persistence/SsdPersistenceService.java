@@ -1,8 +1,8 @@
 package br.com.api.persistence;
 
 import br.com.api.auth.JWTTokenHelper;
-import br.com.api.entity.Category;
 import br.com.api.entity.Ssd;
+import br.com.api.entity.SsdCategory;
 import br.com.api.service.SsdService;
 import br.com.api.storage.BuildFileLinkSsd;
 import org.springframework.stereotype.Controller;
@@ -25,8 +25,8 @@ public class SsdPersistenceService {
         this.buildFileLink = buildFileLink;
     }
 
-    public void SsdPersistence(MultipartFile file, Ssd ssd, Category category) throws IOException {
-        ssdService.saveSsd(ssd, file, category);
+    public void SsdPersistence(MultipartFile file, Ssd ssd, SsdCategory ssdCategory) throws IOException {
+        ssdService.serviceSaveSsd(ssd, file, ssdCategory);
 
     }
 }
