@@ -1,36 +1,50 @@
 package br.com.api.controller.ssd.extension;
 
 import br.com.api.auth.JWTTokenHelper;
-import br.com.api.controller.SsdController;
 import br.com.api.entity.Ssd;
+import br.com.api.exceptions.ErrorHandling;
 import br.com.api.search.SearchSsd;
 import br.com.api.service.SsdService;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
-@RestController
-@RequestMapping("/a")
+@Controller
 public class SsdControllerExtension {
 
 
     private final JWTTokenHelper jwtTokenHelper;
-    private SsdService ssdService;
+    private final SsdService ssdService;
     private SearchSsd searchSsd;
+    private final ErrorHandling errorHandling;
 
-    public SsdControllerExtension(JWTTokenHelper jwtTokenHelper) {
+    public SsdControllerExtension(JWTTokenHelper jwtTokenHelper, SsdService ssdService, SearchSsd searchSsd, ErrorHandling errorHandling) {
         this.jwtTokenHelper = jwtTokenHelper;
+        this.ssdService = ssdService;
+        this.searchSsd = searchSsd;
+        this.errorHandling = errorHandling;
     }
 
-
-    @GetMapping("/search/{id}")
     public Ssd searchForId(@PathVariable Long id) throws Exception {
-        return ssdService.searchId(id);
+        Ssd ssd = ssdService.searchId(id);
+        if (ssd != null) {
+            return ssd;
+        } else {
+            return null;
+        }
     }
 
-    @GetMapping("/sale/day")
+
     public List<String> listDayOfSale() {
-        return searchSsd.listDayOfSale();
+        List<String> aa = ssdService.dayOfSale(); ////
+        if (!aa.isEmpty()) {
+            Ssd ssd = new Ssd();
+            return Collections.singletonList(ssd.getSerialNumber() + "" + aa);
+        }
+        return aa;
     }
+
 }
 

@@ -7,5 +7,5 @@ import java.nio.file.Paths;
 
 public interface FileLinkCreatorSsd {
 
-    Ssd linkFile(Ssd ssd);
+    Ssd linkForFileSsd(Ssd ssd);
 }
