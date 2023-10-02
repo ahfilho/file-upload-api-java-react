@@ -24,14 +24,13 @@ public class SearchSsd {
         this.buildFileLink = buildFileLink;
     }
 
-    public Ssd searchForId(@PathVariable Long id) throws Exception {
-        Ssd ssd = new Ssd();
-        ssd.getId();
-        return ssdService.searchId(id);
+    public List<String> searchForId(@PathVariable Long id) throws Exception {
+        List<String> a = (List<String>) ssdService.searchId(id);
+        return a;
     }
 
     public List<String> listDayOfSale() {
-
-        return ssdService.dayOfSale();
+        List<String> b = ssdService.dayOfSale();
+        return b;
     }
 }

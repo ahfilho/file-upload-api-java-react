@@ -161,7 +161,7 @@ public class SsdService {
 
     }
 
-    public Ssd searchId(Long id) throws Exception {
+    public Ssd  searchId(Long id) throws Exception {
         Optional<Ssd> result = this.ssdRepository.findById(id);
 
         if (result.isPresent()) {
@@ -171,11 +171,11 @@ public class SsdService {
         }
     }
 
-    public List<String> dayOfSale() {
-        List<String> total = ssdRepository.dataDeVenda();
+    public List<String> dayOfSale() { /////
+        List<String> saleDate = ssdRepository.dataDeVenda();
         List<String> result = new ArrayList<>();
 
-        for (String dateString : total) {
+        for (String dateString : saleDate) {
             LocalDate dateInicial = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             LocalDate dateAtual = LocalDate.now();
             long diferencaEmDias = ChronoUnit.DAYS.between(dateInicial, dateAtual);
@@ -183,6 +183,7 @@ public class SsdService {
             if (diferencaEmDias >= 90) {
                 result.add(dateString);
                 System.out.println(dateString + "igual ou maior que 90 dias");
+                System.out.println("Quantidade de dias:"+diferencaEmDias);
             }
         }
 

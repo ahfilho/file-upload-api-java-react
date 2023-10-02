@@ -89,7 +89,7 @@ public class SsdController {
 
     @GetMapping("/redirect/{param}")
     public ResponseEntity<?> newResources(@PathVariable String param) throws Exception {
-        SsdControllerExtension sec = new SsdControllerExtension(jwtTokenHelper);
+        SsdControllerExtension sec = new SsdControllerExtension(jwtTokenHelper, ssdService, searchSsd, errorHandling);
 
         if ("list".equals(param)) {
             List<String> list = sec.listDayOfSale();
