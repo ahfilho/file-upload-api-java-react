@@ -30,8 +30,8 @@ public class ImgCpu {
     private Long fileSize;
 
     @JsonIgnore
-    @Column(name = "URL")
-    private String url;
+    @Column(name = "URL_FILE_CPU")
+    private String urlCpu;
 
     @Lob
     @JsonIgnore

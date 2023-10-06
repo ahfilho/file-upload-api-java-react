@@ -28,8 +28,8 @@ public class ImgSsd {
     private Long fileSize;
 
     @JsonIgnore
-    @Column(name = "URL")
-    private String url;
+    @Column(name = "URL_FILE_SSD")
+    private String urlSsd;
 
     @Lob
     @JsonIgnore

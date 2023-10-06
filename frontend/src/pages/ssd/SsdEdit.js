@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Link, Switch, useParams } from "react-r
 import "./Ssd.css";
 import NavBar from "../../navbar/NavBar";
 
-const url = "http://localhost:9090/ssd";
+const url = "http://localhost:9090/ssd/redirect";
 
 const SsdEdit = () => {
   const { id } = useParams();

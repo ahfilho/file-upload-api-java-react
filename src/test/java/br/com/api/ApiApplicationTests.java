@@ -14,7 +14,7 @@ import br.com.api.controller.SacController;
 import br.com.api.controller.RamController;
 import br.com.api.repository.ClientRepository;
 import br.com.api.service.ClientService;
-import br.com.api.service.SsdFileService;
+import br.com.api.service.CpuFileService;
 import br.com.api.service.SacService;
 import br.com.api.service.RamService;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
@@ -38,7 +38,7 @@ class ApiApplicationTests {
 	private FileUploadController ioc;
 
 	@MockBean
-	private SsdFileService ios;
+	private CpuFileService ios;
 
 	@Autowired
 	private SacController sacController;
