@@ -2,8 +2,8 @@ package br.com.api.service;
 
 import br.com.api.entity.CpuCategory;
 import br.com.api.entity.Cpu;
-import br.com.api.entity.ImgSsd;
 import br.com.api.entity.ImgCpu;
+import br.com.api.entity.ImgSsd;
 import br.com.api.repository.CpuCategoryRepository;
 import br.com.api.repository.CpuFileRepository;
 import br.com.api.repository.CpuRepository;
@@ -22,7 +22,7 @@ import java.util.Optional;
 
 @Transactional
 @Service
-public class CpuFIleService {
+public class CpuFileService {
 
     private final Path rootCpu = Paths.get("uploads/cpu");
 
@@ -30,12 +30,11 @@ public class CpuFIleService {
     private final CpuFileRepository cpuFileRepository;
 
     private final CpuRepository cpuRepository;
-    public CpuFIleService(CpuCategoryRepository cpuCategoryRepository, CpuFileRepository cpuFileRepository, CpuRepository cpuRepository) {
+    public CpuFileService(CpuCategoryRepository cpuCategoryRepository, CpuFileRepository cpuFileRepository, CpuRepository cpuRepository) {
         this.cpuCategoryRepository = cpuCategoryRepository;
         this.cpuFileRepository = cpuFileRepository;
         this.cpuRepository = cpuRepository;
     }
-
 
     public void init() {
         try {

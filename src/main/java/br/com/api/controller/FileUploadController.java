@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import br.com.api.entity.CpuCategory;
-import org.springframework.beans.factory.annotation.Autowired;
+import br.com.api.entity.*;
+import br.com.api.service.SsdFileService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,17 +21,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.api.entity.ImgSsd;
-import br.com.api.entity.Ssd;
-import br.com.api.entity.FileResponse;
-import br.com.api.service.SsdFileService;
-
 @RestController
-@RequestMapping("/files")
+@RequestMapping("/files/ssd/")
 public class FileUploadController {
 
-    @Autowired
-    private SsdFileService ofertasService;
+    private final SsdFileService ssdFileService;
+
+    public FileUploadController(SsdFileService ssdFileService) {
+        this.ssdFileService = ssdFileService;
+    }
 
     /*
      * Envia mais de um arquivo por requisição; vai ficar aqui caso precise.
@@ -54,11 +52,11 @@ public class FileUploadController {
 
     // SALVA UMA IMAGEM, UM PRODUTO E UMA CATEGORIA
     @PostMapping
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, Ssd ssd,
-                                             CpuCategory cpuCategory) {
+    public ResponseEntity<String> uploadFileSsd(@RequestParam("file") MultipartFile file, Ssd ssd,
+                                                SsdCategory ssdCategory) {
 
         try {
-            ofertasService.saveFile(file, ssd, cpuCategory);
+            ssdFileService.saveFile(file, ssd, ssdCategory);
 
             return ResponseEntity.status(HttpStatus.OK)
                     .body(String.format("sucesso no upload", file.getOriginalFilename()));
@@ -71,13 +69,13 @@ public class FileUploadController {
 
     @GetMapping("terca")
     // @Scheduled(fixedRate = 2000)
-    public List<FileResponse> teste3() {
-        return ofertasService.terca().stream().map(this::mapToQuery).collect(Collectors.toList());
+    public List<FileResponse> testeList() {
+        return ssdFileService.terca().stream().map(this::mapToQuery).collect(Collectors.toList());
     }
 
-    private FileResponse mapTo_Terca_Feira(ImgSsd img) {
+    private FileResponse mapToList(ImgSsd img) {
         long l1 = img.getId();
-        String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/")
+        String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/ssd/")
                 .path(Long.toString(l1)).toUriString();
         FileResponse iqr = new FileResponse();
         iqr.setId(img.getId());
@@ -91,46 +89,46 @@ public class FileUploadController {
     @GetMapping("teste")
     // @Scheduled(fixedRate = 2000) // Vou usar isso para exibir as determinadas
     // consultas de acordo com o dia da semana.
-    public List<FileResponse> teste2() {
-        return ofertasService.getSql().stream().map(this::mapToQuery).collect(Collectors.toList());
+    public List<FileResponse> testeee() {
+        return ssdFileService.getSql().stream().map(this::mapToQuery).collect(Collectors.toList());
     }
 
-    private FileResponse mapToQuery(ImgSsd img) {
+    private FileResponse mapToQuery(ImgSsd imgSsd) {
 
-        long l1 = img.getId();
-        String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/")
+        long l1 = imgSsd.getId();
+        String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/ssd/")
                 .path(Long.toString(l1)).toUriString();
         FileResponse iqr = new FileResponse();
-        iqr.setId(img.getId());
-        iqr.setFileName(img.getFileName());
-        iqr.setContentType(img.getContentType());
+        iqr.setId(imgSsd.getId());
+        iqr.setFileName(imgSsd.getFileName());
+        iqr.setContentType(imgSsd.getContentType());
         iqr.setUrl(downloadURL);
         return iqr;
     }
 
     @GetMapping
-    public List<FileResponse> list() {
-        return ofertasService.getAllFiles().stream().map(this::mapToFileResponse).collect(Collectors.toList());
+    public List<FileResponse> listarTodos() {
+        return ssdFileService.getAllFiles().stream().map(this::mapToFileResponseSsd).collect(Collectors.toList());
     }
 
-    private FileResponse mapToFileResponse(ImgSsd ofertasModel) {
+    private FileResponse mapToFileResponseSsd(ImgSsd imgSsd) {
 
-        long l2 = ofertasModel.getId();
-        String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/")
+        long l2 = imgSsd.getId();
+        String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/ssd/")
                 .path(Long.toString(l2)).toUriString();
         FileResponse offer = new FileResponse();
-        offer.setId(ofertasModel.getId());
-        offer.setFileName(ofertasModel.getFileName());
-        offer.setContentType(ofertasModel.getContentType());
-        offer.setSize(ofertasModel.getFileSize());
+        offer.setId(imgSsd.getId());
+        offer.setFileName(imgSsd.getFileName());
+        offer.setContentType(imgSsd.getContentType());
+        offer.setSize(imgSsd.getFileSize());
         offer.setUrl(downloadURL);
 
         return offer;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<byte[]> getFile(@PathVariable Long id) {
-        Optional<ImgSsd> file = ofertasService.getFile(id);
+    public ResponseEntity<byte[]> getFileSsd(@PathVariable Long id) {
+        Optional<ImgSsd> file = ssdFileService.getFile(id);
         if (!file.isPresent()) {
             return ResponseEntity.notFound().build();
         }
@@ -142,23 +140,23 @@ public class FileUploadController {
     }
 
     @DeleteMapping("/{id}")
-    public HttpStatus deleta(@PathVariable Long id) throws Exception {
-        ofertasService.imgDeleteDiretory(id);
-        this.ofertasService.imgDelete(id);
+    public HttpStatus deletaSsd(@PathVariable Long id) throws Exception {
+        ssdFileService.imgDeleteDiretory(id);
+        this.ssdFileService.imgDelete(id);
         return HttpStatus.OK;
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
-
-        try {
-            ofertasService.updateImg(file, null);
-
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(String.format("sucesso no upload", file.getOriginalFilename()));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(String.format("falha no upload %s", file.getOriginalFilename()));
-
-        }
-    }
+//    @PutMapping("/{id}")
+//    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+//
+//        try {
+//            ssdFileService.updateImg(file, null);
+//
+//            return ResponseEntity.status(HttpStatus.OK)
+//                    .body(String.format("sucesso no upload", file.getOriginalFilename()));
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.OK)
+//                    .body(String.format("falha no upload %s", file.getOriginalFilename()));
+//
+//        }
+//    }
 }
