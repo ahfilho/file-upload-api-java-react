@@ -67,8 +67,8 @@ public class ClientController {
 
     @ExceptionHandler
     @GetMapping
-    public ResponseEntity<List<Client>> clientList() throws Exception {
-        return ResponseEntity.ok().body(clientService.clientList());
+    public List<Client> clientList() throws Exception {
+        return clientService.clientList();
 
     }
 

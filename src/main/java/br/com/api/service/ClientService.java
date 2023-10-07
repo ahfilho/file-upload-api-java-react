@@ -7,11 +7,9 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import br.com.api.dto.ClientDto;
-import br.com.api.entity.Address;
+import br.com.api.exceptions.ErrorHandling;
 import br.com.api.repository.AddressRepository;
 import br.com.api.repository.SsdRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.api.entity.Client;
@@ -21,14 +19,20 @@ import br.com.api.repository.ClientRepository;
 @Transactional
 public class ClientService {
 
-    @Autowired
-    private ClientRepository clientRepository;
+    private final ClientRepository clientRepository;
 
-    @Autowired
-    private AddressRepository addressRepository;
+    private final AddressRepository addressRepository;
 
-    @Autowired
-    private SsdRepository ssdRepository;
+    private final SsdRepository ssdRepository;
+
+    private final ErrorHandling errorHandling;
+
+    public ClientService(ClientRepository clientRepository, AddressRepository addressRepository, SsdRepository ssdRepository, ErrorHandling errorHandling) {
+        this.clientRepository = clientRepository;
+        this.addressRepository = addressRepository;
+        this.ssdRepository = ssdRepository;
+        this.errorHandling = errorHandling;
+    }
 
     public void clientSave(Client client) {
         //TODO filtro para verificar se o cpf ja está cadastrado e assim não permitir repetições
@@ -38,14 +42,17 @@ public class ClientService {
 
     public List<Client> clientList() throws Exception {
         List<Client> clientList = clientRepository.findAll();
-
-        clientList.sort(Comparator.comparing(Client::getName));
-        for (Client client : clientList) {
-            Client client1 = client.getAddress().getClient();
-            System.out.println(client1);
-        }
-        if (clientList.isEmpty()) {
-            System.out.println("Não existe cliente cadastrado.");
+        try {
+            clientList.sort(Comparator.comparing(Client::getName));
+            for (Client client : clientList) {
+                Client client1 = client.getAddress().getClient();
+                System.out.println(client1);
+            }
+            if (clientList.isEmpty()) {
+                System.out.println("Não existe cliente cadastrado.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return clientList;
     }

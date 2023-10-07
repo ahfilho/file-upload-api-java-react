@@ -7,6 +7,8 @@ import NavBar from "../../navbar/NavBar";
 
 const url = "http://localhost:9090/ssd/redirect";
 
+const urlEdit = "http://localhost:9090/ssd";
+
 const SsdEdit = () => {
   const { id } = useParams();
   const [ssd, setSsd] = useState({
@@ -60,7 +62,7 @@ const SsdEdit = () => {
     formData.append("amount", ssd.amount);
 
     axios
-      .put(`${url}/${id}`, formData)
+      .put(`${urlEdit}/${id}`, formData)
       .then((response) => {
         alert("Alterado com sucesso!")
 
