@@ -9,7 +9,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import br.com.api.controller.ClientController;
-import br.com.api.controller.FileUploadController;
+import br.com.api.controller.upload.controller.SsdUploadController;
 import br.com.api.controller.SacController;
 import br.com.api.controller.RamController;
 import br.com.api.repository.ClientRepository;
@@ -35,7 +35,7 @@ class ApiApplicationTests {
 	private ClientService contactService;
 
 	@Autowired
-	private FileUploadController ioc;
+	private SsdUploadController ioc;
 
 	@MockBean
 	private CpuFileService ios;
