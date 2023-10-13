@@ -6,8 +6,7 @@ import java.util.stream.Collectors;
 import br.com.api.auth.JWTTokenHelper;
 import br.com.api.controller.ssd.extension.SsdControllerExtension;
 import br.com.api.controller.ssd.extension.SsdErrorHandling;
-import br.com.api.entity.SsdCategory;
-import br.com.api.enume.CategoryEnum;
+import br.com.api.entity.ProductCategorySsd;
 import br.com.api.exceptions.ErrorHandling;
 import br.com.api.persistence.SsdPersistenceService;
 import br.com.api.search.SearchSsd;
@@ -24,7 +23,7 @@ import br.com.api.service.SsdService;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/ssd")
-public class SsdController {
+public class SsdController extends ProductController<Ssd> {
 
     private final JWTTokenHelper jwtTokenHelper;
 
@@ -51,13 +50,12 @@ public class SsdController {
     }
 
     @PostMapping
-    public ResponseEntity<String> saveSsd(MultipartFile file, Ssd ssd, SsdCategory ssdCategory) {
+    public ResponseEntity<String> saveSsd(MultipartFile file, Ssd ssd, ProductCategorySsd productCategorySsd) {
         try {
-            ssdPersistenceService.SsdPersistence(file, ssd, ssdCategory);
-            ssdCategory.setSsdProductCategory(String.valueOf(CategoryEnum.SSD));
-            return ssdErrorHandling.teste(file.getOriginalFilename(), true);
+            ssdPersistenceService.SsdPersistence(file, ssd, productCategorySsd);
+            return ssdErrorHandling.saveErrorHandling(file.getOriginalFilename(), true);
         } catch (Exception e) {
-            return ssdErrorHandling.teste(file.getOriginalFilename(), false);
+            return ssdErrorHandling.saveErrorHandling(file.getOriginalFilename(), false);
         }
     }
 
@@ -67,13 +65,13 @@ public class SsdController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateSsd(String id, MultipartFile file, Ssd ssd, SsdCategory ssdCategory) throws Exception {
+    public ResponseEntity<String> updateSsd(String id, MultipartFile file, Ssd ssd, ProductCategorySsd productCategorySsd) throws Exception {
         ssdErrorHandling.convertId(id);
         try {
-            this.ssdService.serviceUpdateSsd(ssd, file, ssdCategory);
-            return ssdErrorHandling.testeUPdate(file.getOriginalFilename(), true);
+            this.ssdService.serviceUpdateSsd(ssd, file, productCategorySsd);
+            return ssdErrorHandling.updateErrorHandling(file.getOriginalFilename(), true);
         } catch (Exception e) {
-            return ssdErrorHandling.testeUPdate(file.getOriginalFilename(), false);
+            return ssdErrorHandling.updateErrorHandling(file.getOriginalFilename(), false);
         }
     }
 

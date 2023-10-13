@@ -16,9 +16,9 @@ import javax.transaction.Transactional;
 
 import br.com.api.FilePath;
 import br.com.api.entity.ImgSsd;
-import br.com.api.entity.SsdCategory;
+import br.com.api.entity.ProductCategorySsd;
 import br.com.api.enume.CategoryEnum;
-import br.com.api.repository.SsdCategoryRepository;
+import br.com.api.repository.ProductCategoryRepositorySsd;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,12 +33,12 @@ public class SsdService {
 
     private final Path rootSsd = Paths.get("uploads/ssd");
     private final SsdRepository ssdRepository;
-    private final SsdCategoryRepository ssdCategoryRepository;
+    private final ProductCategoryRepositorySsd productCategoryRepositorySsd;
     private final FileRepository fileRepository;
 
-    public SsdService(SsdRepository ssdRepository, SsdCategoryRepository ssdCategoryRepository, FileRepository fileRepository) {
+    public SsdService(SsdRepository ssdRepository, ProductCategoryRepositorySsd productCategoryRepositorySsd, FileRepository fileRepository) {
         this.ssdRepository = ssdRepository;
-        this.ssdCategoryRepository = ssdCategoryRepository;
+        this.productCategoryRepositorySsd = productCategoryRepositorySsd;
         this.fileRepository = fileRepository;
 
     }
@@ -52,12 +52,13 @@ public class SsdService {
         }
     }
 
-    public void serviceSaveSsd(Ssd ssd, MultipartFile file, SsdCategory ssdCategory)
+    public void serviceSaveSsd(Ssd ssd, MultipartFile file, ProductCategorySsd productCategorySsd)
             throws IOException {
         Files.copy(file.getInputStream(), this.rootSsd.resolve(file.getOriginalFilename()));
         ImgSsd imgSsd = new ImgSsd();
 
-        ssdCategory.setSsdProductCategory(String.valueOf(CategoryEnum.SSD));
+        productCategorySsd.setProductCategory(String.valueOf(CategoryEnum.SSD));
+
         imgSsd.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
         imgSsd.setContentType(file.getContentType());
         imgSsd.setData(file.getBytes());
@@ -66,7 +67,7 @@ public class SsdService {
         ssd.setImgSsd(imgSsd);
 
         this.ssdRepository.save(ssd);
-        this.ssdCategoryRepository.save(ssdCategory);
+        this.productCategoryRepositorySsd.save(productCategorySsd);
 
     }
 
@@ -75,7 +76,7 @@ public class SsdService {
 
     }
 
-    public Ssd serviceUpdateSsd(Ssd ssd, MultipartFile file, SsdCategory ssdCategory) throws Exception {
+    public Ssd serviceUpdateSsd(Ssd ssd, MultipartFile file, ProductCategorySsd productCategorySsd) throws Exception {
         Optional<Ssd> optionalSsd = this.ssdRepository.findById(ssd.getId());
 
         if (optionalSsd.isPresent()) {
@@ -87,7 +88,7 @@ public class SsdService {
             initializeImgSsd(file, fi);
 
             this.ssdRepository.save(target);
-            this.ssdCategoryRepository.save(ssdCategory);
+            this.productCategoryRepositorySsd.save(productCategorySsd);
             this.fileRepository.save(fi);
 
             return target;
@@ -161,7 +162,7 @@ public class SsdService {
 
     }
 
-    public Ssd  searchId(Long id) throws Exception {
+    public Ssd searchId(Long id) throws Exception {
         Optional<Ssd> result = this.ssdRepository.findById(id);
 
         if (result.isPresent()) {
@@ -183,7 +184,7 @@ public class SsdService {
             if (diferencaEmDias >= 90) {
                 result.add(dateString);
                 System.out.println(dateString + "igual ou maior que 90 dias");
-                System.out.println("Quantidade de dias:"+diferencaEmDias);
+                System.out.println("Quantidade de dias:" + diferencaEmDias);
             }
         }
 

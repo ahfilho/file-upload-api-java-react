@@ -10,15 +10,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "CPU_CATEGORY")
-public class CpuCategory {
+@Table(name = "PRODUCT_CATEGORY_SSD")
+public class ProductCategorySsd {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "CPU_PRODUCT_CATEGORY")
-    private String cpuProductCategory;
+    @JoinColumn(name = "SSD_ID")
+    @Column(name = "SSD_PRODUCT_CATEGORY")
+    private String productCategory;
 
 
 }

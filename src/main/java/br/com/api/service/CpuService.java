@@ -1,12 +1,15 @@
 package br.com.api.service;
 
-import br.com.api.entity.CpuCategory;
+import br.com.api.controller.ProductController;
 import br.com.api.entity.Cpu;
 import br.com.api.entity.ImgCpu;
+import br.com.api.entity.ProductCategoryCpu;
+import br.com.api.entity.ProductCategorySsd;
 import br.com.api.enume.CategoryEnum;
-import br.com.api.repository.CpuCategoryRepository;
 import br.com.api.repository.CpuFileRepository;
 import br.com.api.repository.CpuRepository;
+import br.com.api.repository.ProductCategoryRepositoryCpu;
+import br.com.api.repository.ProductCategoryRepositorySsd;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,17 +28,18 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class CpuService {
+public class CpuService extends ProductController<Cpu> {
 
     private final Path rootCpu = Paths.get("uploads/cpu");
     private final CpuRepository cpuRepository;
-    private final CpuCategoryRepository cpuCategoryRepository;
     private final CpuFileRepository cpuFileRepository;
 
-    public CpuService(CpuRepository cpuRepository, CpuCategoryRepository cpuCategoryRepository, CpuFileRepository cpuFileRepository) {
+    private final ProductCategoryRepositoryCpu productCategoryCpuRepository;
+
+    public CpuService(CpuRepository cpuRepository, CpuFileRepository cpuFileRepository, ProductCategoryRepositorySsd productCategoryRepositorySsd1, ProductCategoryRepositoryCpu productCategoryCpuRepository) {
         this.cpuRepository = cpuRepository;
-        this.cpuCategoryRepository = cpuCategoryRepository;
         this.cpuFileRepository = cpuFileRepository;
+        this.productCategoryCpuRepository = productCategoryCpuRepository;
     }
 
     public void init() {
@@ -46,28 +50,30 @@ public class CpuService {
         }
     }
 
-    public void save(Cpu cpu, MultipartFile file, CpuCategory cpuCategory) throws IOException {
+    public void save(Cpu cpu, MultipartFile file, ProductCategoryCpu productCategoryCpu) throws IOException {
 
         Files.copy(file.getInputStream(), this.rootCpu.resolve(file.getOriginalFilename()));
         ImgCpu imgCpu = new ImgCpu();
         Date dateNow = new Date();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-        cpuCategory.setCpuProductCategory(String.valueOf(CategoryEnum.CPU));
+        productCategoryCpu.setProductCategory(String.valueOf(CategoryEnum.CPU));
 
         imgCpu.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
         imgCpu.setContentType(file.getContentType());
         imgCpu.setData(file.getBytes());
         imgCpu.setFileSize(file.getSize());
 
+        cpu.setImgCpu(imgCpu);
+
         this.cpuRepository.save(cpu);
-        this.cpuCategoryRepository.save(cpuCategory);
-        this.cpuFileRepository.save(imgCpu);
+        productCategoryCpuRepository.save(productCategoryCpu);
+
 
     }
 
-    public List<Cpu> listAll() {
-        return this.cpuRepository.findAll();
+    public List<Cpu> listAll() throws Exception {
+        return cpuRepository.findAll();
     }
 
     public void delete(Long cpu) throws Exception {
@@ -111,7 +117,7 @@ public class CpuService {
 
     }
 
-    public Cpu update(MultipartFile file, CpuCategory cpuCategory, Cpu cpu) throws Exception {
+    public Cpu update(MultipartFile file, ProductCategorySsd productCategorySsd, Cpu cpu) throws Exception {
         Optional<Cpu> editCpu = this.cpuRepository.findById(cpu.getId());
         if (editCpu.isPresent()) {
             Cpu c = editCpu.get();
