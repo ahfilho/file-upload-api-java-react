@@ -38,13 +38,17 @@ public class SsdControllerExtension {
 
 
     public List<String> listDayOfSale() {
-        List<String> aa = ssdService.dayOfSale(); ////
-        if (!aa.isEmpty()) {
+        List<String> listSsd = ssdService.dayOfSale(); ////
+        if (!listSsd.isEmpty()) {
             Ssd ssd = new Ssd();
-            return Collections.singletonList(ssd.getSerialNumber() + "" + aa);
+            return Collections.singletonList(ssd.getSerialNumber() + "" + listSsd);
         }
-        return aa;
+        return listSsd;
     }
+
+
+
+
 
 }
 

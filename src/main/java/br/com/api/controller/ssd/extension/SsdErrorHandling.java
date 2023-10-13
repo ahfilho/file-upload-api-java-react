@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class SsdErrorHandling {
 
 
-    public ResponseEntity<String> teste(String originalFilename, boolean success) {
+    public ResponseEntity<String> saveErrorHandling(String originalFilename, boolean success) {
         HttpStatus status = success ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
         String message = success
                 ? String.format("Cadastro realizado com sucesso: %s", originalFilename)
@@ -18,9 +18,9 @@ public class SsdErrorHandling {
         return ResponseEntity.status(status).body(message);
     }
 
-    public ResponseEntity<String> testeUPdate(String originalFilename, boolean sucess) {
-        HttpStatus status = sucess ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
-        String message = sucess
+    public ResponseEntity<String> updateErrorHandling(String originalFilename, boolean success) {
+        HttpStatus status = success ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
+        String message = success
                 ? String.format("Atualizado com sucesso!")
                 : String.format("Erro durante a atualização.");
         return ResponseEntity.status(status).body(message);
@@ -35,4 +35,24 @@ public class SsdErrorHandling {
             System.out.println("Alguns dados ainda podem conter Strings." + e.getMessage());
         }
     }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -9,6 +9,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import br.com.api.entity.*;
+import br.com.api.entity.ProductCategorySsd;
 import br.com.api.repository.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
@@ -20,13 +21,13 @@ import org.springframework.web.multipart.MultipartFile;
 public class SsdFileService {
 
     private final Path rootSsd = Paths.get("uploads/ssd");
-    private final SsdCategoryRepository ssdCategoryRepository;
+    private final ProductCategoryRepositorySsd productCategoryRepositorySsd;
     private final SsdFileRepository ssdFileRepository;
     private final SsdRepository ssdRepository;
 
 
-    public SsdFileService(SsdCategoryRepository ssdCategoryRepository, SsdFileRepository ssdFileRepository, SsdRepository ssdRepository, SsdFileRepository ssdFileRepository1, SsdRepository ssdRepository1) {
-        this.ssdCategoryRepository = ssdCategoryRepository;
+    public SsdFileService(ProductCategoryRepositorySsd productCategoryRepositorySsd, SsdFileRepository ssdFileRepository, SsdRepository ssdRepository, SsdFileRepository ssdFileRepository1, SsdRepository ssdRepository1) {
+        this.productCategoryRepositorySsd = productCategoryRepositorySsd;
         this.ssdFileRepository = ssdFileRepository1;
         this.ssdRepository = ssdRepository1;
     }
@@ -39,7 +40,7 @@ public class SsdFileService {
         }
     }
 
-    public void saveFile(MultipartFile file, Ssd ssd, SsdCategory ssdCategory)
+    public void saveFile(MultipartFile file, Ssd ssd, ProductCategorySsd productCategorySsd)
             throws IOException {
         Files.copy(file.getInputStream(), this.rootSsd.resolve(file.getOriginalFilename()));
         ImgSsd imgSsd = new ImgSsd();
@@ -51,7 +52,7 @@ public class SsdFileService {
 
         this.ssdFileRepository.save(imgSsd);
         this.ssdRepository.save(ssd);
-        this.ssdCategoryRepository.save(ssdCategory);
+        this.productCategoryRepositorySsd.save(productCategorySsd);
     }
 
     /*
@@ -74,7 +75,7 @@ public class SsdFileService {
      * this.ofertasRepository.save(product_name);
      * this.ofertasRepository.save(product_category); } }
      */
-    public void saveCategoria(SsdCategory ssdCategory) {
+    public void saveCategoria(ProductCategorySsd productCategorySsd) {
     }
 
     public Optional<ImgSsd> getFile(Long id) {

@@ -46,9 +46,9 @@ public class SsdUploadController {
 
     @PostMapping
     public ResponseEntity<String> uploadFileSsd(@RequestParam("file") MultipartFile file, Ssd ssd,
-                                                SsdCategory ssdCategory) {
+                                                ProductCategorySsd productCategorySsd) {
         try {
-            ssdFileService.saveFile(file, ssd, ssdCategory);
+            ssdFileService.saveFile(file, ssd, productCategorySsd);
 
             return ResponseEntity.status(HttpStatus.OK)
                     .body(String.format("sucesso no upload", file.getOriginalFilename()));

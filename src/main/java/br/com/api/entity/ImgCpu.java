@@ -40,7 +40,7 @@ public class ImgCpu {
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CPU_ID")
-    private Cpu cpu;
+    private Cpu cpuFile;
 
 
 }

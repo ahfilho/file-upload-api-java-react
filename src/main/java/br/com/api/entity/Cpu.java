@@ -58,6 +58,6 @@ public class Cpu {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "CPU_ID")
-    private CpuCategory cpuCategory;
+    private ProductCategoryCpu cpuCategory;
 
 }

@@ -10,10 +10,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import reactor.core.Scannable;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 //import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 
@@ -37,7 +39,6 @@ public class ApiApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
         SpringApplication.run(ApiApplication.class, args);
-
 
     }
 

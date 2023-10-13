@@ -12,11 +12,10 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import br.com.api.entity.CpuCategory;
 import br.com.api.entity.ImgSsd;
-import br.com.api.repository.CpuCategoryRepository;
+import br.com.api.entity.ProductCategorySsd;
+import br.com.api.repository.ProductCategoryRepositorySsd;
 import br.com.api.repository.SsdFileRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.api.entity.Ram;
@@ -30,15 +29,19 @@ public class RamService {
 
     public final Path root = Paths.get("uploads");
 
-    @Autowired
+
     private RamRepository ramRepository;
-    @Autowired
-    private CpuCategoryRepository cpuCategoryRepository;
-    @Autowired
     private SsdFileRepository offerImageRepository;
 
+    private final ProductCategoryRepositorySsd productCategoryRepositorySsd;
 
-    public void ramSave(Ram ram, MultipartFile file, CpuCategory cpuCategory) throws IOException {
+    public RamService(RamRepository ramRepository, SsdFileRepository offerImageRepository, ProductCategoryRepositorySsd productCategoryRepositorySsd) {
+        this.ramRepository = ramRepository;
+        this.offerImageRepository = offerImageRepository;
+        this.productCategoryRepositorySsd = productCategoryRepositorySsd;
+    }
+
+    public void ramSave(Ram ram, MultipartFile file, ProductCategorySsd productCategorySsd) throws IOException {
 
         Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
 
@@ -56,7 +59,7 @@ public class RamService {
         img.setFileSize(file.getSize());
         this.ramRepository.save(ram);
         this.offerImageRepository.save(img);
-        this.cpuCategoryRepository.save(cpuCategory);
+        this.productCategoryRepositorySsd.save(productCategorySsd);
     }
 
     public List<Ram> ramList() {

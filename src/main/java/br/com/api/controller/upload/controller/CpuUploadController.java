@@ -44,9 +44,9 @@ public class CpuUploadController {
 
     @PostMapping
     public ResponseEntity<String> uploadFileCpu(@RequestParam("file") MultipartFile file, Cpu cpu,
-                                                CpuCategory cpuCategory) {
+                                                ProductCategorySsd productCategorySsd) {
         try {
-            cpuFileService.saveFile(file, cpu, cpuCategory);
+            cpuFileService.saveFile(file, cpu, productCategorySsd);
 
             return ResponseEntity.status(HttpStatus.OK)
                     .body(String.format("sucesso no upload", file.getOriginalFilename()));

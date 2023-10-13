@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import br.com.api.entity.CpuCategory;
 import br.com.api.entity.ImgSsd;
 import br.com.api.entity.Ssd;
 import org.springframework.data.repository.query.Param;
@@ -20,7 +19,7 @@ public interface FileRepository extends JpaRepository<ImgSsd, Long> {
 
 	void save(Ssd pm);
 
-	void save(CpuCategory cpm);
+	void save(ProductCategoryRepositorySsd cpm);
 	@Query("SELECT f FROM ImgSsd f WHERE f.fileName = :fileName")
 	List<ImgSsd> findByName(@Param("fileName") String fileName);
 

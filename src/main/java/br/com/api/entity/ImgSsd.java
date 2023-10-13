@@ -38,7 +38,7 @@ public class ImgSsd {
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SSD_ID")
-    private Ssd ssdAbstract;
+    private Ssd ssdFile;
 
 
 

@@ -55,13 +55,13 @@ public class Ram {
     @Column(name = "URL")
     private String url;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "RAM_ID")
-    private ImgSsd image;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "RAM_ID")
-    private CpuCategory cpuCategory;
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "RAM_ID")
+//    private ImgSsd image;
+//
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "RAM_ID")
+//    private ProductCategory productCategory;
 
 }
 

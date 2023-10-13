@@ -1,12 +1,12 @@
 package br.com.api.service;
 
-import br.com.api.entity.CpuCategory;
 import br.com.api.entity.Cpu;
 import br.com.api.entity.ImgCpu;
 import br.com.api.entity.ImgSsd;
-import br.com.api.repository.CpuCategoryRepository;
+import br.com.api.entity.ProductCategorySsd;
 import br.com.api.repository.CpuFileRepository;
 import br.com.api.repository.CpuRepository;
+import br.com.api.repository.ProductCategoryRepositorySsd;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
@@ -26,14 +26,15 @@ public class CpuFileService {
 
     private final Path rootCpu = Paths.get("uploads/cpu");
 
-    private final CpuCategoryRepository cpuCategoryRepository;
     private final CpuFileRepository cpuFileRepository;
 
     private final CpuRepository cpuRepository;
-    public CpuFileService(CpuCategoryRepository cpuCategoryRepository, CpuFileRepository cpuFileRepository, CpuRepository cpuRepository) {
-        this.cpuCategoryRepository = cpuCategoryRepository;
+
+    private  final ProductCategoryRepositorySsd productCategoryRepositorySsd;
+    public CpuFileService( CpuFileRepository cpuFileRepository, CpuRepository cpuRepository, ProductCategoryRepositorySsd productCategoryRepositorySsd) {
         this.cpuFileRepository = cpuFileRepository;
         this.cpuRepository = cpuRepository;
+        this.productCategoryRepositorySsd = productCategoryRepositorySsd;
     }
 
     public void init() {
@@ -44,7 +45,7 @@ public class CpuFileService {
         }
     }
 
-    public void saveFile(MultipartFile file, Cpu cpu, CpuCategory cpuCategoryModel)
+    public void saveFile(MultipartFile file, Cpu cpu, ProductCategorySsd productCategorySsd)
             throws IOException {
         Files.copy(file.getInputStream(), this.rootCpu.resolve(file.getOriginalFilename()));
         ImgCpu img = new ImgCpu();
@@ -56,7 +57,7 @@ public class CpuFileService {
 
         this.cpuFileRepository.save(img);
         this.cpuRepository.save(cpu);
-        this.cpuCategoryRepository.save(cpuCategoryModel);
+        this.productCategoryRepositorySsd.save(productCategorySsd);
     }
 
     /*
@@ -79,7 +80,7 @@ public class CpuFileService {
      * this.ofertasRepository.save(product_name);
      * this.ofertasRepository.save(product_category); } }
      */
-    public void saveCategoria(CpuCategory cpm) {
+    public void saveCategoria(ProductCategorySsd cpm) {
     }
 
     public void saveProduto(Cpu pm) {
