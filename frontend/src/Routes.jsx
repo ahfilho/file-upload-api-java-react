@@ -17,16 +17,16 @@ function RoutesApp(){
       
 
         <Routes path="/ssd" element={<Ssd />} />
-        <Routes path="/ssd/list" element={<SsdList />} />
-        <Routes path="/ssd/update" element={<SsdEdit />} />
+        <Routes path="/ssdList" element={<SsdList />} />
+        <Routes path="/ssdEdit/" element={<SsdEdit />} />
 
         <Routes path="/ram" element={<Ssd />} />
-        <Routes path="/ram/list" element={<SsdList />} />
-        <Routes path="/ram/update" element={<SsdEdit />} />
+        <Routes path="/ramList" element={<SsdList />} />
+        <Routes path="/ramUpdate" element={<SsdEdit />} />
 
         <Routes path="/cpu" element={<Ssd />} />
-        <Routes path="/cpu/list" element={<SsdList />} />
-        <Routes path="/cpu/update" element={<SsdEdit />} />
+        <Routes path="/cpuList" element={<SsdList />} />
+        <Routes path="/cpuEdit/" element={<SsdEdit />} />
 
         <Routes path="/home" element={<Home />} />
       </BrowserRouter>

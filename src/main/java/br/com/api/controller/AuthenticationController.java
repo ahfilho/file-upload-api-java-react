@@ -23,7 +23,7 @@ import java.security.Principal;
 import java.security.spec.InvalidKeySpecException;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/user")
 public class AuthenticationController {
 

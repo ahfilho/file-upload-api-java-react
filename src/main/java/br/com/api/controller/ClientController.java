@@ -3,6 +3,7 @@ package br.com.api.controller;
 import java.util.List;
 
 import br.com.api.auth.JWTTokenHelper;
+import br.com.api.entity.Address;
 import br.com.api.repository.ClientRepository;
 import br.com.api.search.ClientSearchCpf;
 import org.springframework.http.HttpStatus;
@@ -74,10 +75,10 @@ public class ClientController {
 
     @ExceptionHandler
     @PutMapping("/{id}")
-    public ResponseEntity<Client> clientUpdate(@PathVariable Long id, @RequestBody Client client)
+    public ResponseEntity<Client> clientUpdate(@PathVariable Long id, @RequestBody Client client, Address address )
             throws Exception {
         client.setId(id);
-        return ResponseEntity.ok().body(clientService.clientUpdate(client));
+        return ResponseEntity.ok().body(clientService.clientUpdate(client, address));
     }
 
     @ExceptionHandler
@@ -87,5 +88,10 @@ public class ClientController {
         return HttpStatus.OK;
     }
 
+
+    @GetMapping("/search/{id}")
+    public Client searchClientById(@PathVariable Long id){
+        return  clientService.findClientById(id);
+    }
 
 }

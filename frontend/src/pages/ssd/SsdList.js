@@ -43,7 +43,7 @@ class SsdList extends Component {
         <div className="tabela">
           <NavBar></NavBar>
           <br></br>
-          <div className="title">Produtos cadastrados</div>
+          <div className="title">SSD SATA</div>
           <br></br>
           <hr></hr>
         </div>

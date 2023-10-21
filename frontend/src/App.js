@@ -20,6 +20,7 @@ import NavBar from "./navbar/NavBar";
 import Client from "./client/Client";
 import ClientList from "./client/ClientList";
 import CpuEdit from "./pages/cpu/CpuEdit";
+import ClientEdit from "./client/ClientEdit";
 function App() {
   return (
     <BrowserRouter>
@@ -32,6 +33,7 @@ function App() {
           <Route path="/navbar" exact component={NavBar} />
           <Route path="/client" exact component={Client} />
           <Route path="/clientList" exact component={ClientList} />
+          <Route path="/clientEdit/:id" exact component={ClientEdit} />
 
           <Route path="/" exact component={LoginPage} />
           <Route path="/dashboard" exact component={Dashboard} />

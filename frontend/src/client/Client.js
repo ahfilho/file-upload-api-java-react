@@ -164,18 +164,7 @@ const AddClient = () => {
             onChange={(e) => setCity(e.target.value)}
           />
         </div>
-        {/* <div className="inputs">
-          <p>Criação do cadastro</p>
-          <input
-            type={"date"}
-            name="dataRegister"
-            id="dataRegister"
-            className="form-control"
-            value={dataRegister}
-            placeholder="Casa Nº"
-            onChange={(e) => setDataRegister(e.target.value)}
-          />
-        </div> */}
+        
         <br></br>
         <div className="inputs">
 

@@ -39,9 +39,9 @@ class ListClient extends Component {
           <NavBar />
           <br></br>
           <div className="title">Clientes</div>
+          Todos os clientes atendidos
           <br></br>
           <hr></hr>
-          <div className=""><h6>Lista de clientes que já atendi. Aqui tenho informações sobre cada um.</h6></div>
 
         </div>
         <div className="botoes"></div>
@@ -53,8 +53,8 @@ class ListClient extends Component {
             <th>Cpf</th>
             <th>Contato</th>
             <th>Rua</th>
-            <th>Casa Nº</th>
-            <th>Bairro</th>
+            <th>Nº</th>
+            <th>Estado</th>
             <th>Cidade</th>
             <th>Data cadastro</th>
             <th>Ações</th>
@@ -64,14 +64,14 @@ class ListClient extends Component {
               <td>{client.id}</td>
               <td>{client.name}</td>
               <td>{client.email}</td>
-              <td>{client.cpf}</td>
+              <td>{client.cpf ? client.cpf : "N/A"}</td>
               <td>{client.contact}</td>
 
               <td>{client.address ? client.address.street : ""}</td>
               <td>{client.address ? client.address.number : ""}</td>
               <td>{client.address ? client.address.district : ""}</td>
               <td>{client.address ? client.address.city : ""}</td>
-              <td>{client.address ? client.address.dataRegister : ""}</td>
+              <td>{client.address ? client.dataRegister : ""}</td>
               <td>
                 <button>
                   <Link to={`/clientEdit/${client.id}`} className="btn btn-sucess">

@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import br.com.api.entity.Address;
 import br.com.api.exceptions.ErrorHandling;
 import br.com.api.repository.AddressRepository;
 import br.com.api.repository.SsdRepository;
@@ -57,7 +58,7 @@ public class ClientService {
         return clientList;
     }
 
-    public Client clientUpdate(Client client) throws Exception {
+    public Client clientUpdate(Client client, Address address) throws Exception {
         Optional<Client> optionalClient = this.clientRepository.findById(client.getId());
         if (optionalClient.isPresent()) {
             Client cm = optionalClient.get();
@@ -65,6 +66,16 @@ public class ClientService {
             cm.setEmail(client.getEmail());
             cm.setCpf(client.getCpf());
             cm.setContact(client.getContact());
+
+            Address addressEdit = cm.getAddress();
+            addressEdit.setCity(client.getAddress().getCity());
+            addressEdit.setDistrict(client.getAddress().getDistrict());
+            addressEdit.setNumber(client.getAddress().getNumber());
+            addressEdit.setStreet(client.getAddress().getStreet());
+
+            clientRepository.save(cm);
+            addressRepository.save(addressEdit);
+
             return cm;
         } else {
             throw new Exception("ERRO AO ATUALIZAR" + client.getId());
@@ -80,4 +91,8 @@ public class ClientService {
         }
     }
 
+    public Client findClientById(Long id) {
+        Optional<Client> optionalClient = clientRepository.findById(id);
+        return optionalClient.orElse(null);
+    }
 }

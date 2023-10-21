@@ -34,7 +34,7 @@ public class Client {
     @Column(name = "email")
     private String email;
 
-    @NotNull
+//    @NotNull
     @Column(name = "cpf")
     @Size(min = 11, max = 11)
     private String cpf;

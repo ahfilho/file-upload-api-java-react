@@ -20,7 +20,7 @@ import br.com.api.entity.Ssd;
 import br.com.api.service.SsdService;
 
 
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/ssd")
 public class SsdController extends ProductController<Ssd> {
