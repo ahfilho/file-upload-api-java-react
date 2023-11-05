@@ -1746,3 +1746,9 @@ body {
             transform: translateY(100%);
   }
 }
+.forms{
+  display: flex;
+width: 350px;
+}
+.teste{
+margin-right: 5px;}

@@ -1,65 +1,89 @@
 import "./Home.css";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
+import { useState } from "react";
+import { useHistory } from "react-router-dom"; // import do hook
 
 const Home = () => {
+  const history = useHistory();
+  const [cpf, setCpf] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const url = `http://localhost:9090/client/search/${cpf}`;
+
+    try {
+      const response = await axios.get(url);
+      if (response && response.data) {
+        console.log("Cliente encontrado:", response.data);
+        history.push({
+          pathname: "/clientCpfSearch",
+          state: { clients: response.data },
+        });
+      } else {
+        console.log("Nenhum cliente encontrado.");
+      }
+      setCpf("");
+    } catch (error) {
+      console.error("Erro ao pesquisar CPF:", error);
+    }
+  };
+
   return (
-
     <div className="flex-container">
-
-      <div class="container mt-3">
-        {/* <h2>Meus produtos</h2> */}
-        <p>Gerenciador de hardware novo/usado.
-         Cadastrar cliente, máquina e produtos para venda.
+      <div className="container mt-3">
+        <p>
+          Gerenciador de hardware novo/usado. Cadastrar cliente, máquina e produtos
+          para venda.
         </p>
-        <ul class="nav">
-        <li class="nav-item">
-            <a href="/client" class="animated-button9">Cliente</a>
+        <ul className="nav">
+          <li className="nav-item">
+            <Link to="/client" className="animated-button9">
+              Cliente
+            </Link>
           </li>
-          <li class="nav-item">
-            <a href="/cpu" class="animated-button9">CPU</a>
+          <li className="nav-item">
+            <Link to="/cpu" className="animated-button9">
+              CPU
+            </Link>
           </li>
-          <li class="nav-item">
-            <a href="/ram" class="animated-button9">RAM</a>
+          <li className="nav-item">
+            <Link to="/ram" className="animated-button9">
+              RAM
+            </Link>
           </li>
-          <li class="nav-item">
-            <a href="/ssd" class="animated-button9">SSD</a>
+          <li className="nav-item">
+            <Link to="/ssd" className="animated-button9">
+              SSD
+            </Link>
           </li>
-          <li class="nav-item">
-          <a href="#" class="animated-button9">M.2</a>
+          <li className="nav-item">
+            <Link to="#" className="animated-button9">
+              M.2
+            </Link>
           </li>
         </ul>
       </div>
-
-      {/*       
-      <div className="animated-button2">
-        <a href="/ram" class="animated-button1">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          Ram
-        </a>
+      <div className="forms">
+        <form id="formulario" onSubmit={handleSubmit}>
+          <div className="teste">
+            <input
+              type="text"
+              name="cpf"
+              id="cpf"
+              value={cpf}
+              className="form-control"
+              placeholder="Pesquisar CPF"
+              onChange={(e) => setCpf(e.target.value)}
+            />
+            <button type="submit" className="btn btn-primary">
+              <i className="fa-solid fa-check"></i> Pesquisar
+            </button>
+          </div>
+        </form>
       </div>
-      <div className="animated-button3">
-        <a href="/ssd" class="animated-button2">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          Ssd
-        </a>
-      </div> */}
-
-      {/* <div className="a1">
-        <Link to="/ssd">Ssd</Link>
-
-        <Link to="/ram">Ram</Link>
-      </div>
-      <div className="a1">
-        <Link to="/cpu">Cpu</Link>
-      </div> */}
     </div>
   );
 };
+
 export default Home;

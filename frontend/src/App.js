@@ -21,6 +21,8 @@ import Client from "./client/Client";
 import ClientList from "./client/ClientList";
 import CpuEdit from "./pages/cpu/CpuEdit";
 import ClientEdit from "./client/ClientEdit";
+import ClientCpfSearch from "./client/ClientCpfSearch";
+
 function App() {
   return (
     <BrowserRouter>
@@ -34,6 +36,7 @@ function App() {
           <Route path="/client" exact component={Client} />
           <Route path="/clientList" exact component={ClientList} />
           <Route path="/clientEdit/:id" exact component={ClientEdit} />
+          <Route path="/clientCpfSearch" exact component={ClientCpfSearch} />
 
           <Route path="/" exact component={LoginPage} />
           <Route path="/dashboard" exact component={Dashboard} />

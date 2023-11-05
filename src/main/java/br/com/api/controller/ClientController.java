@@ -59,7 +59,7 @@ public class ClientController {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(String.format("Não foi possível cadastrar o cliente: " + client.getName() + ", pois, o CPF:" + client.getCpf() + " já existe na base de dados."));
             } else {
                 clientService.clientSave(client);
-                return ResponseEntity.status(HttpStatus.OK).body(String.format(client.getName() + " cadastrado com sucesso. \n Cadastro realizado em: " + client.getDataRegister()));
+                return ResponseEntity.status(HttpStatus.OK).body(String.format(client.getName() + ": cadastrado com sucesso. \n Cadastro realizado em: " + client.getDataRegister()));
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(String.format("Não foi possível cadastrar o cliente: " + client.getName() + "."));
@@ -75,7 +75,7 @@ public class ClientController {
 
     @ExceptionHandler
     @PutMapping("/{id}")
-    public ResponseEntity<Client> clientUpdate(@PathVariable Long id, @RequestBody Client client, Address address )
+    public ResponseEntity<Client> clientUpdate(@PathVariable Long id, @RequestBody Client client, Address address)
             throws Exception {
         client.setId(id);
         return ResponseEntity.ok().body(clientService.clientUpdate(client, address));
@@ -88,10 +88,20 @@ public class ClientController {
         return HttpStatus.OK;
     }
 
-
-    @GetMapping("/search/{id}")
-    public Client searchClientById(@PathVariable Long id){
-        return  clientService.findClientById(id);
+    @GetMapping("/search/{cpf}")
+    public String pesquisa(@PathVariable String cpf) {
+        String teste = clientService.findByCpf(cpf);
+        if (teste.contains(cpf)) {
+            return teste;
+        } else {
+            return null;
+        }
     }
+
+    @GetMapping("/find/{id}")
+    public Client searchClientById(@PathVariable Long id) {
+        return clientService.findClientById(id);
+    }
+
 
 }
