@@ -3,9 +3,10 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import NavBar from "../navbar/NavBar";
 import { useHistory } from 'react-router-dom'; // import do hook
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 const url = "http://localhost:9090/client";
-const url2 = "http://localhost:9090/client/search";
+const url2 = "http://localhost:9090/client/find";
 
 const ClientEdit = () => {
     const { id } = useParams();
@@ -155,10 +156,23 @@ const ClientEdit = () => {
                 </div>
                 <br></br>
                 <div className="inputs">
-                    <input className="btn btn-primary" type="submit" value="Submit" />
-                    <button className="btn btn-danger" onClick={handleCancel} >Cancelar</button>
+                    <button
+                        type="submit"
+                        className="btn btn-primary"
+                        onChange={(e) => handleSubmit(e)}
+                    ><i class="fa-solid fa-check"></i>
+
+                    </button>
+
+                    <button
+                        type="submit"
+                        className="btn btn-danger"
+
+                        onClick={handleCancel}
+                    ><i class="fa-solid fa-ban"></i>
 
 
+                    </button>
                 </div>
             </form>
         </div>

@@ -27,6 +27,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Autowired
     private CustomUserService userService;
 
@@ -62,11 +65,26 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint).and()
-                .authorizeRequests((request -> request.antMatchers("/localhost:3000/**", "/localhost:9090/**",
-                                "/user/auth/login", "/client", "/client/{id}","/client/search/{id}",
-                                "/ssd", "/ssd/{id}", "/files/{id}",
-                                "/ssd/files/download", "/ssd/files/{id}", "/ssd/sale/day",
-                                "/cpu", "/cpu/{id}", "/ssd/redirect/{id}","/files/ssd/{id}","/files/cpu/{id}").permitAll()
+                .authorizeRequests((request -> request.antMatchers("/localhost:3000/**", "/localhost:9090/**").permitAll()
+                        .antMatchers("/user/auth/login").permitAll()
+                        .antMatchers("/client").permitAll()
+                        .antMatchers("/client/{id}").permitAll()
+                        .antMatchers("/client/search/").permitAll()
+                        .antMatchers("/client/search/{cpf}").permitAll()
+                        .antMatchers("/client/find/{id}").permitAll()
+                        .antMatchers("/client/search/cpf").permitAll()
+                        .antMatchers("/ssd").permitAll()
+                        .antMatchers("/ssd/{id}").permitAll()
+                        .antMatchers("/files/{id}").permitAll()
+                        .antMatchers("/ssd/files/download").permitAll()
+                        .antMatchers("/ssd/files/{id}").permitAll()
+                        .antMatchers("/ssd/sale/day").permitAll()
+                        .antMatchers("/cpu").permitAll()
+                        .antMatchers("/cpu/{id}").permitAll()
+                        .antMatchers("/ssd/redirect/{id}").permitAll()
+                        .antMatchers("/files/ssd/{id}").permitAll()
+                        .antMatchers("/files/cpu/{id}").permitAll()
+                        .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated()))
                 .addFilterBefore(new JWTAuthenticationFilter(userService, jWTTokenHelper),
                         UsernamePasswordAuthenticationFilter.class);

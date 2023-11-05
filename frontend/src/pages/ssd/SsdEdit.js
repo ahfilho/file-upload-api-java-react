@@ -4,12 +4,13 @@ import { useState, useEffect, useNavigate } from "react";
 import { BrowserRouter as Router, Route, Link, Switch, useParams } from "react-router-dom";
 import "./Ssd.css";
 import NavBar from "../../navbar/NavBar";
+import { useHistory } from 'react-router-dom'; // import do hook
 
 const url = "http://localhost:9090/ssd/redirect";
-
 const urlEdit = "http://localhost:9090/ssd";
 
 const SsdEdit = () => {
+  const history = useHistory();
   const { id } = useParams();
   const [ssd, setSsd] = useState({
     brand: "",
@@ -72,6 +73,9 @@ const SsdEdit = () => {
         console.log(error.response);
       });
   };
+  const handleCancel = () => {
+    history.push("/SsdList");
+};
 
   return (
     <div className="meuForm">
@@ -96,8 +100,6 @@ const SsdEdit = () => {
             placeholder="Marca"
             onChange={(e) => onInputChange(e)}
           />
-        </div>
-        <div className="inputs">
           <input
             type={"text"}
             name="model"
@@ -107,8 +109,7 @@ const SsdEdit = () => {
             placeholder="Modelo"
             onChange={(e) => onInputChange(e)}
           />
-        </div>
-        <div className="inputs">
+     
           <input
             type={"text"}
             name="serialNumber"
@@ -118,8 +119,7 @@ const SsdEdit = () => {
             placeholder="Nº de série"
             onChange={(e) => onInputChange(e)}
           />
-        </div>
-        <div className="inputs">
+  
           <input
             type={"text"}
             name="size"
@@ -129,8 +129,7 @@ const SsdEdit = () => {
             placeholder="Capacidade/GB"
             onChange={(e) => onInputChange(e)}
           />
-        </div>
-        <div className="inputs">
+
           <input
             type={"text"}
             name="amount"
@@ -153,8 +152,7 @@ const SsdEdit = () => {
             placeholder="Data de compra"
             onChange={(e) => onInputChange(e)}
           />
-        </div>
-        <div className="inputs">
+      
           <input
             type={"text"}
             name="purchasePrice"
@@ -176,8 +174,7 @@ const SsdEdit = () => {
             placeholder="Arrival date"
             onChange={(e) => onInputChange(e)}
           />
-        </div>
-        <div className="inputs">
+       
           <input
             type={"text"}
             name="saleValue"
@@ -194,12 +191,22 @@ const SsdEdit = () => {
             type="submit"
             className="btn btn-primary"
             onChange={(e) => handleSubmit(e)}
-          >
-            Atualizar
+          ><i class="fa-solid fa-check"></i>
+            
           </button>
-          <button class="btn btn-danger">
-            <Link to="/ssdlist">Cancelar</Link>
-          </button>
+          {/* <button class="btn btn-danger">
+            <Link to="/ssdlist"><i class="fa-solid fa-ban"></i></Link>
+          </button> */}
+        
+        <button
+                     type="submit"
+                     className="btn btn-danger"
+
+                        onClick={handleCancel}
+                    ><i class="fa-solid fa-ban"></i>
+
+
+        </button>
         </div>
       </form>
     </div>

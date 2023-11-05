@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
+
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
 
@@ -15,5 +16,9 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
 
     @Query("SELECT c FROM Client c WHERE c.cpf = ?1")
     public Client clientWithSameCpf(String cpf);
+
+    @Query("SELECT c FROM Client c WHERE c.cpf = ?1")
+    public Client find(String cpf);
+
 
 }
