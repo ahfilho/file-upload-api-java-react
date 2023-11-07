@@ -96,8 +96,8 @@ public class ClientService {
         return optionalClient.orElse(null);
     }
 
-    public String findByCpf(String cpf) {
-        String cpfff = String.valueOf(clientRepository.find(cpf));
-        return cpfff;
+
+    public Client findByCpf(String cpf) {
+    return clientRepository.find(cpf);
     }
 }

@@ -17,7 +17,7 @@ const Home = () => {
       if (response && response.data) {
         console.log("Cliente encontrado:", response.data);
         history.push({
-          pathname: "/clientCpfSearch",
+          pathname: `/search/${cpf}`,
           state: { clients: response.data },
         });
       } else {

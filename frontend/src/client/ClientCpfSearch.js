@@ -9,27 +9,33 @@ class ListClient extends Component {
     clients: [],
   };
 
+  async componentDidMount() {
+    const { cpf } = this.props.match.params; // Obtém o parâmetro cpf da URL
+    try {
+      const response = await axios.get(`http://localhost:9090/client/search/${cpf}`);
+      const client = response.data; // O resultado retornado do endpoint
+      if (client) {
+        this.setState({ clients: [client] }); // Atualiza o estado com os dados do cliente
+      }
+    } catch (error) {
+      console.error("Erro ao buscar o cliente:", error);
+    }
+  }
+
   async remove(id) {
     alert("Deseja mesmo excluir?");
-    axios
-      .delete(`http://localhost:9090/client/${id}`, {
-        method: "DELETE",
+    try {
+      await axios.delete(`http://localhost:9090/client/${id}`, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-      })
-      .then(() => {
-        let updateClient = [...this.state.clients].filter((i) => i.id !== id);
-        this.setState({ clients: updateClient });
       });
-  }
-
-  componentDidMount() {
-    axios.get("http://localhost:9090/client").then((res) => {
-      const clients = res.data;
-      this.setState({ clients });
-    });
+      let updatedClients = this.state.clients.filter((i) => i.id !== id);
+      this.setState({ clients: updatedClients });
+    } catch (error) {
+      console.error("Erro ao excluir o cliente:", error);
+    }
   }
 
   render() {
@@ -38,10 +44,9 @@ class ListClient extends Component {
         <div className="tabela">
           <NavBar />
           <br></br>
-          <div className="title">Resultado da pesquisa por CPF de cliente</div>
+          <div className="title">A pesquisa por CPF encontrou um registro:</div>
           <br></br>
           <hr></hr>
-
         </div>
         <div className="botoes"></div>
         <table>
@@ -65,7 +70,6 @@ class ListClient extends Component {
               <td>{client.email}</td>
               <td>{client.cpf ? client.cpf : "N/A"}</td>
               <td>{client.contact}</td>
-
               <td>{client.address ? client.address.street : ""}</td>
               <td>{client.address ? client.address.number : ""}</td>
               <td>{client.address ? client.address.district : ""}</td>

@@ -89,12 +89,12 @@ public class ClientController {
     }
 
     @GetMapping("/search/{cpf}")
-    public String pesquisa(@PathVariable String cpf) {
-        String teste = clientService.findByCpf(cpf);
-        if (teste.contains(cpf)) {
-            return teste;
+    public ResponseEntity<?> pesquisa(@PathVariable String cpf) {
+        Client client = clientService.findByCpf(cpf);
+        if (client != null) {
+            return ResponseEntity.ok(client);
         } else {
-            return null;
+            return ResponseEntity.notFound().build();
         }
     }
 
