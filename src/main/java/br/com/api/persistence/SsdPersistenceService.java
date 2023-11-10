@@ -15,7 +15,6 @@ import java.io.IOException;
 public class SsdPersistenceService {
 
     private final JWTTokenHelper jwtTokenHelper;
-
     private final SsdService ssdService;
     private final BuildFileLinkSsd buildFileLink;
 

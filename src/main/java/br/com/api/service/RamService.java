@@ -12,14 +12,13 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import br.com.api.entity.ImgSsd;
-import br.com.api.entity.ProductCategorySsd;
-import br.com.api.repository.ProductCategoryRepositorySsd;
-import br.com.api.repository.SsdFileRepository;
+import br.com.api.entity.ImgRam;
+import br.com.api.entity.ProductCategory;
+import br.com.api.enume.CategoryEnum;
+import br.com.api.repository.*;
 import org.springframework.stereotype.Service;
 
 import br.com.api.entity.Ram;
-import br.com.api.repository.RamRepository;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,23 +26,25 @@ import org.springframework.web.multipart.MultipartFile;
 @Transactional
 public class RamService {
 
-    public final Path root = Paths.get("uploads");
+    public final Path rootRam = Paths.get("uploads/ram");
 
+    private final RamRepository ramRepository;
+    private final RamFileRepository ramFileRepository;
+    private final ProductCategoryRepositoryRam productCategoryRepositoryRam;
 
-    private RamRepository ramRepository;
-    private SsdFileRepository offerImageRepository;
+    private final RamFileRepository fileRepository;
 
-    private final ProductCategoryRepositorySsd productCategoryRepositorySsd;
-
-    public RamService(RamRepository ramRepository, SsdFileRepository offerImageRepository, ProductCategoryRepositorySsd productCategoryRepositorySsd) {
+    public RamService(RamRepository ramRepository, RamFileRepository ramFileRepository, ProductCategoryRepositorySsd productCategoryRepositorySsd, ProductCategoryRepositoryRam productCategoryRepositoryRam, FileRepository fileRepository, RamFileRepository fileRepository1) {
         this.ramRepository = ramRepository;
-        this.offerImageRepository = offerImageRepository;
-        this.productCategoryRepositorySsd = productCategoryRepositorySsd;
+        this.ramFileRepository = ramFileRepository;
+        this.productCategoryRepositoryRam = productCategoryRepositoryRam;
+        this.fileRepository = fileRepository1;
     }
 
-    public void ramSave(Ram ram, MultipartFile file, ProductCategorySsd productCategorySsd) throws IOException {
+    public void ramSave(Ram ram, MultipartFile file, ProductCategory productCategory) throws IOException {
 
-        Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
+        Files.copy(file.getInputStream(), this.rootRam.resolve(file.getOriginalFilename()));
+        productCategory.setProductCategory(String.valueOf(CategoryEnum.RAM));
 
         Date dateAtual = new Date();
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -51,15 +52,17 @@ public class RamService {
 //        ram.setArrivalDate(dateAtual);
 //        ram.setPurchaseDate(dateAtual);
 
-        ImgSsd img = new ImgSsd();
+        ImgRam imgRam = new ImgRam();
 
-        img.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
-        img.setContentType(file.getContentType());
-        img.setData(file.getBytes());
-        img.setFileSize(file.getSize());
+        imgRam.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
+        imgRam.setContentType(file.getContentType());
+        imgRam.setData(file.getBytes());
+        imgRam.setFileSize(file.getSize());
+
+        ram.setImgRam(imgRam);
+
         this.ramRepository.save(ram);
-        this.offerImageRepository.save(img);
-        this.productCategoryRepositorySsd.save(productCategorySsd);
+        this.ramFileRepository.save(imgRam);
     }
 
     public List<Ram> ramList() {

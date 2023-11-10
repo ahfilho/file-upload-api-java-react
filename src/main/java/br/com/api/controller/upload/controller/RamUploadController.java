@@ -1,28 +1,23 @@
 package br.com.api.controller.upload.controller;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 import br.com.api.entity.*;
-import br.com.api.service.SsdFileService;
+import br.com.api.service.RamFileService;
+import br.com.api.service.RamService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-@RestController
-@RequestMapping("/files/ssd/")
-public class SsdUploadController {
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
+@RestController
+@RequestMapping("/files/ram/")
+public class RamUploadController {
     /*
      * Envia mais de um arquivo por requisição; vai ficar aqui caso precise.
      *
@@ -37,18 +32,21 @@ public class SsdUploadController {
      *
      * } }
      */
-    private final SsdFileService ssdFileService;
+    private final RamService ramService;
 
-    public SsdUploadController(SsdFileService ssdFileService) {
-        this.ssdFileService = ssdFileService;
+    private final RamFileService ramFileService;
+
+    public RamUploadController(RamService ramService, RamFileService ramFileService) {
+        this.ramService = ramService;
+        this.ramFileService = ramFileService;
     }
 
 
     @PostMapping
-    public ResponseEntity<String> uploadFileSsd(@RequestParam("file") MultipartFile file, Ssd ssd,
-                                                ProductCategorySsd productCategorySsd) {
+    public ResponseEntity<String> uploadFileRam(@RequestParam("file") MultipartFile file, Ram ram,
+                                                ProductCategory productCategory) {
         try {
-            ssdFileService.saveFile(file, ssd, productCategorySsd);
+            ramService.ramSave(ram, file, productCategory);
 
             return ResponseEntity.status(HttpStatus.OK)
                     .body(String.format("sucesso no upload", file.getOriginalFilename()));
@@ -97,36 +95,38 @@ public class SsdUploadController {
 //    }
 
     @GetMapping
-    public List<FileResponse> listarTodosSsd() {
-        return ssdFileService.getAllFiles().stream().map(this::mapToFileResponseSsd).collect(Collectors.toList());
+    public List<FileResponse> listarTodosRam() {
+        return ramFileService.getAllFiles().stream().map(this::mapToFileResponseRam).collect(Collectors.toList());
     }
 
-    private FileResponse mapToFileResponseSsd(ImgSsd imgSsd) {
+    private FileResponse mapToFileResponseRam(ImgRam imgRam) {
 
-        long l2 = imgSsd.getId();
-        String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/ssd/")
+        long l2 = imgRam.getId();
+        String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/ram/")
                 .path(Long.toString(l2)).toUriString();
         FileResponse fileResponse = new FileResponse();
-        fileResponse.setId(imgSsd.getId());
-        fileResponse.setFileName(imgSsd.getFileName());
-        fileResponse.setContentType(imgSsd.getContentType());
-        fileResponse.setSize(imgSsd.getFileSize());
+        fileResponse.setId(imgRam.getId());
+        fileResponse.setFileName(imgRam.getFileName());
+        fileResponse.setContentType(imgRam.getContentType());
+        fileResponse.setSize(imgRam.getFileSize());
         fileResponse.setUrl(downloadURL);
 
         return fileResponse;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<byte[]> getFileSsd(@PathVariable Long id) {
-        Optional<ImgSsd> file = ssdFileService.getFile(id);
+    public ResponseEntity<byte[]> getFileRam(@PathVariable Long id) {
+        Optional<ImgRam> file = ramFileService.getFile(id);
         if (!file.isPresent()) {
             return ResponseEntity.notFound().build();
         }
-        ImgSsd imgSsd = file.get();
+        ImgRam imgRam = file.get();
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "teste de upload/ filename=" + imgSsd.getFileName() + "\"")
-                .contentType(MediaType.valueOf(imgSsd.getContentType())).body(imgSsd.getData());
+                .header(HttpHeaders.CONTENT_DISPOSITION, "teste de upload/ filename=" + imgRam.getFileName() + "\"")
+                .contentType(MediaType.valueOf(imgRam.getContentType())).body(imgRam.getData());
 
     }
 
 }
+
+

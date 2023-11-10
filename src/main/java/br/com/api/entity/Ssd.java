@@ -65,3 +65,22 @@ public class Ssd {
     private ProductCategorySsd ssdCategory;
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
