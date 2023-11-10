@@ -3,7 +3,11 @@ package br.com.api.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import br.com.api.entity.ProductCategorySsd;
+import br.com.api.auth.JWTTokenHelper;
+import br.com.api.controller.ssd.extension.RamErrorHandling;
+import br.com.api.entity.ProductCategory;
+import br.com.api.persistence.RamPersistenceService;
+import br.com.api.storage.BuildFileLinkRam;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,34 +21,40 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 //@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/ram")
-public class RamController {
+public class RamController extends ProductController<Ram> {
 
+    private final JWTTokenHelper jwtTokenHelper;
 
     private final RamService ramService;
 
-    public RamController(RamService ramService) {
+    private final RamPersistenceService ramPersistenceService;
+
+    private final RamErrorHandling ramErrorHandling;
+
+    private final BuildFileLinkRam buildFileLinkRam;
+
+    public RamController(JWTTokenHelper jwtTokenHelper, RamService ramService, RamPersistenceService ramPersistenceService, RamErrorHandling ramErrorHandling, BuildFileLinkRam buildFileLinkRam) {
+        this.jwtTokenHelper = jwtTokenHelper;
         this.ramService = ramService;
+        this.ramPersistenceService = ramPersistenceService;
+        this.ramErrorHandling = ramErrorHandling;
+        this.buildFileLinkRam = buildFileLinkRam;
     }
 
-    @PostMapping("/new")
-    public ResponseEntity<String> ramSave(@RequestParam("file") MultipartFile file, Ram ram, ProductCategorySsd productCategorySsd) {
+    @PostMapping
+    public ResponseEntity<String> ramSave(@RequestParam("file") MultipartFile file, Ram ram, ProductCategory productCategory) {
 
         try {
-//            cpuCategory.setProductCategory(CategoryEnum.RAM.name());
-//            ramService.ramSave(ram, file, productCategory);
-
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(String.format("Produto %s", file.getOriginalFilename() + "cadastrado com sucesso!"));
-
+            ramPersistenceService.RamPersistence(file, ram, productCategory);
+            return ramErrorHandling.saveErrorHandling(file.getOriginalFilename(), true);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(String.format("Falha no cadastro: %s", file.getOriginalFilename()));
+            return ramErrorHandling.saveErrorHandling(file.getOriginalFilename(), false);
         }
     }
 
-    @GetMapping("/list")
-    public List<Ram> ramList() {
-        return this.ramService.ramList().stream().map(this::linkImgRam).collect(Collectors.toList());
+    @GetMapping
+    public List<Ram> listRam() {
+        return ramService.ramList().stream().map(buildFileLinkRam::linkForFileRam).collect(Collectors.toList());
     }
 
     @PutMapping("/{id}")

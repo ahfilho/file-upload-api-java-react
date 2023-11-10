@@ -84,6 +84,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .antMatchers("/ssd/redirect/{id}").permitAll()
                         .antMatchers("/files/ssd/{id}").permitAll()
                         .antMatchers("/files/cpu/{id}").permitAll()
+                        .antMatchers("/files/ram/{id}").permitAll()
+
+                        .antMatchers("/ram").permitAll()
+                        .antMatchers("/ram/{id}").permitAll()
+                        .antMatchers("/ram/files/{id}").permitAll()
+
+
                         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated()))
                 .addFilterBefore(new JWTAuthenticationFilter(userService, jWTTokenHelper),
