@@ -74,7 +74,7 @@ const AddSsd = () => {
     <div className="meuForm">
       <NavBar></NavBar>
       <br></br>
-      <div className="title">Cadastro</div>
+      <div className="title">Ssd</div>
       <br></br>
       <hr></hr>
       <form id="formulario" onSubmit={handleSubmit}>
