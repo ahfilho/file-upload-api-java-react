@@ -49,7 +49,7 @@ public class ApiApplication implements CommandLineRunner {
         authorityList.add(createAuthorithy("USER", "User role"));
 //        authorityList.add(createAuthorithy("ADMIN", "Admin role"));
 
-        User user = new User();
+        var user = new User();
         user.setUserName("dinho");
         user.setFirstName("arlindo");
         user.setLastName("lima");

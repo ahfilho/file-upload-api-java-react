@@ -3,6 +3,10 @@
 display: inline-block;
 text-align: center;
     
+margin-top: 80px;
+}
+.forms{
+  margin-top: 50px;
 }
 p{
 color: white;

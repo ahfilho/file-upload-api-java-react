@@ -3,9 +3,11 @@ package br.com.api.controller;
 import java.util.List;
 
 import br.com.api.auth.JWTTokenHelper;
+import br.com.api.dto.ClientDto;
 import br.com.api.entity.Address;
 import br.com.api.repository.ClientRepository;
 import br.com.api.search.ClientSearchCpf;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -40,9 +42,8 @@ public class ClientController {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @PostMapping
-    public ResponseEntity<String> clientSave(@RequestBody Client client) {
+    public ResponseEntity<String> clientSave(@RequestBody ClientDto clientDto) {
 
-//        ModelMapper mapper = new ModelMapper();
 //        ClientDto clientDto = mapper.map(client, ClientDto.class);
 //        Address address = client.getAddress();
 //        AddressDto addressDto = new AddressDto();
@@ -54,15 +55,18 @@ public class ClientController {
 
 
         try {
-            boolean existingCpf = clientSearchCpf.findByCpf(client.getCpf());
+            boolean existingCpf = clientSearchCpf.findByCpf(clientDto.getCpf());
             if (existingCpf) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(String.format("Não foi possível cadastrar o cliente: " + client.getName() + ", pois, o CPF:" + client.getCpf() + " já existe na base de dados."));
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(String.format("Não foi possível cadastrar o cliente: " + clientDto.getName() + ", pois, o CPF:" + clientDto.getCpf() + " já existe na base de dados."));
             } else {
+                ModelMapper modelMapper = new ModelMapper();
+                var client = new Client();
+                modelMapper.map(clientDto,client);
                 clientService.clientSave(client);
                 return ResponseEntity.status(HttpStatus.OK).body(String.format(client.getName() + ": cadastrado com sucesso. \n Cadastro realizado em: " + client.getDataRegister()));
             }
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(String.format("Não foi possível cadastrar o cliente: " + client.getName() + "."));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(String.format("Não foi possível cadastrar o cliente: " + clientDto.getName() + "."));
         }
     }
 

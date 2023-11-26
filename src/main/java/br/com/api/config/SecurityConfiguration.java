@@ -90,6 +90,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .antMatchers("/ram/{id}").permitAll()
                         .antMatchers("/ram/files/{id}").permitAll()
 
+                        .antMatchers("/user/users").permitAll()
 
                         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated()))
