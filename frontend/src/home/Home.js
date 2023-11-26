@@ -76,8 +76,9 @@ const Home = () => {
               placeholder="Pesquisar CPF"
               onChange={(e) => setCpf(e.target.value)}
             />
+            <br></br>
             <button type="submit" className="btn btn-primary">
-              <i className="fa-solid fa-check"></i> Pesquisar
+            <i class="fa-solid fa-magnifying-glass"></i> Pesquisar
             </button>
           </div>
         </form>

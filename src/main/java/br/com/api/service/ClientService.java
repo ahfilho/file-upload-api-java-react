@@ -8,6 +8,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import br.com.api.entity.Address;
+import br.com.api.entity.User;
 import br.com.api.exceptions.ErrorHandling;
 import br.com.api.repository.AddressRepository;
 import br.com.api.repository.SsdRepository;
@@ -83,6 +84,7 @@ public class ClientService {
     }
 
     public void clientDelete(Long clientId) throws Exception {
+
         Optional<Client> client = this.clientRepository.findById(clientId);
         if (client.isPresent()) {
             this.clientRepository.delete(client.get());

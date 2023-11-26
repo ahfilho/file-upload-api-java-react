@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import NavBar from "../navbar/NavBar";
 
 import "./RamList.css";
 
@@ -9,8 +10,24 @@ export default class RamList extends React.Component {
     rams: [],
   };
 
+  async remove(id) {
+    alert("Deseja mesmo excluir?")
+    axios.delete(`http://localhost:9090/ram/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(() => {
+      let updateRam = [...this.state.rams].filter(i => i.id);
+      this.setState({ rams: updateRam });
+
+    })
+
+  }
+
   componentDidMount() {
-    axios.get("http://localhost:9090/ram/list").then((res) => {
+    axios.get("http://localhost:9090/ram").then((res) => {
       const rams = res.data;
       this.setState({ rams });
     });
@@ -19,8 +36,11 @@ export default class RamList extends React.Component {
     return (
       <tbody>
         <div className="tabela">
-          Ram Cadastradas
-          <Link to="/">Início</Link>
+        <NavBar></NavBar>
+          <br></br>
+          <div className="title">Ram</div>
+          <br></br>
+          <hr></hr>
         </div>
         <div className="botoes"></div>
         <table>
@@ -37,6 +57,8 @@ export default class RamList extends React.Component {
             <th>Preço de venda</th>
             <th>Categoria do produto</th>
             <th>Url</th>
+            <th>Mídia</th>
+            <th>Bytes</th>
             <th></th>
           </tr>
           {this.state.rams.map((ram) => (
@@ -52,13 +74,16 @@ export default class RamList extends React.Component {
               <td>{ram.arrivalDate}</td>
               <td>{ram.saleValue}</td>
               <td>{ram.productCategory}</td>
+              <td>{ram.imgRam ? ram.imgRam.fileName : "N/A"}</td>
+              <td>{ram.imgRam ? ram.imgRam.fileSize : "N/A"}</td>
+
               <td>
                 <a href={ram.url}>url</a>
               </td>
-
-              <td>Alterar</td>
-              <td>Excluir</td>
-            </tr>
+              <td><button> <Link to={`/ramEdit/${ram.id}`} className="btn btn-sucess"><i class='far fa-edit'></i>
+              </Link></button></td>
+              <td><button onClick={() => this.remove(ram.id)} className="btn btn-danger"><i class="fas fa-eraser"></i> </button></td>
+                        </tr>
           ))}
           {/* {this.state.categories.map((cate) => (
             <tr>
