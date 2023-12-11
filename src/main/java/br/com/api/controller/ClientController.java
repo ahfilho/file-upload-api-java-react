@@ -3,6 +3,7 @@ package br.com.api.controller;
 import java.util.List;
 
 import br.com.api.auth.JWTTokenHelper;
+import br.com.api.dto.AddressDto;
 import br.com.api.dto.ClientDto;
 import br.com.api.entity.Address;
 import br.com.api.repository.ClientRepository;
@@ -44,27 +45,16 @@ public class ClientController {
     @PostMapping
     public ResponseEntity<String> clientSave(@RequestBody ClientDto clientDto) {
 
-//        ClientDto clientDto = mapper.map(client, ClientDto.class);
-//        Address address = client.getAddress();
-//        AddressDto addressDto = new AddressDto();
-//        clientDto.setDataRegister(LocalDate.now());
-//        addressDto.setStreet(address.getStreet());
-//        addressDto.setNumber(address.getNumber());
-//        addressDto.setCity(address.getCity());
-//        addressDto.setDistrict(address.getDistrict());
-
-
         try {
             boolean existingCpf = clientSearchCpf.findByCpf(clientDto.getCpf());
             if (existingCpf) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(String.format("Não foi possível cadastrar o cliente: " + clientDto.getName() + ", pois, o CPF:" + clientDto.getCpf() + " já existe na base de dados."));
-            } else {
-                ModelMapper modelMapper = new ModelMapper();
-                var client = new Client();
-                modelMapper.map(clientDto,client);
-                clientService.clientSave(client);
-                return ResponseEntity.status(HttpStatus.OK).body(String.format(client.getName() + ": cadastrado com sucesso. \n Cadastro realizado em: " + client.getDataRegister()));
             }
+
+            clientService.clientSave(clientDto);
+
+            return ResponseEntity.status(HttpStatus.OK).body(String.format(clientDto.getName() + ": cadastrado com sucesso. \n Cadastro realizado em: " + clientDto.getDataRegister()));
+
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(String.format("Não foi possível cadastrar o cliente: " + clientDto.getName() + "."));
         }

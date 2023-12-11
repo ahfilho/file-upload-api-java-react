@@ -6,7 +6,9 @@ import br.com.api.dto.ClientDto;
 import br.com.api.entity.Address;
 import br.com.api.repository.AddressRepository;
 import br.com.api.repository.ClientRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.ModelMap;
 
 @Service
 public class AddressService {
@@ -26,7 +28,10 @@ public class AddressService {
     }
 
     public void addressSave(AddressDto addressDto) {
-        addressRepository.save(addressDto);
+        Address address = new Address();
+        ModelMapper modelMapper = new ModelMapper();
+        address = modelMapper.map(addressDto, Address.class);
+        addressRepository.save(address);
     }
 
 }

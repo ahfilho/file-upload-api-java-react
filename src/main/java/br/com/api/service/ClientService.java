@@ -1,21 +1,26 @@
 package br.com.api.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import br.com.api.dto.ClientDto;
 import br.com.api.entity.Address;
 import br.com.api.entity.User;
 import br.com.api.exceptions.ErrorHandling;
 import br.com.api.repository.AddressRepository;
 import br.com.api.repository.SsdRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import br.com.api.entity.Client;
 import br.com.api.repository.ClientRepository;
+import org.springframework.ui.ModelMap;
 
 @Service
 @Transactional
@@ -36,28 +41,39 @@ public class ClientService {
         this.errorHandling = errorHandling;
     }
 
-    public void clientSave(Client client) {
+    public void clientSave(ClientDto clientDto) {
         //TODO filtro para verificar se o cpf ja está cadastrado e assim não permitir repetições
+        ModelMapper modelMapper = new ModelMapper();
+        Client client = new Client();
+        client = modelMapper.map(clientDto, Client.class);
+
+
+        // //TODO
+//        LocalDateTime currentDateTime = LocalDateTime.now();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+//
+//        String formattedDateTime = currentDateTime.format(formatter);
+//
+//        client.setDataRegister(LocalDate.parse(formattedDateTime));
         client.setDataRegister(LocalDate.now());
         clientRepository.save(client);
     }
 
-    public List<Client> clientList() throws Exception {
+    public List<Client> clientList() {
         List<Client> clientList = clientRepository.findAll();
         try {
-            clientList.sort(Comparator.comparing(Client::getName));
-            for (Client client : clientList) {
-                Client client1 = client.getAddress().getClient();
-                System.out.println(client1);
-            }
             if (clientList.isEmpty()) {
                 System.out.println("Não existe cliente cadastrado.");
+            } else {
+                clientList.sort(Comparator.comparing(client -> client.getName().substring(0, 1), String.CASE_INSENSITIVE_ORDER));
+                clientList.forEach(client -> System.out.println(client));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return clientList;
     }
+
 
     public Client clientUpdate(Client client, Address address) throws Exception {
         Optional<Client> optionalClient = this.clientRepository.findById(client.getId());
@@ -100,6 +116,6 @@ public class ClientService {
 
 
     public Client findByCpf(String cpf) {
-    return clientRepository.find(cpf);
+        return clientRepository.find(cpf);
     }
 }

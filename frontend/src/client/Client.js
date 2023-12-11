@@ -1,20 +1,18 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
-import "./Client.css";
+import { useHistory } from "react-router-dom";
 import NavBar from "../navbar/NavBar";
 
 const url = "http://localhost:9090/client";
 
 const AddClient = () => {
-  //cliente
+  const history = useHistory();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [cpf, setCpf] = useState("");
   const [contact, setContact] = useState("");
-  const [dataRegister, setDataRegister] = useState("");
 
-  //address
   const [street, setStreet] = useState("");
   const [number, setNumber] = useState("");
   const [district, setDistrict] = useState("");
@@ -23,32 +21,27 @@ const AddClient = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const address = {
+    const addressDto = {
       street,
       number,
       district,
       city
     };
-    const client = {
+
+    const clientDto = {
       name,
       email,
       cpf,
-      dataRegister: new Date(),
       contact,
-      address: address
+      addressDto
     };
 
-    console.log(street)
     try {
-      const response = await axios.post(url, client, {
-        if(response = true) {
-          console.log('Cliente salvo com sucesso!');
-
-        }
-      });
+      const response = await axios.post(url, clientDto);
 
       console.log(response.data);
 
+      // Limpar os campos após o sucesso
       setName("");
       setEmail("");
       setCpf("");
@@ -57,13 +50,14 @@ const AddClient = () => {
       setStreet("");
       setNumber("");
       setDistrict("");
-      setDataRegister("");
 
-
+      // Redirecionar para a página desejada após o cadastro
+      history.push("/client");
     } catch (error) {
       console.error('Erro ao salvar cliente e endereço:', error);
     }
   };
+
 
   return (
     <div className="meuForm">

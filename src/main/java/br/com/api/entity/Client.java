@@ -11,14 +11,18 @@ import javax.validation.constraints.Size;
 
 import com.sun.istack.NotNull;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
 @Table(name = "CLIENT")
-public class Client {
+public class Client implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,13 +51,9 @@ public class Client {
     @Column(name = "data_register")
     private LocalDate dataRegister;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "CLIENT_ID")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "ADDRESS_ID")
     private Address address;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "SSD_ID")
-    @JsonIgnore
-    private Ssd ssdAbstract;
 
 }
