@@ -5,15 +5,23 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
+import javax.validation.constraints.NotBlank;
+
 @Data
-public class AddressDto extends Address {
+public class AddressDto {
 
     private Long id;
+
+    @NotBlank
     private String street;
+
+    @NotBlank
     private String number;
+
+    @NotBlank
     private String district;
+
+    @NotBlank
     private String city;
 
 

@@ -7,17 +7,30 @@ import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import java.time.LocalDate;
 
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Data
-@Entity
-public class ClientDto extends Client {
+public class ClientDto  {
 
-    private Long id;
+    @NotBlank
     private String name;
+
+    @NotBlank
+    @Email
     private String email;
+
+    @NotBlank
     private String contact;
+
+    @NotBlank
     private String cpf;
+
+    private LocalDate dataRegister;
+
+    private AddressDto addressDto;
+
 
 }

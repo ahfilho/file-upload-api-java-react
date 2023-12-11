@@ -62,7 +62,7 @@ public class Ssd {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "SSD_ID")
-    private ProductCategorySsd ssdCategory;
+    private ProductCategorySsd productCategorySsd;
 
 }
 
