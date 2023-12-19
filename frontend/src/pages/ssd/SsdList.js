@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { useHistory, useParams } from "react-router-dom";
 import NavBar from "../../navbar/NavBar";
 import "./SsdList.css";
-import { Button } from "bootstrap";
+import { Button } from "react-bootstrap";
 
 
 class SsdList extends Component {

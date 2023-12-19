@@ -53,11 +53,11 @@ public class Cpu {
     private String url;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "CPU_ID")
+    @JoinColumn(name = "IMG_CPU_ID")
     private ImgCpu imgCpu;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "CPU_ID")
+    @JoinColumn(name = "PRODUCT_CATEGORY_CPU_ID")
     private ProductCategoryCpu cpuCategory;
 
 }

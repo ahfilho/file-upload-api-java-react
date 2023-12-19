@@ -13,7 +13,7 @@ import java.time.LocalDate;
 
 
 @Data
-public class ClientDto  {
+public class ClientDto {
 
     @NotBlank
     private String name;

@@ -85,6 +85,15 @@ const SsdEdit = () => {
       <br></br>
       <hr></hr>
       <form id="formulario" onSubmit={handleSubmit}>
+
+      {/* <div className="file">
+        File
+          <input type="text" name="file"
+          defaultValue={ssd.imgSsd.fileName}
+          // <td>{ssd.imgSsd ? ssd.imgSsd.fileName : "N/A "}</td>
+
+            onChange={handleImage} />
+        </div> */}
         <div className="file">
           <input type="file" name="file"
             onChange={handleImage} />
