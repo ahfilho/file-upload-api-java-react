@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 import br.com.api.FilePath;
@@ -52,6 +53,7 @@ public class SsdService {
         }
     }
 
+    @Transactional
     public void serviceSaveSsd(Ssd ssd, MultipartFile file, ProductCategorySsd productCategorySsd)
             throws IOException {
         Files.copy(file.getInputStream(), this.rootSsd.resolve(file.getOriginalFilename()));
@@ -65,9 +67,8 @@ public class SsdService {
         imgSsd.setFileSize(file.getSize());
 
         ssd.setImgSsd(imgSsd);
-
+        ssd.setProductCategorySsd(productCategorySsd);
         this.ssdRepository.save(ssd);
-        this.productCategoryRepositorySsd.save(productCategorySsd);
 
     }
 
@@ -79,24 +80,54 @@ public class SsdService {
     public Ssd serviceUpdateSsd(Ssd ssd, MultipartFile file, ProductCategorySsd productCategorySsd) throws Exception {
         Optional<Ssd> optionalSsd = this.ssdRepository.findById(ssd.getId());
 
-        if (optionalSsd.isPresent()) {
+        Files.copy(file.getInputStream(), this.rootSsd.resolve(file.getOriginalFilename()));
 
+        if (optionalSsd.isPresent()) {
             Ssd target = optionalSsd.get();
             copySsdProperties(ssd, target);
 
-            ImgSsd fi = new ImgSsd();
-            initializeImgSsd(file, fi);
+            // Obtem o ImgSsd anterior
+            ImgSsd oldImgSsd = target.getImgSsd();
 
-            this.ssdRepository.save(target);
-            this.productCategoryRepositorySsd.save(productCategorySsd);
-            this.fileRepository.save(fi);
+            // Associa o novo arquivo
+            ImgSsd newImgSsd = new ImgSsd();
+            initializeImgSsd(file, newImgSsd);
 
-            return target;
+            // Define o mesmo ID do ImgSsd anterior no novo ImgSsd
+            if (oldImgSsd != null) {
+                newImgSsd.setId(oldImgSsd.getId());
+            }
+            // Associa o novo ImgSsd ao Ssd ---------
+            target.setImgSsd(newImgSsd);
+
+            // Salva o objeto atualizado com a nova imagem
+            Ssd updatedSsd = this.ssdRepository.save(target);
+            deleteFilesNotInDatabase();
+
+            // Retorna o objeto atualizado
+            return updatedSsd;
         } else {
-            throw new Exception("Erro durante a atualização." + ssd.getId());
+            throw new Exception("Erro durante a atualização. ID: " + ssd.getId());
         }
-
     }
+
+//
+//    private void deleteOldFile(ImgSsd oldFileSsd) throws IOException {
+//        if (oldFileSsd != null && oldFileSsd.getId() != null) {
+//            Long ssdId = oldFileSsd.getId();
+//
+//            // Encontre o nome do arquivo antigo e seu ID em uma única consulta
+//            String fileName = fileRepository.findFileNameById(ssdId);
+//
+//            if (fileName != null) {
+//                // Deleta o arquivo do diretório
+//                deleteFile(fileName);
+//
+//                // Deleta o arquivo do repositório
+//                fileRepository.delete(oldFileSsd);
+//            }
+//        }
+//    }
 
     private void copySsdProperties(Ssd source, Ssd target) {
         target.setBrand(source.getBrand());
@@ -109,12 +140,14 @@ public class SsdService {
         target.setSize(source.getSize());
     }
 
-    private void initializeImgSsd(MultipartFile file, ImgSsd fi) throws IOException {
+    private void initializeImgSsd(MultipartFile file, ImgSsd imgSsd) throws IOException {
 
-        fi.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
-        fi.setContentType(file.getContentType());
-        fi.setData(file.getBytes());
-        fi.setFileSize(file.getSize());
+        imgSsd.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
+        imgSsd.setContentType(file.getContentType());
+        imgSsd.setData(file.getBytes());
+        imgSsd.setFileSize(file.getSize());
+
+
     }
 
     public void deleteProduct(Long id) throws Exception {
@@ -161,6 +194,24 @@ public class SsdService {
         }
 
     }
+    public void deleteFilesNotInDatabase() {
+        List<String> databaseFileNames = fileRepository.todosArquivos();
+        File[] filesInDirectory = new File("uploads/ssd").listFiles();
+
+        if (filesInDirectory != null) {
+            for (File file : filesInDirectory) {
+                String fileNameInDirectory = file.getName();
+
+                if (!databaseFileNames.contains(fileNameInDirectory)) {
+                    // O arquivo no diretório não está presente no banco de dados, então exclua
+                    file.delete();
+                    System.out.println("Arquivo excluído: " + fileNameInDirectory);
+                }
+            }
+        }
+    }
+
+
 
     public Ssd searchId(Long id) throws Exception {
         Optional<Ssd> result = this.ssdRepository.findById(id);
@@ -172,7 +223,7 @@ public class SsdService {
         }
     }
 
-    public List<String> dayOfSale() { /////
+    public List<String> dayOfSale() {
         List<String> saleDate = ssdRepository.dataDeVenda();
         List<String> result = new ArrayList<>();
 

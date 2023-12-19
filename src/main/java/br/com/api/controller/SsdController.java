@@ -6,13 +6,17 @@ import java.util.stream.Collectors;
 import br.com.api.auth.JWTTokenHelper;
 import br.com.api.controller.ssd.extension.SsdControllerExtension;
 import br.com.api.controller.ssd.extension.SsdErrorHandling;
+import br.com.api.dto.ProductCategorySsdDto;
+import br.com.api.dto.SsdDto;
 import br.com.api.entity.ProductCategorySsd;
 import br.com.api.exceptions.ErrorHandling;
 import br.com.api.persistence.SsdPersistenceService;
 import br.com.api.search.SearchSsd;
 import br.com.api.storage.BuildFileLinkSsd;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -50,8 +54,16 @@ public class SsdController extends ProductController<Ssd> {
     }
 
     @PostMapping
-    public ResponseEntity<String> saveSsd(MultipartFile file, Ssd ssd, ProductCategorySsd productCategorySsd) {
+    public ResponseEntity<String> saveSsd(MultipartFile file, SsdDto ssdDto, ProductCategorySsdDto productCategorySsdDto) {
         try {
+            ProductCategorySsd productCategorySsd = new ProductCategorySsd();
+            Ssd ssd = new Ssd();
+
+            ModelMapper modelMapper = new ModelMapper();
+            productCategorySsd = modelMapper.map(productCategorySsdDto, ProductCategorySsd.class);
+            ssd = modelMapper.map(ssdDto, Ssd.class);
+
+
             ssdPersistenceService.SsdPersistence(file, ssd, productCategorySsd);
             return ssdErrorHandling.saveErrorHandling(file.getOriginalFilename(), true);
         } catch (Exception e) {
