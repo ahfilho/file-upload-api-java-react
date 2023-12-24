@@ -64,7 +64,7 @@ public class SsdController extends ProductController<Ssd> {
             ssd = modelMapper.map(ssdDto, Ssd.class);
 
 
-            ssdPersistenceService.SsdPersistence(file, ssd, productCategorySsd);
+            ssdPersistenceService.SsdPersistence(file, ssd);
             return ssdErrorHandling.saveErrorHandling(file.getOriginalFilename(), true);
         } catch (Exception e) {
             return ssdErrorHandling.saveErrorHandling(file.getOriginalFilename(), false);
@@ -73,7 +73,14 @@ public class SsdController extends ProductController<Ssd> {
 
     @GetMapping
     public List<Ssd> listSsd() {
+
+
+
         return ssdService.serviceListAllSsd().stream().map(buildFileLink::linkForFileSsd).collect(Collectors.toList());
+    }
+    @GetMapping("/guarantee")
+    public List<String> garantias(){
+        return ssdService.dayOfSale();
     }
 
     @PutMapping("/{id}")
