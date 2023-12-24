@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 import br.com.api.FilePath;
+import br.com.api.dto.ProductCategorySsdDto;
 import br.com.api.entity.ImgSsd;
 import br.com.api.entity.ProductCategorySsd;
 import br.com.api.enume.CategoryEnum;
@@ -54,10 +55,12 @@ public class SsdService {
     }
 
     @Transactional
-    public void serviceSaveSsd(Ssd ssd, MultipartFile file, ProductCategorySsd productCategorySsd)
+    public void serviceSaveSsd(Ssd ssd, MultipartFile file )
             throws IOException {
         Files.copy(file.getInputStream(), this.rootSsd.resolve(file.getOriginalFilename()));
         ImgSsd imgSsd = new ImgSsd();
+
+        ProductCategorySsdDto productCategorySsd = new ProductCategorySsdDto();
 
         productCategorySsd.setProductCategory(String.valueOf(CategoryEnum.SSD));
 
@@ -66,8 +69,8 @@ public class SsdService {
         imgSsd.setData(file.getBytes());
         imgSsd.setFileSize(file.getSize());
 
-        ssd.setImgSsd(imgSsd);
-        ssd.setProductCategorySsd(productCategorySsd);
+//        ssd.setImgSsd(imgSsd);
+//        ssd.setProductCategorySsd(productCategorySsd);
         this.ssdRepository.save(ssd);
 
     }

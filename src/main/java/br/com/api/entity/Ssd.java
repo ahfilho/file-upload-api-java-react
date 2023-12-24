@@ -1,6 +1,7 @@
 package br.com.api.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -20,26 +21,26 @@ public class Ssd {
     private Long id;
 
     @Column(name = "BRAND")
-    @NotNull
+    @NotBlank
     private String brand;
 
     @Column(name = "SERIAL_NUMBER", length = 17)
-    @NotNull
+    @NotBlank
     private String serialNumber;
 
-    @NotNull
+    @NotBlank
     @Column(name = "SIZE_STORAGE", length = 4)
     private String size;
 
-    @NotNull
+    @NotBlank
     @Column(name = "PURCHASE_PRICE")
     private String purchasePrice;
 
-    @NotNull
+    @NotBlank
     @Column(name = "PURCHASE_DATE")
     private String purchaseDate;
 
-    @NotNull
+    @NotBlank
     @Column(name = "SALE_VALUE")
     private float saleValue;
 
@@ -52,7 +53,7 @@ public class Ssd {
     @Column(name = "AMOUNT")
     private int amount;
 
-    @NotNull
+    @NotBlank
     @Column(name = "MODEL")
     private String model;
 

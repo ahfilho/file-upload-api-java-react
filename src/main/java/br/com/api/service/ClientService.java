@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.transaction.Transactional;
 
@@ -13,6 +14,7 @@ import br.com.api.dto.ClientDto;
 import br.com.api.entity.Address;
 import br.com.api.entity.User;
 import br.com.api.exceptions.ErrorHandling;
+import br.com.api.producer.ClientProducer;
 import br.com.api.repository.AddressRepository;
 import br.com.api.repository.SsdRepository;
 import org.modelmapper.ModelMapper;
@@ -23,7 +25,6 @@ import br.com.api.repository.ClientRepository;
 import org.springframework.ui.ModelMap;
 
 @Service
-@Transactional
 public class ClientService {
 
     private final ClientRepository clientRepository;
@@ -34,29 +35,22 @@ public class ClientService {
 
     private final ErrorHandling errorHandling;
 
-    public ClientService(ClientRepository clientRepository, AddressRepository addressRepository, SsdRepository ssdRepository, ErrorHandling errorHandling) {
+    final ClientProducer clientProducer;
+
+    public ClientService(ClientRepository clientRepository, AddressRepository addressRepository, SsdRepository ssdRepository, ErrorHandling errorHandling, ClientProducer clientProducer) {
         this.clientRepository = clientRepository;
         this.addressRepository = addressRepository;
         this.ssdRepository = ssdRepository;
         this.errorHandling = errorHandling;
+        this.clientProducer = clientProducer;
     }
 
-    public void clientSave(ClientDto clientDto) {
-        //TODO filtro para verificar se o cpf ja está cadastrado e assim não permitir repetições
-        ModelMapper modelMapper = new ModelMapper();
-        Client client = new Client();
-        client = modelMapper.map(clientDto, Client.class);
-
-
-        // //TODO
-//        LocalDateTime currentDateTime = LocalDateTime.now();
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-//
-//        String formattedDateTime = currentDateTime.format(formatter);
-//
-//        client.setDataRegister(LocalDate.parse(formattedDateTime));
+    @Transactional
+    public Client clientSave(Client client) {
         client.setDataRegister(LocalDate.now());
-        clientRepository.save(client);
+        client = clientRepository.save(client);
+        clientProducer.sendMessageEmail(client);
+        return client;
     }
 
     public List<Client> clientList() {
@@ -75,7 +69,7 @@ public class ClientService {
     }
 
 
-    public Client clientUpdate(Client client, Address address) throws Exception {
+    public Client clientUpdate(Client client) throws Exception {
         Optional<Client> optionalClient = this.clientRepository.findById(client.getId());
         if (optionalClient.isPresent()) {
             Client cm = optionalClient.get();

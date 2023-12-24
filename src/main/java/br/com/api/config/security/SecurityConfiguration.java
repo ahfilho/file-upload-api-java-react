@@ -1,4 +1,4 @@
-package br.com.api.config;
+package br.com.api.config.security;
 
 import br.com.api.auth.JWTAuthenticationFilter;
 import br.com.api.auth.JWTTokenHelper;
