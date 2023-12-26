@@ -55,12 +55,11 @@ public class SsdService {
     }
 
     @Transactional
-    public void serviceSaveSsd(Ssd ssd, MultipartFile file )
+    public void serviceSaveSsd(Ssd ssd, MultipartFile file, ProductCategorySsd productCategorySsd )
             throws IOException {
         Files.copy(file.getInputStream(), this.rootSsd.resolve(file.getOriginalFilename()));
         ImgSsd imgSsd = new ImgSsd();
 
-        ProductCategorySsdDto productCategorySsd = new ProductCategorySsdDto();
 
         productCategorySsd.setProductCategory(String.valueOf(CategoryEnum.SSD));
 
@@ -69,8 +68,8 @@ public class SsdService {
         imgSsd.setData(file.getBytes());
         imgSsd.setFileSize(file.getSize());
 
-//        ssd.setImgSsd(imgSsd);
-//        ssd.setProductCategorySsd(productCategorySsd);
+        ssd.setImgSsd(imgSsd);
+        ssd.setProductCategorySsd(productCategorySsd);
         this.ssdRepository.save(ssd);
 
     }

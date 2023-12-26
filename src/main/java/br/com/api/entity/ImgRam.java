@@ -38,8 +38,12 @@ public class ImgRam {
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CPU_ID")
+    @JoinColumn(name = "RAM_ID")
     private Ram ramFile;
 
 
 }
+
+
+
+
