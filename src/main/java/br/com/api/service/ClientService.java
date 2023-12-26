@@ -73,10 +73,12 @@ public class ClientService {
         Optional<Client> optionalClient = this.clientRepository.findById(client.getId());
         if (optionalClient.isPresent()) {
             Client cm = optionalClient.get();
+            cm.setId(client.getId());
             cm.setName(client.getName());
             cm.setEmail(client.getEmail());
             cm.setCpf(client.getCpf());
             cm.setContact(client.getContact());
+
 
             Address addressEdit = cm.getAddress();
             addressEdit.setCity(client.getAddress().getCity());

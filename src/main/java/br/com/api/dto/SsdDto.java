@@ -26,7 +26,7 @@ public class SsdDto {
     @NotBlank
     private String purchaseDate;
 
-    @NotBlank
+    @NotNull
     private float saleValue;
 
     @NotBlank

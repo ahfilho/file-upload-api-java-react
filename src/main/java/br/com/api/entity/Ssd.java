@@ -40,7 +40,7 @@ public class Ssd {
     @Column(name = "PURCHASE_DATE")
     private String purchaseDate;
 
-    @NotBlank
+    @NotNull
     @Column(name = "SALE_VALUE")
     private float saleValue;
 

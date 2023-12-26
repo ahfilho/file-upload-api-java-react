@@ -60,7 +60,7 @@ public class Ram {
     private ImgRam imgRam;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "RAN_ID")
+    @JoinColumn(name = "RAM_ID")
     private ProductCategory productCategory;
 
 //    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

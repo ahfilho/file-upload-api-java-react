@@ -17,8 +17,8 @@ public class ProductCategoryCpu {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "RAM_ID")
-    @Column(name = "PRODUCT_CATEGORY")
+    @JoinColumn(name = "CPU_ID")
+    @Column(name = "PC_CPU")
     private String productCategory;
 
 

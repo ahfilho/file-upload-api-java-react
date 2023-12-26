@@ -18,7 +18,7 @@ public class ProductCategorySsd {
     private Long id;
 
     @JoinColumn(name = "SSD_ID")
-    @Column(name = "SSD_ID")
+    @Column(name = "PC_SSD")
     private String productCategory;
 
 
