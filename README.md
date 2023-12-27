@@ -8,6 +8,8 @@ Java 11,<br>
 Spring validation,<br>
 Spring boot,<br>
 Api Rest,<br>
+Microservice, <br>
+RabbitMQ,<br>
 Jpa,<br>
 JWT Authentication,<br>
 Hibernate,<br>
@@ -16,7 +18,7 @@ Lombok<br>
 
 
 <hr>
-Tenologias utilizadas no front-end:
+Tenologias utilizadas no front-end:<br>
 React JS,<br> Axios<br> Bootstrap
 
 <hr>
@@ -25,8 +27,8 @@ Tenologia utilizada no banco:
 PostgreSql
 
 
-Testes automatizados: Postman
+Testes de endpoint feitos com o Postman.
 
-*Docker,<br>
+Docker,<br>
 
-*SOLID
+SOLID
