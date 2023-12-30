@@ -19,4 +19,5 @@ public interface CpuFileRepository extends JpaRepository<ImgCpu, Long> {
     @Query("SELECT f FROM ImgCpu f WHERE f.fileName = :fileName")
     List<ImgCpu> deleteByName(@Param("fileName") String fileName);
 
-}
+    @Query("SELECT f.fileName FROM ImgCpu f")
+    List<String> allFiles();}

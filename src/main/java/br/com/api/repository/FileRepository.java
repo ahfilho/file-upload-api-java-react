@@ -37,4 +37,5 @@ public interface FileRepository extends JpaRepository<ImgSsd, Long> {
 
     @Query("SELECT f.fileName FROM ImgSsd f")
     List<String> todosArquivos();
+
 }
