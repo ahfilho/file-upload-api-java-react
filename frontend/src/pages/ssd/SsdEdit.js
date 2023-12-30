@@ -65,8 +65,19 @@ const SsdEdit = () => {
     axios
       .put(`${urlEdit}/${id}`, formData)
       .then((response) => {
-        alert("Alterado com sucesso!")
-
+        alert("Alterado com sucesso!");
+        setSsd({
+          brand: "",
+          model: "",
+          serialNumber: "",
+          size: "",
+          purchaseDate: "",
+          purchasePrice: "",
+          arrivalDate: "",
+          saleValue: "",
+          amount: ""
+        });
+        setFile("");
         console.log(response);
       })
       .catch((error) => {
@@ -75,7 +86,7 @@ const SsdEdit = () => {
   };
   const handleCancel = () => {
     history.push("/SsdList");
-};
+  };
 
   return (
     <div className="meuForm">
@@ -85,8 +96,8 @@ const SsdEdit = () => {
       <br></br>
       <hr></hr>
       <form id="formulario" onSubmit={handleSubmit}>
-
-      {/* <div className="file">
+    
+        {/* <div className="file">
         File
           <input type="text" name="file"
           defaultValue={ssd.imgSsd.fileName}
@@ -118,7 +129,7 @@ const SsdEdit = () => {
             placeholder="Modelo"
             onChange={(e) => onInputChange(e)}
           />
-     
+
           <input
             type={"text"}
             name="serialNumber"
@@ -128,7 +139,7 @@ const SsdEdit = () => {
             placeholder="Nº de série"
             onChange={(e) => onInputChange(e)}
           />
-  
+
           <input
             type={"text"}
             name="size"
@@ -161,7 +172,7 @@ const SsdEdit = () => {
             placeholder="Data de compra"
             onChange={(e) => onInputChange(e)}
           />
-      
+
           <input
             type={"text"}
             name="purchasePrice"
@@ -183,7 +194,7 @@ const SsdEdit = () => {
             placeholder="Arrival date"
             onChange={(e) => onInputChange(e)}
           />
-       
+
           <input
             type={"text"}
             name="saleValue"
@@ -201,21 +212,21 @@ const SsdEdit = () => {
             className="btn btn-primary"
             onChange={(e) => handleSubmit(e)}
           ><i class="fa-solid fa-check"></i>
-            
+
           </button>
           {/* <button class="btn btn-danger">
             <Link to="/ssdlist"><i class="fa-solid fa-ban"></i></Link>
           </button> */}
-        
-        <button
-                     type="submit"
-                     className="btn btn-danger"
 
-                        onClick={handleCancel}
-                    ><i class="fa-solid fa-ban"></i>
+          <button
+            type="submit"
+            className="btn btn-danger"
+
+            onClick={handleCancel}
+          ><i class="fa-solid fa-ban"></i>
 
 
-        </button>
+          </button>
         </div>
       </form>
     </div>

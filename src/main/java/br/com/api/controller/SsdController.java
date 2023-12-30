@@ -56,13 +56,10 @@ public class SsdController extends ProductController<Ssd> {
     @PostMapping
     public ResponseEntity<String> saveSsd(MultipartFile file, SsdDto ssdDto, ProductCategorySsdDto productCategorySsdDto) {
         try {
-            ProductCategorySsd productCategorySsd = new ProductCategorySsd();
-            Ssd ssd = new Ssd();
-
             ModelMapper modelMapper = new ModelMapper();
-            productCategorySsd = modelMapper.map(productCategorySsdDto, ProductCategorySsd.class);
-            ssd = modelMapper.map(ssdDto, Ssd.class);
 
+            ProductCategorySsd productCategorySsd = modelMapper.map(productCategorySsdDto, ProductCategorySsd.class);
+            Ssd ssd = modelMapper.map(ssdDto, Ssd.class);
 
             ssdPersistenceService.SsdPersistence(file, ssd, productCategorySsd);
             return ssdErrorHandling.saveErrorHandling(file.getOriginalFilename(), true);
@@ -75,8 +72,9 @@ public class SsdController extends ProductController<Ssd> {
     public List<Ssd> listSsd() {
         return ssdService.serviceListAllSsd().stream().map(buildFileLink::linkForFileSsd).collect(Collectors.toList());
     }
+
     @GetMapping("/guarantee")
-    public List<String> garantias(){
+    public List<String> garantias() {
         return ssdService.dayOfSale();
     }
 

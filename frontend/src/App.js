@@ -23,6 +23,8 @@ import CpuEdit from "./pages/cpu/CpuEdit";
 import ClientEdit from "./client/ClientEdit";
 import ClientCpfSearch from "./client/ClientCpfSearch";
 import ListClient from "./client/ClientCpfSearch";
+import Garantia from "./pages/Garantia";
+
 function App() {
   return (
     <BrowserRouter>
@@ -53,6 +55,9 @@ function App() {
           <Route path="/cpu" exact component={Cpu} />
           <Route path="/cpulist" exact component={CpuList} />
           <Route path="/cpuEdit/:id" exact component={CpuEdit} />
+
+          <Route path="/garantia" exact component={Garantia} />
+
 
           </Switch>
           {/* /</header>

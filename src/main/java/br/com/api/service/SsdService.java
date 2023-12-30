@@ -55,7 +55,7 @@ public class SsdService {
     }
 
     @Transactional
-    public void serviceSaveSsd(Ssd ssd, MultipartFile file, ProductCategorySsd productCategorySsd )
+    public void serviceSaveSsd(Ssd ssd, MultipartFile file, ProductCategorySsd productCategorySsd)
             throws IOException {
         Files.copy(file.getInputStream(), this.rootSsd.resolve(file.getOriginalFilename()));
         ImgSsd imgSsd = new ImgSsd();
@@ -70,6 +70,7 @@ public class SsdService {
 
         ssd.setImgSsd(imgSsd);
         ssd.setProductCategorySsd(productCategorySsd);
+
         this.ssdRepository.save(ssd);
 
     }
@@ -196,6 +197,7 @@ public class SsdService {
         }
 
     }
+
     public void deleteFilesNotInDatabase() {
         List<String> databaseFileNames = fileRepository.todosArquivos();
         File[] filesInDirectory = new File("uploads/ssd").listFiles();
@@ -212,7 +214,6 @@ public class SsdService {
             }
         }
     }
-
 
 
     public Ssd searchId(Long id) throws Exception {

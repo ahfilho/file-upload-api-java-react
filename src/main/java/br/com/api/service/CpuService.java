@@ -1,15 +1,13 @@
 package br.com.api.service;
 
+import br.com.api.FilePath;
 import br.com.api.controller.ProductController;
 import br.com.api.entity.Cpu;
 import br.com.api.entity.ImgCpu;
 import br.com.api.entity.ProductCategoryCpu;
 import br.com.api.entity.ProductCategorySsd;
 import br.com.api.enume.CategoryEnum;
-import br.com.api.repository.CpuFileRepository;
-import br.com.api.repository.CpuRepository;
-import br.com.api.repository.ProductCategoryRepositoryCpu;
-import br.com.api.repository.ProductCategoryRepositorySsd;
+import br.com.api.repository.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,6 +20,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -35,11 +34,14 @@ public class CpuService extends ProductController<Cpu> {
     private final CpuFileRepository cpuFileRepository;
 
     private final ProductCategoryRepositoryCpu productCategoryCpuRepository;
+    private final FileRepository fileRepository;
 
-    public CpuService(CpuRepository cpuRepository, CpuFileRepository cpuFileRepository, ProductCategoryRepositorySsd productCategoryRepositorySsd1, ProductCategoryRepositoryCpu productCategoryCpuRepository) {
+    public CpuService(CpuRepository cpuRepository, CpuFileRepository cpuFileRepository, ProductCategoryRepositorySsd productCategoryRepositorySsd1, ProductCategoryRepositoryCpu productCategoryCpuRepository,
+                      FileRepository fileRepository) {
         this.cpuRepository = cpuRepository;
         this.cpuFileRepository = cpuFileRepository;
         this.productCategoryCpuRepository = productCategoryCpuRepository;
+        this.fileRepository = fileRepository;
     }
 
     public void init() {
@@ -76,67 +78,104 @@ public class CpuService extends ProductController<Cpu> {
         return cpuRepository.findAll();
     }
 
-    public void delete(Long cpu) throws Exception {
-        Optional<Cpu> c = this.cpuRepository.findById(cpu);
-        if (c.isPresent()) {
-            Cpu cpu1 = c.get();
-            deleteFile(cpu1.getImgCpu().getFileName());
-            cpuRepository.delete(cpu1);
-            cpuFileRepository.delete(cpu1.getImgCpu());
-        } else {
-            throw new Exception(("ERRO AO DELETAR CPU" + cpu));
-        }
-    }
-
-    private void deleteFile(String fileName) {
-        List<ImgCpu> imgList = cpuFileRepository.deleteByName(fileName);
-
-        for (ImgCpu img : imgList) {
-            cpuFileRepository.delete(img);
-            String imgFileName = img.getFileName();
-            Path physicalFilePath = rootCpu.resolve(imgFileName);
-            File physicalFile = physicalFilePath.toFile();
-            if (physicalFile.exists()) {
-                File fileCpuImg = new File("uploads");
-                physicalFile.delete();
-            }
-//            File f = new File(String.valueOf(root));
-//            if (f.isDirectory()) {
-//                File[] fi = f.listFiles();
-//
-//                // Excluindo arquivos no diretório correspondentes aos objetos Img
-//                for (File ff : fi) {
-//                    for (Img im : imgList) {
-//                        if (ff.getName().equals(im.getFileName())) {
-//                            ff.delete();
-//                        }
-//                    }
-//                }
-//            }
-        }
-
-    }
-
     public Cpu update(MultipartFile file, ProductCategorySsd productCategorySsd, Cpu cpu) throws Exception {
-        Optional<Cpu> editCpu = this.cpuRepository.findById(cpu.getId());
-        if (editCpu.isPresent()) {
-            Cpu c = editCpu.get();
-            c.setBrand(cpu.getBrand());
-            c.setArrivalDate(cpu.getArrivalDate());
-            c.setClockCount(cpu.getClockCount());
-            c.setCoreCount(cpu.getCoreCount());
-            c.setModel(cpu.getModel());
-            c.setPurchaseDate(cpu.getPurchaseDate());
-            c.setPurchasePrice(cpu.getPurchasePrice());
-            c.setSaleValue(cpu.getSaleValue());
-            c.setThreadCount(cpu.getThreadCount());
-            return c;
+        Optional<Cpu> fileCpu = this.cpuRepository.findById(cpu.getId());
+        Files.copy(file.getInputStream(), this.rootCpu.resolve(file.getOriginalFilename()));
+
+        if (fileCpu.isPresent()) {
+            Cpu target = fileCpu.get();
+            copyCpuProperties(cpu, target);
+
+            ImgCpu oldFileCpu = target.getImgCpu();
+
+            ImgCpu newFileCpu = new ImgCpu();
+            initalizeFileCpu(file, newFileCpu);
+            if (oldFileCpu != null) {
+                newFileCpu.setId(oldFileCpu.getId());
+            }
+            target.setImgCpu(newFileCpu);
+            Cpu updateCpu = this.cpuRepository.save(target);
+
+            deleteFilesNotInDataBase();
+            return updateCpu;
         } else {
             throw new Exception("ERRO AO ATUALIZAR" + cpu.getId());
         }
 
     }
 
+    public void delete(Long id) throws Exception {
+        Optional<Cpu> cpuOptional = cpuRepository.findById(id);
+        if (cpuOptional.isPresent()) {
+            Cpu cpu = cpuOptional.get();
+            if (cpu.getImgCpu().getFileName() != null) {
+                String fileNameCpu = cpu.getImgCpu().getFileName();
+                System.out.println(cpu.getImgCpu().getFileName());
+                deleteFile(fileNameCpu);
+                cpuRepository.delete(cpuOptional.get());
+                cpuFileRepository.delete(cpu.getImgCpu());
+            } else {
+                throw new Exception(("ERRO AO DELETAR CPU" + cpu));
+            }
+        }
+    }
+
+    private void deleteFile(String fileName) {
+        List<ImgCpu> fileList = cpuFileRepository.deleteByName(fileName);
+
+        for (ImgCpu imgCpu : fileList) {
+            cpuFileRepository.delete(imgCpu);
+            String imgFileNameCpu = imgCpu.getFileName();
+            Path physicalFilePath = rootCpu.resolve(imgFileNameCpu);
+            File physicalFile = physicalFilePath.toFile();
+            File[] files = new File(String.valueOf(FilePath.rootCpu)).listFiles();
+            System.out.println(Arrays.toString(files));
+            for (File fileCpu : files) {
+                System.out.println(fileCpu.getName());
+            }
+            if (physicalFile.exists()) {
+                File fileCpu = new File("uploads/cpu");
+                physicalFile.delete();
+            }
+        }
+
+    }
+
+    private void deleteFilesNotInDataBase() {
+        List<String> databaseFileNameCpu = cpuFileRepository.allFiles();
+        File[] filesInDirectory = new File("uploads/cpu").listFiles();
+
+        if (filesInDirectory != null) {
+            for (File file : filesInDirectory) {
+                String fileNameDirectory = file.getName();
+                if (!databaseFileNameCpu.contains(fileNameDirectory)) {
+                    file.delete();
+                    System.out.println("File deleted:" + fileNameDirectory);
+                }
+            }
+        }
+
+    }
+
+    private void copyCpuProperties(Cpu source, Cpu target) {
+        target.setBrand(source.getBrand());
+        target.setModel(source.getModel());
+        target.setPurchaseDate(source.getPurchaseDate());
+        target.setPurchasePrice(source.getPurchasePrice());
+        target.setSaleValue(source.getSaleValue());
+        target.setSerialNumber(source.getSerialNumber());
+        target.setThreadCount(source.getThreadCount());
+        target.setArrivalDate(source.getArrivalDate());
+        target.setClockCount(source.getClockCount());
+        target.setCoreCount(source.getCoreCount());
+    }
+
+    public void initalizeFileCpu(MultipartFile file, ImgCpu imgCpu) throws Exception {
+        imgCpu.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
+        imgCpu.setContentType(file.getContentType());
+        imgCpu.setData(file.getBytes());
+        imgCpu.setFileSize(file.getSize());
+    }
 
     public Cpu searchId(Long id) throws Exception {
         Optional<Cpu> resultSearchCpuId = cpuRepository.findById(id);

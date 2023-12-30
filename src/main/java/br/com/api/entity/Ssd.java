@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -57,13 +58,18 @@ public class Ssd {
     @Column(name = "MODEL")
     private String model;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "SSD_ID")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "ssdFile")
     private ImgSsd imgSsd;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "SSD_ID")
+    @Setter
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "PRODUCT_CATEGORY_SSD_ID")
     private ProductCategorySsd productCategorySsd;
+
+    public void setImgSsd(ImgSsd imgSsd) {
+        this.imgSsd = imgSsd;
+        imgSsd.setSsdFile(this);
+    }
 
 }
 
