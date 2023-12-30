@@ -25,7 +25,7 @@ public class ClientProducer {
         emailDto.setEmailTo(client.getEmail());
         emailDto.setSubject("Cadastro realizado com sucesso!");
         emailDto.setText("Olá, " + client.getName() + ", seja Bem-vindo(a)!" +
-                "\nEm caso de dúvidas, suporte para produto ou de algum serviço, entre em contato pelo Whatsapp: 81 9 9650 3148");
+                "\nEm caso de dúvidas, suporte para produto ou de algum serviço, entre em contato pelo Whatsapp: 81 9 9650 1010");
         rabbitTemplate.convertAndSend("", routingKey, emailDto);
 
     }
