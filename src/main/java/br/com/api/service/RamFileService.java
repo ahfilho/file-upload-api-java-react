@@ -38,7 +38,7 @@ public class RamFileService {
         }
     }
 
-    public void saveFile(MultipartFile file, Ram ram, ProductCategory productCategory)
+    public void saveFile(MultipartFile file, Ram ram, ProductCategoryRam productCategory)
             throws IOException {
         Files.copy(file.getInputStream(), this.rootRam.resolve(file.getOriginalFilename()));
         ImgRam imgRam = new ImgRam();

@@ -33,10 +33,13 @@ public class Ram {
     private int size;
 
     @NotNull
+    @Column(name = "SERIAL_NUMBER")
+    private String serialNumber;
+
+    @NotNull
     @Column(name = "PURCHASE_PRICE")
     private float purchasePrice;
 
-    @NotNull
     @Column(name = "PURCHASE_DATE")
     private String purchaseDate;
 
@@ -44,7 +47,6 @@ public class Ram {
     @Column(name = "SALE_VALUE")
     private float saleValue;
 
-    @NotNull
     @Column(name = "ARRIVAL_DATE")
     private String arrivalDate;
 
@@ -61,7 +63,7 @@ public class Ram {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "RAM_ID")
-    private ProductCategory productCategory;
+    private ProductCategoryRam productCategory;
 
 //    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    @JoinColumn(name = "RAM_ID")

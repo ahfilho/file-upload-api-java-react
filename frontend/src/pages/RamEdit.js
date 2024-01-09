@@ -2,33 +2,33 @@ import axios from "axios";
 import React from "react";
 import { useState, useEffect, useNavigate } from "react";
 import { BrowserRouter as Router, Route, Link, Switch, useParams } from "react-router-dom";
-import "./Ssd.css";
-import NavBar from "../../navbar/NavBar";
+import "./Ram.css";
+import NavBar from "../navbar/NavBar";
 import { useHistory } from "react-router-dom"; // import do hook
 
-const url = "http://localhost:9090/ssd/redirect";
-const urlEdit = "http://localhost:9090/ssd";
+const url = "http://localhost:9090/ram";
+const url2 = "http://localhost:9090/ram/redirect";
 
-const SsdEdit = () => {
+
+const RamEdit = () => {
   const history = useHistory();
   const { id } = useParams();
-  const [ssd, setSsd] = useState({
+  const [ram, setRam] = useState({
     brand: "",
     model: "",
-    serialNumber: "",
+    mhz: "",
     size: "",
     purchaseDate: "",
     purchasePrice: "",
     arrivalDate: "",
     saleValue: "",
-    amount: ""
   });
   const [file, setFile] = useState("");
 
   useEffect(() => {
-    axios.get(`${url}/${id}`)
+    axios.get(`${url2}/${id}`)
       .then((result) => {
-        setSsd(result.data);
+        setRam(result.data);
       })
       .catch((error) => {
         console.log(error);
@@ -36,8 +36,8 @@ const SsdEdit = () => {
   }, [id]);
 
   const onInputChange = (e) => {
-    setSsd({
-      ...ssd,
+    setRam({
+      ...ram,
       [e.target.name]: e.target.value,
     });
   };
@@ -52,21 +52,21 @@ const SsdEdit = () => {
     const formData = new FormData();
 
     formData.append("file", file);
-    formData.append("brand", ssd.brand);
-    formData.append("model", ssd.model);
-    formData.append("serialNumber", ssd.serialNumber);
-    formData.append("size", ssd.size);
-    formData.append("purchaseDate", ssd.purchaseDate);
-    formData.append("purchasePrice", ssd.purchasePrice);
-    formData.append("arrivalDate", ssd.arrivalDate);
-    formData.append("saleValue", ssd.saleValue);
-    formData.append("amount", ssd.amount);
+    formData.append("brand", ram.brand);
+    formData.append("model", ram.model);
+    formData.append("mhz", ram.mhz);
+    formData.append("size", ram.size);
+    formData.append("purchaseDate", ram.purchaseDate);
+    formData.append("purchasePrice", ram.purchasePrice);
+    formData.append("arrivalDate", ram.arrivalDate);
+    formData.append("saleValue", ram.saleValue);
+    formData.append("serialNumber",ram.serialNumber);
 
     axios
-      .put(`${urlEdit}/${id}`, formData)
+      .put(`${url}/${id}`, formData)
       .then((response) => {
         alert("Alterado com sucesso!");
-        setSsd({
+        setRam({
           brand: "",
           model: "",
           serialNumber: "",
@@ -85,7 +85,7 @@ const SsdEdit = () => {
       });
   };
   const handleCancel = () => {
-    history.push("/SsdList");
+    history.push("/RamList");
   };
 
   return (
@@ -115,7 +115,7 @@ const SsdEdit = () => {
             type={"text"}
             name="brand"
             id="brand"
-            defaultValue={ssd.brand}
+            defaultValue={ram.brand}
             className="form-control"
             placeholder="Marca"
             onChange={(e) => onInputChange(e)}
@@ -125,7 +125,7 @@ const SsdEdit = () => {
             name="model"
             id="model"
             className="form-control"
-            defaultValue={ssd.model}
+            defaultValue={ram.model}
             placeholder="Modelo"
             onChange={(e) => onInputChange(e)}
           />
@@ -135,7 +135,7 @@ const SsdEdit = () => {
             name="serialNumber"
             id="serialNumber"
             className="form-control"
-            defaultValue={ssd.serialNumber}
+            defaultValue={ram.serialNumber}
             placeholder="Nº de série"
             onChange={(e) => onInputChange(e)}
           />
@@ -145,7 +145,7 @@ const SsdEdit = () => {
             name="size"
             id="size"
             className="form-control"
-            defaultValue={ssd.size}
+            defaultValue={ram.size}
             placeholder="Capacidade/GB"
             onChange={(e) => onInputChange(e)}
           />
@@ -155,7 +155,7 @@ const SsdEdit = () => {
             name="amount"
             id="amount"
             className="form-control"
-            defaultValue={ssd.amount}
+            defaultValue={ram.amount}
             placeholder="Quantidade(UN)"
             onChange={(e) => onInputChange(e)}
           />
@@ -168,7 +168,7 @@ const SsdEdit = () => {
             name="purchaseDate"
             id="purchaseDate"
             className="form-control"
-            defaultValue={ssd.purchaseDate}
+            defaultValue={ram.purchaseDate}
             placeholder="Data de compra"
             onChange={(e) => onInputChange(e)}
           />
@@ -178,7 +178,7 @@ const SsdEdit = () => {
             name="purchasePrice"
             id="purchasePrice"
             className="form-control"
-            defaultValue={ssd.purchasePrice}
+            defaultValue={ram.purchasePrice}
             placeholder="Preço de compra"
             onChange={(e) => onInputChange(e)}
           />
@@ -190,7 +190,7 @@ const SsdEdit = () => {
             name="arrivalDate"
             id="arrivalDate"
             className="form-control"
-            defaultValue={ssd.arrivalDate}
+            defaultValue={ram.arrivalDate}
             placeholder="Arrival date"
             onChange={(e) => onInputChange(e)}
           />
@@ -199,7 +199,7 @@ const SsdEdit = () => {
             type={"text"}
             name="saleValue"
             id="saleValue"
-            defaultValue={ssd.saleValue}
+            defaultValue={ram.saleValue}
             className="form-control"
             placeholder="Preço de venda"
             onChange={(e) => onInputChange(e)}
@@ -232,4 +232,4 @@ const SsdEdit = () => {
     </div>
   );
 };
-export default SsdEdit;
+export default RamEdit;

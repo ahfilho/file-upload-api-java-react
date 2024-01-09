@@ -44,7 +44,7 @@ public class RamUploadController {
 
     @PostMapping
     public ResponseEntity<String> uploadFileRam(@RequestParam("file") MultipartFile file, Ram ram,
-                                                ProductCategory productCategory) {
+                                                ProductCategoryRam productCategory) {
         try {
             ramService.ramSave(ram, file, productCategory);
 

@@ -4,13 +4,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.api.auth.JWTTokenHelper;
+import br.com.api.controller.ram.extension.RamControllerExtension;
 import br.com.api.controller.ssd.extension.RamErrorHandling;
-import br.com.api.entity.ProductCategory;
+import br.com.api.dto.ProductCategoryRamDto;
+import br.com.api.dto.RamDto;
+import br.com.api.entity.ProductCategoryRam;
 import br.com.api.persistence.RamPersistenceService;
+import br.com.api.search.RamSearch;
 import br.com.api.storage.BuildFileLinkRam;
 import org.jetbrains.annotations.NotNull;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import br.com.api.entity.Ram;
@@ -33,19 +39,25 @@ public class RamController extends ProductController<Ram> {
 
     private final BuildFileLinkRam buildFileLinkRam;
 
-    public RamController(JWTTokenHelper jwtTokenHelper, RamService ramService, RamPersistenceService ramPersistenceService, RamErrorHandling ramErrorHandling, BuildFileLinkRam buildFileLinkRam) {
+    private final RamSearch ramSearch;
+
+    public RamController(JWTTokenHelper jwtTokenHelper, RamService ramService, RamPersistenceService ramPersistenceService, RamErrorHandling ramErrorHandling, BuildFileLinkRam buildFileLinkRam, RamSearch ramSearch) {
         this.jwtTokenHelper = jwtTokenHelper;
         this.ramService = ramService;
         this.ramPersistenceService = ramPersistenceService;
         this.ramErrorHandling = ramErrorHandling;
         this.buildFileLinkRam = buildFileLinkRam;
+        this.ramSearch = ramSearch;
     }
 
     @PostMapping
-    public ResponseEntity<String> ramSave(@RequestParam("file") MultipartFile file, Ram ram, ProductCategory productCategory) {
+    public ResponseEntity<String> ramSave(@RequestParam("file") MultipartFile file, RamDto ramDto, ProductCategoryRamDto productCategoryDto) {
 
         try {
-            ramPersistenceService.RamPersistence(file, ram, productCategory);
+            ModelMapper mp = new ModelMapper();
+            ProductCategoryRam productCategoryRam = mp.map(productCategoryDto, ProductCategoryRam.class);
+            Ram ram = mp.map(ramDto, Ram.class);
+            ramPersistenceService.RamPersistence(file, ram, productCategoryRam);
             return ramErrorHandling.saveErrorHandling(file.getOriginalFilename(), true);
         } catch (Exception e) {
             return ramErrorHandling.saveErrorHandling(file.getOriginalFilename(), false);
@@ -58,9 +70,14 @@ public class RamController extends ProductController<Ram> {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Ram> ramUpdate(@PathVariable Long id, @NotNull @RequestBody Ram ram) throws Exception {
-        ram.setId(id);
-        return ResponseEntity.ok().body(this.ramService.ramUpdate(ram));
+    public ResponseEntity<String> ramUpdate(String id, MultipartFile file, Ram ram, ProductCategoryRam productCategoryRam) throws Exception {
+        ramErrorHandling.convertRamId(id);
+        try {
+            this.ramService.ramUpdateService(ram, file, productCategoryRam);
+            return ramErrorHandling.updateErrorHandling(file.getOriginalFilename(), true);
+        } catch (Exception e) {
+            return ramErrorHandling.updateErrorHandling(file.getOriginalFilename(), false);
+        }
     }
 
     @DeleteMapping("/{id}")
@@ -69,12 +86,34 @@ public class RamController extends ProductController<Ram> {
         return HttpStatus.OK;
     }
 
-    private Ram linkImgRam(Ram ram) {
-        long r1 = ram.getId();
-        String linkRam = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/").path(Long.toString(r1)).toUriString();
-        ram.setId(ram.getId());
-        ram.setUrl(linkRam);
-        return ram;
+    @GetMapping("redirect/{param}")
+    public ResponseEntity<?> newResourcesForRam(@PathVariable String param) throws Exception {
+        RamControllerExtension rec = new RamControllerExtension(jwtTokenHelper, ramService, ramSearch, ramErrorHandling);
+        if ("list".equals(param)) {
+            List<String> list = rec.listDayOfSaleRam();
+            return ResponseEntity.status(HttpStatus.OK).body(list);
+        } else {
+            try {
+                Long id = Long.parseLong(param);
+                Ram ram = rec.searchForIdRam(id);
+                if (ram != null) {
+                    return ResponseEntity.status(HttpStatus.OK).body(ram);
+                } else {
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nada encontrado para o ID" + id);
+                }
+            } catch (NumberFormatException ex) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Parâmetro inválido:" + param);
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao processar a solicitação");
+            }
+        }
     }
-
 }
+
+
+
+
+
+
+
+

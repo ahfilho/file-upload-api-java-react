@@ -1,7 +1,7 @@
 package br.com.api.persistence;
 
 import br.com.api.auth.JWTTokenHelper;
-import br.com.api.entity.ProductCategory;
+import br.com.api.entity.ProductCategoryRam;
 import br.com.api.entity.Ram;
 import br.com.api.service.RamService;
 import br.com.api.storage.BuildFileLinkRam;
@@ -24,7 +24,7 @@ public class RamPersistenceService {
         this.buildFileLinkRam = buildFileLinkRam;
     }
 
-    public void RamPersistence(MultipartFile file, Ram ram, ProductCategory productCategory) throws IOException {
+    public void RamPersistence(MultipartFile file, Ram ram, ProductCategoryRam productCategory) throws IOException {
 
         ramService.ramSave(ram, file, productCategory);
     }

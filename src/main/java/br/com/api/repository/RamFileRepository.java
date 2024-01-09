@@ -21,5 +21,7 @@ public interface RamFileRepository extends JpaRepository<ImgRam, Long> {
 	@Query("SELECT f FROM ImgRam f WHERE f.fileName = :fileName")
 	List<ImgRam> deleteByName(@Param("fileName") String fileName);
 
+	@Query("SELECT f.fileName FROM ImgRam f")
+	List<String> ramTodosArquivos();
 
 }

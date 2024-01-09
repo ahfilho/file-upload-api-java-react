@@ -78,7 +78,7 @@ export default class RamList extends React.Component {
               <td>{ram.imgRam ? ram.imgRam.fileSize : "N/A"}</td>
 
               <td>
-                <a href={ram.url}>url</a>
+                <a href={ram.url}><i class="fas fa-download"></i></a>
               </td>
               <td><button> <Link to={`/ramEdit/${ram.id}`} className="btn btn-sucess"><i class='far fa-edit'></i>
               </Link></button></td>
