@@ -85,6 +85,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .antMatchers("/files/ssd/{id}").permitAll()
                         .antMatchers("/files/cpu/{id}").permitAll()
                         .antMatchers("/files/ram/{id}").permitAll()
+                        .antMatchers("/ram/redirect/{id}").permitAll()
 
                         .antMatchers("/ram").permitAll()
                         .antMatchers("/ram/{id}").permitAll()

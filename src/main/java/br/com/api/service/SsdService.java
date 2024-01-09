@@ -114,24 +114,6 @@ public class SsdService {
         }
     }
 
-//
-//    private void deleteOldFile(ImgSsd oldFileSsd) throws IOException {
-//        if (oldFileSsd != null && oldFileSsd.getId() != null) {
-//            Long ssdId = oldFileSsd.getId();
-//
-//            // Encontre o nome do arquivo antigo e seu ID em uma única consulta
-//            String fileName = fileRepository.findFileNameById(ssdId);
-//
-//            if (fileName != null) {
-//                // Deleta o arquivo do diretório
-//                deleteFile(fileName);
-//
-//                // Deleta o arquivo do repositório
-//                fileRepository.delete(oldFileSsd);
-//            }
-//        }
-//    }
-
     private void copySsdProperties(Ssd source, Ssd target) {
         target.setBrand(source.getBrand());
         target.setModel(source.getModel());
@@ -183,12 +165,8 @@ public class SsdService {
             File[] files = new File(String.valueOf(FilePath.rootSsd)).listFiles();
             System.out.println(Arrays.toString(files));
             System.out.println();
-
-            for (File f : files
-            ) {
-
+            for (File f : files) {
                 System.out.println(f.getName());
-
             }
             if (physicalFile.exists()) {
                 File fil = new File("uploads/ssd");

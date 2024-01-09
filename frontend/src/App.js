@@ -24,6 +24,7 @@ import ClientEdit from "./client/ClientEdit";
 import ClientCpfSearch from "./client/ClientCpfSearch";
 import ListClient from "./client/ClientCpfSearch";
 import Garantia from "./pages/Garantia";
+import RamEdit from "./pages/RamEdit";
 
 function App() {
   return (
@@ -51,6 +52,8 @@ function App() {
 
           <Route path="/ram" exact component={Ram} />
           <Route path="/ramlist" exact component={RamList} />
+          <Route path="/ramEdit/:id" exact component={RamEdit} />
+
 
           <Route path="/cpu" exact component={Cpu} />
           <Route path="/cpulist" exact component={CpuList} />

@@ -1,19 +1,16 @@
 package br.com.api.controller;
 
 import java.util.List;
-import java.util.UUID;
 
 import br.com.api.auth.JWTTokenHelper;
 import br.com.api.dto.ClientDto;
 import br.com.api.repository.ClientRepository;
 import br.com.api.search.ClientSearchCpf;
-import com.mchange.v2.beans.BeansUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.beans.BeanUtils;
 
 import br.com.api.entity.Client;
 import br.com.api.service.ClientService;
