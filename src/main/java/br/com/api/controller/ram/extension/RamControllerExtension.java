@@ -18,11 +18,8 @@ public class RamControllerExtension {
 
     private final JWTTokenHelper jwtTokenHelper;
     private final RamService ramService;
-
     private final RamSearch ramSearch;
-
     private final RamErrorHandling ramErrorHandling;
-
 
     public RamControllerExtension(JWTTokenHelper jwtTokenHelper, RamService ramService, RamSearch ramSearch, RamErrorHandling ramErrorHandling) {
         this.jwtTokenHelper = jwtTokenHelper;
@@ -33,25 +30,17 @@ public class RamControllerExtension {
 
     public Ram searchForIdRam(@PathVariable Long id) throws Exception {
         Ram ram = ramService.searchId(id);
-        if (ram != null) {
-            return ram;
-        } else {
-            return null;
-        }
+        return ram;
     }
 
     public List<String> listDayOfSaleRam() {
         List<String> listRam = ramService.dayOfSaleRam();
         if (!listRam.isEmpty()) {
             Ram ram = new Ram();
-            return Collections.singletonList(ram.getSerialNumber() + "" + listRam);
+            return Collections.singletonList(ram.getSerialNumber() + " " + listRam);
         }
         return listRam;
-
-
     }
-
-
 }
 
 
