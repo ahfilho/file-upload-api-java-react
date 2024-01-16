@@ -29,11 +29,7 @@ public class SsdControllerExtension {
 
     public Ssd searchForId(@PathVariable Long id) throws Exception {
         Ssd ssd = ssdService.searchId(id);
-        if (ssd != null) {
-            return ssd;
-        } else {
-            return null;
-        }
+        return ssd;
     }
 
 
