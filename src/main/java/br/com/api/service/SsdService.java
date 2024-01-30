@@ -61,12 +61,17 @@ public class SsdService {
         ImgSsd imgSsd = new ImgSsd();
 
 
+
         productCategorySsd.setProductCategory(String.valueOf(CategoryEnum.SSD));
 
         imgSsd.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
         imgSsd.setContentType(file.getContentType());
         imgSsd.setData(file.getBytes());
         imgSsd.setFileSize(file.getSize());
+
+
+
+
 
         ssd.setImgSsd(imgSsd);
         ssd.setProductCategorySsd(productCategorySsd);

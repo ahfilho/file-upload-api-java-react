@@ -4,7 +4,7 @@ import br.com.api.auth.JWTTokenHelper;
 import br.com.api.entity.ProductCategoryRam;
 import br.com.api.entity.Ram;
 import br.com.api.service.RamService;
-import br.com.api.storage.BuildFileLinkRam;
+import br.com.api.link.generator.BuildFileLinkRam;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
 

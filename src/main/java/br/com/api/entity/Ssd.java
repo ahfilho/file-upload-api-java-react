@@ -9,6 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -39,14 +41,14 @@ public class Ssd {
 
     @NotBlank
     @Column(name = "PURCHASE_DATE")
-    private String purchaseDate;
+    private LocalDate purchaseDate;
 
     @NotNull
     @Column(name = "SALE_VALUE")
     private float saleValue;
 
     @Column(name = "ARRIVAL_DATE")
-    private String arrivalDate;
+    private LocalDate arrivalDate;
 
     @Column(name = "URL")
     private String url;

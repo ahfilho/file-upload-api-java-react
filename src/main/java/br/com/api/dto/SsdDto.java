@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Data
 public class SsdDto {
@@ -24,13 +25,13 @@ public class SsdDto {
     private String purchasePrice;
 
     @NotBlank
-    private String purchaseDate;
+    private LocalDate purchaseDate;
 
     @NotNull
     private float saleValue;
 
     @NotBlank
-    private String arrivalDate;
+    private LocalDate arrivalDate;
 
     @NotBlank
     private String url;

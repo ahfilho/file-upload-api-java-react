@@ -37,12 +37,14 @@ public class AuthenticationController {
 
     private CorsConfigurationSource corsConfigurationSource;
 
+    //              4 AQUI PEGA OS DADOS NOME E SENHA
+    // 7 volta pra cá
     @PostMapping("/auth/login")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest, HttpServletResponse res)
             throws InvalidKeySpecException, NoSuchAlgorithmException {
-
         final Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 authenticationRequest.getUserName(), authenticationRequest.getPassword()));
+
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -54,7 +56,6 @@ public class AuthenticationController {
 
         return ResponseEntity.ok(response);
     }
-
 
     @GetMapping("/auth/userinfo")
     public ResponseEntity<?> getUserInfo(Principal user) {
