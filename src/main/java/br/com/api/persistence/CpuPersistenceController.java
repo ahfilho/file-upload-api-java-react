@@ -5,7 +5,7 @@ import br.com.api.entity.Cpu;
 import br.com.api.entity.ProductCategoryCpu;
 import br.com.api.repository.ProductCategoryRepositorySsd;
 import br.com.api.service.CpuService;
-import br.com.api.storage.BuildFileLinkSsd;
+import br.com.api.link.generator.BuildFileLinkSsd;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
 

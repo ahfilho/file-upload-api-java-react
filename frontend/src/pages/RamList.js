@@ -73,7 +73,6 @@ export default class RamList extends React.Component {
               <td>{ram.purchasePrice}</td>
               <td>{ram.arrivalDate}</td>
               <td>{ram.saleValue}</td>
-              <td>{ram.productCategory}</td>
               <td>{ram.imgRam ? ram.imgRam.fileName : "N/A"}</td>
               <td>{ram.imgRam ? ram.imgRam.fileSize : "N/A"}</td>
 

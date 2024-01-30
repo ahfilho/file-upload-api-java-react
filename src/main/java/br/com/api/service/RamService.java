@@ -44,14 +44,14 @@ public class RamService {
         this.fileRepository = fileRepository1;
     }
 
-    public void ramSave(Ram ram, MultipartFile file, ProductCategoryRam productCategory) throws IOException {
+    public void ramSave(Ram ram, MultipartFile file, ProductCategoryRam productCategoryRam) throws IOException {
 
         Files.copy(file.getInputStream(), this.rootRam.resolve(file.getOriginalFilename()));
-        productCategory.setProductCategory(String.valueOf(CategoryEnum.RAM));
+        productCategoryRam.setProductCategory(String.valueOf(CategoryEnum.RAM));
 
-        Date dateAtual = new Date();
+        Date currentDate = new Date();
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String dataFormatada = df.format(dateAtual);
+        String dataFormatada = df.format(currentDate);
 //        ram.setArrivalDate(dateAtual);
 //        ram.setPurchaseDate(dateAtual);
 
@@ -63,9 +63,8 @@ public class RamService {
         imgRam.setFileSize(file.getSize());
 
         ram.setImgRam(imgRam);
-
+        ram.setProductCategory(productCategoryRam);
         this.ramRepository.save(ram);
-        this.ramFileRepository.save(imgRam);
     }
 
     public List<Ram> ramList() {

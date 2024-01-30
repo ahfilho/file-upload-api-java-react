@@ -11,18 +11,15 @@ import br.com.api.dto.RamDto;
 import br.com.api.entity.ProductCategoryRam;
 import br.com.api.persistence.RamPersistenceService;
 import br.com.api.search.RamSearch;
-import br.com.api.storage.BuildFileLinkRam;
-import org.jetbrains.annotations.NotNull;
+import br.com.api.link.generator.BuildFileLinkRam;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import br.com.api.entity.Ram;
 import br.com.api.service.RamService;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 //@CrossOrigin(origins = "http://localhost:3000")
 @RestController

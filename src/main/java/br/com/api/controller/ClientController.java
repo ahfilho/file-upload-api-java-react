@@ -18,7 +18,7 @@ import br.com.api.service.ClientService;
 import javax.validation.Valid;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/client")
 public class ClientController {
 

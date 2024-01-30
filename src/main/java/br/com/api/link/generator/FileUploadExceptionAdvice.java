@@ -1,4 +1,4 @@
-package br.com.api.storage;
+package br.com.api.link.generator;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

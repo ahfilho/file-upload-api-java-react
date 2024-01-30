@@ -1,4 +1,4 @@
-package br.com.api.storage;
+package br.com.api.link.generator;
 
 
 import br.com.api.entity.Cpu;

@@ -44,10 +44,10 @@ public class ApiApplication implements CommandLineRunner {
 
     @PostConstruct
     protected void init() {
-        List<Authority> authorityList = new ArrayList<>();
+        List<  Authority> authorityList = new ArrayList<>();
 
         authorityList.add(createAuthorithy("USER", "User role"));
-//        authorityList.add(createAuthorithy("ADMIN", "Admin role"));
+        authorityList.add(createAuthorithy("ADMIN", "Admin role"));
 
         var user = new User();
         user.setUserName("dinho");
@@ -57,10 +57,14 @@ public class ApiApplication implements CommandLineRunner {
         user.setPassword(passwordEncoder.encode("arlindo123@56"));
         user.setEnabled(true);
         user.setAuthorities(authorityList);
+        System.out.println(user.getAuthorities()+"USER");
+        System.out.println(user.getAuthorities()+"ADM");
+
 
         userDetailsRepository.save(user);
 
     }
+    
 
     private Authority createAuthorithy(String roleCode, String roleDescription) {
         Authority authority = new Authority();

@@ -1,5 +1,6 @@
 package br.com.api.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,11 +13,10 @@ import br.com.api.entity.ProductCategorySsd;
 import br.com.api.exceptions.ErrorHandling;
 import br.com.api.persistence.SsdPersistenceService;
 import br.com.api.search.SearchSsd;
-import br.com.api.storage.BuildFileLinkSsd;
+import br.com.api.link.generator.BuildFileLinkSsd;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -57,7 +57,11 @@ public class SsdController extends ProductController<Ssd> {
     public ResponseEntity<String> saveSsd(MultipartFile file, SsdDto ssdDto, ProductCategorySsdDto productCategorySsdDto) {
         try {
             ModelMapper modelMapper = new ModelMapper();
+            String data1 = String.valueOf(ssdDto.getPurchaseDate());
+            LocalDate convertedDate = LocalDate.parse(data1);
+            ssdDto.setPurchaseDate(convertedDate);
 
+            //TODO VER A DATA PARA CONVERTER. STRING PARA DATA NÃO PODE FICAR
             ProductCategorySsd productCategorySsd = modelMapper.map(productCategorySsdDto, ProductCategorySsd.class);
             Ssd ssd = modelMapper.map(ssdDto, Ssd.class);
 
@@ -100,9 +104,10 @@ public class SsdController extends ProductController<Ssd> {
     }
 
     @GetMapping("/redirect/{param}")
-    public ResponseEntity<?> newResources(@PathVariable String param) throws Exception {
+    public ResponseEntity<?> WarrantyExpiredOrSearchId(@PathVariable String param) throws Exception {
         SsdControllerExtension sec = new SsdControllerExtension(jwtTokenHelper, ssdService, searchSsd, errorHandling);
 
+        //busca apenas um item
         if ("list".equals(param)) {
             List<String> list = sec.listDayOfSale();
             return ResponseEntity.status(HttpStatus.OK).body(list);

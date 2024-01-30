@@ -4,7 +4,7 @@ import br.com.api.auth.JWTTokenHelper;
 import br.com.api.entity.Ssd;
 import br.com.api.entity.ProductCategorySsd;
 import br.com.api.service.SsdService;
-import br.com.api.storage.BuildFileLinkSsd;
+import br.com.api.link.generator.BuildFileLinkSsd;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
 
