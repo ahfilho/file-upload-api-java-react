@@ -1,0 +1,126 @@
+body.login-page {
+	background-color: #f7f9fb;
+	font-size: 14px;
+}
+
+
+
+.login-page .brand {
+	width: 90px;
+	height: 90px;
+	overflow: hidden;
+	border-radius: 50%;
+	margin: 40px auto;
+	box-shadow: 0 4px 8px rgba(0,0,0,.05);
+	position: relative;
+}
+
+.login-page .brand img {
+	width: 100%;
+}
+
+.login-page .card-wrapper {
+	width: 450px;
+}
+
+.login-page .card {
+	border-color: transparent;
+	box-shadow: 0 4px 8px rgba(0,0,0,.05);
+}
+
+.login-page .card.fat {
+	padding: 10px;
+	margin-top: 10px;
+	height: 550px;
+	background-color: #8e1aac46;
+	color: whitesmoke;	
+}
+
+.login-page .card .card-title {
+	margin-bottom: 50px;
+}
+
+.login-page .form-control {
+	border-width: 2.3px;
+	width: 90%;
+}
+
+.login-page .form-group label {
+	width: 100%;
+}
+
+.login-page .btn.btn-block {
+	padding: 12px 10px;
+}
+
+.login-page .footer {
+	margin: 40px 0;
+	color: #888;
+	text-align: center;
+}
+
+@media screen and (max-width: 425px) {
+	.login-page .card-wrapper {
+		width: 90%;
+		margin: 0 auto;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	.login-page .card.fat {
+		padding: 0;
+	}
+
+	.login-page .card.fat .card-body {
+		padding: 15px;
+	}
+}
+
+.login-page {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+  }
+  
+  .login-container {
+	display: flex;
+	align-items: center;
+	margin-right: 60px; 
+  }
+  
+  .login-form {
+	margin-left: 20px; 
+  }
+  
+  
+.login-form,
+.new-user-form {
+  width: 400px; 
+  margin: 0 20px; 
+}
+.form-group-button{
+align-items: end;
+margin-top: 30px;
+}
+
+.login-container {
+	display: flex;
+	align-items: center;
+  }
+  
+  .login-form,
+  .new-user-form {
+	width: 400px;
+
+	margin-right: 50px; /* Espaço entre os elementos, ajuste conforme necessário */
+  }
+  .error-message-container {
+	background-color: #f8d9d9; /* Fundo vermelho suave */
+	border: 1px solid #e6b1ab; /* Borda vermelha */
+	border-radius: 5px; /* Borda arredondada */
+	padding: 10px; /* Espaçamento interno */
+	margin-bottom: 10px; /* Espaçamento inferior */
+	color: #5f0a01; /* Cor do texto vermelho */
+  }
+  

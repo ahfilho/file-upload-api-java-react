@@ -1,5 +1,4 @@
-package br.com.api.entity;
-
+package br.com.api.auth.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,24 +7,36 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
-@Table(name = "AUTH_USER_DETAILS")
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "AUTH_USER_DETAILS")
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "O nome não pode estar em branco")
+    @Size(min = 2, max = 30, message = "O nome deve ter entre 2 e 50 caracteres")
     @Column(name = "USER_NAME", unique = true)
     private String userName;
 
+    @NotBlank(message = "O e-mail não pode estar em branco")
+    @Email(message = "O e-mail deve ser válido")
+    private String email;
+
+    @NotBlank(message = "A senha não pode estar em branco")
+    @Size(min = 6, message = "A senha deve ter pelo menos 6 caracteres")
     @Column(name = "USER_KEY")
     private String password;
 
@@ -41,17 +52,18 @@ public class User implements UserDetails {
     @Column(name = "LAST_NAME")
     private String lastName;
 
-    @Column(name = "EMAIL")
-    private String email;
+    @NotBlank(message = "O CPF não pode estar em branco")
+    @Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}", message = "O CPF deve ter o formato 999.999.999-99")
+    @Size(min = 14, max = 14, message = "O CPF deve conter 11 dígitos")
+    private String cpf;
 
-    @Column(name = "´PHONE_NUMBER")
-    private String phoneNumber;
+    @NotBlank(message = "O perfil não pode estar em branco")
+    @Pattern(regexp = "usuario|admin", message = "O perfil deve ser usuario ou admin")
+    @Column(name = "USER_TYPE")
+    private String profile;
 
     @Column(name = "ENABLED")
     private boolean enabled = true;
-
-    @Column(name = "USER_TYPE")
-    private String userType;
 
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -62,7 +74,6 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
     }
-
     @Override
     public String getUsername() {
         return this.userName;
@@ -92,28 +103,4 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return this.enabled;
     }
-
-
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

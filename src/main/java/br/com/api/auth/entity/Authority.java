@@ -1,4 +1,4 @@
-package br.com.api.entity;
+package br.com.api.auth.entity;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;

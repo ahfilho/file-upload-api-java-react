@@ -1,0 +1,43 @@
+.tabela {
+  text-align: center;
+  margin-top: 50px; /* Ajuste a margem conforme necessário */
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 29px;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 50px); /* Ajuste a altura conforme necessário */
+}
+
+table {
+  width: 80%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #24012c00;
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #1104142f;
+}
+
+.tabela-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color:rgba(227, 216, 238, 0.342) ;
+  height: 800px;
+
+}
