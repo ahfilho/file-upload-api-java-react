@@ -1,15 +1,15 @@
-package br.com.api.config.security;
+package br.com.api.auth.security;
 
 import br.com.api.auth.JWTAuthenticationFilter;
 import br.com.api.auth.JWTTokenHelper;
-import br.com.api.service.CustomUserService;
+import br.com.api.auth.UserDetailsServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -29,9 +29,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
     @Autowired
+    private UserDetailsServiceImpl userDetailsServiceImpl;
+    @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
-    private CustomUserService userService;
+    private UserDetailsServiceImpl userService;
 
     @Autowired
     private JWTTokenHelper jWTTokenHelper;
@@ -39,14 +41,26 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthenticationEntryPoint authenticationEntryPoint;
 
+
+    private final UserRepository userRepository;
+
+    public SecurityConfiguration(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        auth.inMemoryAuthentication().withUser("Arlindo").password(passwordEncoder().encode("test@123"))
-                .authorities("USER", "ADMIN");
+        auth.userDetailsService(userDetailsServiceImpl).passwordEncoder(passwordEncoder);
 
-        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
+    }
 
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsServiceImpl);
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
     }
 
     @Bean
@@ -66,40 +80,39 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint).and()
                 .authorizeRequests((request -> request.antMatchers("/localhost:3000/**", "/localhost:9090/**").permitAll()
-                        .antMatchers("/user/auth/login").permitAll()
-                        .antMatchers("/client").permitAll()
-                        .antMatchers("/client/{id}").permitAll()
-                        .antMatchers("/client/search/").permitAll()
-                        .antMatchers("/client/search/{cpf}").permitAll()
-                        .antMatchers("/client/find/{id}").permitAll()
-                        .antMatchers("/client/search/cpf").permitAll()
-                        .antMatchers("/ssd").permitAll()
-                        .antMatchers("/ssd/{id}").permitAll()
-                        .antMatchers("/files/{id}").permitAll()
-                        .antMatchers("/ssd/files/download").permitAll()
-                        .antMatchers("/ssd/files/{id}").permitAll()
-                        .antMatchers("/ssd/sale/day").permitAll()
-                        .antMatchers("/cpu").permitAll()
-                        .antMatchers("/cpu/{id}").permitAll()
-                        .antMatchers("/ssd/redirect/{id}").permitAll()
-                        .antMatchers("/files/ssd/{id}").permitAll()
-                        .antMatchers("/files/cpu/{id}").permitAll()
-                        .antMatchers("/files/ram/{id}").permitAll()
-                        .antMatchers("/ram/redirect/{id}").permitAll()
+                        .antMatchers("/user/auth/login",
+                                "/client",
+                                "/client/{id}",
+                                "/client/search/",
+                                "/client/search/{cpf}",
+                                "/client/find/{id}",
+                                "/client/search/cpf",
+                                "/ssd",
+                                "/ssd/{id}",
+                                "/files/{id}",
+                                "/ssd/files/download",
+                                "/ssd/files/{id}",
+                                "/ssd/sale/day",
+                                "/cpu",
+                                "/cpu/{id}",
+                                "/ssd/redirect/{id}",
+                                "/files/ssd/{id}",
+                                "/files/cpu/{id}",
+                                "/files/ram/{id}",
+                                "/ram/redirect/{id}",
+                                "/ram",
+                                "/ram/{id}",
+                                "/ram/files/{id}",
+                                "/user/users",
 
-                        .antMatchers("/ram").permitAll()
-                        .antMatchers("/ram/{id}").permitAll()
-                        .antMatchers("/ram/files/{id}").permitAll()
-
-                        .antMatchers("/user/users").permitAll()
-
+                                "/user/users",
+                                "/new/user").permitAll()
                         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated()))
                 .addFilterBefore(new JWTAuthenticationFilter(userService, jWTTokenHelper),
                         UsernamePasswordAuthenticationFilter.class);
 
         http.csrf().disable().cors().and().headers().frameOptions().disable();
-//                .authorizeRequests((request) -> request.antMatchers("/h2-console/**", "/api/v1/auth/login").permitAll()
     }
 
     @Bean

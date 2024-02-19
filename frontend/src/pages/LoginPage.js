@@ -4,7 +4,8 @@ import { authenticate, authFailure, authSuccess } from '../redux/authActions';
 import './loginpage.css';
 import { userLogin } from '../api/authenticationService';
 import { Alert, Spinner } from 'react-bootstrap';
-
+import NewUser
+ from './dashboard/NewUser';
 const LoginPage = ({ loading, error, ...props }) => {
 
 
@@ -69,7 +70,9 @@ const LoginPage = ({ loading, error, ...props }) => {
 
     return (
         <div className="login-page">
-
+      <div className="login-container">
+                <NewUser />
+            </div>
 
 
             <section className="h-100">

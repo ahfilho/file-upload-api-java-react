@@ -1,28 +1,21 @@
 package br.com.api.service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import javax.transaction.Transactional;
 
-import br.com.api.dto.ClientDto;
 import br.com.api.entity.Address;
-import br.com.api.entity.User;
 import br.com.api.exceptions.ErrorHandling;
 import br.com.api.producer.ClientProducer;
 import br.com.api.repository.AddressRepository;
 import br.com.api.repository.SsdRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import br.com.api.entity.Client;
 import br.com.api.repository.ClientRepository;
-import org.springframework.ui.ModelMap;
 
 @Service
 public class ClientService {
