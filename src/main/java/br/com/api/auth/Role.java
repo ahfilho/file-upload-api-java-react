@@ -5,7 +5,7 @@ import org.springframework.security.core.parameters.P;
 public enum Role {
 
 ROLE_ADMIN("ADMIN"),
-ROLE_USER("USER");
+ROLE_USER("USUARIO");
 
 
     private final String role;

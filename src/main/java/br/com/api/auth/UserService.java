@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -60,15 +59,17 @@ public class UserService {
         authority.setRoleDescription(roleDescription);
         return authority;
     }
-    public List<User> listAll(User authenticatedUser){
-        if (authenticatedUser == null || isAdmin(authenticatedUser)){
-            return userRepository.findAll();
-        } else {
-            return Collections.singletonList(authenticatedUser);
-        }
+
+    public List<User> listAll() {
+//        if (authenticatedUser == null || isAdmin(authenticatedUser)) {
+//            return userRepository.findAll();
+//        } else {
+//            return Collections.singletonList(authenticatedUser);
+//        }
+    return userRepository.findAll();
     }
 
-    private boolean isAdmin(User user) {
+    public boolean isAdmin(User user) {
         return "admin".equalsIgnoreCase(user.getProfile());
     }
 

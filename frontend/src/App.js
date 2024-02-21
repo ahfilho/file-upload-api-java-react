@@ -62,8 +62,8 @@ function App() {
           <Route path="/cpuEdit/:id" exact component={CpuEdit} />
 
           <Route path="/garantia" exact component={Garantia} />
-          <Route path="/new/user" exact element={<NewUser />} />
-          <Route path="/list" exact element={<Listar />} />
+          <Route path="/new/user" exact component={<NewUser />} />
+          <Route path="/list" exact component={Listar} />
 
 
           </Switch>

@@ -32,8 +32,6 @@ public class AuthenticationController {
 
     private CorsConfigurationSource corsConfigurationSource;
 
-    //              4 AQUI PEGA OS DADOS NOME E SENHA
-    // 7 volta pra cá
     @PostMapping("/auth/login")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest, HttpServletResponse res)
             throws InvalidKeySpecException, NoSuchAlgorithmException {

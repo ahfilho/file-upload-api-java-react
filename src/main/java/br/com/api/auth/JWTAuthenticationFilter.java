@@ -33,7 +33,6 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         String authToken = jwtTokenHelper.getToken(request);
-        // 21 verifica o token e AUTORIZA O LOGIN
         if (null != authToken) {
             String userName = jwtTokenHelper.getUsernameFromToken(authToken);
 
