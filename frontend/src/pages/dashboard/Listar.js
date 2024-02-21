@@ -57,19 +57,19 @@ class ListUser extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:8080/new").then((res) => {
+    axios.get("http://localhost:9090/new/todos").then((res) => {
       const usuarios = res.data;
       this.setState({ usuarios });
     });
 
-    this.setState({ userPerfil: 'ADMIN' }); // Aqui você deve definir o perfil do usuário logado vindo do backend
+    this.setState({ userPerfil: 'ADMIN' }); 
   }
 
   render() {
     const { showMessage, message } = this.state;
 
     return (
-      <div className="tabela-container">
+      <div className="table-container">
         {showMessage && <div className="message">{message}</div>}
         <div className="tabela">
           <br></br>

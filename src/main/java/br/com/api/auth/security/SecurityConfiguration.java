@@ -106,7 +106,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                 "/user/users",
 
                                 "/user/users",
-                                "/new/user").permitAll()
+                                "/new/user",
+                                "new/todos").permitAll()
+                        .antMatchers("/new/todos").permitAll()
                         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated()))
                 .addFilterBefore(new JWTAuthenticationFilter(userService, jWTTokenHelper),
