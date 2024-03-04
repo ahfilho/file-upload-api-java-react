@@ -3,7 +3,7 @@ package br.com.api.search;
 import br.com.api.auth.JWTTokenHelper;
 import br.com.api.repository.RamRepository;
 import br.com.api.service.RamService;
-import br.com.api.storage.BuildFileLinkRam;
+import br.com.api.link.generator.BuildFileLinkRam;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 

@@ -1,5 +1,5 @@
 ##Back-end_api_java_front-end_api_react
-
+Api com autenticação em memória.
 Documentação aqui: https://documenter.getpostman.com/view/14374394/Uyxkkkyr
 
 

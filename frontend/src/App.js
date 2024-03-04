@@ -25,6 +25,8 @@ import ClientCpfSearch from "./client/ClientCpfSearch";
 import ListClient from "./client/ClientCpfSearch";
 import Garantia from "./pages/Garantia";
 import RamEdit from "./pages/RamEdit";
+import NewUser from "./pages/dashboard/NewUser";
+import Listar from "./pages/dashboard/Listar";
 
 function App() {
   return (
@@ -60,6 +62,8 @@ function App() {
           <Route path="/cpuEdit/:id" exact component={CpuEdit} />
 
           <Route path="/garantia" exact component={Garantia} />
+          <Route path="/new/user" exact component={<NewUser />} />
+          <Route path="/list" exact component={Listar} />
 
 
           </Switch>

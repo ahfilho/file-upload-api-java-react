@@ -10,7 +10,7 @@ import br.com.api.repository.FileRepository;
 import br.com.api.repository.ProductCategoryRepositorySsd;
 import br.com.api.search.SearchCpu;
 import br.com.api.service.CpuService;
-import br.com.api.storage.BuildFileLinkCpu;
+import br.com.api.link.generator.BuildFileLinkCpu;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

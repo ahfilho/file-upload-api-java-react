@@ -1,0 +1,24 @@
+.tabela {
+    /* color: red; */
+    width: 100%;
+}
+.title{
+    display: flexbox;
+    width: 100%;
+    justify-content: end;
+    margin:auto;
+}
+
+table {
+    display: flexbox;
+    width: 100%;
+    justify-content: space-around;
+    margin: auto;
+    height: auto;
+}
+tr,th,td{
+    height: auto;
+    width: 100%;
+}
+
+

@@ -1,7 +1,6 @@
-package br.com.api.service;
+package br.com.api.auth;
 
-import br.com.api.entity.User;
-import br.com.api.repository.UserDetailsRepository;
+import br.com.api.auth.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,7 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomUserService implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserDetailsRepository userDetailsRepository;

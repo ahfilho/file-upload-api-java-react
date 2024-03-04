@@ -1,11 +1,7 @@
-package br.com.api.controller;
+package br.com.api.auth;
 
 
-import br.com.api.auth.JWTTokenHelper;
-import br.com.api.entity.User;
-import br.com.api.response.AuthenticationRequest;
-import br.com.api.response.LoginResponse;
-import br.com.api.response.UserInfo;
+import br.com.api.auth.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.cors.CorsConfigurationSource;
 
 import javax.servlet.http.HttpServletResponse;
-import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
 import java.security.spec.InvalidKeySpecException;
@@ -40,9 +35,9 @@ public class AuthenticationController {
     @PostMapping("/auth/login")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest, HttpServletResponse res)
             throws InvalidKeySpecException, NoSuchAlgorithmException {
-
         final Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 authenticationRequest.getUserName(), authenticationRequest.getPassword()));
+
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -54,7 +49,6 @@ public class AuthenticationController {
 
         return ResponseEntity.ok(response);
     }
-
 
     @GetMapping("/auth/userinfo")
     public ResponseEntity<?> getUserInfo(Principal user) {

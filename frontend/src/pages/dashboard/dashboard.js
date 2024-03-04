@@ -37,7 +37,8 @@ export const Dashboard = (props) => {
     <Container>
       <MainWrapper>
 
-        <div className='titulo'>   <h3> Olá, {data && `${data.firstName} ${data.lastName}.`}</h3>
+        <div className='titulo'>   <h3> Olá, {data && `${data.firstName} ${data.lastName}.
+        `}</h3>
         </div>
         <div className="button-container">
           <button type="button" className="btn btn-primary">

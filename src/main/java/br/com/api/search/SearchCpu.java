@@ -3,7 +3,7 @@ package br.com.api.search;
 import br.com.api.auth.JWTTokenHelper;
 import br.com.api.entity.Cpu;
 import br.com.api.service.CpuService;
-import br.com.api.storage.BuildFileLinkSsd;
+import br.com.api.link.generator.BuildFileLinkSsd;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 

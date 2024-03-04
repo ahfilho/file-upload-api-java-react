@@ -1,11 +1,11 @@
-package br.com.api.enume;
+package br.com.api.auth;
 
 import org.springframework.security.core.parameters.P;
 
 public enum Role {
 
-ROLE_ADMIN("ROLE_ADMIN"),
-ROLE_USER("ROLE_USER");
+ROLE_ADMIN("ADMIN"),
+ROLE_USER("USUARIO");
 
 
     private final String role;

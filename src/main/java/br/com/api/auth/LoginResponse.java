@@ -1,4 +1,4 @@
-package br.com.api.response;
+package br.com.api.auth;
 
 import lombok.Data;
 
@@ -7,6 +7,12 @@ public class LoginResponse {
 
     private String token;
 
-
-
 }
+
+
+
+
+
+
+
+

@@ -1,8 +1,7 @@
-package br.com.api.storage;
+package br.com.api.link.generator;
 
 import br.com.api.entity.Ram;
 import br.com.api.interfaces.FileLinkCreatorRam;
-import br.com.api.interfaces.FileLinkCreatorSsd;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
