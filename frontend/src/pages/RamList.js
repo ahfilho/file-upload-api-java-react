@@ -51,14 +51,13 @@ export default class RamList extends React.Component {
             <th>Modelo</th>
             <th>Nº de série</th>
             <th>Capacidade</th>
-            <th>Data de compra</th>
-            <th>Preço de compra</th>
-            <th>Data de venda</th>
-            <th>Preço de venda</th>
-            <th>Categoria do produto</th>
-            <th>Url</th>
+            <th>Data compra</th>
+            <th>Preço compra</th>
+            <th>Data venda</th>
+            <th>Preço venda</th>
             <th>Mídia</th>
             <th>Bytes</th>
+            <th>Url</th>
             <th></th>
           </tr>
           {this.state.rams.map((ram) => (

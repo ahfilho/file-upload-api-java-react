@@ -3,7 +3,7 @@ import axios from "axios";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { useHistory, useParams } from "react-router-dom";
 import NavBar from "../../navbar/NavBar";
-import "./Cpu.css";
+import "./CpuList.css";
 import { Button } from "bootstrap";
 
 class CpuList extends Component {
@@ -42,7 +42,7 @@ class CpuList extends Component {
         <div className="tabela">
           <NavBar></NavBar>
           <br></br>
-          <div className="title">CPU</div>
+          <div className="title">Cpu</div>
           <br></br>
           <hr></hr>
         </div>
@@ -59,11 +59,12 @@ class CpuList extends Component {
             <th>Threads</th>
             <th>Clock</th>
             <th>Data de compra</th>
-            <th>Preço de compra</th>
+            <th>Preço compra</th>
             {/* <th>Data de venda</th> */}
-            <th>Preço de venda</th>
+            <th>Preço venda</th>
             <th>Mídia</th>
             <th>Bytes</th>
+            <th>Visualisar</th>
           </tr>
           {this.state.cpus.map((cpu) => (
             <tr>

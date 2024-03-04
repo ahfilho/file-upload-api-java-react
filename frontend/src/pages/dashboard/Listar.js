@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import './listar.css';
+import { Nav } from "react-bootstrap";
+import NavBar from "../../navbar/NavBar.js";
 
 class ListUser extends Component {
   state = {
@@ -56,25 +58,33 @@ class ListUser extends Component {
     }, 3000); // 3 segundos
   }
 
-  componentDidMount() {
-    axios.get("http://localhost:9090/new/todos").then((res) => {
+  async componentDidMount() {
+    try {
+      const res = await axios.get("http://localhost:9090/new/todos");
       const usuarios = res.data;
-      this.setState({ usuarios });
-    });
+      if (usuarios.length === 0) {
+        this.setState({ usuarios: [], listaVazia: true });
+      } else {
+        this.setState({ usuarios: usuarios, listaVazia: false });
+      }
+    } catch (error) {
+      console.log("Erro ao buscar usuários.", error);
+      this.setState({ error: "Erro ao buscar usuários. Por favor, tente novamente mais tarde." });
+    }
 
-    this.setState({ userPerfil: 'ADMIN' }); 
+    this.setState({ userPerfil: 'ADMIN' });
   }
+
 
   render() {
     const { showMessage, message } = this.state;
 
     return (
       <div className="table-container">
+<NavBar/>
         {showMessage && <div className="message">{message}</div>}
         <div className="tabela">
-          <br></br>
           <div className="title">Usuários</div>
-          <br></br>
           <hr></hr>
         </div>
         <div className="botoes"></div>

@@ -87,7 +87,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                 "/client/search/{cpf}",
                                 "/client/find/{id}",
                                 "/client/search/cpf",
-                                "/ssd",
                                 "/ssd/{id}",
                                 "/files/{id}",
                                 "/ssd/files/download",
@@ -108,6 +107,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                 "/user/users",
                                 "/new/user",
                                 "new/todos").permitAll()
+                        .antMatchers("/ssd").permitAll()
                         .antMatchers("/new/todos").permitAll()
                         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated()))

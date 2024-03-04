@@ -41,14 +41,14 @@ public class Ssd {
 
     @NotBlank
     @Column(name = "PURCHASE_DATE")
-    private LocalDate purchaseDate;
+    private String purchaseDate;
 
     @NotNull
     @Column(name = "SALE_VALUE")
     private float saleValue;
 
     @Column(name = "ARRIVAL_DATE")
-    private LocalDate arrivalDate;
+    private String arrivalDate;
 
     @Column(name = "URL")
     private String url;
