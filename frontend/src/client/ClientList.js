@@ -39,7 +39,6 @@ class ListClient extends Component {
           <NavBar />
           <br></br>
           <div className="title">Clientes</div>
-          Todos os clientes atendidos
           <br></br>
           <hr></hr>
 

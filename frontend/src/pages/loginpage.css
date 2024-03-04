@@ -11,7 +11,7 @@ body.login-page {
 	overflow: hidden;
 	border-radius: 50%;
 	margin: 40px auto;
-	box-shadow: 0 4px 8px rgba(0,0,0,.05);
+	box-shadow: 0 4px 8px rgba(175, 17, 17, 0.05);
 	position: relative;
 }
 
@@ -21,11 +21,23 @@ body.login-page {
 
 .login-page .card-wrapper {
 	width: 400px;
+	background-color:  rgba(0,0,0,.05);
+	/* box-shadow: 0 4px 8px rgba(0,0,0,.05); */
+	border-top: 2px solid #333;
+	border-right: 2px solid #333;
+	border-bottom: 2px solid #333;
+	border-left: 2px solid #333;
+	padding: 15px;
+	width: 300px;
+	margin: 20px;
+	margin-top: 100px;
+	border-radius: 10px;
+	height: 600px;
 }
 
 .login-page .card {
 	border-color: transparent;
-	box-shadow: 0 4px 8px rgba(0,0,0,.05);
+	box-shadow: 0 4px 8px rgba(133, 101, 168, 0.05);
 }
 
 .login-page .card.fat {
@@ -36,10 +48,13 @@ body.login-page {
 
 .login-page .card .card-title {
 	margin-bottom: 30px;
+
 }
 
 .login-page .form-control {
 	border-width: 2.3px;
+	width: 100%;
+	
 }
 
 .login-page .form-group label {
@@ -72,3 +87,42 @@ body.login-page {
 		padding: 15px;
 	}
 }
+
+.login-page {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	background-color: rgb(13, 1, 22);
+  }
+  
+  .login-container {
+	display: flex;
+	align-items: center;
+	margin-right: 60px;
+	
+  }
+  
+  .login-form {
+	margin-left: 20px;
+  }
+  
+  
+.login-form,
+.new-user-form {
+  width: 400px; 
+  margin: 0 20px;
+}
+.forgot-password-link {
+	color: red;
+	text-decoration: underline; /* Adiciona um sublinhado, se desejado */
+	cursor: pointer; /* Muda o cursor para indicar que é clicável */
+  }
+  .senha{
+	color: #000;
+	margin:8px;
+	
+  }
+  .my-login-validation{
+	color: red;
+  }

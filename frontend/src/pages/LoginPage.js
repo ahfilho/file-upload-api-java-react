@@ -5,7 +5,7 @@ import './loginpage.css';
 import { userLogin } from '../api/authenticationService';
 import { Alert, Spinner } from 'react-bootstrap';
 import NewUser
- from './dashboard/NewUser';
+    from './dashboard/NewUser';
 const LoginPage = ({ loading, error, ...props }) => {
 
 
@@ -23,10 +23,14 @@ const LoginPage = ({ loading, error, ...props }) => {
             console.log("response", response);
             if (response.status === 200) {
                 props.setUser(response.data);
-                props.history.push('/dashboard');
+                props.history.push('/home');
+            }
+            if(response.status===404){
+                props.setUser(response.data);
+                props.authFailure('Usuário não cadastrado.')
             }
             else {
-                props.loginFailure('Something Wrong!Please Try Again');
+                props.loginFailure('Algo saiu errado. Tente novamente.');
             }
 
 
@@ -40,13 +44,13 @@ const LoginPage = ({ loading, error, ...props }) => {
                         props.loginFailure("Authentication Failed.Bad Credentials");
                         break;
                     default:
-                        props.loginFailure('Something Wrong!Please Try Again');
+                        props.loginFailure('Algo saiu errado. Tente novamente.');
 
                 }
 
             }
             else {
-                props.loginFailure('Something Wrong!Please Try Again');
+                props.loginFailure('Algo saiu errado. Tente novamente.');
             }
 
 
@@ -70,7 +74,7 @@ const LoginPage = ({ loading, error, ...props }) => {
 
     return (
         <div className="login-page">
-      <div className="login-container">
+            <div className="login-container">
                 <NewUser />
             </div>
 
@@ -87,39 +91,31 @@ const LoginPage = ({ loading, error, ...props }) => {
 
                                     <form className="my-login-validation" onSubmit={handleSubmit} noValidate={false}>
                                         <div className="form-group">
-                                            <label htmlFor="email">User Name</label>
+                                            <label htmlFor="email">Usuário</label>
                                             <input id="username" type="text" className="form-control"
-                                            
-                                            minLength={5} value={values.userName} onChange={handleChange}
-                                             name="userName" required />
-
+                                                minLength={5} value={values.userName} onChange={handleChange}
+                                                name="userName" required />
                                             <div className="invalid-feedback">
                                                 UserId is invalid
                                             </div>
-
-
-
                                         </div>
 
                                         <div className="form-group">
-                                            <label>Password
-                                                <a href="forgot.html" className="float-right">
-                                                    Forgot Password?
-                                                </a>
-                                            </label>
+                                            <br></br> <br></br>
+                                            <label htmlFor="password">Senha</label>
                                             <input id="password" type="password" className="form-control" minLength={8} value={values.password} onChange={handleChange} name="password" required />
                                             <div className="invalid-feedback">
                                                 Password is required
                                             </div>
                                         </div>
 
-                                        <div className="form-group">
-                                            <div className="custom-control custom-checkbox">
-                                                <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                                                <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
-                                            </div>
-                                        </div>
-
+                                        {/* <div className="form-group"> */}
+                                            {/* <div className="custom-control custom-checkbox"> */}
+                                                {/* <input type="checkbox" className="custom-control-input" id="customCheck1" /> */}
+                                                {/* <label className="custom-control-label" htmlFor="customCheck1">Lembrar login</label> */}
+                                            {/* </div> */}
+                                        {/* </div> */}
+                                        <br></br>
 
                                         <div className="form-group m-0">
                                             <button type="submit" className="btn btn-primary">
@@ -142,6 +138,13 @@ const LoginPage = ({ loading, error, ...props }) => {
                                             </button>
                                         </div>
                                     </form>
+                                    <br></br>
+                                    <div className="forgot">
+                                        <a href="forgot.html" className="float-right">
+                                            Forgot Password?
+                                        </a>
+                                        <br></br>
+                                    </div>
                                     {error &&
                                         <Alert style={{ marginTop: '20px' }} variant="danger">
                                             {error}

@@ -73,20 +73,22 @@ const NewUser = () => {
             <div className="card-wrapper">
               <div className="card fat">
                 <div className="card-body">
-                  <h4 className="card-title">Cadastrar</h4>
+                  <h4 className="card-title">Cadastrar novo usuário</h4>
                   <form id="formulario" onSubmit={handleSubmit} className="login-form">
 
-                  <div className="form-group">
+                    <div className="form-group">
                       <input
                         type="text"
                         name="firstName"
                         id="firstName"
                         value={firstName}
                         className="form-control"
-                        placeholder="Primeiro nome"
+                        placeholder="Nome"
                         onChange={(e) => setFirstName(e.target.value)}
                       />
-                    </div>   <div className="form-group">
+                    </div>   
+                    
+                    <div className="form-group">
                       <input
                         type="text"
                         name="lastName"
@@ -109,6 +111,7 @@ const NewUser = () => {
                         onChange={(e) => setUsername(e.target.value)}
                       />
                     </div>
+                    
                     <div className="inputs">
                       <input
                         type="text"
@@ -120,6 +123,7 @@ const NewUser = () => {
                         onChange={(e) => setEmail(e.target.value)}
                       />
                     </div>
+                   
                     <div className="inputs">
                       <input
                         type="password"
@@ -131,6 +135,7 @@ const NewUser = () => {
                         onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
+                   
                     <div className="inputs">
                       <input
                         type="text"
@@ -142,6 +147,7 @@ const NewUser = () => {
                         onChange={handleCpfChange}
                       />
                     </div>
+                    
                     <div className="inputs">
                       <label>Perfil</label>
                       <div>
@@ -176,7 +182,7 @@ const NewUser = () => {
                       ></input>
                       <div className="new-user-form">
                         <button type="submit" className="btn btn-primary">
-                          <Link to="/list" className="animated-button9" style={{ color: 'white', textDecoration: 'none' }}>
+                          <Link to="/list" style={{ color: 'white', textDecoration: 'none' }}>
                             Listar todos
                           </Link>
                         </button>

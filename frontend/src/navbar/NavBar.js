@@ -23,7 +23,7 @@ const NavBar = () => {
     
         <button type="button" class="btn btn-primary">
         <a class="nav-item nav-link">
-          <Link to="/ssdlist">Listar SSDs</Link>
+          <Link to="/ssdlist">Listar Ssd</Link>
         </a> </button>
 
         <button type="button" class="btn btn-primary">

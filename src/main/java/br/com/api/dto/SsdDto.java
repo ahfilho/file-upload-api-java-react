@@ -25,13 +25,13 @@ public class SsdDto {
     private String purchasePrice;
 
     @NotBlank
-    private LocalDate purchaseDate;
+    private String purchaseDate;
 
     @NotNull
     private float saleValue;
 
     @NotBlank
-    private LocalDate arrivalDate;
+    private String arrivalDate;
 
     @NotBlank
     private String url;

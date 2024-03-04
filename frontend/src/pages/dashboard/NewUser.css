@@ -11,7 +11,7 @@ body.login-page {
 	overflow: hidden;
 	border-radius: 50%;
 	margin: 40px auto;
-	box-shadow: 0 4px 8px rgba(0,0,0,.05);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, .05);
 	position: relative;
 }
 
@@ -25,7 +25,7 @@ body.login-page {
 
 .login-page .card {
 	border-color: transparent;
-	box-shadow: 0 4px 8px rgba(0,0,0,.05);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, .05);
 }
 
 .login-page .card.fat {
@@ -33,7 +33,7 @@ body.login-page {
 	margin-top: 10px;
 	height: 550px;
 	background-color: #8e1aac46;
-	color: whitesmoke;	
+	color: whitesmoke;
 }
 
 .login-page .card .card-title {
@@ -42,7 +42,7 @@ body.login-page {
 
 .login-page .form-control {
 	border-width: 2.3px;
-	width: 90%;
+	width: 85%;
 }
 
 .login-page .form-group label {
@@ -81,46 +81,69 @@ body.login-page {
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
-  }
-  
-  .login-container {
-	display: flex;
-	align-items: center;
-	margin-right: 60px; 
-  }
-  
-  .login-form {
-	margin-left: 20px; 
-  }
-  
-  
-.login-form,
-.new-user-form {
-  width: 400px; 
-  margin: 0 20px; 
-}
-.form-group-button{
-align-items: end;
-margin-top: 30px;
 }
 
 .login-container {
 	display: flex;
 	align-items: center;
-  }
-  
-  .login-form,
-  .new-user-form {
+	margin-right: 60px;
+}
+
+.login-form {
+	margin-left: 20px;
+}
+
+
+.login-form,
+.new-user-form {
+	width: 400px;
+	margin: 0 20px;
+}
+
+.form-group-button {
+	align-items: end;
+	margin-top: 30px;
+}
+
+.login-container {
+	display: flex;
+	align-items: center;
+}
+
+.login-form,
+.new-user-form {
 	width: 400px;
 
-	margin-right: 50px; /* Espaço entre os elementos, ajuste conforme necessário */
-  }
-  .error-message-container {
-	background-color: #f8d9d9; /* Fundo vermelho suave */
-	border: 1px solid #e6b1ab; /* Borda vermelha */
-	border-radius: 5px; /* Borda arredondada */
-	padding: 10px; /* Espaçamento interno */
-	margin-bottom: 10px; /* Espaçamento inferior */
-	color: #5f0a01; /* Cor do texto vermelho */
-  }
-  
+	margin-right: 50px;
+	/* Espaço entre os elementos, ajuste conforme necessário */
+}
+
+.error-message-container {
+	background-color: #f8d9d9;
+	/* Fundo vermelho suave */
+	border: 1px solid #e6b1ab;
+	/* Borda vermelha */
+	border-radius: 5px;
+	/* Borda arredondada */
+	padding: 10px;
+	/* Espaçamento interno */
+	margin-bottom: 10px;
+	/* Espaçamento inferior */
+	color: #5f0a01;
+	/* Cor do texto vermelho */
+}
+
+label {
+	color: white;
+	display: flex;
+	justify-content: start;
+}
+
+login-container {
+		align-items: center;
+		color: #000;
+		display: flex;
+	}
+	.login-pagebtn btn-primary{
+		color: rebeccapurple;
+	}
