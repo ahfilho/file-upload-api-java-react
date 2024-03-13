@@ -1,7 +1,7 @@
-Api com autenticação em memória.
-
 Documentação aqui: https://documenter.getpostman.com/view/14374394/Uyxkkkyr
 
+Descrição
+Este projeto é uma API REST que utiliza diversas tecnologias do ecossistema Spring Boot, juntamente com outras bibliotecas, para facilitar o desenvolvimento web, testes, segurança e comunicação em aplicações Java. A API é protegida com Spring Security e JWT, permitindo o gerenciamento de uploads de arquivos, cadastro de clientes e envio de e-mails através do RabbitMQ.
 
 Tecnologias utilizadas no back-end:<br>
 Java 11,<br>
