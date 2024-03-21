@@ -1,10 +1,9 @@
 package br.com.api.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import br.com.api.auth.JWTTokenHelper;
+import br.com.api.auth.token.JWTTokenHelper;
 import br.com.api.controller.ssd.extension.SsdControllerExtension;
 import br.com.api.controller.ssd.extension.SsdErrorHandling;
 import br.com.api.dto.ProductCategorySsdDto;

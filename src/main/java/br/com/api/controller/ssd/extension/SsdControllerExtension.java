@@ -1,6 +1,6 @@
 package br.com.api.controller.ssd.extension;
 
-import br.com.api.auth.JWTTokenHelper;
+import br.com.api.auth.token.JWTTokenHelper;
 import br.com.api.entity.Ssd;
 import br.com.api.exceptions.ErrorHandling;
 import br.com.api.search.SearchSsd;

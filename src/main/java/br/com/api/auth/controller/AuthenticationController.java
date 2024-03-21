@@ -1,6 +1,10 @@
-package br.com.api.auth;
+package br.com.api.auth.controller;
 
 
+import br.com.api.auth.entity.AuthenticationRequest;
+import br.com.api.auth.token.JWTTokenHelper;
+import br.com.api.auth.entity.LoginResponse;
+import br.com.api.auth.entity.UserInfo;
 import br.com.api.auth.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

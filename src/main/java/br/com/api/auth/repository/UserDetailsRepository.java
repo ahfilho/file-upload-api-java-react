@@ -1,4 +1,4 @@
-package br.com.api.auth;
+package br.com.api.auth.repository;
 
 import br.com.api.auth.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;

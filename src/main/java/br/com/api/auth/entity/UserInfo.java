@@ -1,4 +1,4 @@
-package br.com.api.auth;
+package br.com.api.auth.entity;
 
 import lombok.Data;
 

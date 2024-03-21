@@ -3,7 +3,7 @@ package br.com.api.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import br.com.api.auth.JWTTokenHelper;
+import br.com.api.auth.token.JWTTokenHelper;
 import br.com.api.controller.ram.extension.RamControllerExtension;
 import br.com.api.controller.ssd.extension.RamErrorHandling;
 import br.com.api.dto.ProductCategoryRamDto;

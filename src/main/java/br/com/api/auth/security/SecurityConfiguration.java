@@ -1,8 +1,8 @@
 package br.com.api.auth.security;
 
-import br.com.api.auth.JWTAuthenticationFilter;
-import br.com.api.auth.JWTTokenHelper;
-import br.com.api.auth.UserDetailsServiceImpl;
+import br.com.api.auth.token.JWTAuthenticationFilter;
+import br.com.api.auth.token.JWTTokenHelper;
+import br.com.api.auth.service.UserDetailsServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -106,7 +106,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                                 "/user/users",
                                 "/new/user",
-                                "new/todos").permitAll()
+                                "new/todos",
+                                "client/search/{cpf}/",
+                                "/search/pesquisa/**").permitAll()
                         .antMatchers("/ssd").permitAll()
                         .antMatchers("/new/todos").permitAll()
                         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()

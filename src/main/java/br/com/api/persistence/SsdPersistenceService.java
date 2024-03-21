@@ -1,6 +1,6 @@
 package br.com.api.persistence;
 
-import br.com.api.auth.JWTTokenHelper;
+import br.com.api.auth.token.JWTTokenHelper;
 import br.com.api.entity.Ssd;
 import br.com.api.entity.ProductCategorySsd;
 import br.com.api.service.SsdService;
@@ -28,4 +28,5 @@ public class SsdPersistenceService {
         ssdService.serviceSaveSsd(ssd, file, productCategorySsd);
 
     }
+
 }

@@ -1,6 +1,6 @@
 package br.com.api.controller;
 
-import br.com.api.auth.JWTTokenHelper;
+import br.com.api.auth.token.JWTTokenHelper;
 import br.com.api.entity.Cpu;
 import br.com.api.entity.ProductCategoryCpu;
 import br.com.api.entity.ProductCategorySsd;
