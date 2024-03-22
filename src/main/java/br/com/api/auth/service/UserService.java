@@ -1,5 +1,7 @@
-package br.com.api.auth;
+package br.com.api.auth.service;
 
+import br.com.api.auth.enumm.Role;
+import br.com.api.auth.repository.UserDetailsRepository;
 import br.com.api.auth.entity.Authority;
 import br.com.api.auth.entity.User;
 import br.com.api.auth.security.UserRepository;

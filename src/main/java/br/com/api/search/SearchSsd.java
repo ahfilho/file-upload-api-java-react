@@ -1,6 +1,6 @@
 package br.com.api.search;
 
-import br.com.api.auth.JWTTokenHelper;
+import br.com.api.auth.token.JWTTokenHelper;
 import br.com.api.service.SsdService;
 import br.com.api.link.generator.BuildFileLinkSsd;
 import org.springframework.stereotype.Controller;

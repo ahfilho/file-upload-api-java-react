@@ -1,10 +1,9 @@
 package br.com.api.controller.ram.extension;
 
 
-import br.com.api.auth.JWTTokenHelper;
+import br.com.api.auth.token.JWTTokenHelper;
 import br.com.api.controller.ssd.extension.RamErrorHandling;
 import br.com.api.entity.Ram;
-import br.com.api.exceptions.ErrorHandling;
 import br.com.api.search.RamSearch;
 import br.com.api.service.RamService;
 import org.springframework.stereotype.Controller;

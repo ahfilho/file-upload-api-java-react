@@ -1,6 +1,6 @@
 package br.com.api.persistence;
 
-import br.com.api.auth.JWTTokenHelper;
+import br.com.api.auth.token.JWTTokenHelper;
 import br.com.api.entity.ProductCategoryRam;
 import br.com.api.entity.Ram;
 import br.com.api.service.RamService;

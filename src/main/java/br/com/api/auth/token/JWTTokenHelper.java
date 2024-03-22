@@ -1,4 +1,4 @@
-package br.com.api.auth;
+package br.com.api.auth.token;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;

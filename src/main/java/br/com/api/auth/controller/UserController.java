@@ -1,5 +1,7 @@
-package br.com.api.auth;
+package br.com.api.auth.controller;
 
+import br.com.api.auth.service.UserDetailsServiceImpl;
+import br.com.api.auth.service.UserService;
 import br.com.api.auth.dto.UserDto;
 import br.com.api.auth.entity.User;
 import org.modelmapper.ModelMapper;
@@ -10,7 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 @RestController

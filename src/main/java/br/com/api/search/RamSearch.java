@@ -1,6 +1,6 @@
 package br.com.api.search;
 
-import br.com.api.auth.JWTTokenHelper;
+import br.com.api.auth.token.JWTTokenHelper;
 import br.com.api.repository.RamRepository;
 import br.com.api.service.RamService;
 import br.com.api.link.generator.BuildFileLinkRam;
