@@ -53,7 +53,6 @@ public class ClientController {
 
         try {
             String clientCPF = clientDto.getCpf();
-//            boolean existingCpf = clientSearchCpf.findByCpf(clientDto.getCpf());
             String url = "http://localhost:9090/search/pesquisa/" + clientCPF;
             ResponseEntity<?> responseEntity = restTemplate().getForEntity(url, Client.class);
             if (responseEntity.getStatusCode() == HttpStatus.OK) {

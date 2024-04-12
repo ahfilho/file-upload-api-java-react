@@ -222,7 +222,7 @@ const CpuEdit = () => {
             Atualizar
           </button>
           <button class="btn btn-danger">
-            <Link to="/ssdlist">Cancelar</Link>
+            <Link to="/cpulist">Cancelar</Link>
           </button>
         </div>
       </form>

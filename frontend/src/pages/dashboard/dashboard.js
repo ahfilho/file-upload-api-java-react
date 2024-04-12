@@ -37,7 +37,7 @@ export const Dashboard = (props) => {
     <Container>
       <MainWrapper>
 
-        <div className='titulo'>   <h3> Olá, {data && `${data.firstName} ${data.lastName}.
+        <div className='titulo'>   <h3> Olá, {data && `${data.firstName} ${data.lastName}. Privilégio: ${data.roles && data.roles.find(role => role.roleCode === "ADMIN") ? 'Admnistrador' : 'Usuário'}
         `}</h3>
         </div>
         <div className="button-container">
