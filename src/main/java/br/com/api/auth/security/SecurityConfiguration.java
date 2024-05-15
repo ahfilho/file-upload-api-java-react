@@ -33,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
-    private UserDetailsServiceImpl userService;
+    private UserDetailsServiceImpl userServiceImpl;
 
     @Autowired
     private JWTTokenHelper jWTTokenHelper;
@@ -77,9 +77,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
-                .authenticationEntryPoint(authenticationEntryPoint).and()
-                .authorizeRequests((request -> request.antMatchers("/localhost:3000/**", "/localhost:9090/**").permitAll()
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(authenticationEntryPoint)
+                .and()
+                .authorizeRequests((request -> request.antMatchers("/localhost:3000/**", "/localhost:9090/**")
+                        .permitAll()
                         .antMatchers("/user/auth/login",
                                 "/client",
                                 "/client/{id}",
@@ -108,12 +112,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                 "/new/user",
                                 "new/todos",
                                 "client/search/{cpf}/",
-                                "/search/pesquisa/**").permitAll()
-                        .antMatchers("/ssd").permitAll()
-                        .antMatchers("/new/todos").permitAll()
-                        .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated()))
-                .addFilterBefore(new JWTAuthenticationFilter(userService, jWTTokenHelper),
+                                "/search/pesquisa/**")
+                        .permitAll()
+                        .antMatchers("/ssd")
+                        .permitAll()
+                        .antMatchers("/new/todos")
+                        .permitAll()
+                        .antMatchers(HttpMethod.OPTIONS, "/**")
+                        .permitAll()
+                        .antMatchers(HttpMethod.OPTIONS, "/**")
+                        .permitAll()
+                        .anyRequest()
+                        .authenticated()))
+                .addFilterBefore(new JWTAuthenticationFilter(userServiceImpl, jWTTokenHelper),
                         UsernamePasswordAuthenticationFilter.class);
 
         http.csrf().disable().cors().and().headers().frameOptions().disable();

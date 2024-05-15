@@ -71,7 +71,7 @@ public class ClientController {
             ModelMapper mp = new ModelMapper();
             cl = mp.map(clientDto, Client.class);
             clientService.clientSave(cl);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(String.format("Cliente cadsatrado com sucesso: " + clientDto.getName() + "."));
+            return ResponseEntity.status(HttpStatus.CREATED).body(String.format("Cliente cadsatrado com sucesso: " + clientDto.getName() + "."));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                     String.format("Não foi possível cadastrar o cliente: %s.", clientDto.getName()));

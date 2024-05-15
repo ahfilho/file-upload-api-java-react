@@ -41,16 +41,11 @@ public class AuthenticationController {
             throws InvalidKeySpecException, NoSuchAlgorithmException {
         final Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 authenticationRequest.getUserName(), authenticationRequest.getPassword()));
-
-
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
         User user = (User) authentication.getPrincipal();
         String jwtToken = jwtTokenHelper.generateToken(user.getUsername());
-
         LoginResponse response = new LoginResponse();
         response.setToken(jwtToken);
-
         return ResponseEntity.ok(response);
     }
 

@@ -4,6 +4,7 @@ import br.com.api.auth.service.UserDetailsServiceImpl;
 import br.com.api.auth.service.UserService;
 import br.com.api.auth.dto.UserDto;
 import br.com.api.auth.entity.User;
+import org.apache.coyote.Response;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,7 +44,7 @@ public class UserController {
     }
 
     @GetMapping("todos")
-    public  List<User> list() {
+    public List<User> list() {
 //        if (principal != null) {
 //            List<User> AllUsers = userService.listAll(null);
 //            return ResponseEntity.ok(AllUsers);
@@ -57,10 +58,25 @@ public class UserController {
 //        } else {
 //            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 //        }
-            return userService.listAll();
+        return userService.listAll();
 
 
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> UserDelete(@PathVariable Long id) throws Exception {
+        userService.deleteUserById(id);
+        return ResponseEntity.status(HttpStatus.OK).body("Usuário excluído.");
+    }
 
+    @PutMapping("/reset")
+    public ResponseEntity<?> resetPassword(@RequestBody @Validated User user) {
+        try {
+            userService.resetPasswordFromUser(user);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Senha alterada com sucesso");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao alterar a senha");
+        }
+
+    }
 }

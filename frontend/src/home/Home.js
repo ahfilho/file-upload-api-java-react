@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { useHistory } from "react-router-dom"; // import do hook
-
+import NavBar from "../navbar/NavBar";
 const Home = () => {
   const history = useHistory();
   const [cpf, setCpf] = useState("");
@@ -31,53 +31,15 @@ const Home = () => {
 
   return (
     <div className="flex-container">
+
       <div className="container mt-4">
         <p>
           Gerenciador de hardware novo/usado. Cadastrar cliente, máquina e produtos
           para venda.
         </p>
         <ul className="nav">
-          <li className="nav-item">
-            <button type="button" class="btn btn-primary">
+        <NavBar></NavBar>
 
-              <Link to="/client" className="animated-button9">
-                Cliente
-              </Link>
-            </button>
-          </li>
-
-          <li className="nav-item">
-            <button type="button" class="btn btn-primary">
-              <Link to="/cpu" className="animated-button9">
-                CPU
-              </Link>
-            </button>
-          </li>
-
-          <li className="nav-item">
-            <button type="button" class="btn btn-primary">
-
-              <Link to="/ram" className="animated-button9">
-                RAM
-              </Link>
-            </button>
-          </li>
-
-          <li className="nav-item">
-            <button type="button" class="btn btn-primary">
-              <Link to="/ssd" className="animated-button9">
-                SSD
-              </Link>
-            </button>
-          </li>
-          <li className="nav-item">
-            <button type="button" class="btn btn-primary">
-
-              <Link to="#" className="animated-button9">
-                M.2
-              </Link>
-            </button>
-          </li>
         </ul>
       </div>
       <div className="forms">
