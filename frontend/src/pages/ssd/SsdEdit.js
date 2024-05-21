@@ -10,7 +10,7 @@ const url = "http://localhost:9090/ssd/redirect";
 const urlEdit = "http://localhost:9090/ssd";
 
 const SsdEdit = () => {
-  const history = useHistory();
+  const history = useNavigate();
   const { id } = useParams();
   const [ssd, setSsd] = useState({
     brand: "",

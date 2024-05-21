@@ -2,10 +2,10 @@ import "./Home.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
-import { useHistory } from "react-router-dom"; // import do hook
+import { useNavigate } from 'react-router-dom';
 import NavBar from "../navbar/NavBar";
 const Home = () => {
-  const history = useHistory();
+  const history = useNavigate();
   const [cpf, setCpf] = useState("");
 
   const handleSubmit = async (e) => {

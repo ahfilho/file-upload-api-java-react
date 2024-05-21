@@ -1,17 +1,17 @@
 import axios from "axios";
 import React from "react";
-import { useState, useEffect, useNavigate } from "react";
-import { BrowserRouter as Router, Route, Link, Switch, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Link, useParams } from "react-router-dom";
 import "./Ram.css";
 import NavBar from "../navbar/NavBar";
-import { useHistory } from "react-router-dom"; // import do hook
+import { useNavigate } from 'react-router-dom';
 
 const url = "http://localhost:9090/ram";
 const url2 = "http://localhost:9090/ram/redirect";
 
 
 const RamEdit = () => {
-  const history = useHistory();
+  const history = useNavigate();
   const { id } = useParams();
   const [ram, setRam] = useState({
     brand: "",

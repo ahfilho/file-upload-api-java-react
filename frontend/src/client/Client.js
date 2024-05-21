@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import NavBar from "../navbar/NavBar";
 
 const url = "http://localhost:9090/client";
 
 const AddClient = () => {
-  const history = useHistory();
+  const history = useNavigate();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
