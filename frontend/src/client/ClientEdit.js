@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import NavBar from "../navbar/NavBar";
-import { useHistory } from 'react-router-dom'; // import do hook
+import { useNavigate } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 const url = "http://localhost:9090/client";
@@ -10,7 +10,7 @@ const url2 = "http://localhost:9090/client/find";
 
 const ClientEdit = () => {
     const { id } = useParams();
-    const history = useHistory();
+    const history = useNavigate();
     const [client, setClient] = useState({
         name: "",
         email: "",

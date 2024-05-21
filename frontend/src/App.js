@@ -1,12 +1,7 @@
 import "./App.css";
-import React, { Fragment } from "react";
-import "./index.css";
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";import Home from "./home/Home";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./home/Home";
 import Ssd from "./pages/ssd/Ssd";
 import SsdList from "./pages/ssd/SsdList";
 import Ram from "./pages/Ram";
@@ -30,48 +25,35 @@ import Listar from "./pages/dashboard/Listar";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Switch> 
-        {/* exact faz renderizar aquele determinado component */}
+      <Routes>
+        <Route path="/navbar" element={<NavBar />} />
+        <Route path="/client" element={<Client />} />
+        <Route path="/clientList" element={<ClientList />} />
+        <Route path="/clientEdit/:id" element={<ClientEdit />} />
+        <Route path="/clientCpfSearch" element={<ClientCpfSearch />} />
+        <Route path="/search/:cpf" element={<ListClient />} />
 
-        {/* <div className="opcoes"> */}
-          {/* <header> */}
-          <Switch>
-          <Route path="/navbar" exact component={NavBar} />
-          <Route path="/client" exact component={Client} />
-          <Route path="/clientList" exact component={ClientList} />
-          <Route path="/clientEdit/:id" exact component={ClientEdit} />
-          <Route path="/clientCpfSearch" exact component={ClientCpfSearch} />
-          <Route path="/search/:cpf" component={ListClient} />
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
 
-          <Route path="/" exact component={LoginPage} />
-          <Route path="/dashboard" exact component={Dashboard} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/ssd" element={<Ssd />} />
+        <Route path="/ssdlist" element={<SsdList />} />
+        <Route path="/ssdEdit/:id" element={<SsdEdit />} />
 
-          <Route path="/home" exact component={Home} />
-          <Route path="/ssd" exact component={Ssd} />
-          <Route path="/ssdlist" exact component={SsdList} />
-          <Route path="/ssdEdit/:id" exact component={SsdEdit} />
+        <Route path="/ram" element={<Ram />} />
+        <Route path="/ramlist" element={<RamList />} />
+        <Route path="/ramEdit/:id" element={<RamEdit />} />
 
-          <Route path="/ram" exact component={Ram} />
-          <Route path="/ramlist" exact component={RamList} />
-          <Route path="/ramEdit/:id" exact component={RamEdit} />
+        <Route path="/cpu" element={<Cpu />} />
+        <Route path="/cpulist" element={<CpuList />} />
+        <Route path="/cpuEdit/:id" element={<CpuEdit />} />
 
-
-          <Route path="/cpu" exact component={Cpu} />
-          <Route path="/cpulist" exact component={CpuList} />
-          <Route path="/cpuEdit/:id" exact component={CpuEdit} />
-
-          <Route path="/garantia" exact component={Garantia} />
-          <Route path="/new/user" exact component={<NewUser />} />
-          <Route path="/list" exact component={Listar} />
-
-
-          </Switch>
-          {/* /</header>
-           */}
-        {/* </div> */}
-      </Switch>
-    </BrowserRouter>
-    );
+        <Route path="/garantia" element={<Garantia />} />
+        <Route path="/new/user" element={<NewUser />} />
+        <Route path="/list" element={<Listar />} />
+      </Routes>
+  );
 }
+
 export default App;
