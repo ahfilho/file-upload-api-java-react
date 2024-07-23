@@ -185,6 +185,10 @@ const NewUser = () => {
                           <Link to="/list" style={{ color: 'white', textDecoration: 'none' }}>
                             Listar todos
                           </Link>
+                        </button> <button type="submit" className="btn btn-primary">
+                          <Link to="/client" style={{ color: 'white', textDecoration: 'none' }}>
+                            Novo cliente
+                          </Link>
                         </button>
                       </div>
 

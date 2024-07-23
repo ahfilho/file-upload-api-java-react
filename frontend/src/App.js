@@ -25,34 +25,34 @@ import Listar from "./pages/dashboard/Listar";
 
 function App() {
   return (
-      <Routes>
-        <Route path="/navbar" element={<NavBar />} />
-        <Route path="/client" element={<Client />} />
-        <Route path="/clientList" element={<ClientList />} />
-        <Route path="/clientEdit/:id" element={<ClientEdit />} />
-        <Route path="/clientCpfSearch" element={<ClientCpfSearch />} />
-        <Route path="/search/:cpf" element={<ListClient />} />
+    <Routes>
+      <Route path="/navbar" element={<NavBar />} />
+      <Route path="/client" element={<Client />} />
+      <Route path="/clientList" element={<ClientList />} />
+      <Route path="/clientEdit/:id" element={<ClientEdit />} />
+      <Route path="/clientCpfSearch" element={<ClientCpfSearch />} />
+      <Route path="/search/:cpf" element={<ListClient />} />
 
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/" element={<LoginPage />} />
+      <Route path="/dashboard" element={<Dashboard />} />
 
-        <Route path="/home" element={<Home />} />
-        <Route path="/ssd" element={<Ssd />} />
-        <Route path="/ssdlist" element={<SsdList />} />
-        <Route path="/ssdEdit/:id" element={<SsdEdit />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/ssd" element={<Ssd />} />
+      <Route path="/ssdlist" element={<SsdList />} />
+      <Route path="/ssdEdit/:id" element={<SsdEdit />} />
 
-        <Route path="/ram" element={<Ram />} />
-        <Route path="/ramlist" element={<RamList />} />
-        <Route path="/ramEdit/:id" element={<RamEdit />} />
+      <Route path="/ram" element={<Ram />} />
+      <Route path="/ramlist" element={<RamList />} />
+      <Route path="/ramEdit/:id" element={<RamEdit />} />
 
-        <Route path="/cpu" element={<Cpu />} />
-        <Route path="/cpulist" element={<CpuList />} />
-        <Route path="/cpuEdit/:id" element={<CpuEdit />} />
+      <Route path="/cpu" element={<Cpu />} />
+      <Route path="/cpulist" element={<CpuList />} />
+      <Route path="/cpuEdit/:id" element={<CpuEdit />} />
 
-        <Route path="/garantia" element={<Garantia />} />
-        <Route path="/new/user" element={<NewUser />} />
-        <Route path="/list" element={<Listar />} />
-      </Routes>
+      <Route path="/garantia" element={<Garantia />} />
+      <Route path="/new/user" element={<NewUser />} />
+      <Route path="/list" element={<Listar />} />
+    </Routes>
   );
 }
 
