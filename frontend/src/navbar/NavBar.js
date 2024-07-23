@@ -5,11 +5,12 @@ const NavBar = () => {
   return (
 
     <nav class="nav-pills nav-fill">
-      <button type="button" class="btn btn-primary">
+
+<div class="btn-group" role="group">
+      <button  id="btnGroupDrop1"type="button" class="btn btn-primary">
         <a class="nav-item nav-link">
           <Link to="/home">Início</Link>
         </a></button>
-     
      
       <button type="button" class="btn btn-primary">
         <a class="nav-item nav-link">
@@ -39,8 +40,8 @@ const NavBar = () => {
         <a class="nav-item nav-link">
           <Link to="/dashboard">Dashboard</Link>
         </a> </button>
+  </div>
     </nav>
-
   )
 }
 export default NavBar;

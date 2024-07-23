@@ -60,8 +60,10 @@ const AddClient = () => {
 
 
   return (
+    
     <div className="meuForm">
       <NavBar></NavBar>
+      
       <br></br>
       <div className="title">Cadastro</div>
       <br></br>

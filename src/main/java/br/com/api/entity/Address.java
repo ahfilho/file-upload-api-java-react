@@ -14,7 +14,8 @@ import java.io.Serializable;
 @Data
 @Table(name = "ADDRESS")
 @Entity
-public class Address implements Serializable {
+public class
+Address implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
