@@ -57,7 +57,7 @@ const LoginPage = ({ loading, error, ...props }) => {
     console.log("Loading ", loading);
 
     return (
-        <div className="login-page">
+        <div class="d-flex flex-column align-items-center">
             <section className="h-100">
             <div className="botoes">
                             <button type="submit" className="btn btn-primary">
@@ -98,8 +98,8 @@ const LoginPage = ({ loading, error, ...props }) => {
                      
                             <div className="algumacoisa">Login</div>
                          <form className="my-login-validation" onSubmit={handleSubmit} noValidate={false}>
-                            <div className="total">
-                                <div className="form-group">
+                         <div class="d-flex flex-column align-items-center">
+                         <div className="form-group">
                                     <label htmlFor="username">Usuário</label>
                                 </div>
                                 <input
@@ -137,7 +137,7 @@ const LoginPage = ({ loading, error, ...props }) => {
                                 </div>
 
                                 <br />
-                            <div className="input">
+                                 <div className="input">
                                 <button type="submit" className="btn btn-primary">
                                     Login
                                     {loading && (
@@ -159,10 +159,7 @@ const LoginPage = ({ loading, error, ...props }) => {
                             </a>
                             <br />
                         </div>
-                        <br></br>
-                        <br></br>
-                        <br></br>
-
+                      
                         {error &&
                             <Alert style={{ marginTop: '20px' }} variant="danger">
                                 {error}
