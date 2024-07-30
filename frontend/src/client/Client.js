@@ -61,9 +61,13 @@ const AddClient = () => {
   return (
     <div className="meu-form">
       <NavBar />
-
       <div className="d-flex flex-column justify-content-center align-items-center vh-100">
+        <div className="title>">
+          Cadastrar cliente
+        </div>
         <form id="formulario" onSubmit={handleSubmit} className="w-50">
+        <label>Dados pessoais</label>
+
           <div className="form-group mb-3">
             <input
               type="text"
@@ -75,9 +79,6 @@ const AddClient = () => {
               onChange={(e) => setName(e.target.value)}
             />
           </div>
-
-
-
           <div className="form-group mb-3">
             <div className="row">
               <div className="col">
@@ -91,30 +92,31 @@ const AddClient = () => {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-            <div className="col">
-              <input
-                type="text"
-                name="cpf"
-                id="cpf"
-                className="form-control"
-                value={cpf}
-                placeholder="Cpf"
-                onChange={(e) => setCpf(e.target.value)}
-              />
+              <div className="col">
+                <input
+                  type="text"
+                  name="cpf"
+                  id="cpf"
+                  className="form-control"
+                  value={cpf}
+                  placeholder="Cpf"
+                  onChange={(e) => setCpf(e.target.value)}
+                />
+              </div>
+              <div className="col">
+                <input
+                  type="text"
+                  name="contact"
+                  id="contact"
+                  className="form-control"
+                  value={contact}
+                  placeholder="Contato"
+                  onChange={(e) => setContact(e.target.value)}
+                />
+              </div>
             </div>
           </div>
-          </div>
-          <div className="form-group mb-3">
-            <input
-              type="text"
-              name="contact"
-              id="contact"
-              className="form-control"
-              value={contact}
-              placeholder="Celular/whatsapp"
-              onChange={(e) => setContact(e.target.value)}
-            />
-          </div>
+
           <div className="form-group mb-3">
             <label>Endereço</label>
             <div className="row">
@@ -169,7 +171,7 @@ const AddClient = () => {
             </div>
           </div>
           <div className="form-group mb-3">
-            <input className="btn btn-primary w-100" type="submit" value="Submit" />
+            <input className="btn btn-primary px-3" type="submit" value="Cadastrar" />
           </div>
         </form>
       </div>

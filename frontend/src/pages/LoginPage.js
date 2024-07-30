@@ -59,47 +59,50 @@ const LoginPage = ({ loading, error, ...props }) => {
     return (
         <div class="d-flex flex-column align-items-center">
             <section className="h-100">
-            <div className="botoes">
-                            <button type="submit" className="btn btn-primary">
+                <div className="botoes">
+                    <button type="submit" className="btn btn-primary px-2">
 
-                                <Link to="/client" style={{ color: 'white', textDecoration: 'none' }}>
-                                    Cliente
-                                </Link>
-                            </button>
+                        <Link to="/client" style={{ color: 'white', textDecoration: 'none' }}>
+                            Cliente
+                        </Link>
+                    </button>
 
-                            <button type="submit" className="btn btn-primary">
+                    <button type="submit" className="btn btn-primary px-2">
 
-                                <Link to="/new/user" style={{ color: 'white', textDecoration: 'none' }}>
-                                    Usuário
-                                </Link>
-                            </button>
-                            <button type="submit" className="btn btn-primary">
+                        <Link to="/new/user" style={{ color: 'white', textDecoration: 'none' }}>
+                            Usuário
+                        </Link>
+                    </button>
+                    <button type="submit" className="btn btn-primary px-2">
 
-                                <Link to="/ssd" style={{ color: 'white', textDecoration: 'none' }}>
-                                    Ssd
-                                </Link>
-                            </button>
-                            <button type="submit" className="btn btn-primary">
+                        <Link to="/ssd" style={{ color: 'white', textDecoration: 'none' }}>
+                            Ssd
+                        </Link>
+                    </button>
+                    <button type="submit" className="btn btn-primary px-2">
 
-                                <Link to="/ram" style={{ color: 'white', textDecoration: 'none' }}>
-                                    Ram
-                                </Link>
-                            </button>
-                            <button type="submit" className="btn btn-primary">
+                        <Link to="/ram" style={{ color: 'white', textDecoration: 'none' }}>
+                            Ram
+                        </Link>
+                    </button>
+                    <button type="submit" className="btn btn-primary px-2">
 
-                                <Link to="/cpu" style={{ color: 'white', textDecoration: 'none' }}>
-                                    Cpu
-                                </Link>
-                            </button>
-
-                         </div>
+                        <Link to="/cpu" style={{ color: 'white', textDecoration: 'none' }}>
+                            Cpu
+                        </Link>
+                    </button>
+                    <button type="button" class="btn btn-primary px-2">
+                        <a class="nav-item nav-link">
+                            <Link to="/dashboard">Dashboard</Link>
+                        </a> </button>
+                </div>
                 <div className="row justify-content">
                     <div className="card-wrapper">
-                     
-                            <div className="algumacoisa">Login</div>
-                         <form className="my-login-validation" onSubmit={handleSubmit} noValidate={false}>
-                         <div class="d-flex flex-column align-items-center">
-                         <div className="form-group">
+
+                        <div className="algumacoisa">Login</div>
+                        <form className="my-login-validation" onSubmit={handleSubmit} noValidate={false}>
+                            <div class="d-flex flex-column align-items-center">
+                                <div className="form-group">
                                     <label htmlFor="username">Usuário</label>
                                 </div>
                                 <input
@@ -116,28 +119,28 @@ const LoginPage = ({ loading, error, ...props }) => {
                                     UserId is invalid
                                 </div>
 
-                                    <br />
-                                    <div className="password">
-                                        <label htmlFor="password">Senha</label>
-
-                                    </div>
-                                    <input
-                                        id="password"
-                                        type="password"
-                                        className="form-control"
-                                        minLength={8}
-                                        value={values.password}
-                                        onChange={handleChange}
-                                        name="password"
-                                        required
-                                    />
-                                    <div className="invalid-feedback">
-                                        Password is required
-                                    </div>
-                                </div>
-
                                 <br />
-                                 <div className="input">
+                                <div className="password">
+                                    <label htmlFor="password">Senha</label>
+
+                                </div>
+                                <input
+                                    id="password"
+                                    type="password"
+                                    className="form-control"
+                                    minLength={8}
+                                    value={values.password}
+                                    onChange={handleChange}
+                                    name="password"
+                                    required
+                                />
+                                <div className="invalid-feedback">
+                                    Password is required
+                                </div>
+                            </div>
+
+                            <br />
+                            <div className="input">
                                 <button type="submit" className="btn btn-primary">
                                     Login
                                     {loading && (
@@ -159,7 +162,7 @@ const LoginPage = ({ loading, error, ...props }) => {
                             </a>
                             <br />
                         </div>
-                      
+
                         {error &&
                             <Alert style={{ marginTop: '20px' }} variant="danger">
                                 {error}

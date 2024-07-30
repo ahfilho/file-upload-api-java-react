@@ -7,6 +7,9 @@ body {
   padding: 0;
   text-align: center;
   width: 100%;
-  background: linear-gradient(170deg, rgba(49, 57, 73, 0.8) 2%, rgba(49, 57, 73, 0.5) 10%,  rgba(31, 36, 46, 0.8) 75%);
+  /* background: linear-gradient(170deg, rgba(49, 57, 73, 0.8) 2%, rgba(49, 57, 73, 0.5) 10%,  rgba(31, 36, 46, 0.8) 75%); */
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  position: fixed;
+  background-color: gray;
+  overflow: hidden;
 }
