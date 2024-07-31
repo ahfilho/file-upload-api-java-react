@@ -62,12 +62,10 @@ const AddClient = () => {
     <div className="meu-form">
       <NavBar />
       <div className="d-flex flex-column justify-content-center align-items-center vh-100">
-        <div className="title>">
-          Cadastrar cliente
-        </div>
-        <form id="formulario" onSubmit={handleSubmit} className="w-50">
-        <label>Dados pessoais</label>
 
+        <form id="formulario" onSubmit={handleSubmit} className="w-50">
+          <p>Cadastrar cliente</p>
+          <h3><label>Dados pessoais</label> </h3>
           <div className="form-group mb-3">
             <input
               type="text"
@@ -118,7 +116,7 @@ const AddClient = () => {
           </div>
 
           <div className="form-group mb-3">
-            <label>Endereço</label>
+            <h3><label>Endereço</label> </h3>
             <div className="row">
               <div className="col">
                 <input
@@ -170,8 +168,10 @@ const AddClient = () => {
               </div>
             </div>
           </div>
-          <div className="form-group mb-3">
-            <input className="btn btn-primary px-3" type="submit" value="Cadastrar" />
+          <div className="form-group">
+            <button type="submit" className="btn btn-primary" value="Cadastrar">
+              Cadastrar
+          </button>
           </div>
         </form>
       </div>
