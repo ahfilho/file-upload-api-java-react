@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import './NewUser.css';
 import { Link } from "react-router-dom";
-
+import NavBar from "../../navbar/NavBar";
 
 const url = "http://localhost:9090/new/user";
 
@@ -65,10 +65,10 @@ const NewUser = () => {
   };
 
   return (
-    <div className="login-page">
-
+    <div className="meu-form">
+      <NavBar />
       <section className="h-100">
-        <div className="container h-100">
+        <div className="d-flex flex-column justify-content-center align-items-center vh-100">
           <div className="row justify-content-md-center h-100">
             <div className="card-wrapper">
               <div className="card fat">
@@ -86,8 +86,8 @@ const NewUser = () => {
                         placeholder="Nome"
                         onChange={(e) => setFirstName(e.target.value)}
                       />
-                    </div>   
-                    
+                    </div>
+
                     <div className="form-group">
                       <input
                         type="text"
@@ -111,7 +111,7 @@ const NewUser = () => {
                         onChange={(e) => setUsername(e.target.value)}
                       />
                     </div>
-                    
+
                     <div className="inputs">
                       <input
                         type="text"
@@ -123,7 +123,7 @@ const NewUser = () => {
                         onChange={(e) => setEmail(e.target.value)}
                       />
                     </div>
-                   
+
                     <div className="inputs">
                       <input
                         type="password"
@@ -135,7 +135,7 @@ const NewUser = () => {
                         onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
-                   
+
                     <div className="inputs">
                       <input
                         type="text"
@@ -147,7 +147,7 @@ const NewUser = () => {
                         onChange={handleCpfChange}
                       />
                     </div>
-                    
+
                     <div className="inputs">
                       <label>Perfil</label>
                       <div>
@@ -180,20 +180,7 @@ const NewUser = () => {
                         type="submit"
                         value="Cadastrar"
                       ></input>
-                      <div className="new-user-form">
-                        <button type="submit" className="btn btn-primary">
-                          <Link to="/list" style={{ color: 'white', textDecoration: 'none' }}>
-                            Listar todos
-                          </Link>
-                        </button> <button type="submit" className="btn btn-primary">
-                          <Link to="/client" style={{ color: 'white', textDecoration: 'none' }}>
-                            Novo cliente
-                          </Link>
-                        </button>
-                      </div>
-
                     </div>
-
                   </form>
                 </div>
               </div>

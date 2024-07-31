@@ -59,117 +59,106 @@ const LoginPage = ({ loading, error, ...props }) => {
     return (
         <div class="d-flex flex-column align-items-center">
             <section className="h-100">
-                <div className="botoes">
-                    <button type="submit" className="btn btn-primary px-2">
-
-                        <Link to="/client" style={{ color: 'white', textDecoration: 'none' }}>
+                <div className='bold-text'>
+                    <button type="submit" className="btn px-4">
+                        <Link to="/client">
                             Cliente
                         </Link>
                     </button>
+                    <button type="submit" className="btn px-4">
 
-                    <button type="submit" className="btn btn-primary px-2">
-
-                        <Link to="/new/user" style={{ color: 'white', textDecoration: 'none' }}>
+                        <Link to="/new/user">
                             Usuário
                         </Link>
                     </button>
-                    <button type="submit" className="btn btn-primary px-2">
+                    <button type="submit" className="btn px-4">
 
-                        <Link to="/ssd" style={{ color: 'white', textDecoration: 'none' }}>
+                        <Link to="/ssd">
                             Ssd
                         </Link>
                     </button>
-                    <button type="submit" className="btn btn-primary px-2">
+                    <button type="submit" className="btn px-4">
 
-                        <Link to="/ram" style={{ color: 'white', textDecoration: 'none' }}>
+                        <Link to="/ram">
                             Ram
                         </Link>
                     </button>
-                    <button type="submit" className="btn btn-primary px-2">
+                    <button type="submit" className="btn px-4">
 
-                        <Link to="/cpu" style={{ color: 'white', textDecoration: 'none' }}>
+                        <Link to="/cpu">
                             Cpu
                         </Link>
                     </button>
-                    <button type="button" class="btn btn-primary px-2">
-                        <a class="nav-item nav-link">
-                            <Link to="/dashboard">Dashboard</Link>
-                        </a> </button>
-                </div>
-                <div className="row justify-content">
-                    <div className="card-wrapper">
+                    <button type="submit" className="btn px-">
+                        <Link to="/dashboard">Dashboard</Link>
+                    </button></div>
 
-                        <div className="algumacoisa">Login</div>
-                        <form className="my-login-validation" onSubmit={handleSubmit} noValidate={false}>
-                            <div class="d-flex flex-column align-items-center">
-                                <div className="form-group">
-                                    <label htmlFor="username">Usuário</label>
-                                </div>
-                                <input
-                                    id="username"
-                                    type="text"
-                                    className="form-control"
-                                    minLength={5}
-                                    value={values.userName}
-                                    onChange={handleChange}
-                                    name="userName"
-                                    required
-                                />
-                                <div className="invalid-feedback">
-                                    UserId is invalid
-                                </div>
-
-                                <br />
-                                <div className="password">
-                                    <label htmlFor="password">Senha</label>
-
-                                </div>
-                                <input
-                                    id="password"
-                                    type="password"
-                                    className="form-control"
-                                    minLength={8}
-                                    value={values.password}
-                                    onChange={handleChange}
-                                    name="password"
-                                    required
-                                />
-                                <div className="invalid-feedback">
-                                    Password is required
-                                </div>
-                            </div>
-
-                            <br />
-                            <div className="input">
-                                <button type="submit" className="btn btn-primary">
-                                    Login
-                                    {loading && (
-                                        <Spinner
-                                            as="span"
-                                            animation="border"
-                                            size="sm"
-                                            role="status"
-                                            aria-hidden="true"
-                                        />
-                                    )}
-                                </button>
-                            </div>
-                        </form>
-                        <br />
-                        <div className="forgot">
-                            <a href="forgot.html" className="float-right">
-                                Forgot Password?
-                            </a>
-                            <br />
+                <form className="my-login-validation" onSubmit={handleSubmit} noValidate={false}>
+                    <div className="algumacoisa">Login</div>
+                    <div class="input-flex flex-column align-items-center">
+                        <div className="user">
+                            Usuário
+                        </div>
+                        <input
+                            id="username"
+                            type="text"
+                            className="form-control"
+                            minLength={5}
+                            value={values.userName}
+                            onChange={handleChange}
+                            name="userName"
+                            required
+                        />
+                        <div className="invalid-feedback">
+                            UserId is invalid
                         </div>
 
-                        {error &&
-                            <Alert style={{ marginTop: '20px' }} variant="danger">
-                                {error}
-                            </Alert>
-                        }
+                        <br />
+                        <div className="senha">Senha</div>
+
+                        <input
+                            id="password"
+                            type="password"
+                            className="form-control"
+                            minLength={8}
+                            value={values.password}
+                            onChange={handleChange}
+                            name="password"
+                            required
+                        />
+                        <div className="invalid-feedback">
+                            Password is required
+                        </div>
                     </div>
+
+                    <br />
+                    <div className="input">
+                        <button type="submit" className="btn btn-primary">
+                            Login
+                            {loading && (
+                                <Spinner
+                                    as="span"
+                                    animation="border"
+                                    size="sm"
+                                    role="status"
+                                    aria-hidden="true"
+                                />
+                            )}
+                        </button>
+                    </div>
+                </form>
+                <div className='forgotpass'>
+                    <button type="submit" className="btn px-2">
+                        <Link to="/forgot">
+                            Esqueci a senha
+                        </Link>
+                    </button>
                 </div>
+                {error &&
+                    <Alert style={{ marginTop: '20px' }} variant="danger">
+                        {error}
+                    </Alert>
+                }
             </section>
         </div>
     );
