@@ -1,0 +1,6 @@
+/* loginpage.css */
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; /* remove margin so it doesn't hide below */
+  }
+  
