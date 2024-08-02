@@ -6,17 +6,36 @@
 }
 
 .h-100 {
-    background-color:;
+    background-color: ;
     margin: 0 auto;
     text-align: center;
 }
 
 .algumacoisa {
-    color: white;
-    text-align: center;
-    background-color: ;
-    margin-top: 120px;
 
+    color: #0056b3;
+    background-color: gray;
+    width: 50px;
+    align-items: center;
+    text-align: center;
+    margin-top: 180px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.btn{
+    color: 
+    
+}
+
+.input-flex {
+    background-color: ;
+    margin-left: 70px;
+    margin-right: 70px;
+    height: 100%;
+    border-radius: 8%;
+
+        
 }
 
 .user {
@@ -25,11 +44,13 @@
     margin-top: 20px;
     font-size: 13px;
 }
-.senha{
+
+.senha {
     color: white;
     text-align: left;
     font-size: 13px
 }
+
 .justify-content {
     background-color: ;
     margin: 0 auto;
@@ -47,21 +68,22 @@
 .d-flex {
     margin-top: 20px;
 }
-.forgotpass{
+
+.forgotpass {
     font-size: 15px;
-    color: white;
+    color: red;
     margin-top: 50px;
 }
 
-.input-flex{
-    background-color: ;
-    margin-left: 70px;
-    margin-right: 70px;
-    width: 0 auto;
-}
-.bold-text{
-    background-color:;
+.bold-text {
+    background-color:#0056b3;
     font-size: 20px;
     font-weight: bold;
+    border-radius: 10px;
+    justify-content: space-evenly;
+    margin-left: 20p;
 
+}
+.full-height{
+    
 }
