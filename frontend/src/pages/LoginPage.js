@@ -7,6 +7,7 @@ import { Alert, Spinner } from 'react-bootstrap';
 import NewUser from './dashboard/NewUser';
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import NavBar from '../navbar/NavBar';
 
 const LoginPage = ({ loading, error, ...props }) => {
     const navigate = useNavigate();
@@ -58,42 +59,9 @@ const LoginPage = ({ loading, error, ...props }) => {
 
     return (
         <div class="d-flex flex-column align-items-center">
+                        <NavBar></NavBar>
+
             <section className="h-100">
-                <div className='bold-text'>
-                    <button type="submit" className="btn px-4">
-                        <Link to="/client">
-                            Cliente
-                        </Link>
-                    </button>
-                    <button type="submit" className="btn px-4">
-
-                        <Link to="/new/user">
-                            Usuário
-                        </Link>
-                    </button>
-                    <button type="submit" className="btn px-4">
-
-                        <Link to="/ssd">
-                            Ssd
-                        </Link>
-                    </button>
-                    <button type="submit" className="btn px-4">
-
-                        <Link to="/ram">
-                            Ram
-                        </Link>
-                    </button>
-                    <button type="submit" className="btn px-4">
-
-                        <Link to="/cpu">
-                            Cpu
-                        </Link>
-                    </button>
-                    <button type="submit" className="btn px-">
-                        <Link to="/dashboard">Dashboard</Link>
-                    </button>
-                </div>
-
                 <form className="my-login-validation" onSubmit={handleSubmit} noValidate={false}>
                     <div className="algumacoisa">
                         <svg data-slot="icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

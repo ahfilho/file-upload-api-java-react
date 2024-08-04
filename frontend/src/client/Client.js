@@ -168,10 +168,11 @@ const AddClient = () => {
               </div>
             </div>
           </div>
+          <br></br>
           <div className="form-group">
             <button type="submit" className="btn btn-primary" value="Cadastrar">
               Cadastrar
-          </button>
+            </button>
           </div>
         </form>
       </div>

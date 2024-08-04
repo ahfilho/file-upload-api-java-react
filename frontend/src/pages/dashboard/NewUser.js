@@ -65,130 +65,122 @@ const NewUser = () => {
   };
 
   return (
-    <div className="meu-form">
+    <section className="h-100">
       <NavBar />
-      <section className="h-100">
-        <div className="d-flex flex-column justify-content-center align-items-center vh-100">
-          <div className="row justify-content-md-center h-100">
-            <div className="card-wrapper">
-              <div className="card fat">
-                <div className="card-body">
-                  <h4 className="card-title">Cadastrar novo usuário</h4>
-                  <form id="formulario" onSubmit={handleSubmit} className="login-form">
-
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        name="firstName"
-                        id="firstName"
-                        value={firstName}
-                        className="form-control"
-                        placeholder="Nome"
-                        onChange={(e) => setFirstName(e.target.value)}
-                      />
-                    </div>
-
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        name="lastName"
-                        id="LastName"
-                        value={lastName}
-                        className="form-control"
-                        placeholder="Sobrenome"
-                        onChange={(e) => setLastName(e.target.value)}
-                      />
-                    </div>
-
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        name="userName"
-                        id="userName"
-                        value={userName}
-                        className="form-control"
-                        placeholder="Usuário"
-                        onChange={(e) => setUsername(e.target.value)}
-                      />
-                    </div>
-
-                    <div className="inputs">
-                      <input
-                        type="text"
-                        name="email"
-                        id="email"
-                        className="form-control"
-                        value={email}
-                        placeholder="E-mail"
-                        onChange={(e) => setEmail(e.target.value)}
-                      />
-                    </div>
-
-                    <div className="inputs">
-                      <input
-                        type="password"
-                        name="password"
-                        id="password"
-                        className="form-control"
-                        value={password}
-                        placeholder="Senha"
-                        onChange={(e) => setPassword(e.target.value)}
-                      />
-                    </div>
-
-                    <div className="inputs">
-                      <input
-                        type="text"
-                        name="cpf"
-                        id="cpf"
-                        className="form-control"
-                        value={cpf}
-                        placeholder="Cpf"
-                        onChange={handleCpfChange}
-                      />
-                    </div>
-
-                    <div className="inputs">
-                      <label>Perfil</label>
-                      <div>
-                        <label>
-                          <input
-                            type="radio"
-                            name="profile"
-                            value="admin"
-                            checked={profile === "admin"}
-                            onChange={() => setProfile("admin")}
-                          />
-                          Administrador
-                        </label>
-                        <label>
-                          <input
-                            type="radio"
-                            name="profile"
-                            value="usuario"
-                            checked={profile === "usuario"}
-                            onChange={() => setProfile("usuario")}
-                          />
-                          Usuário
-                        </label>
-                      </div>
-                    </div>
-                    <br></br>
-                    <div className="login-container">
-                      <input
-                        className="btn btn-primary"
-                        type="submit"
-                        value="Cadastrar"
-                      ></input>
-                    </div>
-                  </form>
-                </div>
+     
+      <div className="d-flex flex-column justify-content-center align-items-center vh-100 move-up">
+        <p>Novo usuário</p>
+        <form id="formulario" onSubmit={handleSubmit} className="login-form">
+          <div className="form-group mt-3">
+            <div className="row">
+              <div className="col">
+                <input
+                  type="text"
+                  name="firstName"
+                  id="firstName"
+                  value={firstName}
+                  className="form-control"
+                  placeholder="Nome"
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
               </div>
+
+              <div className="col">
+                <input
+                  type="text"
+                  name="lastName"
+                  id="LastName"
+                  value={lastName}
+                  className="form-control"
+                  placeholder="Sobrenome"
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+              </div>
+            </div></div>
+          <div className="form-group mt-1">
+            <input
+              type="text"
+              name="userName"
+              id="userName"
+              value={userName}
+              className="form-control"
+              placeholder="Usuário"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+
+          <div className="inputs">
+            <input
+              type="text"
+              name="email"
+              id="email"
+              className="form-control"
+              value={email}
+              placeholder="E-mail"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+
+          <div className="inputs">
+            <input
+              type="password"
+              name="password"
+              id="password"
+              className="form-control"
+              value={password}
+              placeholder="Senha"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          <div className="inputs">
+            <input
+              type="text"
+              name="cpf"
+              id="cpf"
+              className="form-control"
+              value={cpf}
+              placeholder="Cpf"
+              onChange={handleCpfChange}
+            />
+          </div>
+
+          <div className="radio">
+            <p>Perfil</p>
+            <div>
+              <label>
+                <input
+                  type="radio"
+                  name="profile"
+                  value="admin"
+                  checked={profile === "admin"}
+                  onChange={() => setProfile("admin")}
+                />
+                Administrador
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="profile"
+                  value="usuario"
+                  checked={profile === "usuario"}
+                  onChange={() => setProfile("usuario")}
+                />
+                Usuário
+              </label>
             </div>
           </div>
-        </div>
-      </section>
-    </div>
+          <br></br>
+          <div className="login-container">
+            <input
+              className="btn btn-primary"
+              type="submit"
+              value="Cadastrar"
+            ></input>
+          </div>
+        </form>
+      </div>
+    </section>
   );
 };
 
