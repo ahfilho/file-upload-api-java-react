@@ -1,6 +1,85 @@
-/* loginpage.css */
+.btn {
+  color: #0056b3;
+  box-shadow: none;
+  /* Remove qualquer sombra */
+  outline: none;
+  /* Remove o outline */
+  border: none;
+  /* Remove a borda */
+}
+
+.btn:focus,
+.btn:active,
+.btn:focus:active {
+  outline: none;
+  /* Remove o outline */
+  box-shadow: none;
+  /* Remove qualquer sombra */
+  border: none;
+  /* Remove a borda */
+}
+
+#dropdown-client,
+#dropdown-user,
+#dropdown-cpu,
+#dropdown-ssd,
+#dropdown-ram,
+#dropdown-dashboard {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  /* Remove qualquer sombra */
+}
+
+#dropdown-client:focus,
+#dropdown-user:focus,
+#dropdown-cpu:focus,
+#dropdown-ssd:focus,
+#dropdown-ram:focus,
+#dropdown-dashboard:focus,
+#dropdown-client:active,
+#dropdown-user:active,
+#dropdown-cpu:active,
+#dropdown-ssd:active,
+#dropdown-ram:active,
+#dropdown-dashboard:active,
+#dropdown-client:focus:active,
+#dropdown-user:focus:active,
+#dropdown-cpu:focus:active,
+#dropdown-ssd:focus:active,
+#dropdown-ram:focus:active,
+#dropdown-dashboard:focus:active {
+  outline: none;
+  /* Remove o outline */
+  box-shadow: none;
+  /* Remove qualquer sombra */
+  border: none;
+  /* Remove a borda */
+}
+
+.dropdown-menu {
+  background-color: transparent;
+  /* Torna o fundo do dropdown transparente */
+  border: none;
+  /* Remove a borda do dropdown */
+  outline: none;
+  /* Remove o outline */
+}
+
 .dropdown:hover .dropdown-menu {
-    display: block;
-    margin-top: 0; /* remove margin so it doesn't hide below */
-  }
-  
+  display: block;
+}
+
+btn:hover,
+#dropdown-client:hover,
+#dropdown-user:hover,
+#dropdown-cpu:hover,
+#dropdown-ssd:hover,
+#dropdown-ram:hover,
+#dropdown-dashboard:hover {
+  background-color: rgba(0, 123, 255, 0.1);
+  /* Cor de fundo ao passar o mouse */
+  color: #0056b3;
+  /* Cor do texto ao passar o mouse */
+}
