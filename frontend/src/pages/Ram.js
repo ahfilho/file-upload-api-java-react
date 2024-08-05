@@ -62,135 +62,137 @@ const AddRam = () => {
       setSaleValue("");
       setSize("");
       setProductCategory("");
-       setFile(null); 
-    } catch(error){
+      setFile(null);
+    } catch (error) {
       console.log(error.response);
-  }
-};
+    }
+  };
 
-return (
-  <div className="meuForm">
+  return (
+    <div className="meuForm">
       <NavBar></NavBar>
-      <br></br>
-      <div className="title">Ram</div>
-      <br></br>
-      <hr></hr>
-    <form id="formulario" onSubmit={handleSubmit}>
-        <div className="file">
-          <input type="file" name="file" onChange={handleImage} />
-        </div>
+      <div className="d-flex flex-column justify-content-center align-items-center vh-100">
+        <form id="formulario" onSubmit={handleSubmit} className="w-50">
+          <div className="file">
+            <input type="file" name="file" onChange={handleImage} />
+          </div>
+          <div className="form-group mb-3">
+            <div className="row">
+              <div className="col">
+                <input
+                  type={"text"}
+                  name="brand"
+                  id="brand"
+                  value={brand}
+                  className="form-control"
+                  y
+                  placeholder="Marca"
+                  onChange={(e) => setBrand(e.target.value)}
+                />
+              </div>
+              <div className="col mb-1">
+                <input
+                  type={"text"}
+                  name="mhz"
+                  id="mhz"
+                  className="form-control"
+                  value={mhz}
+                  placeholder="Mhz"
+                  onChange={(e) => setMhz(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col mb-1">
+                <input
+                  type={"text"}
+                  name="model"
+                  id="model"
+                  className="form-control"
+                  value={model}
+                  placeholder="Modelo"
+                  onChange={(e) => setModel(e.target.value)}
+                />
+              </div>
+              <div className="col">
+                <input
+                  type={"text"}
+                  name="size"
+                  id="size"
+                  className="form-control"
+                  value={size}
+                  placeholder="Capacidade/GB"
+                  onChange={(e) => setSize(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="inputs">
+              <input
+                type={"text"}
+                name="serialNumber"
+                id="serialNumber"
+                className="form-control"
+                value={serialNumber}
+                placeholder="Nº de série"
+                onChange={(e) => setSerialNumber(e.target.value)}
+              />
+            </div>
 
-        <div className="inputs">
-          <input
-            type={"text"}
-            name="brand"
-            id="brand"
-            value={brand}
-            className="form-control"
-            y
-            placeholder="Marca"
-            onChange={(e) => setBrand(e.target.value)}
-          />
-        </div>
-        <div className="inputs">
-          <input
-            type={"text"}
-            name="mhz"
-            id="mhz"
-            className="form-control"
-            value={mhz}
-            placeholder="Mhz"
-            onChange={(e) => setMhz(e.target.value)}
-          />
-        </div>
-        <div className="inputs">
-          <input
-            type={"text"}
-            name="model"
-            id="model"
-            className="form-control"
-            value={model}
-            placeholder="Modelo"
-            onChange={(e) => setModel(e.target.value)}
-          />
-        </div>
-        <div className="inputs">
-          <input
-            type={"text"}
-            name="serialNumber"
-            id="serialNumber"
-            className="form-control"
-            value={serialNumber}
-            placeholder="Nº de série"
-            onChange={(e) => setSerialNumber(e.target.value)}
-          />
-        </div>
-        <div className="inputs">
-          <input
-            type={"text"}
-            name="size"
-            id="size"
-            className="form-control"
-            value={size}
-            placeholder="Capacidade/GB"
-            onChange={(e) => setSize(e.target.value)}
-          />
-        </div>
-        <div className="inputs">
-          {" "}
-          Data de compra
-          <input
-            type={"date"}
-            name="purchaseDate"
-            id="purchaseDate"
-            className="form-control"
-            value={purchaseDate}
-            placeholder="Data de compra"
-            onChange={(e) => setPurchaseDate(e.target.value)}
-          />
-        </div>
-        <div className="inputs">
-          <input
-            type={"text"}
-            name="purchasePrice"
-            id="purchasePrice"
-            className="form-control"
-            value={purchasePrice}
-            placeholder="Preço de compra"
-            onChange={(e) => setPurchasePrice(e.target.value)}
-          />
-        </div>
-        <div className="inputs">
-          Data de venda
-          <input
-            type={"date"}
-            name="arrivalDate"
-            id="arrivalDate"
-            className="form-control"
-            value={arrivalDate}
-            placeholder="Arrival date"
-            onChange={(e) => setArrivalDate(e.target.value)}
-          />
-        </div>
-        <div className="inputs">
-          <input
-            type={"text"}
-            name="saleValue"
-            id="saleValue"
-            value={saleValue}
-            className="form-control"
-            placeholder="Preço de venda"
-            onChange={(e) => setSaleValue(e.target.value)}
-          />
-        </div>
-        <br></br>
-        <div className="inputs">
+            <div className="inputs">
+              {" "}
+              Data de compra
+              <input
+                type={"date"}
+                name="purchaseDate"
+                id="purchaseDate"
+                className="form-control"
+                value={purchaseDate}
+                placeholder="Data de compra"
+                onChange={(e) => setPurchaseDate(e.target.value)}
+              />
+            </div>
+            <div className="inputs">
+              <input
+                type={"text"}
+                name="purchasePrice"
+                id="purchasePrice"
+                className="form-control"
+                value={purchasePrice}
+                placeholder="Preço de compra"
+                onChange={(e) => setPurchasePrice(e.target.value)}
+              />
+            </div>
+            <div className="inputs">
+              Data de venda
+              <input
+                type={"date"}
+                name="arrivalDate"
+                id="arrivalDate"
+                className="form-control"
+                value={arrivalDate}
+                placeholder="Arrival date"
+                onChange={(e) => setArrivalDate(e.target.value)}
+              />
+            </div>
+            <div className="inputs">
+              <input
+                type={"text"}
+                name="saleValue"
+                id="saleValue"
+                value={saleValue}
+                className="form-control"
+                placeholder="Preço de venda"
+                onChange={(e) => setSaleValue(e.target.value)}
+              />
+            </div>
+            <div className="inputs">
 
-          <input class="btn btn-primary" type="submit" value="Submit" onChange={(e) => this.handleSubmit(e)}></input>
-        </div>
-      </form>
-
-    </div>
-);
+              <input class="btn btn-primary" type="submit" value="Submit" onChange={(e) => this.handleSubmit(e)}></input>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div >
+  );
 };
 export default AddRam;

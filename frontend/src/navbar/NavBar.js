@@ -12,7 +12,7 @@ const NavBar = () => {
 
           <button type="button" class="btn px-2">
             <a class="nav-item nav-link">
-              <Link to="/home">Início</Link>
+              <Link to="/">Início</Link>
             </a></button>
 
 
@@ -28,18 +28,7 @@ const NavBar = () => {
               </Link>
             </Dropdown.Item>
           </DropdownButton>
-          <DropdownButton id="dropdown-user" title="Usuário" className="btn px-2">
-            <Dropdown.Item>
-              <Link className="nav-link" to="/new/user">
-                <button className="btn">Cadastrar</button>
-              </Link>
-            </Dropdown.Item>
-            <Dropdown.Item>
-              <Link className="nav-link" to="/list">
-                <button className="btn">Listar</button>
-              </Link>
-            </Dropdown.Item>
-          </DropdownButton>
+      
 
           <DropdownButton id="dropdown-cpu" title="Cpu" className="btn px-2">
             <Dropdown.Item>
@@ -79,10 +68,21 @@ const NavBar = () => {
               </Link>
             </Dropdown.Item>
           </DropdownButton>
-
-          <DropdownButton id="dropdown-dashboard" title="Dashboard" className="btn px-2">
+          <DropdownButton id="dropdown-user" title="Usuário" className="btn px-2">
             <Dropdown.Item>
-              <Link className="nav-link" to="/">Em construção</Link>
+              <Link className="nav-link" to="/new/user">
+                <button className="btn">Cadastrar</button>
+              </Link>
+            </Dropdown.Item>
+            <Dropdown.Item>
+              <Link className="nav-link" to="/list">
+                <button className="btn">Listar</button>
+              </Link>
+            </Dropdown.Item>
+          </DropdownButton>
+          <DropdownButton id="dropdown-dashboard" title="Meus dados" className="btn px-2">
+            <Dropdown.Item>
+              <Link className="nav-link" to="/dashboard">Dashboard</Link>
             </Dropdown.Item>
             <Dropdown.Item>
               <Link className="nav-link" to="/">Em construção</Link>

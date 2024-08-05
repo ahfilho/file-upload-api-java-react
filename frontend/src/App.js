@@ -36,7 +36,7 @@ function App() {
       <Route path="/" element={<LoginPage />} />
       <Route path="/dashboard" element={<Dashboard />} />
 
-      <Route path="/home" element={<Home />} />
+      <Route path="/" element={<Home />} />
       <Route path="/ssd" element={<Ssd />} />
       <Route path="/ssdlist" element={<SsdList />} />
       <Route path="/ssdEdit/:id" element={<SsdEdit />} />
