@@ -25,7 +25,7 @@ const LoginPage = ({ loading, error, ...props }) => {
             console.log("response", response);
             if (response.status === 200) {
                 props.setUser(response.data);
-                navigate('/home');
+                navigate('/');
             } else if (response.status === 404) {
                 props.authFailure('Usuário não cadastrado.');
             } else {
