@@ -79,4 +79,17 @@ public class UserController {
         }
 
     }
+
+    @PutMapping("/reset/pass")
+    public ResponseEntity<?> resetPass(@RequestBody @Validated UserDto userDto) {
+        try {
+            ModelMapper mp = new ModelMapper();
+            var user = mp.map(userDto, User.class);
+            userService.resetPasswordFromUser(user);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Senha alterada com sucesso.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao alterar a senha.");
+        }
+
+    }
 }
