@@ -56,11 +56,9 @@ const LoginPage = ({ loading, error, ...props }) => {
     };
 
     console.log("Loading ", loading);
-
     return (
         <div class="d-flex flex-column align-items-center">
-                        <NavBar></NavBar>
-
+            <NavBar></NavBar>
             <section className="h-100">
                 <form className="my-login-validation" onSubmit={handleSubmit} noValidate={false}>
                     <div className="algumacoisa">
