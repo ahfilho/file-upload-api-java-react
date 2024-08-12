@@ -12,7 +12,7 @@ const NavBar = () => {
 
           <button type="button" class="btn px-2">
             <a class="nav-item nav-link">
-              <Link to="/">Início</Link>
+              <Link to="/home/Home">Início</Link>
             </a></button>
 
 
@@ -80,7 +80,10 @@ const NavBar = () => {
               </Link>
             </Dropdown.Item>
           </DropdownButton>
-          <DropdownButton id="dropdown-dashboard" title="Meus dados" className="btn px-2">
+          <DropdownButton id="dropdown-dashboard" title="Login" className="btn px-2">
+          <Dropdown.Item>
+              <Link className="nav-link" to="/dashboard">Entrar</Link>
+            </Dropdown.Item>
             <Dropdown.Item>
               <Link className="nav-link" to="/dashboard">Dashboard</Link>
             </Dropdown.Item>

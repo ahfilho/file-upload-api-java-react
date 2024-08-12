@@ -67,24 +67,20 @@ const NewUser = () => {
   return (
     <section className="h-100">
       <NavBar />
-     
       <div className="d-flex flex-column justify-content-center align-items-center vh-100 move-up">
-        <p>Novo usuário</p>
         <form id="formulario" onSubmit={handleSubmit} className="login-form">
-          <div className="form-group mt-3">
-            <div className="row">
-              <div className="col">
-                <input
-                  type="text"
-                  name="firstName"
-                  id="firstName"
-                  value={firstName}
-                  className="form-control"
-                  placeholder="Nome"
-                  onChange={(e) => setFirstName(e.target.value)}
-                />
-              </div>
-
+          <p>Novo usuário</p>
+          <div className="row">
+            <div className="col">
+              <input
+                type="text"
+                name="firstName"
+                id="firstName"
+                value={firstName}
+                className="form-control"
+                placeholder="Nome"
+                onChange={(e) => setFirstName(e.target.value)}
+              />
               <div className="col">
                 <input
                   type="text"
@@ -97,53 +93,45 @@ const NewUser = () => {
                 />
               </div>
             </div></div>
-          <div className="form-group mt-1">
-            <input
-              type="text"
-              name="userName"
-              id="userName"
-              value={userName}
-              className="form-control"
-              placeholder="Usuário"
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
 
-          <div className="inputs">
-            <input
-              type="text"
-              name="email"
-              id="email"
-              className="form-control"
-              value={email}
-              placeholder="E-mail"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
+          <input
+            type="text"
+            name="userName"
+            id="userName"
+            value={userName}
+            className="form-control"
+            placeholder="Usuário"
+            onChange={(e) => setUsername(e.target.value)}
+          />
 
-          <div className="inputs">
-            <input
-              type="password"
-              name="password"
-              id="password"
-              className="form-control"
-              value={password}
-              placeholder="Senha"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
+          <input
+            type="text"
+            name="email"
+            id="email"
+            className="form-control"
+            value={email}
+            placeholder="E-mail"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            className="form-control"
+            value={password}
+            placeholder="Senha"
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-          <div className="inputs">
-            <input
-              type="text"
-              name="cpf"
-              id="cpf"
-              className="form-control"
-              value={cpf}
-              placeholder="Cpf"
-              onChange={handleCpfChange}
-            />
-          </div>
+          <input
+            type="text"
+            name="cpf"
+            id="cpf"
+            className="form-control"
+            value={cpf}
+            placeholder="Cpf"
+            onChange={handleCpfChange}
+          />
 
           <div className="radio">
             <p>Perfil</p>
@@ -176,7 +164,8 @@ const NewUser = () => {
               className="btn btn-primary"
               type="submit"
               value="Cadastrar"
-            ></input>
+            >
+            </input>
           </div>
         </form>
       </div>

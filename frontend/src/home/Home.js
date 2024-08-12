@@ -32,8 +32,16 @@ const Home = () => {
   return (
     <div className="meu-form">
           <NavBar></NavBar>
+
+
+
+
+
+
+
+
       <div class="d-flex flex-column align-items-center">
-      </div>
+    
       <div className="forms">
         <form id="formulario" onSubmit={handleSubmit}>
           <div className="teste">
@@ -56,6 +64,7 @@ const Home = () => {
           </div>
         </form>
       </div>
+    </div>
     </div>
   );
 };
