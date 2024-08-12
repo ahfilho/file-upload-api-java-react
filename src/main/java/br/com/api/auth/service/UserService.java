@@ -1,11 +1,14 @@
 package br.com.api.auth.service;
 
 import br.com.api.auth.controller.AuthenticationController;
+import br.com.api.auth.dto.ResetPasswordDto;
+import br.com.api.auth.dto.UserDto;
 import br.com.api.auth.enumm.Role;
 import br.com.api.auth.repository.UserDetailsRepository;
 import br.com.api.auth.entity.Authority;
 import br.com.api.auth.entity.User;
 import br.com.api.auth.security.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -36,9 +39,12 @@ public class UserService {
         return userDetailsRepository.findAll();
     }
 
-    public void save(User user) {
+    public void save(UserDto userDto) {
         List<Authority> authorityList = new ArrayList<>();
 
+        ModelMapper mp = new ModelMapper();
+        var user = mp.map(userDto, User.class);
+        
         String lowercaseProfile = user.getProfile().toLowerCase();
 
         if ("admin".equals(lowercaseProfile)) {
@@ -93,7 +99,9 @@ public class UserService {
 
     }
 
-    public void resetPasswordFromUser(User user) {
+    public void resetPasswordFromUser(ResetPasswordDto resetPasswordDto) {
+        ModelMapper mp = new ModelMapper();
+        var user = mp.map(resetPasswordDto, User.class);
         try {
             User existingUser = userRepository.userWithSameCpf(user.getCpf());
 

@@ -1,5 +1,6 @@
 package br.com.api.auth.controller;
 
+import br.com.api.auth.dto.ResetPasswordDto;
 import br.com.api.auth.service.UserDetailsServiceImpl;
 import br.com.api.auth.service.UserService;
 import br.com.api.auth.dto.UserDto;
@@ -33,9 +34,7 @@ public class UserController {
     @PostMapping("/user")
     public ResponseEntity<?> saveNewUser(@RequestBody @Validated UserDto userDto) {
         try {
-            ModelMapper mp = new ModelMapper();
-            var user = mp.map(userDto, User.class);
-            userService.save(user);
+            userService.save(userDto);
             return ResponseEntity.status(HttpStatus.CREATED).body("Usuário cadastrado com sucesso!");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Falha no cadastro do usuário.");
@@ -70,25 +69,12 @@ public class UserController {
     }
 
     @PutMapping("/reset")
-    public ResponseEntity<?> resetPassword(@RequestBody @Validated User user) {
+    public ResponseEntity<?> resetPassword(@RequestBody @Validated ResetPasswordDto resetPasswordDto) {
         try {
-            userService.resetPasswordFromUser(user);
+            userService.resetPasswordFromUser(resetPasswordDto);
             return ResponseEntity.status(HttpStatus.CREATED).body("Senha alterada com sucesso");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao alterar a senha");
-        }
-
-    }
-
-    @PutMapping("/reset/pass")
-    public ResponseEntity<?> resetPass(@RequestBody @Validated UserDto userDto) {
-        try {
-            ModelMapper mp = new ModelMapper();
-            var user = mp.map(userDto, User.class);
-            userService.resetPasswordFromUser(user);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Senha alterada com sucesso.");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao alterar a senha.");
         }
 
     }
