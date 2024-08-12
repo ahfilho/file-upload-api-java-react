@@ -1,10 +1,27 @@
 .d-flex {
         margin-top: 0 auto;
+        display: flex;
+        justify-content: center;
+        background-color: ;
+}
+
+.row {
+        background-color: ;
+        display: flex;
+        justify-content: center;
+        margin-left: 0 auto;
+}
+.col{
+        background-color: ;
+        display: grid;
+        justify-content: center;
 }
 
 h3 {
         text-align: left;
+        align-items: left;
         font-size: 14px;
+        
 }
 
 .title {

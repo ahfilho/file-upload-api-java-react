@@ -22,6 +22,7 @@ import Garantia from "./pages/Garantia";
 import RamEdit from "./pages/RamEdit";
 import NewUser from "./pages/dashboard/NewUser";
 import Listar from "./pages/dashboard/Listar";
+import ForgotPass from "./reset/ResetPassword";
 
 function App() {
   return (
@@ -52,6 +53,9 @@ function App() {
       <Route path="/garantia" element={<Garantia />} />
       <Route path="/new/user" element={<NewUser />} />
       <Route path="/list" element={<Listar />} />
+
+      <Route path="/reset/pass"  element={<ForgotPass/>}/> 
+
     </Routes>
   );
 }

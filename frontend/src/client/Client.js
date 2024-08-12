@@ -61,64 +61,59 @@ const AddClient = () => {
   return (
     <div className="meu-form">
       <NavBar />
-      <div className="d-flex flex-column justify-content-center align-items-center vh-100">
+
+      <div class="d-flex flex-column align-items-center">
 
         <form id="formulario" onSubmit={handleSubmit} className="w-50">
           <p>Cadastrar cliente</p>
-          <h3><label>Dados pessoais</label> </h3>
-          <div className="form-group mb-3">
-            <input
-              type="text"
-              name="name"
-              id="name"
-              value={name}
-              className="form-control"
-              placeholder="Nome"
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div className="form-group mb-3">
-            <div className="row">
-              <div className="col">
-                <input
-                  type="text"
-                  name="email"
-                  id="email"
-                  className="form-control"
-                  value={email}
-                  placeholder="E-mail"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div className="col">
-                <input
-                  type="text"
-                  name="cpf"
-                  id="cpf"
-                  className="form-control"
-                  value={cpf}
-                  placeholder="Cpf"
-                  onChange={(e) => setCpf(e.target.value)}
-                />
-              </div>
-              <div className="col">
-                <input
-                  type="text"
-                  name="contact"
-                  id="contact"
-                  className="form-control"
-                  value={contact}
-                  placeholder="Contato"
-                  onChange={(e) => setContact(e.target.value)}
-                />
-              </div>
+          <div className="row">
+            <p></p>
+            <div className="col">
+            <h3><label>Dados pessoais</label> </h3>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                value={name}
+                className="form-control"
+                placeholder="Nome"
+                onChange={(e) => setName(e.target.value)}
+              />
+              <input
+                type="text"
+                name="email"
+                id="email"
+                className="form-control"
+                value={email}
+                placeholder="E-mail"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                type="text"
+                name="cpf"
+                id="cpf"
+                className="form-control"
+                value={cpf}
+                placeholder="Cpf"
+                onChange={(e) => setCpf(e.target.value)}
+              />
+              <input
+                type="text"
+                name="contact"
+                id="contact"
+                className="form-control mb-3"
+                value={contact}
+                placeholder="Contato"
+                onChange={(e) => setContact(e.target.value)}
+              />
             </div>
           </div>
 
-          <div className="form-group mb-3">
-            <h3><label>Endereço</label> </h3>
+          <div className="form-group mb-">
             <div className="row">
               <div className="col">
+              <h3><label>Endereço</label> </h3>
+
                 <input
                   type="text"
                   name="street"
@@ -128,8 +123,6 @@ const AddClient = () => {
                   placeholder="Rua"
                   onChange={(e) => setStreet(e.target.value)}
                 />
-              </div>
-              <div className="col">
                 <input
                   type="text"
                   name="number"
@@ -139,32 +132,28 @@ const AddClient = () => {
                   placeholder="Nº casa"
                   onChange={(e) => setNumber(e.target.value)}
                 />
-              </div>
-            </div>
-          </div>
-          <div className="form-group mb-3">
-            <div className="row">
-              <div className="col">
-                <input
-                  type="text"
-                  name="district"
-                  id="district"
-                  className="form-control"
-                  value={district}
-                  placeholder="Estado"
-                  onChange={(e) => setDistrict(e.target.value)}
-                />
-              </div>
-              <div className="col">
-                <input
-                  type="text"
-                  name="city"
-                  id="city"
-                  className="form-control"
-                  value={city}
-                  placeholder="Cidade"
-                  onChange={(e) => setCity(e.target.value)}
-                />
+                <div className="col">
+                  <input
+                    type="text"
+                    name="district"
+                    id="district"
+                    className="form-control"
+                    value={district}
+                    placeholder="Estado"
+                    onChange={(e) => setDistrict(e.target.value)}
+                  />
+                  <div className="col">
+                    <input
+                      type="text"
+                      name="city"
+                      id="city"
+                      className="form-control"
+                      value={city}
+                      placeholder="Cidade"
+                      onChange={(e) => setCity(e.target.value)}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -175,8 +164,9 @@ const AddClient = () => {
             </button>
           </div>
         </form>
-      </div>
-    </div>
+        </div>
+        </div>
+
   );
 };
 
