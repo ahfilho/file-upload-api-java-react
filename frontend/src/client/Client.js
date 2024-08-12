@@ -59,15 +59,11 @@ const AddClient = () => {
   };
 
   return (
-    <div className="meu-form">
-      <NavBar />
-
       <div class="d-flex flex-column align-items-center">
-
+             <NavBar></NavBar>
         <form id="formulario" onSubmit={handleSubmit} className="w-50">
           <p>Cadastrar cliente</p>
           <div className="row">
-            <p></p>
             <div className="col">
             <h3><label>Dados pessoais</label> </h3>
               <input
@@ -164,7 +160,6 @@ const AddClient = () => {
             </button>
           </div>
         </form>
-        </div>
         </div>
 
   );

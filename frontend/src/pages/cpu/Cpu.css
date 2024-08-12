@@ -1,3 +1,17 @@
 .meu-form{
     margin-top: 0 auto;
 }
+.cpu{
+    color: white;
+    font-size: 18px;
+    margin-top: 3px;
+}
+.row1{
+    color: rebeccapurple;
+    display: flex;
+}
+.col1{
+    background-color: rebeccapurple;
+    width: 50px;
+    display: flex;
+}

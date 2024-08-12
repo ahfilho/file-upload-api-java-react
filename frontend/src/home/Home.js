@@ -30,17 +30,9 @@ const Home = () => {
   };
 
   return (
-    <div className="flex-container">
-
-      <div className="container mt-4">
-        <p>
-          Gerenciador de hardware novo/usado. Cadastrar cliente, máquina e produtos
-          para venda.
-        </p>
-        <ul className="nav">
-        <NavBar></NavBar>
-
-        </ul>
+    <div className="meu-form">
+          <NavBar></NavBar>
+      <div class="d-flex flex-column align-items-center">
       </div>
       <div className="forms">
         <form id="formulario" onSubmit={handleSubmit}>
