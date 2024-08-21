@@ -30,17 +30,17 @@ class SsdList extends Component {
   }
 
   async componentDidMount() {
-    try{
-    const res = await axios.get("http://localhost:9090/ssd");
+    try {
+      const res = await axios.get("http://localhost:9090/ssd");
       const ssds = res.data;
-      if(ssds.alert==0){
-      this.setState({ ssds: [], listaVazia : true });
-      } else{
-        this.setState({ssd: ssds, listaVazia: false});
+      if (ssds.length === 0) {
+        this.setState({ ssds: [], listaVazia: true });
+      } else {
+        this.setState({ ssd: ssds, listaVazia: false });
       }
-    } catch(error){
-      console.log("Erro ao buscar ssd",error);
-      this.setState({error:"Erro ao buscar a lista de ssds."});
+    } catch (error) {
+      console.log("Erro ao buscar ssd", error);
+      this.setState({ error: "Erro ao buscar a lista de ssds." });
     }
 
   }
