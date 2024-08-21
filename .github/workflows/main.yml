@@ -1,0 +1,18 @@
+Nome: Demonstração das Ações do GitHub
+run-name: $ ? github.actor ? está testando o GitHub Actions ?
+em: [empurrar]
+Empregos:
+  Explore-GitHub-Ações:
+    run-on: ubuntu-latest
+    Degraus:
+      - run: echo "? O trabalho foi automaticamente acionado por um $? github.event_name ? evento."
+      - run: echo "Este trabalho agora está sendo executado em um $? runner.os ? servidor hospedado pelo GitHub!"
+      - executar: echo "? O nome da sua ramificação é $ ? github.ref ? e seu repositório é $? github.repository ? ? ?.
+      - Nome: Confira o código do repositório
+        usos: ações/checkout-v4
+      - run: echo "? O repositório de erthub.repository - foi clonado para o corredor."
+      - run: echo "O fluxo de trabalho agora está pronto para testar o seu código no corredor."
+      - Nome: Lista de arquivos no repositório
+        corrida: |
+          ls $? github.workspace ?
+      - run: echo "? O status deste trabalho é $' job.status ?."
