@@ -15,12 +15,20 @@ jobs:
     - name: Check out repository code
       uses: actions/checkout@v3
 
+<<<<<<< HEAD
     - name: Rebase into develop_test_CI
+=======
+    - name: Merge into develop_test_CI
+>>>>>>> f807a4f (main.yml)
       run: |
         git config --global user.email "you@example.com"
         git config --global user.name "Your Name"
         git checkout develop_test_CI
+<<<<<<< HEAD
         git rebase develop
+=======
+        git merge --no-ff DEVELOP
+>>>>>>> f807a4f (main.yml)
         git push origin develop_test_CI
 
   ci-test:
