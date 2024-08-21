@@ -15,12 +15,12 @@ jobs:
     - name: Check out repository code
       uses: actions/checkout@v3
 
-    - name: Merge into develop_test_CI
+    - name: Rebase into develop_test_CI
       run: |
         git config --global user.email "you@example.com"
         git config --global user.name "Your Name"
         git checkout develop_test_CI
-        git merge --no-ff DEVELOP
+        git rebase develop
         git push origin develop_test_CI
 
   ci-test:
