@@ -1,0 +1,60 @@
+name: Java CI/CD with Manual Verification
+
+on:
+  push:
+    branches:
+      - DEVELOP
+      - develop_test_CI
+
+jobs:
+  merge:
+    if: github.ref == 'refs/heads/DEVELOP'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v3
+
+    - name: Merge into develop_test_CI
+      run: |
+        git config --global user.email "you@example.com"
+        git config --global user.name "Your Name"
+        git checkout develop_test_CI
+        git merge --no-ff DEVELOP
+        git push origin develop_test_CI
+
+  ci-test:
+    needs: merge
+    if: github.ref == 'refs/heads/develop_test_CI'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v3
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Build with Maven
+      run: mvn clean install
+
+    - name: Test with Maven
+      run: mvn test
+
+  push-master:
+    needs: ci-test
+    if: github.ref == 'refs/heads/develop_test_CI' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v3
+
+    - name: Merge into master
+      run: |
+        git checkout master
+        git merge --no-ff develop_test_CI
+        git push origin master
