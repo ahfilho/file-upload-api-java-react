@@ -27,12 +27,19 @@ class CpuList extends Component {
 
   }
 
-  componentDidMount() {
-    axios.get("http://localhost:9090/cpu").then((res) => {
+  async componentDidMount() {
+    try {
+      const res = await axios.get("http://localhost:9090/cpu");
       const cpus = res.data;
-      this.setState({ cpus });
-
-    });
+      if (cpus.length === 0) {
+        this.setState({ cpus: [], listaVazia: true });
+      } else {
+        this.setState({ cpus: cpus, listaVazia: false });
+      }
+    } catch (error) {
+      console.log("Erro ao buscar todos os cpu's.");
+      this.setState({ error: "Erro ao listar cpu" });
+    }
 
   }
 
