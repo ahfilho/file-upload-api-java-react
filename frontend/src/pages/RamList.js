@@ -33,7 +33,7 @@ export default class RamList extends React.Component {
       if (rams.length === 0) {
         this.setState({ rams: [], listaVazia: true });
       } else {
-        this.setState({ ram: rams, listaVazia: false });
+        this.setState({ rams: rams, listaVazia: false });
       }
     } catch (error) {
       console.log("Erro ao buscar a lista de RAM", error);
