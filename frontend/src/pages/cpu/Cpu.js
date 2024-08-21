@@ -146,7 +146,7 @@ const AddCpu = () => {
         </div>
         <div className="row">
           <div className="col">
-            Data de compra
+<p>Data de compra</p>
             <input
               type="date"
               name="purchaseDate"

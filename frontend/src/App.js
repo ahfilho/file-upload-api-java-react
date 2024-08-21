@@ -21,7 +21,7 @@ import ListClient from "./client/ClientCpfSearch";
 import Garantia from "./pages/Garantia";
 import RamEdit from "./pages/RamEdit";
 import NewUser from "./pages/dashboard/NewUser";
-import Listar from "./pages/dashboard/Listar";
+import ListarUser from "./pages/dashboard/ListarUser";
 import ForgotPass from "./reset/ResetPassword";
 
 function App() {
@@ -52,7 +52,7 @@ function App() {
 
       <Route path="/garantia" element={<Garantia />} />
       <Route path="/new/user" element={<NewUser />} />
-      <Route path="/list" element={<Listar />} />
+      <Route path="/list" element={<ListarUser />} />
 
       <Route path="/reset/pass"  element={<ForgotPass/>}/> 
       <Route path="/home/Home" element={<Home />} />

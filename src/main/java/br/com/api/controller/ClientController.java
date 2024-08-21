@@ -100,20 +100,20 @@ public class ClientController {
         return HttpStatus.OK;
     }
 
-//    @GetMapping("/search/{cpf}")
-//    public ResponseEntity<?> pesquisa(@PathVariable String cpf) {
-//        Client client = clientService.findByCpf(cpf);
-//        if (client != null) {
-//            return ResponseEntity.ok(client);
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
-//
-//    @GetMapping("/find/{id}")
-//    public Client searchClientById(@PathVariable Long id) {
-//        return clientService.findClientById(id);
-//    }
+    @GetMapping("/search/{cpf}")
+    public ResponseEntity<?> pesquisa(@PathVariable String cpf) {
+        Client client = clientService.findByCpf(cpf);
+        if (client != null) {
+            return ResponseEntity.status(HttpStatus.FOUND).body("Cliente encontrado.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente não encontrado.");
+        }
+    }
+
+    @GetMapping("/find/{id}")
+    public Client searchClientById(@PathVariable Long id) {
+        return clientService.findClientById(id);
+    }
 
 
 }
