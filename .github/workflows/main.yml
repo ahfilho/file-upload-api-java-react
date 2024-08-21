@@ -3,7 +3,7 @@ name: Java CI/CD with Manual Verification
 on:
   push:
     branches:
-      - DEVELOP
+      - develop
       - develop_test_CI
 
 jobs:
