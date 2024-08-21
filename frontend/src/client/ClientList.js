@@ -25,13 +25,21 @@ class ListClient extends Component {
       });
   }
 
-  componentDidMount() {
-    axios.get("http://localhost:9090/client").then((res) => {
+  async componentDidMount() {
+    try {
+      const res = await axios.get("http://localhost:9090/client");
       const clients = res.data;
-      this.setState({ clients });
-    });
-  }
+      if (clients.length === 0) {
+        this.setState({ clients: [], listaVazia: true });
+      } else {
+        this.setState({ clients: clients, listaVazia: false });
+      }
+    } catch (error) {
+      console.log("Erro ao buscar todos os clientes.");
+      this.setState({ error: "Erro ao listar clientes" });
+    }
 
+  }
   render() {
     return (
       <tbody>
