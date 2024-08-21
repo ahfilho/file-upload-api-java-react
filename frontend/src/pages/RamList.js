@@ -26,17 +26,25 @@ export default class RamList extends React.Component {
 
   }
 
-  componentDidMount() {
-    axios.get("http://localhost:9090/ram").then((res) => {
+  async componentDidMount() {
+    try {
+      const res = await axios.get("http://localhost:9090/ram");
       const rams = res.data;
-      this.setState({ rams });
-    });
+      if (rams.length === 0) {
+        this.setState({ rams: [], listaVazia: true });
+      } else {
+        this.setState({ ram: rams, listaVazia: false });
+      }
+    } catch (error) {
+      console.log("Erro ao buscar a lista de RAM", error);
+      this.setState({ error: "Erro na lista de ram" });
+    }
   }
   render() {
     return (
       <tbody>
         <div className="tabela">
-        <NavBar></NavBar>
+          <NavBar></NavBar>
           <br></br>
           <div className="title">Ram</div>
           <br></br>
@@ -81,7 +89,7 @@ export default class RamList extends React.Component {
               <td><button> <Link to={`/ramEdit/${ram.id}`} className="btn btn-sucess"><i class='far fa-edit'></i>
               </Link></button></td>
               <td><button onClick={() => this.remove(ram.id)} className="btn btn-danger"><i class="fas fa-eraser"></i> </button></td>
-                        </tr>
+            </tr>
           ))}
           {/* {this.state.categories.map((cate) => (
             <tr>
