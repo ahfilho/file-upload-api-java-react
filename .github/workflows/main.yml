@@ -1,4 +1,4 @@
-name: Java CI/CD with Manual Verification
+name: Java CI automatic /CD with Manual Verification
 
 on:
   push:
