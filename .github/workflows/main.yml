@@ -3,11 +3,7 @@ name: Java CI/CD with Manual Verification
 on:
   push:
     branches:
-<<<<<<< HEAD
-      - develop
-=======
       - DEVELOP
->>>>>>> develop_test_CI
       - develop_test_CI
 
 jobs:
@@ -19,20 +15,12 @@ jobs:
     - name: Check out repository code
       uses: actions/checkout@v3
 
-<<<<<<< HEAD
-    - name: Merge into develop_test_CI
-=======
     - name: Rebase into develop_test_CI
->>>>>>> develop_test_CI
       run: |
         git config --global user.email "you@example.com"
         git config --global user.name "Your Name"
         git checkout develop_test_CI
-<<<<<<< HEAD
-        git merge --no-ff DEVELOP
-=======
         git rebase develop
->>>>>>> develop_test_CI
         git push origin develop_test_CI
 
   ci-test:
