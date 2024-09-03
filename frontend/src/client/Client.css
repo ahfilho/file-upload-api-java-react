@@ -11,7 +11,8 @@
         justify-content: center;
         margin-left: 0 auto;
 }
-.col{
+
+.col {
         background-color: ;
         display: grid;
         justify-content: center;
@@ -20,24 +21,22 @@
 h3 {
         text-align: left;
         align-items: left;
-        font-size: 14px;
-        
-}
-
-.title {
-        text-align: left;
+        font-size: 12px;
+        color: black;
 }
 
 p {
-        color: white;
-        font-size: 16px;
-        text-align: le;
+        color: black;
+        font-size: 14px;
+        text-align: left;
 }
 
 .w-50 {
-        background-color: ;
+        background-color: transparent;
         height: 80vh;
 }
-#formulario{
-        margin-top: 100px;
+
+#formulario {
+        margin-top: 30px;
+        background-color: transparent;
 }

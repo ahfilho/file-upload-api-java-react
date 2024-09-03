@@ -45,61 +45,60 @@ class CpuList extends Component {
 
   render() {
     return (
-      <tbody>
-        <div className="tabela">
-          <NavBar></NavBar>
-          <br></br>
-          <div className="title">Cpu</div>
-          <br></br>
-          <hr></hr>
-        </div>
-        <div className="botoes">
-
-        </div>
+      <div className="cpu-list">
+        <NavBar></NavBar>
         <table>
-          <tr>
-            <th>Id</th>
-            <th>Fabricante</th>
-            <th>Modelo</th>
-            <th>Referência</th>
-            <th>Cores</th>
-            <th>Threads</th>
-            <th>Clock</th>
-            <th>Data de compra</th>
-            <th>Preço compra</th>
-            {/* <th>Data de venda</th> */}
-            <th>Preço venda</th>
-            <th>Mídia</th>
-            <th>Bytes</th>
-            <th>Visualisar</th>
-          </tr>
-          {this.state.cpus.map((cpu) => (
+          <div className="client-table">
+
             <tr>
-              <td>{cpu.id}</td>
-              <td>{cpu.brand}</td>
-              <td>{cpu.model}</td>
-              <td>{cpu.serialNumber}</td>
-              <td>{cpu.coreCount}</td>
-              <td>{cpu.threadCount}</td>
-              <th>{cpu.clockCount}</th>
-              <td>{cpu.purchaseDate}</td>
-              <td>{cpu.purchasePrice}</td>
-              {/* <td>{cpu.dateOfSale}</td> */}
-
-              <td>{cpu.saleValue}</td>
-              <td>{cpu.imgCpu ? cpu.imgCpu.fileName : ""}</td>
-              <td>{cpu.imgCpu ? cpu.imgCpu.fileSize : ""}</td>
-
-              <td>
-                <a href={cpu.url}><i class="fas fa-download"></i></a>
-              </td>
-              <td><button> <Link to={`/cpuEdit/${cpu.id}`} className="btn btn-sucess"><i class='far fa-edit'></i>
-              </Link></button></td>
-              <td><button onClick={() => this.remove(cpu.id)} className="btn btn-danger"><i class="fas fa-eraser"></i> </button></td>
+              <th id="th-1">Id</th>
+              <th id="th-2">Marca</th>
+              <th id="th-3">Modelo</th>
+              <th id="th-4">N/Série</th>
+              <th id="th-5">Cores</th>
+              <th id="th-6">Threads</th>
+              <th id="th-7">Clock</th>
+              <th id="th-8">Dt/Compra</th>
+              <th id="th-9">Prç/Compra</th>
+              <th id="th-0">Prç/Venda</th>
+              <th id="th-00">Mídia</th>
+              <th id="th-01">Bytes</th>
+              <th id="th-02">Ver</th>
+              <th id="th-03"></th>
             </tr>
-          ))}
+          </div>
+          <tbody>
+            {this.state.cpus.map((cpu) => (
+              <tr>
+                <td id="td-1">{cpu.id}</td>
+                <td id="td-2">{cpu.brand}</td>
+                <td id="td-3">{cpu.model}</td>
+                <td id="td-4">{cpu.serialNumber}</td>
+                <td id="td-5">{cpu.coreCount}</td>
+                <td id="td-6">{cpu.threadCount}</td>
+                <td id="td-7">{cpu.clockCount}</td>
+                <td id="td-8">{cpu.purchaseDate}</td>
+                <td id="td-9">{cpu.purchasePrice}</td>
+                {/* <td>{cpu.dateOfSale}</td> */}
+
+                <td id="td-0">{cpu.saleValue}</td>
+                <td id="td-01">{cpu.imgCpu ? cpu.imgCpu.fileName : ""}</td>
+                <td id="td-02">{cpu.imgCpu ? cpu.imgCpu.fileSize : ""}</td>
+
+                <td id="td-03">
+                  <a href={cpu.url}><i class="fas fa-download"></i></a>
+                </td>
+                <td id="td-04">
+                  <button> 
+                    <Link to={`/cpuEdit/${cpu.id}`} className="btn btn-sucess"><i class='far fa-edit'></i>
+                  </Link></button>
+                  <button onClick={() => this.remove(cpu.id)} className="btn btn-danger"><i class="fas fa-eraser"></i> </button></td>
+              </tr>
+            ))}
+          </tbody>
         </table>
-      </tbody>
+
+      </div>
     );
   }
 }

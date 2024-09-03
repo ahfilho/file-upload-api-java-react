@@ -78,14 +78,17 @@ const AddCpu = () => {
   return (
     <div className="d-flex flex-column align-items-center">
       <NavBar />
+      <div className="title-cpu">
+        Cadastrar Cpu
+      </div>
       <form id="formulario" onSubmit={handleSubmit} className="w-50">
-        <div className="cpu">Cpu</div>
         <div className="file">
           <input type="file" name="file" onChange={handleImage} />
         </div>
-
         <div className="row">
           <div className="col">
+            <h3><label>
+              Dados pessoais</label> </h3>
             <input
               type="text"
               name="brand"
@@ -146,7 +149,7 @@ const AddCpu = () => {
         </div>
         <div className="row">
           <div className="col">
-<p>Data de compra</p>
+            <p>Data de compra</p>
             <input
               type="date"
               name="purchaseDate"

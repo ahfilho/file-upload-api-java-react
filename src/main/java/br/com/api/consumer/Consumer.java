@@ -24,7 +24,6 @@ public class Consumer {
         ModelMapper mp = new ModelMapper();
         email = mp.map(emailDto, Email.class);
         emailService.sendEmail(email);
-
         if ("SENT".equalsIgnoreCase(String.valueOf(email.getStatusEmail()))) {
             System.out.println("E-mail enviado para: " + emailDto.getEmailTo());
         } else {

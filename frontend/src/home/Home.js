@@ -45,17 +45,16 @@ const Home = () => {
   return (
     <div className="meu-form">
       <NavBar />
+  
       <div className="row">
         <div className="col">
           <div className="d-flex flex-column align-items-center">
             <form id="formulario" onSubmit={handleSubmit}>
               <div className="teste">
                 <ul>
-                  <li>Cadastrar clientes, peças, serviços realizados</li>
-                  <li>Cadastro de hardware</li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
+                  Cadastrar clientes, peças, serviços realizados
+                  Cadastro de hardware
+               
                 </ul>
                 <div className="pesquisa">
                   Pesquisar cliente

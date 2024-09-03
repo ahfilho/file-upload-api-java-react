@@ -10,10 +10,9 @@ const NavBar = () => {
       <div class="btn-group" role="group">
         <div className='bold-text'>
 
-          <button type="button" class="btn px-2">
-            <a class="nav-item nav-link">
-              <Link to="/home/Home">Início</Link>
-            </a></button>
+          <button id="home-button" type="button" class="btn1 px-2">
+            <Link to="/home/Home" className="nav-link">Início</Link>
+          </button>
 
 
           <DropdownButton id="dropdown-client" title="Cliente" className="btn px-2">
@@ -28,7 +27,7 @@ const NavBar = () => {
               </Link>
             </Dropdown.Item>
           </DropdownButton>
-      
+
 
           <DropdownButton id="dropdown-cpu" title="Cpu" className="btn px-2">
             <Dropdown.Item>
@@ -81,7 +80,7 @@ const NavBar = () => {
             </Dropdown.Item>
           </DropdownButton>
           <DropdownButton id="dropdown-dashboard" title="Login" className="btn px-2">
-          <Dropdown.Item>
+            <Dropdown.Item>
               <Link className="nav-link" to="/dashboard">Entrar</Link>
             </Dropdown.Item>
             <Dropdown.Item>

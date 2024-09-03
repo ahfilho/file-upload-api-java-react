@@ -1,48 +1,146 @@
-
-
-.title {
-  font-size: 22px;
-  text-align: center;
-  margin-top: 0px;
-  position: absolute;
-}
-
-.table-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 50px); /* Ajuste a altura conforme necessário */
-  z-index: 999;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  
-}
-.tabela{
-  text-align: center;
-}
+/* Centraliza a tabela horizontalmente */
 table {
   width: 80%;
-  margin-top: 20px;
+  /* Ajuste a largura da tabela conforme necessário */
+  margin: 0 auto;
+  /* Centraliza a tabela horizontalmente */
   border-collapse: collapse;
+  /* Remove o espaçamento entre as bordas das células */
 }
 
-th, td {
-  border: 1px solid #24012c00;
-  text-align: left;
+/* Remove a cor de fundo dos cabeçalhos e centraliza o texto */
+table th {
+  background-color: transparent;
+  /* Remove a cor de fundo dos cabeçalhos */
+  text-align: center;
+  /* Centraliza o texto dentro das células */
   padding: 10px;
+  /* Adiciona espaçamento interno aos cabeçalhos */
 }
 
-th {
-  background-color: #1104142f;
+/* Estilo das linhas e células da tabela */
+tr,
+th,
+td {
+  text-align: center;
+  /* Centraliza o texto dentro das células */
+  padding: 10px;
+  /* Adiciona espaçamento interno às células */
+  background-color: white;
+  /* Cor de fundo das células */
+  border: 1px solid #ddd;
+  /* Adiciona bordas às células */
+  white-space: nowrap;
+  /* Impede quebra de linha dentro das células */
+  vertical-align: middle;
+  /* Centraliza o conteúdo verticalmente */
 }
 
-.tabela-container {
+/* Define larguras fixas para as colunas */
+table th:nth-child(1),
+table td:nth-child(1) {
+  width: 5%;
+}
+
+/* Id */
+
+table th:nth-child(2),
+table td:nth-child(2) {
+  width: 15%;
+}
+
+/* Nome */
+
+table th:nth-child(3),
+table td:nth-child(3) {
+  width: 20%;
+}
+
+/* E-mail */
+
+table th:nth-child(4),
+table td:nth-child(4) {
+  width: 10%;
+}
+
+/* CPF */
+
+table th:nth-child(5),
+table td:nth-child(5) {
+  width: 10%;
+}
+
+/* Contato */
+
+table th:nth-child(6),
+table td:nth-child(6) {
+  width: 15%;
+}
+
+/* Rua */
+
+table th:nth-child(7),
+table td:nth-child(7) {
+  width: 5%;
+}
+
+/* Nº */
+
+table th:nth-child(8),
+table td:nth-child(8) {
+  width: 10%;
+}
+
+/* Estado */
+
+table th:nth-child(9),
+table td:nth-child(9) {
+  width: 10%;
+}
+
+/* Cidade */
+
+table th:nth-child(10),
+table td:nth-child(10) {
+  width: 15%;
+}
+
+/* Data cadastro */
+
+table th:nth-child(11),
+table td:nth-child(11) {
+  width: 15%;
+}
+
+/* Ações */
+
+/* Centraliza o conteúdo horizontalmente */
+table th,
+table td {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  background-color:rgba(227, 216, 238, 0.342) ;
-  height: 800px;
+}
 
+
+.btn-success {
+  background-color: #28a745;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  /* Cor do hover para o botão de sucesso */
+  transform: scale(1.05);
+  /* Leve aumento no tamanho */
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  /* Cor do hover para o botão de remoção */
+  transform: scale(1.05);
+  /* Leve aumento no tamanho */
 }

@@ -78,28 +78,19 @@ class ListUser extends Component {
 
   render() {
     const { showMessage, message } = this.state;
-
     return (
-      <div className="table-container">
-<NavBar/>
+      <div className="table">
+        <NavBar />
         {showMessage && <div className="message">{message}</div>}
-        <div className="tabela">
-          <div className="title">Usuários</div>
-          <hr></hr>
-        </div>
-        <div className="botoes"></div>
         <table>
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Nome</th>
-              <th>Usuário</th>
-              <th>E-mail</th>
-              <th>Cpf</th>
-              <th>Perfil</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
+          <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Usuário</th>
+            <th>E-mail</th>
+            <th>Cpf</th>
+            <th>Perfil</th>
+          </tr>
           <tbody>
             {this.state.usuarios.map((user) => (
               <tr key={user.id}>
@@ -109,17 +100,15 @@ class ListUser extends Component {
                 <td>{user.email}</td>
                 <td>{user.cpf}</td>
                 <td>{user.profile}</td>
-                <td>
-                  <Link to={`/userEdit/${user.id}`} className="btn btn-sucess">
-                    <i className="far fa-edit"></i>
-                  </Link>
-                </td>
-                <td>
-                  {this.state.userPerfil === 'ADMIN' && ( // Apenas o administrador pode ver o botão de exclusão
-                    <button onClick={() => this.remove(user.id, user.profile)} className="btn btn-danger">
+                <td>{<button>
+                    <Link to={`/userEdit/${user.id}`} className="btn btn-sucess btn-link">
+                      <i className="fas fa-edit"></i>
+                    </Link>
+                  </button>}
+                  {/* {this.state.userPerfil === 'ADMIN' && ( // Apenas o administrador pode ver o botão de exclusão */}
+                  {<button onClick={() => this.remove(user.id, user.profile)} className="btn btn-danger">
                       <i className="fas fa-eraser"></i>
-                    </button>
-                  )}
+                    </button>}              
                 </td>
               </tr>
             ))}

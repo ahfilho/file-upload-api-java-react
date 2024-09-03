@@ -73,9 +73,9 @@ const AddSsd = () => {
 
   return (
     <div className="d-flex flex-column align-items-center">
-      <NavBar />
+      <NavBar /><br></br>
+      Cadastrar Ssd
       <form id="formulario" onSubmit={handleSubmit} className="w-50">
-        <div className="ram">Ssd</div>
         <div className="file">
           <input type="file" name="file" onChange={handleImage} />
         </div>

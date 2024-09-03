@@ -19,6 +19,8 @@ target/
 *.iml
 *.ipr
 
+src/main/java/resources/application.properties
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -31,3 +33,4 @@ build/
 
 ### VS Code ###
 .vscode/
+

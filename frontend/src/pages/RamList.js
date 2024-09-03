@@ -42,15 +42,8 @@ export default class RamList extends React.Component {
   }
   render() {
     return (
-      <tbody>
-        <div className="tabela">
-          <NavBar></NavBar>
-          <br></br>
-          <div className="title">Ram</div>
-          <br></br>
-          <hr></hr>
-        </div>
-        <div className="botoes"></div>
+      <div className="teste">
+        <NavBar></NavBar>
         <table>
           <tr>
             <th>Id</th>
@@ -66,38 +59,44 @@ export default class RamList extends React.Component {
             <th>Mídia</th>
             <th>Bytes</th>
             <th>Url</th>
-            <th></th>
           </tr>
-          {this.state.rams.map((ram) => (
-            <tr>
-              <td>{ram.id}</td>
-              <td>{ram.brand}</td>
-              <td>{ram.mhz}</td>
-              <td>{ram.model}</td>
-              <td>{ram.serialNumber}</td>
-              <td>{ram.size}</td>
-              <td>{ram.purchaseDate}</td>
-              <td>{ram.purchasePrice}</td>
-              <td>{ram.arrivalDate}</td>
-              <td>{ram.saleValue}</td>
-              <td>{ram.imgRam ? ram.imgRam.fileName : "N/A"}</td>
-              <td>{ram.imgRam ? ram.imgRam.fileSize : "N/A"}</td>
-
-              <td>
-                <a href={ram.url}><i class="fas fa-download"></i></a>
-              </td>
-              <td><button> <Link to={`/ramEdit/${ram.id}`} className="btn btn-sucess"><i class='far fa-edit'></i>
-              </Link></button></td>
-              <td><button onClick={() => this.remove(ram.id)} className="btn btn-danger"><i class="fas fa-eraser"></i> </button></td>
-            </tr>
-          ))}
-          {/* {this.state.categories.map((cate) => (
+          <tbody>
+            {this.state.rams.map((ram) => (
+              <tr>
+                <td>{ram.id}</td>
+                <td>{ram.brand}</td>
+                <td>{ram.mhz}</td>
+                <td>{ram.model}</td>
+                <td>{ram.serialNumber}</td>
+                <td>{ram.size}</td>
+                <td>{ram.purchaseDate}</td>
+                <td>{ram.purchasePrice}</td>
+                <td>{ram.arrivalDate}</td>
+                <td>{ram.saleValue}</td>
+                <td>{ram.imgRam ? ram.imgRam.fileName : "N/A"}</td>
+                <td>{ram.imgRam ? ram.imgRam.fileSize : "N/A"}</td>
+                <td>{ <a href={ram.url}><i class="fas fa-download"></i></a>}</td>
+                <td>{<button>
+                  <Link to={`/ramEdit/${ram.id}`} className="btn btn-sucess">
+                    <i class='far fa-edit'></i>
+                  </Link>
+                  <button onClick={() => this.remove(ram.id)} className="btn btn-danger">
+                    <i className="fas fa-eraser"></i>
+                  </button>
+                </button>
+                }
+                </td>  
+              </tr>
+              
+            ))}
+            {/* {this.state.categories.map((cate) => (
             <tr>
               <td>{cate.productCategory}</td>
             </tr>
           ))} */}
+          </tbody>
         </table>
-      </tbody>
+      </div>
     );
   }
 }
