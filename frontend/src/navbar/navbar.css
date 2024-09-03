@@ -1,11 +1,12 @@
 .btn {
-  color: #0056b3;
+  color: black;
   box-shadow: none;
   /* Remove qualquer sombra */
   outline: none;
   /* Remove o outline */
   border: none;
   /* Remove a borda */
+  background-color: ;
 }
 
 .btn:focus,
@@ -25,10 +26,10 @@
 #dropdown-ssd,
 #dropdown-ram,
 #dropdown-dashboard {
-  background-color: transparent;
+  background-color: #0564c9;
   border: none;
   outline: none;
-  box-shadow: none;
+  box-shadow: ;
   /* Remove qualquer sombra */
 }
 
@@ -65,6 +66,8 @@
   /* Remove a borda do dropdown */
   outline: none;
   /* Remove o outline */
+  transition: opacity 0.3s ease; /* Adiciona uma transição suave */
+  display: none;
 }
 
 .dropdown:hover .dropdown-menu {
@@ -78,8 +81,39 @@ btn:hover,
 #dropdown-ssd:hover,
 #dropdown-ram:hover,
 #dropdown-dashboard:hover {
-  background-color: rgba(0, 123, 255, 0.1);
+  background-color: rgba(36, 46, 187, 0.1);
   /* Cor de fundo ao passar o mouse */
-  color: #0056b3;
+  color: #001cb8;
   /* Cor do texto ao passar o mouse */
+}
+
+
+.nav-pills .btn1.px-2{
+  background-color: black;
+  color: #001cb8;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  border-radius: 5px;
+  height: 35px;
+  margin-top: 5px;
+  font-size:17px;
+  margin-right: 20px;
+}
+
+/* Estilo normal do botão "Início" */
+.nav-pills .btn1.px-2 {
+  background-color: #066bd8;
+  color: white;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+/* Estilo de hover para o botão "Início" */
+.nav-pills .btn1.px-2:hover {
+  background-color: rgba(36, 46, 187, 0.1);
+  ;
+  /* Cor de fundo ao passar o mouse */
+  color: #051469; /* Cor do texto ao passar o mouse */
 }

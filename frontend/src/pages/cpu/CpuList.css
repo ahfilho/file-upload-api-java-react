@@ -1,24 +1,139 @@
-.tabela {
-    /* color: red; */
+.client-list {
     width: 100%;
-}
-.title{
+    background-color: transparent;
+    height: 100%;
     display: flexbox;
-    width: 100%;
-    justify-content: end;
-    margin:auto;
+    justify-content: center;
+    flex-direction: row;
 }
 
-table {
-    display: flexbox;
+td,
+th,
+tr {
+    display: flex;
+    color: black;
+    flex-direction: row;
     width: 100%;
-    justify-content: space-around;
-    margin: auto;
-    height: auto;
+    border: ;
+
 }
-tr,th,td{
-    height: auto;
+
+td {
+    font-size: 11px;
+}
+
+#th-1,
+#th-2,
+#th-3,
+#th-4,
+#th-5,
+#th-6,
+#th-7,
+#th-8,
+#th-9,
+#th-0,
+#th-00,
+#th-01,
+#th-02,
+#th-03 {
+    border: none;
+    text-align: center;
+    font-size: 10px;
+    align-items: center;
+    width: 0 auto;
+}
+
+#td-1,
+#td-2,
+#td-3,
+#td-4,
+#td-5,
+#td-6,
+#td-7,
+#td-8,
+#td-9,
+#td-0,
+#td-01,
+#td-02,
+#td-03 {
+    align-items: center;
+    border: none;
+    text-align: center;
+    width: 0 auto;
+}
+
+#td-03 {
+    background-color: black;
+}
+
+#td-04 {
+    
+}
+
+.client-table {
     width: 100%;
 }
 
+table {}
 
+.client-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    table-layout: fixed;
+    /* Mantém as colunas com largura fixa */
+}
+
+.client-table th,
+.client-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+    word-wrap: break-word;
+    /* Quebra o conteúdo longo em múltiplas linhas */
+}
+
+.client-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.client-table td {
+    font-size: 13px;
+}
+
+.client-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.client-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.client-table td:last-child {
+    width: 150px;
+    /* Espaço fixo para a coluna dos botões */
+    white-space: nowrap;
+    /* Garante que os botões fiquem em uma linha */
+}
+
+.client-table button {
+    margin: 5px;
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+.btn-link {
+    text-decoration: none;
+    color: white;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border: none;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+}

@@ -114,8 +114,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                 "client/search/{cpf}/",
                                 "/search/pesquisa/**",
                                 "/list",
-                                "reset/password",
-                                "")
+                                "reset/password"
+                                )
                         .permitAll()
                         .antMatchers("/ssd")
                         .permitAll()

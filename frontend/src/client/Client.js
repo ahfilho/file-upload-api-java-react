@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch,useNavigate } from "react-router-dom";
 import NavBar from "../navbar/NavBar";
 import './Client.css';
 const url = "http://localhost:9090/client";
@@ -17,6 +17,7 @@ const AddClient = () => {
   const [number, setNumber] = useState("");
   const [district, setDistrict] = useState("");
   const [city, setCity] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,7 +53,7 @@ const AddClient = () => {
       setDistrict("");
 
       // Redirecionar para a página desejada após o cadastro
-      history.push("/client");
+    navigate("/client");
     } catch (error) {
       console.error('Erro ao salvar cliente e endereço:', error);
     }
@@ -61,11 +62,13 @@ const AddClient = () => {
   return (
       <div class="d-flex flex-column align-items-center">
              <NavBar></NavBar>
-        <form id="formulario" onSubmit={handleSubmit} className="w-50">
-          <p>Cadastrar cliente</p>
+   
+        <form id="formulario" onSubmit={handleSubmit} className="w-50"> 
           <div className="row">
             <div className="col">
-            <h3><label>Dados pessoais</label> </h3>
+            <h3><label>
+              <p>Cadastro de clientes</p>
+              Dados pessoais</label> </h3>
               <input
                 type="text"
                 name="name"

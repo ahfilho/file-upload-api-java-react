@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import NavBar from "../navbar/NavBar";
-import "./ClientList.css";
+import "../client/ClientList.css";
 
 class ListClient extends Component {
   state = {
@@ -42,59 +42,53 @@ class ListClient extends Component {
   }
   render() {
     return (
-      <tbody>
-        <div className="tabela">
-          <NavBar />
-          <br></br>
-          <div className="title">Clientes</div>
-          <br></br>
-          <hr></hr>
-
-        </div>
-        <div className="botoes"></div>
+      <div className="client-list">
+      <NavBar></NavBar>
         <table>
-          <tr>
-            <th>Id</th>
-            <th>Nome</th>
-            <th>E-mail</th>
-            <th>Cpf</th>
-            <th>Contato</th>
-            <th>Rua</th>
-            <th>Nº</th>
-            <th>Estado</th>
-            <th>Cidade</th>
-            <th>Data cadastro</th>
-            <th>Ações</th>
-          </tr>
-          {this.state.clients.map((client) => (
-            <tr key={client.id}>
-              <td>{client.id}</td>
-              <td>{client.name}</td>
-              <td>{client.email}</td>
-              <td>{client.cpf ? client.cpf : "N/A"}</td>
-              <td>{client.contact}</td>
-
-              <td>{client.address ? client.address.street : ""}</td>
-              <td>{client.address ? client.address.number : ""}</td>
-              <td>{client.address ? client.address.district : ""}</td>
-              <td>{client.address ? client.address.city : ""}</td>
-              <td>{client.address ? client.dataRegister : ""}</td>
-              <td>
-                <button>
-                  <Link to={`/clientEdit/${client.id}`} className="btn btn-sucess">
-                    <i className="far fa-edit"></i>
-                  </Link>
-                </button>
-              </td>
-              <td>
-                <button onClick={() => this.remove(client.id)} className="btn btn-danger">
-                  <i className="fas fa-eraser"></i>
-                </button>
-              </td>
+           <div className="client-table">
+           <tr>
+              <th id="th-1">Id</th>
+              <th id="th-2">Nome</th>
+              <th id="th-3">E-mail</th>
+              <th id="th-4">Cpf</th>
+              <th id="th-5">Contato</th>
+              <th id="th-6">Rua</th>
+              <th id="th-7">Nº</th>
+              <th id="th-8">Estado</th>
+              <th id="th-9">Cidade</th>
+              <th id="th-0">Data cadastro</th>
+              <th id="th-00"> Opções</th>
             </tr>
-          ))}
+            </div>
+          <tbody>
+            {this.state.clients.map((client) => (
+              <tr key={client.id}>
+                <td id="td-1">{client.id}</td>
+                <td id="td-2">{client.name}</td>
+                <td id="td-3">{client.email}</td>
+                <td id="td-4">{client.cpf ? client.cpf : "N/A"}</td>
+                <td id="td-5">{client.contact}</td>
+                <td id="td-6">{client.address ? client.address.street : ""}</td>
+                <td id="td-7">{client.address ? client.address.number : ""}</td>
+                <td id="td-8">{client.address ? client.address.district : ""}</td>
+                <td id="td-9">{client.address ? client.address.city : ""}</td>
+                <td id="td-0">{client.address ? client.dataRegister : ""} </td>
+                <td id="td-00">
+                  <button>
+                    <Link to={`/clientEdit/${client.id}`} className="btn btn-success btn-link">
+                      <i className="fas fa-edit"></i>
+                    </Link>
+                  </button>
+                  <button onClick={() => this.remove(client.id)} className="btn btn-danger">
+                    <i className="fas fa-eraser"></i>
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
-      </tbody>
+      </div>
+    
     );
   }
 }

@@ -56,7 +56,6 @@ public class SsdController extends ProductController<Ssd> {
     public ResponseEntity<String> saveSsd(MultipartFile file, SsdDto ssdDto, ProductCategorySsdDto productCategorySsdDto) {
         try {
             ModelMapper modelMapper = new ModelMapper();
-            //TODO VER A DATA PARA CONVERTER. STRING PARA DATA NÃO PODE FICAR
             ProductCategorySsd productCategorySsd = modelMapper.map(productCategorySsdDto, ProductCategorySsd.class);
             Ssd ssd = modelMapper.map(ssdDto, Ssd.class);
 

@@ -47,18 +47,9 @@ class SsdList extends Component {
 
   render() {
     return (
-      <tbody>
-        <div className="tabela">
-          <NavBar></NavBar>
-          <br></br>
-          <div className="title">Ssd</div>
-          <br></br>
-          <hr></hr>
-        </div>
-        <div className="botoes">
-
-        </div>
-        <table>
+     <div className="teste">
+      <NavBar></NavBar>
+      <table>
           <tr>
             <th>Id</th>
             <th>Marca</th>
@@ -73,6 +64,7 @@ class SsdList extends Component {
             <th>Mídia</th>
             <th>Bytes</th>
           </tr>
+          <tbody>
           {this.state.ssds.map((ssd) => (
             <tr>
               <td>{ssd.id}</td>
@@ -96,8 +88,9 @@ class SsdList extends Component {
               <td><button onClick={() => this.remove(ssd.id)} className="btn btn-danger"><i class="fas fa-eraser"></i> </button></td>
             </tr>
           ))}
+          </tbody>
         </table>
-      </tbody>
+        </div>
     );
   }
 }

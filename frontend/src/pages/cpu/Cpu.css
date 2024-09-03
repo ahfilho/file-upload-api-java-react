@@ -1,21 +1,26 @@
-.meu-form{
-    margin-top: 0 auto;
+.d-flex{
+    background-color: transparent;
 }
-.cpu{
-    color: white;
-    font-size: 18px;
-    margin-top:0 auto;
-}
-.row1{
-    color: rebeccapurple;
-    display: flex;
-}
-.col1{
-    background-color: rebeccapurple;
-    width: 50px;
-    display: flex;
+.w-50{
+    color: black;
+    margin-top: 30px;
 }
 
-#formulario{
-    margin-top: 100px;
+.col{
+    background-color: ;
+    width: 50px;
+    margin-top: 0 auto;
+}
+
+.formulario{
+    margin-top: 12px;
+}
+.file{
+    margin-top: -50px;
+    background-color: ;
+    font-size: 11px;
+    margin-left: 0px;
+}
+.title-cpu{
+    margin-top: 5px;
 }
