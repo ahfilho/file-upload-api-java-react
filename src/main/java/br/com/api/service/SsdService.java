@@ -55,7 +55,8 @@ public class SsdService {
     }
 
     @Transactional
-    public void serviceSaveSsd(Ssd ssd, MultipartFile file, ProductCategorySsd productCategorySsd)
+    public void
+    serviceSaveSsd(Ssd ssd, MultipartFile file, ProductCategorySsd productCategorySsd)
             throws IOException {
         Files.copy(file.getInputStream(), this.rootSsd.resolve(file.getOriginalFilename()));
         ImgSsd imgSsd = new ImgSsd();

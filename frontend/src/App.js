@@ -55,7 +55,7 @@ function App() {
       <Route path="/list" element={<ListarUser />} />
 
       <Route path="/reset/pass"  element={<ForgotPass/>}/> 
-      <Route path="/home/Home" element={<Home />} />
+      <Route path="/home" element={<Home />} />
 
     </Routes>
   );

@@ -5,6 +5,7 @@ import br.com.api.auth.service.UserDetailsServiceImpl;
 import br.com.api.auth.service.UserService;
 import br.com.api.auth.dto.UserDto;
 import br.com.api.auth.entity.User;
+import br.com.api.auth.token.JWTTokenHelper;
 import org.apache.coyote.Response;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,14 @@ public class UserController {
 
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
+    private final JWTTokenHelper jwtTokenHelper;
     @Autowired
     private UserDetailsServiceImpl userDetailsServiceImpl;
 
-    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
+    public UserController(UserService userService, PasswordEncoder passwordEncoder, JWTTokenHelper jwtTokenHelper) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+        this.jwtTokenHelper = jwtTokenHelper;
     }
 
     @PostMapping("/user")
@@ -42,8 +45,11 @@ public class UserController {
         }
     }
 
-    @GetMapping("todos")
-    public List<User> list() {
+    @GetMapping("/todos")
+    public List<?> list()  {
+
+
+
 //        if (principal != null) {
 //            List<User> AllUsers = userService.listAll(null);
 //            return ResponseEntity.ok(AllUsers);

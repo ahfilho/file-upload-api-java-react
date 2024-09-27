@@ -43,7 +43,7 @@ export const Dashboard = (props) => {
         </div>
         <div className="button-container">
           <button type="button" className="btn btn-primary">
-            <a className="nav-item nav-link" href="/home/Home">
+            <a className="nav-item nav-link" href="/home">
               Início
             </a>
           </button>

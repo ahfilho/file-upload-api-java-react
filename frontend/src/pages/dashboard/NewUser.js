@@ -81,7 +81,6 @@ const NewUser = () => {
                 placeholder="Nome"
                 onChange={(e) => setFirstName(e.target.value)}
               />
-              <div className="col">
                 <input
                   type="text"
                   name="lastName"
@@ -91,7 +90,6 @@ const NewUser = () => {
                   placeholder="Sobrenome"
                   onChange={(e) => setLastName(e.target.value)}
                 />
-              </div>
             </div></div>
 
           <input
