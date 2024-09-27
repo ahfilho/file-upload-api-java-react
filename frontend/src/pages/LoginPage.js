@@ -120,7 +120,7 @@ const LoginPage = ({ loading, error, ...props }) => {
                     </div>
                 </form>
                 <div className='forgotpass'>
-                    <button type="submit" className="btn px-2">
+                    <button type="submit" className="btn-primary px-2">
                         <Link to="/reset/pass">
                             Esqueci a senha
                         </Link>

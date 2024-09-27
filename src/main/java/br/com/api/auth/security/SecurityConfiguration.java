@@ -110,17 +110,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                                 "/user/users",
                                 "/new/user",
-                                "new/todos",
+                                "/new/todos",
                                 "client/search/{cpf}/",
                                 "/search/pesquisa/**",
-                                "/list",
-                                "reset/password"
+                                "/new/reset"
                                 )
                         .permitAll()
                         .antMatchers("/ssd")
                         .permitAll()
-                        .antMatchers("/new/todos")
-                        .permitAll()
+                        .antMatchers("/new/todos").hasRole("ADMIN")
                         .antMatchers(HttpMethod.OPTIONS, "/**")
                         .permitAll()
                         .antMatchers(HttpMethod.OPTIONS, "/**")

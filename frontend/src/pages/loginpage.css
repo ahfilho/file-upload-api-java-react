@@ -72,8 +72,9 @@
 
 .forgotpass {
     font-size: 15px;
-    color: red;
+    color: black;
     margin-top: 50px;
+    background-color: transparent;
 }
 
 .bold-text {

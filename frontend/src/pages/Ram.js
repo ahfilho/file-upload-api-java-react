@@ -71,9 +71,9 @@ const AddRam = () => {
   return (
     <div className="d-flex flex-column align-items-center">
       <NavBar />
-      <br></br>
-      Cadastrar RAM
-            <form id="formulario" onSubmit={handleSubmit} className="w-50">
+      <div className="">
+        Cadastrar RAM</div>
+      <form id="formulario" onSubmit={handleSubmit} className="w-50">
         <div className="file">
           <input type="file" name="file" onChange={handleImage} />
         </div>
@@ -132,8 +132,8 @@ const AddRam = () => {
         <div className="row">
           <div className="col">
             <div className="text">
-              Data de compra  
-               <input
+              Data de compra
+              <input
                 type={"date"}
                 name="purchaseDate"
                 id="purchaseDate"

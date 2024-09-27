@@ -31,7 +31,7 @@ class ListUser extends Component {
     const confirmDelete = window.confirm("Deseja mesmo excluir?");
     if (confirmDelete) {
       axios
-        .delete(`http://localhost:8080/new/user/${id}`)
+        .delete(`http://localhost:9090/new/user/${id}`)
         .then(() => {
           let updatedUsers = [...this.state.usuarios].filter((i) => i.id !== id);
           this.setState({ usuarios: updatedUsers });
@@ -101,14 +101,14 @@ class ListUser extends Component {
                 <td>{user.cpf}</td>
                 <td>{user.profile}</td>
                 <td>{<button>
-                    <Link to={`/userEdit/${user.id}`} className="btn btn-sucess btn-link">
-                      <i className="fas fa-edit"></i>
-                    </Link>
-                  </button>}
+                  <Link to={`/userEdit/${user.id}`} className="btn btn-sucess btn-link">
+                    <i className="fas fa-edit"></i>
+                  </Link>
+                </button>}
                   {/* {this.state.userPerfil === 'ADMIN' && ( // Apenas o administrador pode ver o botão de exclusão */}
                   {<button onClick={() => this.remove(user.id, user.profile)} className="btn btn-danger">
-                      <i className="fas fa-eraser"></i>
-                    </button>}              
+                    <i className="fas fa-eraser"></i>
+                  </button>}
                 </td>
               </tr>
             ))}

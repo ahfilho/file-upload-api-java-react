@@ -1,53 +1,67 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import axios from "axios";
 import { authenticate, authFailure, authSuccess } from '../redux/authActions.js';
 import './ResetPassword.css';
 import { userLogin } from '../api/authenticationService.js';
 import { Alert, Navbar, Spinner } from 'react-bootstrap';
 import NavBar from "../navbar/NavBar.js";
+import { Await } from 'react-router-dom';
 
 
+const url = "http://localhost:9090/new/reset";
 
 const ResetPassword = ({ loading, error, ...props }) => {
-    const [values, setValues] = useState({
-        nome: '',
-        senha: ''
-    });
+    const [userName, setUserName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [profile, setProfile] = useState("USER"); // Valor padrão
+    const [cpf, setCpf] = useState("");
 
-    const handleSubmit = (evt) => {
+    const formatCpf = (value) => {
+        // Remove caracteres não numéricos
+        const cleanedValue = value.replace(/[^\d]/g, "");
+
+        // Aplica a máscara
+        const formattedValue = cleanedValue.replace(
+            /^(\d{3})(\d{3})(\d{3})(\d{2})$/,
+            "$1.$2.$3-$4"
+        );
+
+        return formattedValue;
+    };
+
+    const handleCpfChange = (e) => {
+        const formattedCpf = formatCpf(e.target.value);
+        setCpf(formattedCpf);
+    };
+
+    const handleSubmit = async (evt) => {
         evt.preventDefault();
         props.authenticate();
 
-        userLogin(values).then((response) => {
-            console.log("response", response);
-            if (response.status === 200) {
-                props.setUser(response.data);
-                props.history.push('/dashboard');
-            } else {
-                props.loginFailure('Something Wrong!Please Try Again');
-            }
-        }).catch((err) => {
-            if (err && err.response) {
-                switch (err.response.status) {
-                    case 401:
-                        console.log("401 status");
-                        props.loginFailure("Authentication Failed.Bad Credentials");
-                        break;
-                    default:
-                        props.loginFailure('Something Wrong!Please Try Again');
-                }
-            } else {
-                props.loginFailure('Something Wrong!Please Try Again');
-            }
-        });
-    };
+        const user = {
+            userName,
+            email,
+            password,
+            profile,
+            cpf,
+        };
+        try {
+            const response = await axios.put(url, user);
 
-    const handleChange = (e) => {
-        e.persist();
-        setValues(values => ({
-            ...values,
-            [e.target.name]: e.target.value
-        }));
+
+            console.log(response.data);
+
+            alert("Senha alterada com sucesso!");
+            setUserName("");
+            setEmail("");
+            setPassword("");
+            setCpf("");
+            setProfile("USER"); // Resetar para o valor padrão
+        } catch (error) {
+            console.error("Erro ao alterar senha:", error);
+        }
     };
 
     return (
@@ -59,13 +73,13 @@ const ResetPassword = ({ loading, error, ...props }) => {
                         <label htmlFor="usuario">Usuário</label>
 
                         <input
-                            id="nome"
+                            id="userName"
                             type="text"
                             className="form-control"
                             minLength={5}
-                            value={values.nome}
-                            onChange={handleChange}
-                            name="nome"
+                            value={userName}
+                            onChange={(e) => setUserName(e.target.value)}
+                            name="username"
                             required
                         />
                         <div className="invalid-feedback">
@@ -80,9 +94,9 @@ const ResetPassword = ({ loading, error, ...props }) => {
                             type="text"
                             className="form-control"
                             minLength={5}
-                            value={values.email}
-                            onChange={handleChange}
-                            name="nome"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            name="email"
                             required
                         />
                     </div>
@@ -90,16 +104,32 @@ const ResetPassword = ({ loading, error, ...props }) => {
                         <label htmlFor="senha">Senha</label>
 
                         <input
-                            id="senha"
+                            id="password"
                             type="password"
                             className="form-control"
                             minLength={6}
-                            value={values.senha}
-                            onChange={handleChange}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             name="senha"
                             required
                         />
 
+                    </div>
+                    <div className="senha">
+                        <label htmlFor="cpf">Cpf</label>
+
+                        <div className="inputs">
+                            <input
+                                type="text"
+                                name="cpf"
+                                id="cpf"
+                                className="form-control"
+                                minLength={11}
+                                value={cpf}
+                                // placeholder="Cpf"
+                                onChange={handleCpfChange}
+                            />
+                        </div>
                     </div>
                     <div className="invalid-feedback">
                         Password is required
